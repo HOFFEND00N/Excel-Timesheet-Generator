@@ -1,65 +1,17 @@
-[
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
-    "Kachalov Alexey"
-  ],
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
-    "Kolokolenkina Natalia"
-  ],
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
-    "Kozlova Anna"
-  ],
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
-    "Pisarenko Dmitry"
-  ],
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
-    "Popov Sergey"
-  ],
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
-    "Protasov Ilya"
-  ],
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
-    "Sumatokhin Alexey"
-  ],
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
-    "Volyakov Dmitry"
-  ],
-  [
-    "651",
-    "NO",
-    "Confirmit",
-    "Studio",
+{
+  "Unit": "651",
+  "Interco": "NO",
+  "Product": "Confirmit",
+  "Project": "Studio",
+  "Employees": [
+    "Kachalov Alexey",
+    "Kolokolenkina Natalia",
+    "Kozlova Anna",
+    "Pisarenko Dmitry",
+    "Popov Sergey",
+    "Protasov Ilya",
+    "Sumatokhin Alexey",
+    "Volyakov Dmitry",
     "Volyakova Kristina"
   ]
-]
+}
