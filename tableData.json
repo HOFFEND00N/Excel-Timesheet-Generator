@@ -1,7 +1,7 @@
 {
   "Unit": "651",
-  "Interco": "NO",
-  "Product": "Confirmit",
+  "CompanyCode": "NO",
+  "CompanyName": "Confirmit",
   "Project": "Studio",
   "Employees": [
     "Kachalov Alexey",

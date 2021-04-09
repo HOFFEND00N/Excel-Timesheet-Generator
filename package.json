@@ -2,26 +2,34 @@
   "name": "test",
   "version": "1.0.0",
   "description": "",
-  "main": "app.ts",
+  "main": "build/app.js",
   "scripts": {
-    "compileTs" : "./node_modules/.bin/babel app.ts --out-dir build --extensions \".ts\"",
-    "start" : "npm run compileTs && node build/app.js"
+    "compileTs": "./node_modules/.bin/babel src --out-dir build --extensions \".ts\"",
+    "start": "npm run compileTs && node build/app.js --input-type=module"
   },
   "author": "ivan.petrov@confirmit.com",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.13.14",
-    "@babel/core": "^7.13.14",
-    "@babel/preset-env": "^7.13.12",
-    "@babel/preset-typescript": "^7.13.0",
+    "@babel/cli": "7.13.14",
+    "@babel/core": "7.13.14",
+    "@babel/polyfill": "7.12.1",
+    "@babel/preset-env": "7.13.12",
+    "@babel/preset-typescript": "7.13.0",
     "@types/node": "14.14.37",
-    "eslint": "^7.23.0"
+    "babel-plugin-add-import-extension": "^1.5.0",
+    "eslint": "7.23.0",
+    "prettier": "2.2.1"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "deepmerge": "3.2.0",
-    "excel4node": "1.7.2",
-    "fs": "0.0.1-security",
-    "prettier": "^2.2.1"
-  }
+    "excel4node": "1.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "type": "module"
 }
