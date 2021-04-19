@@ -4,20 +4,24 @@
   "description": "",
   "main": "build/app.js",
   "scripts": {
-    "compileTs": "./node_modules/.bin/babel src --out-dir build --extensions \".ts\"",
-    "start": "npm run compileTs && node build/app.js --input-type=module"
+    "compileTs": "babel src --out-dir build --extensions \".ts\" --source-maps",
+    "start": "npm run compileTs && node build/app.js --input-type=module",
+    "test": "npm run compileTs && jest"
   },
   "author": "ivan.petrov@confirmit.com",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "7.13.14",
     "@babel/core": "7.13.14",
+    "@babel/plugin-transform-modules-commonjs": "7.13.8",
     "@babel/polyfill": "7.12.1",
-    "@babel/preset-env": "7.13.12",
+    "@babel/preset-env": "7.13.15",
     "@babel/preset-typescript": "7.13.0",
+    "@types/jest": "26.0.22",
     "@types/node": "14.14.37",
-    "babel-plugin-add-import-extension": "^1.5.0",
+    "babel-plugin-add-import-extension": "1.5.0",
     "eslint": "7.23.0",
+    "jest": "26.6.3",
     "prettier": "2.2.1"
   },
   "dependencies": {
