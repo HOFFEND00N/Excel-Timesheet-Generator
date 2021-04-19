@@ -1,9 +1,9 @@
 {
-  "Unit": "651",
-  "CompanyCode": "NO",
-  "CompanyName": "Confirmit",
-  "Project": "Studio",
-  "Employees": [
+  "unit": "651",
+  "companyCode": "NO",
+  "companyName": "Confirmit",
+  "project": "Studio",
+  "employees": [
     "Kachalov Alexey",
     "Kolokolenkina Natalia",
     "Kozlova Anna",
