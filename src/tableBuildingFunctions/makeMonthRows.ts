@@ -14,19 +14,22 @@ import { Point } from "../classes/Point";
 
 export function makeMonthRows() {
   let rows: TableCell[] = [];
-  let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
+  let {
+    row: pointRow,
+    column: pointColumn,
+  }: Point = getStartMonthHeaderPoint();
   let currentDate: Date = new Date();
 
   rows.push(
-    new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
-      makeBoldCellTextStyle(),
-      makeDefaultTextStyle(),
-    ])
+    new TableCell(
+      { row: pointRow, column: pointColumn },
+      getMontlyTimesheetHeader(),
+      [makeBoldCellTextStyle(), makeDefaultTextStyle()]
+    )
   );
-  ++startMonthHeaderPoint.row;
   rows.push(
     new TableCell(
-      startMonthHeaderPoint,
+      { row: pointRow + 1, column: pointColumn },
       getMonthNames(currentDate.getMonth()),
       [
         makeYellowBackgroundStyle(),
@@ -35,13 +38,16 @@ export function makeMonthRows() {
       ]
     )
   );
-  ++startMonthHeaderPoint.column;
   rows.push(
-    new TableCell(startMonthHeaderPoint, currentDate.getFullYear().toString(), [
-      makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText("left"),
-      makeDefaultTextStyle(),
-    ])
+    new TableCell(
+      { row: pointRow + 1, column: pointColumn + 1 },
+      currentDate.getFullYear().toString(),
+      [
+        makeYellowBackgroundStyle(),
+        makeStyleHorizontalAlignText("left"),
+        makeDefaultTextStyle(),
+      ]
+    )
   );
   return rows;
 }
