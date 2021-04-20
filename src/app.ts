@@ -5,7 +5,8 @@ import * as fs from "fs";
 import { TableData } from "./classes/TableData";
 import { Point } from "./classes/Point";
 import { TableCell } from "./classes/TableCell";
-import { From, Position, WorksheetImage } from "./classes/WorksheetImage";
+import { WorksheetImage } from "./classes/WorksheetImage";
+import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 
 let tabledata: TableData = JSON.parse(
   fs.readFileSync("tableData.json", "utf-8")
@@ -13,11 +14,11 @@ let tabledata: TableData = JSON.parse(
 let workBook = new excel.Workbook({});
 let workSheet = workBook.addWorksheet(getWorksheetName());
 let startTablePoint: Point = getStartTablePoint();
-let image: WorksheetImage = new WorksheetImage(
-  "picture",
-  "images/confirmit.jpg",
-  new Position("oneCellAnchor", new From(2, 2))
-);
+let image: WorksheetImage = new WorksheetImage({
+  path: "images/confirmit.jpg",
+  column: 2,
+  row: 2,
+});
 
 let table: Array<TableCell> = makeTable(tabledata, startTablePoint);
 
@@ -31,7 +32,7 @@ for (const tableCell of table) {
       .style(workBook.createStyle(style));
   }
 }
-workSheet.addImage(image);
+workSheet.addImage(new WorkSheetImageAdapter(image));
 
 workBook.write("Report.xlsx");
 console.log("Successfully generated Report.xls");

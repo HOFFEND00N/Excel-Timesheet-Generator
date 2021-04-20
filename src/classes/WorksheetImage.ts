@@ -1,31 +1,19 @@
-export class From {
-  col: number;
+export class WorksheetImage {
+  path: string;
+  column: number;
   row: number;
 
-  constructor(column: number, row: number) {
-    this.row = row;
-    this.col = column;
-  }
-}
-
-export class Position {
-  type: string;
-  from: From;
-
-  constructor(type: string, from: From) {
-    this.type = type;
-    this.from = new From(from.col, from.row);
-  }
-}
-
-export class WorksheetImage {
-  type: string;
-  path: string;
-  position: Position;
-
-  constructor(type: string, path: string, position: Position) {
-    this.type = type;
+  constructor({
+    path,
+    column,
+    row,
+  }: {
+    path: string;
+    column: number;
+    row: number;
+  }) {
     this.path = path;
-    this.position = new Position(position.type, position.from);
+    this.column = column;
+    this.row = row;
   }
 }
