@@ -1,4 +1,3 @@
-import excel from "excel4node";
 import { Style } from "../classes/Style";
 
 export function makeBoldCellTextStyle(): Style {
