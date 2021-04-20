@@ -27,7 +27,7 @@ export function makeMonthRows() {
   rows.push(
     new TableCell(
       startMonthHeaderPoint,
-      getMonthNames()[currentDate.getMonth()],
+      getMonthNames(currentDate.getMonth()),
       [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("right"),

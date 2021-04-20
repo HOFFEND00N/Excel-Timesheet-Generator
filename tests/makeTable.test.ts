@@ -23,7 +23,7 @@ import * as fs from "fs";
 test("table data is empty expect just table headers + date", () => {
   let expectedTable: Array<TableCell> = [];
   let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
-  let curDate: Date = new Date();
+  let currentDate: Date = new Date();
   expectedTable.push(
     new TableCell(startMonthHeaderPoint, getMonthHeaderName(), [
       makeBoldCellTextStyle(),
@@ -33,7 +33,7 @@ test("table data is empty expect just table headers + date", () => {
   expectedTable.push(
     new TableCell(
       new Point(startMonthHeaderPoint.column, ++startMonthHeaderPoint.row),
-      getMonthNames()[curDate.getMonth()],
+      getMonthNames(currentDate.getMonth()),
       [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("right"),
@@ -44,7 +44,7 @@ test("table data is empty expect just table headers + date", () => {
   expectedTable.push(
     new TableCell(
       new Point(++startMonthHeaderPoint.column, startMonthHeaderPoint.row),
-      curDate.getFullYear().toString(),
+      currentDate.getFullYear().toString(),
       [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("left"),
@@ -78,7 +78,7 @@ test("table data is empty expect just table headers + date", () => {
 test("make full table", () => {
   let expectedTable: Array<TableCell> = [];
   let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
-  let curDate: Date = new Date();
+  let currentDate: Date = new Date();
   expectedTable.push(
     new TableCell(startMonthHeaderPoint, getMonthHeaderName(), [
       makeBoldCellTextStyle(),
@@ -89,7 +89,7 @@ test("make full table", () => {
   expectedTable.push(
     new TableCell(
       new Point(startMonthHeaderPoint.column, ++startMonthHeaderPoint.row),
-      getMonthNames()[curDate.getMonth()],
+      getMonthNames(currentDate.getMonth()),
       [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("right"),
@@ -100,7 +100,7 @@ test("make full table", () => {
   expectedTable.push(
     new TableCell(
       new Point(++startMonthHeaderPoint.column, startMonthHeaderPoint.row),
-      curDate.getFullYear().toString(),
+      currentDate.getFullYear().toString(),
       [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("left"),

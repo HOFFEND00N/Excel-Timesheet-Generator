@@ -19,8 +19,8 @@ export function getMonthHeaderName() {
   return "Monthly Timesheet for";
 }
 
-export function getMonthNames() {
-  return [
+export function getMonthNames(monthIndex: number) {
+  const months = [
     "Jan",
     "Feb",
     "Mar",
@@ -34,6 +34,7 @@ export function getMonthNames() {
     "Nov",
     "Dec",
   ];
+  return months[monthIndex];
 }
 
 export function getStartTablePoint() {

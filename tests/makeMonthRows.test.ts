@@ -15,7 +15,7 @@ import { makeMonthRows } from "../build/tableBuildingFunctions/makeMonthRows";
 
 test("make date section of talbe + header, expect current month + year + header", () => {
   let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
-  let curDate: Date = new Date();
+  let currentDate: Date = new Date();
   let expectedTable: Array<TableCell> = [
     new TableCell(startMonthHeaderPoint, getMonthHeaderName(), [
       makeBoldCellTextStyle(),
@@ -23,7 +23,7 @@ test("make date section of talbe + header, expect current month + year + header"
     ]),
     new TableCell(
       new Point(startMonthHeaderPoint.column, ++startMonthHeaderPoint.row),
-      getMonthNames()[curDate.getMonth()],
+      getMonthNames(currentDate.getMonth()),
       [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("right"),
@@ -32,7 +32,7 @@ test("make date section of talbe + header, expect current month + year + header"
     ),
     new TableCell(
       new Point(++startMonthHeaderPoint.column, startMonthHeaderPoint.row),
-      curDate.getFullYear().toString(),
+      currentDate.getFullYear().toString(),
       [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("left"),
