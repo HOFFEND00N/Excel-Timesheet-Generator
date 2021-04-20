@@ -8,9 +8,6 @@ export class TableCell {
   constructor(point: Point, value: any, styles: Array<object>) {
     this.point = new Point(point.col, point.row);
     this.value = value;
-    this.styles = [];
-    for (const style of styles) {
-      this.styles.push(style);
-    }
+    this.styles = styles;
   }
 }
