@@ -1,4 +1,4 @@
-export function getWorksheetName() {
+export function getWorksheetMonthlyTimesheetName() {
   return "Monthly timesheet";
 }
 

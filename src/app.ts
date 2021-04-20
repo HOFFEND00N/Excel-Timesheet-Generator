@@ -1,5 +1,8 @@
 import { makeTable } from "./tableBuildingFunctions/makeTable";
-import { getStartTablePoint, getWorksheetName } from "./constants/constant";
+import {
+  getStartTablePoint,
+  getWorksheetMonthlyTimesheetName,
+} from "./constants/constant";
 import excel from "excel4node";
 import * as fs from "fs";
 import { TableData } from "./classes/TableData";
@@ -12,7 +15,7 @@ let tabledata: TableData = JSON.parse(
   fs.readFileSync("tableData.json", "utf-8")
 );
 let workBook = new excel.Workbook({});
-let workSheet = workBook.addWorksheet(getWorksheetName());
+let workSheet = workBook.addWorksheet(getWorksheetMonthlyTimesheetName());
 let startTablePoint: Point = getStartTablePoint();
 let image: WorksheetImage = new WorksheetImage({
   path: "images/confirmit.jpg",
