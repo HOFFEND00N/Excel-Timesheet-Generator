@@ -26,7 +26,9 @@ for (const tableCell of table) {
     .cell(tableCell.point.row, tableCell.point.column)
     .string(tableCell.value);
   for (const style of tableCell.styles) {
-    workSheet.cell(tableCell.point.row, tableCell.point.column).style(style);
+    workSheet
+      .cell(tableCell.point.row, tableCell.point.column)
+      .style(workBook.createStyle(style));
   }
 }
 workSheet.addImage(image);

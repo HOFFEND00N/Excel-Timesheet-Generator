@@ -1,20 +1,16 @@
 import excel from "excel4node";
-//may be return just {
-//     font: {
-//       bold: true,
-//     },
-//   }
-// and this will be my own type by which i will build this:
-// new excel.Workbook().createStyle({my own type})
-export function makeBoldCellTextStyle() {
-  return new excel.Workbook().createStyle({
+import { Style } from "../classes/Style";
+
+export function makeBoldCellTextStyle(): Style {
+  return {
     font: {
       bold: true,
     },
-  });
+  };
 }
-export function makeCellBorderStyle() {
-  return new excel.Workbook().createStyle({
+
+export function makeCellBorderStyle(): Style {
+  return {
     border: {
       left: {
         style: "thin",
@@ -29,32 +25,32 @@ export function makeCellBorderStyle() {
         style: "thin",
       },
     },
-  });
+  };
 }
 
-export function makeYellowBackgroundStyle() {
-  return new excel.Workbook().createStyle({
+export function makeYellowBackgroundStyle(): Style {
+  return {
     fill: {
       type: "pattern",
       patternType: "solid",
       fgColor: "FFE699",
     },
-  });
+  };
 }
 
-export function makeStyleHorizontalAlignText(way) {
-  return new excel.Workbook().createStyle({
+export function makeStyleHorizontalAlignText(way): Style {
+  return {
     alignment: {
       horizontal: way,
     },
-  });
+  };
 }
 
-export function makeDefaultTextStyle() {
-  return new excel.Workbook().createStyle({
+export function makeDefaultTextStyle(): Style {
+  return {
     font: {
       size: 10,
       name: "Arial",
     },
-  });
+  };
 }
