@@ -13,9 +13,9 @@ import { TableCell } from "../classes/TableCell";
 import { Point } from "../classes/Point";
 
 export function makeMonthRows() {
-  let rows: Array<TableCell> = [];
+  let rows: TableCell[] = [];
   let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
-  let curDate: Date = new Date();
+  let currentDate: Date = new Date();
 
   rows.push(
     new TableCell(startMonthHeaderPoint, getMonthHeaderName(), [
@@ -25,15 +25,19 @@ export function makeMonthRows() {
   );
   ++startMonthHeaderPoint.row;
   rows.push(
-    new TableCell(startMonthHeaderPoint, getMonthNames()[curDate.getMonth()], [
-      makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText("right"),
-      makeDefaultTextStyle(),
-    ])
+    new TableCell(
+      startMonthHeaderPoint,
+      getMonthNames()[currentDate.getMonth()],
+      [
+        makeYellowBackgroundStyle(),
+        makeStyleHorizontalAlignText("right"),
+        makeDefaultTextStyle(),
+      ]
+    )
   );
-  ++startMonthHeaderPoint.col;
+  ++startMonthHeaderPoint.column;
   rows.push(
-    new TableCell(startMonthHeaderPoint, curDate.getFullYear().toString(), [
+    new TableCell(startMonthHeaderPoint, currentDate.getFullYear().toString(), [
       makeYellowBackgroundStyle(),
       makeStyleHorizontalAlignText("left"),
       makeDefaultTextStyle(),

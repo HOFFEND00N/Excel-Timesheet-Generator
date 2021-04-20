@@ -1,9 +1,9 @@
 import { TableData } from "../classes/TableData";
 
 export function makeTableRowsValues(tableData: TableData) {
-  let dataArr: Array<Array<string>> = [];
+  let dataArr: string[][] = [];
   for (let i: number = 0; i < tableData.employees?.length; i++) {
-    let rowArr: Array<string> = [];
+    let rowArr: string[] = [];
     for (const tableDataKey in tableData) {
       if (tableDataKey != "employees") rowArr.push(tableData[tableDataKey]);
     }

@@ -2,9 +2,9 @@ export class From {
   col: number;
   row: number;
 
-  constructor(col: number, row: number) {
+  constructor(column: number, row: number) {
     this.row = row;
-    this.col = col;
+    this.col = column;
   }
 }
 

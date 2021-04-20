@@ -22,7 +22,7 @@ test("make date section of talbe + header, expect current month + year + header"
       makeDefaultTextStyle(),
     ]),
     new TableCell(
-      new Point(startMonthHeaderPoint.col, ++startMonthHeaderPoint.row),
+      new Point(startMonthHeaderPoint.column, ++startMonthHeaderPoint.row),
       getMonthNames()[curDate.getMonth()],
       [
         makeYellowBackgroundStyle(),
@@ -31,7 +31,7 @@ test("make date section of talbe + header, expect current month + year + header"
       ]
     ),
     new TableCell(
-      new Point(++startMonthHeaderPoint.col, startMonthHeaderPoint.row),
+      new Point(++startMonthHeaderPoint.column, startMonthHeaderPoint.row),
       curDate.getFullYear().toString(),
       [
         makeYellowBackgroundStyle(),

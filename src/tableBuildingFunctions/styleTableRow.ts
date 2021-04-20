@@ -4,8 +4,8 @@ export function styleTableRow({
   row,
   cellStyles,
 }: {
-  row: Array<TableCell>;
-  cellStyles: Array<object>;
+  row: TableCell[];
+  cellStyles: object[];
 }) {
   for (let i: number = 0; i < row.length; i++) {
     for (const cellStyle of cellStyles) {

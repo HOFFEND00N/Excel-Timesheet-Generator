@@ -14,13 +14,13 @@ import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
 
 export function makeTable(tableData: TableData, startTablePoint: Point) {
-  let table: Array<TableCell> = [];
+  let table: TableCell[] = [];
 
-  let tableHeaders: Array<string> = getTableHeaders();
-  let monthRow: Array<TableCell> = makeMonthRows();
+  let tableHeaders: string[] = getTableHeaders();
+  let monthRow: TableCell[] = makeMonthRows();
   addTableRowToTable(monthRow, table);
 
-  let tableHeadersRow: Array<TableCell> = makeTableRow({
+  let tableHeadersRow: TableCell[] = makeTableRow({
     startPoint: startTablePoint,
     values: tableHeaders,
   });
@@ -35,9 +35,9 @@ export function makeTable(tableData: TableData, startTablePoint: Point) {
   addTableRowToTable(tableHeadersRow, table);
 
   startTablePoint.row++;
-  const tableRowsValues: Array<Array<string>> = makeTableRowsValues(tableData);
+  const tableRowsValues: string[][] = makeTableRowsValues(tableData);
   for (const tableRowValues of tableRowsValues) {
-    let row: Array<TableCell> = makeTableRow({
+    let row: TableCell[] = makeTableRow({
       startPoint: startTablePoint,
       values: tableRowValues,
     });

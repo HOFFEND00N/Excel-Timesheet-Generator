@@ -1,9 +1,9 @@
 export class Point {
-  public col: number;
+  public column: number;
   public row: number;
 
-  constructor(col: number, row: number) {
-    this.col = col;
+  constructor(column: number, row: number) {
+    this.column = column;
     this.row = row;
   }
 }

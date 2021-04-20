@@ -32,7 +32,7 @@ test("table data is empty expect just table headers + date", () => {
   );
   expectedTable.push(
     new TableCell(
-      new Point(startMonthHeaderPoint.col, ++startMonthHeaderPoint.row),
+      new Point(startMonthHeaderPoint.column, ++startMonthHeaderPoint.row),
       getMonthNames()[curDate.getMonth()],
       [
         makeYellowBackgroundStyle(),
@@ -43,7 +43,7 @@ test("table data is empty expect just table headers + date", () => {
   );
   expectedTable.push(
     new TableCell(
-      new Point(++startMonthHeaderPoint.col, startMonthHeaderPoint.row),
+      new Point(++startMonthHeaderPoint.column, startMonthHeaderPoint.row),
       curDate.getFullYear().toString(),
       [
         makeYellowBackgroundStyle(),
@@ -63,7 +63,7 @@ test("table data is empty expect just table headers + date", () => {
   for (const tableHeader of tableHeaders) {
     expectedTable.push(
       new TableCell(
-        new Point(startTablePoint.col++, startTablePoint.row),
+        new Point(startTablePoint.column++, startTablePoint.row),
         tableHeader,
         headerStyles
       )
@@ -88,7 +88,7 @@ test("make full table", () => {
 
   expectedTable.push(
     new TableCell(
-      new Point(startMonthHeaderPoint.col, ++startMonthHeaderPoint.row),
+      new Point(startMonthHeaderPoint.column, ++startMonthHeaderPoint.row),
       getMonthNames()[curDate.getMonth()],
       [
         makeYellowBackgroundStyle(),
@@ -99,7 +99,7 @@ test("make full table", () => {
   );
   expectedTable.push(
     new TableCell(
-      new Point(++startMonthHeaderPoint.col, startMonthHeaderPoint.row),
+      new Point(++startMonthHeaderPoint.column, startMonthHeaderPoint.row),
       curDate.getFullYear().toString(),
       [
         makeYellowBackgroundStyle(),
@@ -114,7 +114,7 @@ test("make full table", () => {
   for (const tableHeader of tableHeaders) {
     expectedTable.push(
       new TableCell(
-        new Point(startTablePoint.col++, startTablePoint.row),
+        new Point(startTablePoint.column++, startTablePoint.row),
         tableHeader,
         [makeBoldCellTextStyle(), makeCellBorderStyle(), makeDefaultTextStyle()]
       )
@@ -138,7 +138,7 @@ test("make full table", () => {
     let i: number = 0;
     for (const value of expectedTableRow) {
       expectedTable.push(
-        new TableCell(new Point(startPoint.col + i, startPoint.row), value, [
+        new TableCell(new Point(startPoint.column + i, startPoint.row), value, [
           makeCellBorderStyle(),
           makeDefaultTextStyle(),
         ])
@@ -160,7 +160,7 @@ test("make full table", () => {
 });
 
 function compare(a: TableCell, b: TableCell) {
-  let columnDiff: number = a.point.col - b.point.col;
+  let columnDiff: number = a.point.column - b.point.column;
   if (columnDiff != 0) return columnDiff;
   else return a.point.row - b.point.row;
 }

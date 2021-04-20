@@ -37,9 +37,9 @@ export function getMonthNames() {
 }
 
 export function getStartTablePoint() {
-  return { col: 2, row: 8 };
+  return { column: 2, row: 8 };
 }
 
 export function getStartMonthHeaderPoint() {
-  return { col: 2, row: 5 };
+  return { column: 2, row: 5 };
 }

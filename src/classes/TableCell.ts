@@ -1,12 +1,12 @@
 import { Point } from "./Point";
 
 export class TableCell {
-  public styles: Array<object>;
+  public styles: any[];
   public point: Point;
   public value: any;
 
-  constructor(point: Point, value: any, styles: Array<object>) {
-    this.point = new Point(point.col, point.row);
+  constructor(point: Point, value: any, styles: any[]) {
+    this.point = new Point(point.column, point.row);
     this.value = value;
     this.styles = styles;
   }

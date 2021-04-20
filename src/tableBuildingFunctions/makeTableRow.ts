@@ -6,13 +6,17 @@ export function makeTableRow({
   values,
 }: {
   startPoint: Point;
-  values: Array<any>;
+  values: any[];
 }) {
-  let row: Array<TableCell> = [];
+  let row: TableCell[] = [];
   let i: number = 0;
   for (const value of values) {
     row.push(
-      new TableCell(new Point(startPoint.col + i++, startPoint.row), value, [])
+      new TableCell(
+        new Point(startPoint.column + i++, startPoint.row),
+        value,
+        []
+      )
     );
   }
   return row;

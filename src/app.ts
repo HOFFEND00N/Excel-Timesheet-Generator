@@ -6,7 +6,6 @@ import { TableData } from "./classes/TableData";
 import { Point } from "./classes/Point";
 import { TableCell } from "./classes/TableCell";
 import { From, Position, WorksheetImage } from "./classes/WorksheetImage";
-import { makeDefaultTextStyle } from "./constants/styleConstants";
 
 let tabledata: TableData = JSON.parse(
   fs.readFileSync("tableData.json", "utf-8")
@@ -24,10 +23,10 @@ let table: Array<TableCell> = makeTable(tabledata, startTablePoint);
 
 for (const tableCell of table) {
   workSheet
-    .cell(tableCell.point.row, tableCell.point.col)
+    .cell(tableCell.point.row, tableCell.point.column)
     .string(tableCell.value);
   for (const style of tableCell.styles) {
-    workSheet.cell(tableCell.point.row, tableCell.point.col).style(style);
+    workSheet.cell(tableCell.point.row, tableCell.point.column).style(style);
   }
 }
 workSheet.addImage(image);

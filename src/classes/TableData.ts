@@ -3,14 +3,14 @@ export class TableData {
   public companyCode: string;
   public companyName: string;
   public project: string;
-  public employees: Array<string>;
+  public employees: string[];
 
   constructor(
     unit: string,
     companyCode: string,
     companyName: string,
     project: string,
-    employees: Array<string>
+    employees: string[]
   ) {
     this.unit = unit;
     this.companyCode = companyCode;
