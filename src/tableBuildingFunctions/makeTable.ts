@@ -43,7 +43,7 @@ export function makeTable(tableData: TableData, startTablePoint: Point) {
     });
     styleTableRow({
       row,
-      cellStyles: [makeDefaultTextStyle(), makeCellBorderStyle()],
+      cellStyles: [makeCellBorderStyle(), makeDefaultTextStyle()],
     });
     addTableRowToTable(row, table);
     startTablePoint.row++;

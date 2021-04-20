@@ -139,8 +139,8 @@ test("make full table", () => {
     for (const value of expectedTableRow) {
       expectedTable.push(
         new TableCell(new Point(startPoint.col + i, startPoint.row), value, [
-          makeDefaultTextStyle(),
           makeCellBorderStyle(),
+          makeDefaultTextStyle(),
         ])
       );
       i++;
