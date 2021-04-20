@@ -1,12 +1,11 @@
 import excel from "excel4node";
 import { makeTable } from "../build/tableBuildingFunctions/makeTable";
 import {
-  getMonthHeaderName,
+  getMontlyTimesheetHeader,
   getMonthNames,
   getStartMonthHeaderPoint,
   getStartTablePoint,
   getTableHeaders,
-  getWorksheetName,
 } from "../build/constants/constant";
 import {
   makeCellBorderStyle,
@@ -25,7 +24,7 @@ test("table data is empty expect just table headers + date", () => {
   let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   let currentDate: Date = new Date();
   expectedTable.push(
-    new TableCell(startMonthHeaderPoint, getMonthHeaderName(), [
+    new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
       makeBoldCellTextStyle(),
       makeDefaultTextStyle(),
     ])
@@ -80,7 +79,7 @@ test("make full table", () => {
   let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   let currentDate: Date = new Date();
   expectedTable.push(
-    new TableCell(startMonthHeaderPoint, getMonthHeaderName(), [
+    new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
       makeBoldCellTextStyle(),
       makeDefaultTextStyle(),
     ])

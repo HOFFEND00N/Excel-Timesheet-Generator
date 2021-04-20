@@ -1,5 +1,5 @@
 import {
-  getMonthHeaderName,
+  getMontlyTimesheetHeader,
   getMonthNames,
   getStartMonthHeaderPoint,
 } from "../constants/constant";
@@ -18,7 +18,7 @@ export function makeMonthRows() {
   let currentDate: Date = new Date();
 
   rows.push(
-    new TableCell(startMonthHeaderPoint, getMonthHeaderName(), [
+    new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
       makeBoldCellTextStyle(),
       makeDefaultTextStyle(),
     ])

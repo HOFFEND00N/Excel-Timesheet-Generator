@@ -15,7 +15,7 @@ export function getTableHeaders() {
   ];
 }
 
-export function getMonthHeaderName() {
+export function getMontlyTimesheetHeader() {
   return "Monthly Timesheet for";
 }
 

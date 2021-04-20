@@ -1,6 +1,6 @@
 import { TableCell } from "../build/classes/TableCell";
 import {
-  getMonthHeaderName,
+  getMontlyTimesheetHeader,
   getMonthNames,
   getStartMonthHeaderPoint,
 } from "../build/constants/constant";
@@ -17,7 +17,7 @@ test("make date section of talbe + header, expect current month + year + header"
   let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   let currentDate: Date = new Date();
   let expectedTable: Array<TableCell> = [
-    new TableCell(startMonthHeaderPoint, getMonthHeaderName(), [
+    new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
       makeBoldCellTextStyle(),
       makeDefaultTextStyle(),
     ]),
