@@ -1,28 +1,28 @@
-import excel from "excel4node";
-import { makeTable } from "../build/tableBuildingFunctions/makeTable";
+import { makeTable } from "../src/tableBuildingFunctions/makeTable";
 import {
   getMontlyTimesheetHeader,
   getMonthNames,
   getStartMonthHeaderPoint,
   getStartTablePoint,
   getTableHeaders,
-} from "../build/constants/constant";
+} from "../src/constants/constant";
 import {
   makeCellBorderStyle,
   makeBoldCellTextStyle,
   makeStyleHorizontalAlignText,
   makeYellowBackgroundStyle,
   makeDefaultTextStyle,
-} from "../build/constants/styleConstants";
-import { TableCell } from "../build/classes/TableCell";
-import { Point } from "../build/classes/Point";
+} from "../src/constants/styleConstants";
+import { TableCell } from "../src/classes/TableCell";
+import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
 import * as fs from "fs";
+import { Style } from "../src/classes/Style";
 
 test("table data is empty expect just table headers + date", () => {
-  let expectedTable: Array<TableCell> = [];
-  let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
-  let currentDate: Date = new Date();
+  const expectedTable: Array<TableCell> = [];
+  const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
+  const currentDate: Date = new Date();
   expectedTable.push(
     new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
       makeBoldCellTextStyle(),
@@ -52,13 +52,13 @@ test("table data is empty expect just table headers + date", () => {
     )
   );
 
-  let headerStyles: Array<object> = [
+  const headerStyles: Array<Style> = [
     makeBoldCellTextStyle(),
     makeCellBorderStyle(),
     makeDefaultTextStyle(),
   ];
-  let startTablePoint = getStartTablePoint();
-  let tableHeaders = getTableHeaders();
+  const startTablePoint = getStartTablePoint();
+  const tableHeaders = getTableHeaders();
   for (const tableHeader of tableHeaders) {
     expectedTable.push(
       new TableCell(
@@ -69,15 +69,24 @@ test("table data is empty expect just table headers + date", () => {
     );
   }
 
-  let actualTable = makeTable({}, getStartTablePoint());
+  const actualTable = makeTable(
+    {
+      employees: [],
+      companyCode: "",
+      companyName: "",
+      unit: "",
+      project: "",
+    },
+    getStartTablePoint()
+  );
 
   expect(actualTable).toEqual(expectedTable);
 });
 
 test("make full table", () => {
-  let expectedTable: Array<TableCell> = [];
-  let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
-  let currentDate: Date = new Date();
+  const expectedTable: Array<TableCell> = [];
+  const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
+  const currentDate: Date = new Date();
   expectedTable.push(
     new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
       makeBoldCellTextStyle(),
@@ -108,8 +117,8 @@ test("make full table", () => {
     )
   );
 
-  let startTablePoint = getStartTablePoint();
-  let tableHeaders = getTableHeaders();
+  const startTablePoint = getStartTablePoint();
+  const tableHeaders = getTableHeaders();
   for (const tableHeader of tableHeaders) {
     expectedTable.push(
       new TableCell(
@@ -119,7 +128,7 @@ test("make full table", () => {
       )
     );
   }
-  let expectedTableRows: Array<Array<string>> = [
+  const expectedTableRows: string[][] = [
     ["651", "NO", "Confirmit", "Studio", "Kachalov Alexey"],
     ["651", "NO", "Confirmit", "Studio", "Kolokolenkina Natalia"],
     ["651", "NO", "Confirmit", "Studio", "Kozlova Anna"],
@@ -131,26 +140,25 @@ test("make full table", () => {
     ["651", "NO", "Confirmit", "Studio", "Volyakova Kristina"],
   ];
 
-  let startPoint = getStartTablePoint();
-  startPoint.row++;
-  for (const expectedTableRow of expectedTableRows) {
-    let i: number = 0;
-    for (const value of expectedTableRow) {
+  const startPoint = getStartTablePoint();
+  for (let i = 1; i < expectedTableRows.length; i++) {
+    const expectedTableRow = expectedTableRows[i];
+    for (let j = 0; j < expectedTableRow.length; j++) {
+      const value = expectedTableRow[j];
       expectedTable.push(
-        new TableCell(new Point(startPoint.column + i, startPoint.row), value, [
-          makeCellBorderStyle(),
-          makeDefaultTextStyle(),
-        ])
+        new TableCell(
+          new Point(startPoint.column + j, startPoint.row + i),
+          value,
+          [makeCellBorderStyle(), makeDefaultTextStyle()]
+        )
       );
-      i++;
     }
-    startPoint.row++;
   }
 
-  let tabledata: TableData = JSON.parse(
+  const tabledata: TableData = JSON.parse(
     fs.readFileSync("tableData.json", "utf-8")
   );
-  let actualTable = makeTable(tabledata, getStartTablePoint());
+  const actualTable = makeTable(tabledata, getStartTablePoint());
 
   actualTable.sort(compare);
   expectedTable.sort(compare);
@@ -159,7 +167,7 @@ test("make full table", () => {
 });
 
 function compare(a: TableCell, b: TableCell) {
-  let columnDiff: number = a.point.column - b.point.column;
+  const columnDiff: number = a.point.column - b.point.column;
   if (columnDiff != 0) return columnDiff;
   else return a.point.row - b.point.row;
 }

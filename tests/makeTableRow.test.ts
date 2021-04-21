@@ -1,6 +1,6 @@
-import { TableCell } from "../build/classes/TableCell";
-import { makeTableRow } from "../build/tableBuildingFunctions/makeTableRow";
-import { Point } from "../build/classes/Point";
+import { TableCell } from "../src/classes/TableCell";
+import { makeTableRow } from "../src/tableBuildingFunctions/makeTableRow";
+import { Point } from "../src/classes/Point";
 
 test("make Table Row, pass empty values, expect empty array", () => {
   let expectedRow: Array<TableCell> = [];

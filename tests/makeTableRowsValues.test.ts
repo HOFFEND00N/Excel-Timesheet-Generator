@@ -1,9 +1,9 @@
-import { TableData } from "../build/classes/TableData";
+import { TableData } from "../src/classes/TableData";
 import * as fs from "fs";
-import { makeTableRowsValues } from "../build/tableBuildingFunctions/makeTableRowsValues";
+import { makeEmployeeDataRows } from "../src/tableBuildingFunctions/makeEmployeeDataRows";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", () => {
-  let expectedTable: Array<Array<string>> = [
+  const expectedTable = [
     ["651", "NO", "Confirmit", "Studio", "Kachalov Alexey"],
     ["651", "NO", "Confirmit", "Studio", "Kolokolenkina Natalia"],
     ["651", "NO", "Confirmit", "Studio", "Kozlova Anna"],
@@ -14,20 +14,25 @@ test("make two dimensional array from parsed json, json file consist of predefin
     ["651", "NO", "Confirmit", "Studio", "Volyakov Dmitry"],
     ["651", "NO", "Confirmit", "Studio", "Volyakova Kristina"],
   ];
-  let tabledata: TableData = JSON.parse(
+  const tabledata: TableData = JSON.parse(
     fs.readFileSync("tableData.json", "utf-8")
   );
 
-  let actualTable = makeTableRowsValues(tabledata);
+  const actualTable = makeEmployeeDataRows(tabledata);
 
   expect(actualTable).toEqual(expectedTable);
 });
 
 test("make table rows values, pass empty function parameter, expect empty table", () => {
-  let expectedTable: Array<Array<string>> = [];
-  let tabledata: TableData = new TableData("", "", "", "", []);
+  const expectedTable = [];
 
-  let actualTable = makeTableRowsValues(tabledata);
+  const actualTable = makeEmployeeDataRows({
+    employees: [],
+    companyCode: "",
+    companyName: "",
+    unit: "",
+    project: "",
+  });
 
   expect(actualTable).toEqual(expectedTable);
 });

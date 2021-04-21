@@ -1,17 +1,17 @@
-import { TableCell } from "../build/classes/TableCell";
+import { TableCell } from "../src/classes/TableCell";
 import {
   getMontlyTimesheetHeader,
   getMonthNames,
   getStartMonthHeaderPoint,
-} from "../build/constants/constant";
+} from "../src/constants/constant";
 import {
   makeBoldCellTextStyle,
   makeStyleHorizontalAlignText,
   makeYellowBackgroundStyle,
   makeDefaultTextStyle,
-} from "../build/constants/styleConstants";
-import { Point } from "../build/classes/Point";
-import { makeMonthRows } from "../build/tableBuildingFunctions/makeMonthRows";
+} from "../src/constants/styleConstants";
+import { Point } from "../src/classes/Point";
+import { makeMonthRows } from "../src/tableBuildingFunctions/makeMonthRows";
 
 test("make date section of talbe + header, expect current month + year + header", () => {
   let startMonthHeaderPoint: Point = getStartMonthHeaderPoint();

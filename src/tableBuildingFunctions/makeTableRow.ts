@@ -8,7 +8,7 @@ export function makeTableRow({
   startPoint: Point;
   values: any[];
 }) {
-  let row: TableCell[] = [];
+  const row: TableCell[] = [];
   for (let i = 0; i < values.length; i++) {
     const value = values[i];
     row.push(

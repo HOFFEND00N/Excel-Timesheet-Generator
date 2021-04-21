@@ -11,19 +11,19 @@ import { TableCell } from "./classes/TableCell";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 
-let tabledata: TableData = JSON.parse(
+const tabledata: TableData = JSON.parse(
   fs.readFileSync("tableData.json", "utf-8")
 );
-let workBook = new excel.Workbook({});
-let workSheet = workBook.addWorksheet(getWorksheetMonthlyTimesheetName());
-let startTablePoint: Point = getStartTablePoint();
-let image: WorksheetImage = new WorksheetImage({
+const workBook = new excel.Workbook({});
+const workSheet = workBook.addWorksheet(getWorksheetMonthlyTimesheetName());
+const startTablePoint: Point = getStartTablePoint();
+const image: WorksheetImage = new WorksheetImage({
   path: "images/confirmit.jpg",
   column: 2,
   row: 2,
 });
 
-let table: Array<TableCell> = makeTable(tabledata, startTablePoint);
+const table: Array<TableCell> = makeTable(tabledata, startTablePoint);
 
 for (const tableCell of table) {
   workSheet

@@ -1,21 +1,7 @@
-export class TableData {
-  public unit: string;
-  public companyCode: string;
-  public companyName: string;
-  public project: string;
-  public employees: string[];
-
-  constructor(
-    unit: string,
-    companyCode: string,
-    companyName: string,
-    project: string,
-    employees: string[]
-  ) {
-    this.unit = unit;
-    this.companyCode = companyCode;
-    this.companyName = companyName;
-    this.project = project;
-    this.employees = employees;
-  }
+export interface TableData {
+  unit: string;
+  companyCode: string;
+  companyName: string;
+  project: string;
+  employees: string[];
 }

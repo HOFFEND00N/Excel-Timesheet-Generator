@@ -3,7 +3,7 @@ import {
   makeCellBorderStyle,
   makeDefaultTextStyle,
 } from "../constants/styleConstants";
-import { getStartTablePoint, getTableHeaders } from "../constants/constant";
+import { getTableHeaders } from "../constants/constant";
 import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
@@ -14,14 +14,14 @@ import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
 
 export function makeTable(tableData: TableData, startTablePoint: Point) {
-  let table: TableCell[] = [];
+  const table: TableCell[] = [];
 
-  let tableHeaders: string[] = getTableHeaders();
-  let monthRow: TableCell[] = makeMonthRows();
-  let { row: pointRow, column: pointColumn }: Point = startTablePoint;
+  const tableHeaders: string[] = getTableHeaders();
+  const monthRow: TableCell[] = makeMonthRows();
+  const { row: pointRow, column: pointColumn }: Point = startTablePoint;
   addTableRowToTable(monthRow, table);
 
-  let tableHeadersRow: TableCell[] = makeTableRow({
+  const tableHeadersRow: TableCell[] = makeTableRow({
     startPoint: new Point(pointColumn, pointRow),
     values: tableHeaders,
   });
@@ -35,11 +35,11 @@ export function makeTable(tableData: TableData, startTablePoint: Point) {
   });
   addTableRowToTable(tableHeadersRow, table);
 
-  pointRow++;
   const tableRowsValues: string[][] = makeEmployeeDataRows(tableData);
-  for (const tableRowValues of tableRowsValues) {
-    let row: TableCell[] = makeTableRow({
-      startPoint: new Point(pointColumn, pointRow),
+  for (let i = 1; i < tableRowsValues.length; i++) {
+    const tableRowValues = tableRowsValues[i];
+    const row: TableCell[] = makeTableRow({
+      startPoint: new Point(pointColumn, pointRow + i),
       values: tableRowValues,
     });
     styleTableRow({
@@ -47,7 +47,6 @@ export function makeTable(tableData: TableData, startTablePoint: Point) {
       cellStyles: [makeCellBorderStyle(), makeDefaultTextStyle()],
     });
     addTableRowToTable(row, table);
-    pointRow++;
   }
 
   return table;

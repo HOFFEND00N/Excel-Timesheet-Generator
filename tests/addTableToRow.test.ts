@@ -1,7 +1,7 @@
-import { TableCell } from "../build/classes/TableCell";
-import { addTableRowToTable } from "../build/tableBuildingFunctions/addTableToRow";
-import { Point } from "../build/classes/Point";
-import { makeBoldCellTextStyle } from "../build/constants/styleConstants";
+import { TableCell } from "../src/classes/TableCell";
+import { addTableRowToTable } from "../src/tableBuildingFunctions/addTableToRow";
+import { Point } from "../src/classes/Point";
+import { makeBoldCellTextStyle } from "../src/constants/styleConstants";
 
 test("add empty row, expect empty table", () => {
   let row: Array<TableCell> = [];
