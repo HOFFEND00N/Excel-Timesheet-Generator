@@ -1,8 +1,8 @@
 import { TableData } from "../classes/TableData";
 
-export function makeTableRowsValues(tableData: TableData) {
+export function makeEmployeeDataRows(tableData: TableData) {
   let dataArr: string[][] = [];
-  for (let i: number = 0; i < tableData.employees?.length; i++) {
+  for (let i = 0; i < tableData.employees?.length; i++) {
     let rowArr: string[] = [];
     for (const tableDataKey in tableData) {
       if (tableDataKey != "employees") rowArr.push(tableData[tableDataKey]);

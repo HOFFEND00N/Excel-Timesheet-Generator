@@ -9,14 +9,10 @@ export function makeTableRow({
   values: any[];
 }) {
   let row: TableCell[] = [];
-  let i: number = 0;
-  for (const value of values) {
+  for (let i = 0; i < values.length; i++) {
+    const value = values[i];
     row.push(
-      new TableCell(
-        new Point(startPoint.column + i++, startPoint.row),
-        value,
-        []
-      )
+      new TableCell(new Point(startPoint.column + i, startPoint.row), value, [])
     );
   }
   return row;

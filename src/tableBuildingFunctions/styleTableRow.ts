@@ -8,7 +8,7 @@ export function styleTableRow({
   row: TableCell[];
   cellStyles: Style[];
 }) {
-  for (let i: number = 0; i < row.length; i++) {
+  for (let i = 0; i < row.length; i++) {
     for (const cellStyle of cellStyles) {
       row[i].styles.push(cellStyle);
     }
