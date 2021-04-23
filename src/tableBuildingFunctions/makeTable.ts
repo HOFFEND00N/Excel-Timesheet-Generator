@@ -17,7 +17,7 @@ export function makeTable(tableData: TableData, startTablePoint: Point) {
   const table: CommonCell[] = [];
 
   const tableHeaders = getTableHeaders();
-  const monthRow = makeMonthRows();
+  const monthRow = makeMonthRows(new Date());
   const { row: pointRow, column: pointColumn }: Point = startTablePoint;
   addTableRowToTable(monthRow, table);
 

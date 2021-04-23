@@ -49,7 +49,7 @@ test("make date section of table + header, expect current month + year + header"
     }),
   ];
 
-  const actualTable = makeMonthRows();
+  const actualTable = makeMonthRows(currentDate);
 
   expect(actualTable).toEqual(expectedTable);
 });

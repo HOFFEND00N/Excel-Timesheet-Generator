@@ -7,8 +7,9 @@
     "compileTs": "babel src --out-dir build --extensions \".ts\" --source-maps",
     "start": "npm run compileTs && node build/app.js --input-type=module",
     "test": "jest",
-    "eslint": "eslint \"./{src,test}/**/*.ts\"",
-    "eslint-fix": "eslint --fix \"./{src,test}/**/*.ts\""
+    "eslint": "eslint \"./{src,tests}/**/*.ts\"",
+    "eslint-fix": "eslint --fix \"./{src,tests}/**/*.ts\"",
+    "pre-commit": "lint-staged"
   },
   "author": "ivan.petrov@confirmit.com",
   "license": "MIT",
@@ -37,14 +38,9 @@
   "dependencies": {
     "excel4node": "1.7.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.ts": [
-      "eslint --no-ignore --fix",
+      "eslint --fix",
       "prettier --write",
       "git add"
     ]

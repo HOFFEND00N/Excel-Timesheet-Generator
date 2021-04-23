@@ -13,14 +13,12 @@ import { TableCell } from "../classes/TableCell";
 import { Point } from "../classes/Point";
 import { CommonCell } from "./types";
 
-export function makeMonthRows() {
+export function makeMonthRows(currentDate: Date) {
   const rows: CommonCell[] = [];
   const {
     row: pointRow,
     column: pointColumn,
   }: Point = getStartMonthHeaderPoint();
-  const currentDate: Date = new Date();
-
   rows.push(
     new TableCell({
       point: { row: pointRow, column: pointColumn },
