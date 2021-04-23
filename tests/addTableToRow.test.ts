@@ -1,12 +1,12 @@
 import { TableCell } from "../src/classes/TableCell";
 import { addTableRowToTable } from "../src/tableBuildingFunctions/addTableToRow";
-import { Point } from "../src/classes/Point";
 import { makeBoldCellTextStyle } from "../src/constants/styleConstants";
+import { CommonCell } from "../src/tableBuildingFunctions/types";
 
 test("add empty row, expect empty table", () => {
-  let row: Array<TableCell> = [];
-  let actualTable: Array<TableCell> = [];
-  let expectedTable: Array<TableCell> = [];
+  const row: CommonCell[] = [];
+  const actualTable: CommonCell[] = [];
+  const expectedTable: CommonCell[] = [];
 
   addTableRowToTable(row, actualTable);
 
@@ -14,10 +14,12 @@ test("add empty row, expect empty table", () => {
 });
 
 test("add empty row, expect the same table", () => {
-  let row: Array<TableCell> = [];
-  let actualTable: Array<TableCell> = [new TableCell(new Point(1, 1), "a", [])];
-  let expectedTable: Array<TableCell> = [
-    new TableCell(new Point(1, 1), "a", []),
+  const row: CommonCell[] = [];
+  const actualTable: CommonCell[] = [
+    new TableCell({ point: { column: 1, row: 1 }, value: "a", styles: [] }),
+  ];
+  const expectedTable: CommonCell[] = [
+    new TableCell({ point: { column: 1, row: 1 }, value: "a", styles: [] }),
   ];
 
   addTableRowToTable(row, actualTable);
@@ -26,13 +28,23 @@ test("add empty row, expect the same table", () => {
 });
 
 test("add one row, expect two rows", () => {
-  let row: Array<TableCell> = [
-    new TableCell(new Point(2, 2), "asd", [makeBoldCellTextStyle()]),
+  const row: CommonCell[] = [
+    new TableCell({
+      point: { column: 2, row: 2 },
+      value: "asd",
+      styles: [makeBoldCellTextStyle()],
+    }),
   ];
-  let actualTable: Array<TableCell> = [new TableCell(new Point(1, 1), "a", [])];
-  let expectedTable: Array<TableCell> = [
-    new TableCell(new Point(1, 1), "a", []),
-    new TableCell(new Point(2, 2), "asd", [makeBoldCellTextStyle()]),
+  const actualTable: CommonCell[] = [
+    new TableCell({ point: { column: 1, row: 1 }, value: "a", styles: [] }),
+  ];
+  const expectedTable: CommonCell[] = [
+    new TableCell({ point: { column: 1, row: 1 }, value: "a", styles: [] }),
+    new TableCell({
+      point: { column: 2, row: 2 },
+      value: "asd",
+      styles: [makeBoldCellTextStyle()],
+    }),
   ];
 
   addTableRowToTable(row, actualTable);

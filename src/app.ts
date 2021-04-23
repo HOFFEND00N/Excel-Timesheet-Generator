@@ -7,9 +7,9 @@ import excel from "excel4node";
 import * as fs from "fs";
 import { TableData } from "./classes/TableData";
 import { Point } from "./classes/Point";
-import { TableCell } from "./classes/TableCell";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
+import { isNumericCell, isStringCell } from "./tableBuildingFunctions/types";
 
 const tabledata: TableData = JSON.parse(
   fs.readFileSync("tableData.json", "utf-8")
@@ -17,22 +17,21 @@ const tabledata: TableData = JSON.parse(
 const workBook = new excel.Workbook({});
 const workSheet = workBook.addWorksheet(getWorksheetMonthlyTimesheetName());
 const startTablePoint: Point = getStartTablePoint();
-const image: WorksheetImage = new WorksheetImage({
+const image: WorksheetImage = {
   path: "images/confirmit.jpg",
   column: 2,
   row: 2,
-});
+};
 
-const table: Array<TableCell> = makeTable(tabledata, startTablePoint);
+const table = makeTable(tabledata, startTablePoint);
 
 for (const tableCell of table) {
-  workSheet
-    .cell(tableCell.point.row, tableCell.point.column)
-    .string(tableCell.value);
+  const cell = workSheet.cell(tableCell.point.row, tableCell.point.column);
+  if (isNumericCell(tableCell)) cell.number(tableCell.value);
+  if (isStringCell(tableCell)) cell.string(tableCell.value);
+
   for (const style of tableCell.styles) {
-    workSheet
-      .cell(tableCell.point.row, tableCell.point.column)
-      .style(workBook.createStyle(style));
+    cell.style(workBook.createStyle(style));
   }
 }
 workSheet.addImage(new WorkSheetImageAdapter(image));

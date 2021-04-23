@@ -8,21 +8,21 @@ import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
-import { TableCell } from "../classes/TableCell";
 import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
+import { CommonCell } from "./types";
 
 export function makeTable(tableData: TableData, startTablePoint: Point) {
-  const table: TableCell[] = [];
+  const table: CommonCell[] = [];
 
-  const tableHeaders: string[] = getTableHeaders();
-  const monthRow: TableCell[] = makeMonthRows();
+  const tableHeaders = getTableHeaders();
+  const monthRow = makeMonthRows();
   const { row: pointRow, column: pointColumn }: Point = startTablePoint;
   addTableRowToTable(monthRow, table);
 
-  const tableHeadersRow: TableCell[] = makeTableRow({
-    startPoint: new Point(pointColumn, pointRow),
+  const tableHeadersRow = makeTableRow({
+    startPoint: { column: pointColumn, row: pointRow },
     values: tableHeaders,
   });
   styleTableRow({
@@ -38,8 +38,8 @@ export function makeTable(tableData: TableData, startTablePoint: Point) {
   const tableRowsValues: string[][] = makeEmployeeDataRows(tableData);
   for (let i = 1; i < tableRowsValues.length; i++) {
     const tableRowValues = tableRowsValues[i];
-    const row: TableCell[] = makeTableRow({
-      startPoint: new Point(pointColumn, pointRow + i),
+    const row: CommonCell[] = makeTableRow({
+      startPoint: { column: pointColumn, row: pointRow + i },
       values: tableRowValues,
     });
     styleTableRow({

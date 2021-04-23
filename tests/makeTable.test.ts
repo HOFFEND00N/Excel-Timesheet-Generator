@@ -18,38 +18,44 @@ import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
 import * as fs from "fs";
 import { Style } from "../src/classes/Style";
+import { CommonCell } from "../src/tableBuildingFunctions/types";
 
 test("table data is empty expect just table headers + date", () => {
-  const expectedTable: Array<TableCell> = [];
+  const expectedTable: CommonCell[] = [];
   const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   const currentDate: Date = new Date();
   expectedTable.push(
-    new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
-      makeBoldCellTextStyle(),
-      makeDefaultTextStyle(),
-    ])
+    new TableCell({
+      point: startMonthHeaderPoint,
+      value: getMontlyTimesheetHeader(),
+      styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
+    })
   );
   expectedTable.push(
-    new TableCell(
-      new Point(startMonthHeaderPoint.column, ++startMonthHeaderPoint.row),
-      getMonthNames(currentDate.getMonth()),
-      [
+    new TableCell({
+      point: {
+        column: startMonthHeaderPoint.column,
+        row: ++startMonthHeaderPoint.row,
+      },
+      value: getMonthNames(currentDate.getMonth()),
+      styles: [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("right"),
         makeDefaultTextStyle(),
-      ]
-    )
+      ],
+    })
   );
+  const { column, row }: Point = startMonthHeaderPoint;
   expectedTable.push(
-    new TableCell(
-      new Point(++startMonthHeaderPoint.column, startMonthHeaderPoint.row),
-      currentDate.getFullYear().toString(),
-      [
+    new TableCell({
+      point: { column: column + 1, row },
+      value: currentDate.getFullYear(),
+      styles: [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("left"),
         makeDefaultTextStyle(),
-      ]
-    )
+      ],
+    })
   );
 
   const headerStyles: Array<Style> = [
@@ -59,13 +65,14 @@ test("table data is empty expect just table headers + date", () => {
   ];
   const startTablePoint = getStartTablePoint();
   const tableHeaders = getTableHeaders();
-  for (const tableHeader of tableHeaders) {
+  for (let i = 0; i < tableHeaders.length; i++) {
+    const tableHeader = tableHeaders[i];
     expectedTable.push(
-      new TableCell(
-        new Point(startTablePoint.column++, startTablePoint.row),
-        tableHeader,
-        headerStyles
-      )
+      new TableCell({
+        point: { column: startTablePoint.column + i, row: startTablePoint.row },
+        value: tableHeader,
+        styles: headerStyles,
+      })
     );
   }
 
@@ -84,48 +91,60 @@ test("table data is empty expect just table headers + date", () => {
 });
 
 test("make full table", () => {
-  const expectedTable: Array<TableCell> = [];
+  const expectedTable: CommonCell[] = [];
   const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   const currentDate: Date = new Date();
   expectedTable.push(
-    new TableCell(startMonthHeaderPoint, getMontlyTimesheetHeader(), [
-      makeBoldCellTextStyle(),
-      makeDefaultTextStyle(),
-    ])
+    new TableCell({
+      point: startMonthHeaderPoint,
+      value: getMontlyTimesheetHeader(),
+      styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
+    })
   );
 
   expectedTable.push(
-    new TableCell(
-      new Point(startMonthHeaderPoint.column, ++startMonthHeaderPoint.row),
-      getMonthNames(currentDate.getMonth()),
-      [
+    new TableCell({
+      point: {
+        column: startMonthHeaderPoint.column,
+        row: startMonthHeaderPoint.row + 1,
+      },
+      value: getMonthNames(currentDate.getMonth()),
+      styles: [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("right"),
         makeDefaultTextStyle(),
-      ]
-    )
+      ],
+    })
   );
   expectedTable.push(
-    new TableCell(
-      new Point(++startMonthHeaderPoint.column, startMonthHeaderPoint.row),
-      currentDate.getFullYear().toString(),
-      [
+    new TableCell({
+      point: {
+        column: startMonthHeaderPoint.column + 1,
+        row: startMonthHeaderPoint.row + 1,
+      },
+      value: currentDate.getFullYear(),
+      styles: [
         makeYellowBackgroundStyle(),
         makeStyleHorizontalAlignText("left"),
         makeDefaultTextStyle(),
-      ]
-    )
+      ],
+    })
   );
 
   const startTablePoint = getStartTablePoint();
   const tableHeaders = getTableHeaders();
-  for (const tableHeader of tableHeaders) {
+  for (let i = 0; i < tableHeaders.length; i++) {
+    const tableHeader = tableHeaders[i];
     expectedTable.push(
-      new TableCell(
-        new Point(startTablePoint.column++, startTablePoint.row),
-        tableHeader,
-        [makeBoldCellTextStyle(), makeCellBorderStyle(), makeDefaultTextStyle()]
-      )
+      new TableCell({
+        point: { column: startTablePoint.column + i, row: startTablePoint.row },
+        value: tableHeader,
+        styles: [
+          makeBoldCellTextStyle(),
+          makeCellBorderStyle(),
+          makeDefaultTextStyle(),
+        ],
+      })
     );
   }
   const expectedTableRows: string[][] = [
@@ -146,11 +165,11 @@ test("make full table", () => {
     for (let j = 0; j < expectedTableRow.length; j++) {
       const value = expectedTableRow[j];
       expectedTable.push(
-        new TableCell(
-          new Point(startPoint.column + j, startPoint.row + i),
-          value,
-          [makeCellBorderStyle(), makeDefaultTextStyle()]
-        )
+        new TableCell({
+          point: { column: startPoint.column + j, row: startPoint.row + i },
+          value: value,
+          styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
+        })
       );
     }
   }
@@ -166,7 +185,7 @@ test("make full table", () => {
   expect(actualTable).toEqual(expectedTable);
 });
 
-function compare(a: TableCell, b: TableCell) {
+function compare(a: CommonCell, b: CommonCell) {
   const columnDiff: number = a.point.column - b.point.column;
   if (columnDiff != 0) return columnDiff;
   else return a.point.row - b.point.row;

@@ -1,18 +1,23 @@
 import { TableCell } from "../classes/TableCell";
 import { Point } from "../classes/Point";
+import { CommonValue } from "./types";
 
-export function makeTableRow({
+export function makeTableRow<T = CommonValue>({
   startPoint,
   values,
 }: {
   startPoint: Point;
-  values: any[];
+  values: T[];
 }) {
-  const row: TableCell[] = [];
+  const row: TableCell<T>[] = [];
   for (let i = 0; i < values.length; i++) {
     const value = values[i];
     row.push(
-      new TableCell(new Point(startPoint.column + i, startPoint.row), value, [])
+      new TableCell({
+        point: { column: startPoint.column + i, row: startPoint.row },
+        value: value,
+        styles: [],
+      })
     );
   }
   return row;

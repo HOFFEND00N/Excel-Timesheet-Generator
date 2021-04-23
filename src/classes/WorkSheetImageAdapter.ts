@@ -8,32 +8,22 @@ export class WorkSheetImageAdapter {
   constructor(worksheetImage: WorksheetImage) {
     this.type = "picture";
     this.path = worksheetImage.path;
-    this.position = new Position({
+    this.position = {
       type: "oneCellAnchor",
-      from: new From({
+      from: {
         row: worksheetImage.row,
-        column: worksheetImage.column,
-      }),
-    });
+        col: worksheetImage.column,
+      },
+    };
   }
 }
 
-class Position {
+interface Position {
   type: string;
   from: From;
-
-  constructor({ type, from }: { type: string; from: From }) {
-    this.type = type;
-    this.from = new From({ row: from.row, column: from.col });
-  }
 }
 
-class From {
+interface From {
   col: number;
   row: number;
-
-  constructor({ row, column }: { column: number; row: number }) {
-    this.row = row;
-    this.col = column;
-  }
 }

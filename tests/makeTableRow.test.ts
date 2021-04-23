@@ -1,20 +1,25 @@
 import { TableCell } from "../src/classes/TableCell";
 import { makeTableRow } from "../src/tableBuildingFunctions/makeTableRow";
-import { Point } from "../src/classes/Point";
+import { CommonCell } from "../src/tableBuildingFunctions/types";
 
 test("make Table Row, pass empty values, expect empty array", () => {
-  let expectedRow: Array<TableCell> = [];
+  const expectedRow: CommonCell[] = [];
 
-  let actualRow = makeTableRow({ startPoint: new Point(1, 1), values: [] });
+  const actualRow = makeTableRow({
+    startPoint: { column: 1, row: 1 },
+    values: [],
+  });
 
   expect(actualRow).toEqual(expectedRow);
 });
 
 test("make Table Row, pass one value, expect one row", () => {
-  let expectedRow: Array<TableCell> = [new TableCell(new Point(1, 1), "a", [])];
+  const expectedRow: CommonCell[] = [
+    new TableCell({ point: { column: 1, row: 1 }, value: "a", styles: [] }),
+  ];
 
-  let actualRow = makeTableRow({
-    startPoint: new Point(1, 1),
+  const actualRow = makeTableRow({
+    startPoint: { column: 1, row: 1 },
     values: ["a"],
   });
 

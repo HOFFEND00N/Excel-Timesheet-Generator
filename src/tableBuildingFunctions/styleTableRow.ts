@@ -1,11 +1,11 @@
-import { TableCell } from "../classes/TableCell";
 import { Style } from "../classes/Style";
+import { CommonCell } from "./types";
 
 export function styleTableRow({
   row,
   cellStyles,
 }: {
-  row: TableCell[];
+  row: CommonCell[];
   cellStyles: Style[];
 }) {
   for (let i = 0; i < row.length; i++) {

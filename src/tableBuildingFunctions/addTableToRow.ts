@@ -1,6 +1,6 @@
-import { TableCell } from "../classes/TableCell";
+import { CommonCell } from "./types";
 
-export function addTableRowToTable(row: TableCell[], table: TableCell[]) {
+export function addTableRowToTable(row: CommonCell[], table: CommonCell[]) {
   for (const tableCell of row) {
     table.push(tableCell);
   }

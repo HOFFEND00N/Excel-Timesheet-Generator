@@ -1,16 +1,32 @@
 import { TableCell } from "../src/classes/TableCell";
-import { Point } from "../src/classes/Point";
 import { styleTableRow } from "../src/tableBuildingFunctions/styleTableRow";
 import {
   makeBoldCellTextStyle,
   makeYellowBackgroundStyle,
 } from "../src/constants/styleConstants";
+import { CommonCell } from "../src/tableBuildingFunctions/types";
 
 test("use no styles for row, expect zero changes", () => {
-  const expectedRow: Array<TableCell> = [
-    new TableCell(new Point(1, 1), "a", []),
+  const expectedRow: CommonCell[] = [
+    new TableCell({
+      point: {
+        column: 1,
+        row: 1,
+      },
+      value: "a",
+      styles: [],
+    }),
   ];
-  const actualRow: Array<TableCell> = [new TableCell(new Point(1, 1), "a", [])];
+  const actualRow: CommonCell[] = [
+    new TableCell({
+      point: {
+        column: 1,
+        row: 1,
+      },
+      value: "a",
+      styles: [],
+    }),
+  ];
 
   styleTableRow({
     row: actualRow,
@@ -21,13 +37,26 @@ test("use no styles for row, expect zero changes", () => {
 });
 
 test("use bold text + yellow background styles for row, expect changes to be applied", () => {
-  const expectedRow: Array<TableCell> = [
-    new TableCell(new Point(1, 1), "a", [
-      makeYellowBackgroundStyle(),
-      makeBoldCellTextStyle(),
-    ]),
+  const expectedRow: CommonCell[] = [
+    new TableCell({
+      point: {
+        column: 1,
+        row: 1,
+      },
+      value: "a",
+      styles: [makeYellowBackgroundStyle(), makeBoldCellTextStyle()],
+    }),
   ];
-  const actualRow: Array<TableCell> = [new TableCell(new Point(1, 1), "a", [])];
+  const actualRow: CommonCell[] = [
+    new TableCell({
+      point: {
+        column: 1,
+        row: 1,
+      },
+      value: "a",
+      styles: [],
+    }),
+  ];
 
   styleTableRow({
     row: actualRow,
