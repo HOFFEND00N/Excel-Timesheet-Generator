@@ -1,27 +1,27 @@
-export interface Font {
+interface Font {
   bold?: boolean;
   size?: number;
   name?: string;
 }
 
-export interface Border {
+interface Border {
   left?: BorderStyle;
   right?: BorderStyle;
   top?: BorderStyle;
   bottom?: BorderStyle;
 }
 
-export interface BorderStyle {
+interface BorderStyle {
   style?: string;
 }
 
-export interface Background {
+interface Background {
   type?: string;
   patternType?: string;
   fgColor?: string;
 }
 
-export interface Alignment {
+interface Alignment {
   horizontal?: string;
 }
 
