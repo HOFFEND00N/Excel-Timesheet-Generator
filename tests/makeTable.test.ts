@@ -18,7 +18,7 @@ import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
 import * as fs from "fs";
 import { Style } from "../src/classes/Style";
-import { CommonCell } from "../src/tableBuildingFunctions/types";
+import { CommonCell, CommonValue } from "../src/tableBuildingFunctions/types";
 
 test("table data is empty expect just table headers + date", () => {
   const expectedTable: CommonCell[] = [];
@@ -147,16 +147,16 @@ test("make full table", () => {
       })
     );
   }
-  const expectedTableRows: string[][] = [
-    ["651", "NO", "Confirmit", "Studio", "Kachalov Alexey"],
-    ["651", "NO", "Confirmit", "Studio", "Kolokolenkina Natalia"],
-    ["651", "NO", "Confirmit", "Studio", "Kozlova Anna"],
-    ["651", "NO", "Confirmit", "Studio", "Pisarenko Dmitry"],
-    ["651", "NO", "Confirmit", "Studio", "Popov Sergey"],
-    ["651", "NO", "Confirmit", "Studio", "Protasov Ilya"],
-    ["651", "NO", "Confirmit", "Studio", "Sumatokhin Alexey"],
-    ["651", "NO", "Confirmit", "Studio", "Volyakov Dmitry"],
-    ["651", "NO", "Confirmit", "Studio", "Volyakova Kristina"],
+  const expectedTableRows: CommonValue[][] = [
+    [651, "NO", "Confirmit", "Studio", "Kachalov Alexey"],
+    [651, "NO", "Confirmit", "Studio", "Kolokolenkina Natalia"],
+    [651, "NO", "Confirmit", "Studio", "Kozlova Anna"],
+    [651, "NO", "Confirmit", "Studio", "Pisarenko Dmitry"],
+    [651, "NO", "Confirmit", "Studio", "Popov Sergey"],
+    [651, "NO", "Confirmit", "Studio", "Protasov Ilya"],
+    [651, "NO", "Confirmit", "Studio", "Sumatokhin Alexey"],
+    [651, "NO", "Confirmit", "Studio", "Volyakov Dmitry"],
+    [651, "NO", "Confirmit", "Studio", "Volyakova Kristina"],
   ];
 
   const startPoint = getStartTablePoint();
@@ -164,13 +164,25 @@ test("make full table", () => {
     const expectedTableRow = expectedTableRows[i];
     for (let j = 0; j < expectedTableRow.length; j++) {
       const value = expectedTableRow[j];
-      expectedTable.push(
-        new TableCell({
+      let tableCell;
+      if (j == 0 || j == 1) {
+        tableCell = new TableCell({
+          point: { column: startPoint.column + j, row: startPoint.row + i },
+          value: value,
+          styles: [
+            makeStyleHorizontalAlignText("center"),
+            makeCellBorderStyle(),
+            makeDefaultTextStyle(),
+          ],
+        });
+      } else {
+        tableCell = new TableCell({
           point: { column: startPoint.column + j, row: startPoint.row + i },
           value: value,
           styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
-        })
-      );
+        });
+      }
+      expectedTable.push(tableCell);
     }
   }
 

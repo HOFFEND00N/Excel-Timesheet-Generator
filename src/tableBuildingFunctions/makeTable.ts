@@ -2,6 +2,7 @@ import {
   makeBoldCellTextStyle,
   makeCellBorderStyle,
   makeDefaultTextStyle,
+  makeStyleHorizontalAlignText,
 } from "../constants/styleConstants";
 import { getTableHeaders } from "../constants/constant";
 import { makeMonthRows } from "./makeMonthRows";
@@ -35,12 +36,16 @@ export function makeTable(tableData: TableData, startTablePoint: Point) {
   });
   addTableRowToTable(tableHeadersRow, table);
 
-  const tableRowsValues: string[][] = makeEmployeeDataRows(tableData);
+  const tableRowsValues = makeEmployeeDataRows(tableData);
   for (let i = 1; i < tableRowsValues.length; i++) {
     const tableRowValues = tableRowsValues[i];
-    const row: CommonCell[] = makeTableRow({
+    const row = makeTableRow({
       startPoint: { column: pointColumn, row: pointRow + i },
       values: tableRowValues,
+    });
+    styleTableRow({
+      row: [row[0], row[1]],
+      cellStyles: [makeStyleHorizontalAlignText("center")],
     });
     styleTableRow({
       row,

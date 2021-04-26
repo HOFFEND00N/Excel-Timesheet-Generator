@@ -44,3 +44,6 @@ export function getStartTablePoint() {
 export function getStartMonthHeaderPoint() {
   return { column: 2, row: 5 };
 }
+
+export const startTasksPoint = { y: 9, x: 7 };
+export const jiraUserNames = ["AnnaKo"];

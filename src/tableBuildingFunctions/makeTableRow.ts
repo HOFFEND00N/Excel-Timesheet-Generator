@@ -1,15 +1,15 @@
 import { TableCell } from "../classes/TableCell";
 import { Point } from "../classes/Point";
-import { CommonValue } from "./types";
+import { CommonCell, CommonValue } from "./types";
 
-export function makeTableRow<T = CommonValue>({
+export function makeTableRow({
   startPoint,
   values,
 }: {
   startPoint: Point;
-  values: T[];
+  values: CommonValue[];
 }) {
-  const row: TableCell<T>[] = [];
+  const row: CommonCell[] = [];
   for (let i = 0; i < values.length; i++) {
     const value = values[i];
     row.push(

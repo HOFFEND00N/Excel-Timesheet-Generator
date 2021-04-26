@@ -1,10 +1,11 @@
 import { Point } from "./Point";
 import { Style } from "./Style";
+import { CommonValue } from "../tableBuildingFunctions/types";
 
-export class TableCell<T> {
+export class TableCell {
   public styles: Style[];
   public point: Point;
-  public value: T;
+  public value: CommonValue;
 
   constructor({
     point,
@@ -12,7 +13,7 @@ export class TableCell<T> {
     styles,
   }: {
     point: Point;
-    value: T;
+    value: CommonValue;
     styles: Style[];
   }) {
     this.point = { column: point.column, row: point.row };

@@ -38,3 +38,8 @@ workSheet.addImage(new WorkSheetImageAdapter(image));
 
 workBook.write("Report.xlsx");
 console.log("Successfully generated Report.xls");
+// (async () => {
+//   workbook = await makeTable(startTablePoint, workbook, tableData);
+//   workbook.write("Report.xlsx");
+//   console.log("Successfully generated Report.xlsx");
+// })();
