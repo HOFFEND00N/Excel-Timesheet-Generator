@@ -1,6 +1,6 @@
-import { TableCell } from "../classes/TableCell";
 import { Point } from "../classes/Point";
-import { CommonCell, CommonValue } from "./types";
+import { CommonCell, CommonValue, NumberValue, StringValue } from "./types";
+import { TableCell } from "../classes/TableCell";
 
 export function makeTableRow({
   startPoint,
@@ -12,13 +12,11 @@ export function makeTableRow({
   const row: CommonCell[] = [];
   for (let i = 0; i < values.length; i++) {
     const value = values[i];
-    row.push(
-      new TableCell({
-        point: { column: startPoint.column + i, row: startPoint.row },
-        value: value,
-        styles: [],
-      })
-    );
+    row.push(<TableCell<StringValue> | TableCell<NumberValue>>{
+      point: { column: startPoint.column + i, row: startPoint.row },
+      value: value,
+      styles: [],
+    });
   }
   return row;
 }

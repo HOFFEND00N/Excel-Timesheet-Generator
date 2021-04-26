@@ -1,4 +1,3 @@
-import { TableCell } from "../src/classes/TableCell";
 import { makeTableRow } from "../src/tableBuildingFunctions/makeTableRow";
 import { CommonCell } from "../src/tableBuildingFunctions/types";
 
@@ -15,8 +14,8 @@ test("make Table Row, pass empty values, expect empty array", () => {
 
 test("make Table Row, pass two value, expect one row with two values", () => {
   const expectedRow: CommonCell[] = [
-    new TableCell({ point: { column: 1, row: 1 }, value: "a", styles: [] }),
-    new TableCell({ point: { column: 2, row: 1 }, value: "abs", styles: [] }),
+    { point: { column: 1, row: 1 }, value: "a", styles: [] },
+    { point: { column: 2, row: 1 }, value: "abs", styles: [] },
   ];
 
   const actualRow = makeTableRow({

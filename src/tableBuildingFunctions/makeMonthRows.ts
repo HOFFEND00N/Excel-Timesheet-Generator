@@ -9,7 +9,6 @@ import {
   makeStyleHorizontalAlignText,
   makeYellowBackgroundStyle,
 } from "../constants/styleConstants";
-import { TableCell } from "../classes/TableCell";
 import { Point } from "../classes/Point";
 import { CommonCell } from "./types";
 
@@ -19,34 +18,28 @@ export function makeMonthRows(currentDate: Date) {
     row: pointRow,
     column: pointColumn,
   }: Point = getStartMonthHeaderPoint();
-  rows.push(
-    new TableCell({
-      point: { row: pointRow, column: pointColumn },
-      value: getMontlyTimesheetHeader(),
-      styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
-    })
-  );
-  rows.push(
-    new TableCell({
-      point: { row: pointRow + 1, column: pointColumn },
-      value: getMonthNames(currentDate.getMonth()),
-      styles: [
-        makeYellowBackgroundStyle(),
-        makeStyleHorizontalAlignText("right"),
-        makeDefaultTextStyle(),
-      ],
-    })
-  );
-  rows.push(
-    new TableCell({
-      point: { row: pointRow + 1, column: pointColumn + 1 },
-      value: currentDate.getFullYear(),
-      styles: [
-        makeYellowBackgroundStyle(),
-        makeStyleHorizontalAlignText("left"),
-        makeDefaultTextStyle(),
-      ],
-    })
-  );
+  rows.push({
+    point: { row: pointRow, column: pointColumn },
+    value: getMontlyTimesheetHeader(),
+    styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
+  });
+  rows.push({
+    point: { row: pointRow + 1, column: pointColumn },
+    value: getMonthNames(currentDate.getMonth()),
+    styles: [
+      makeYellowBackgroundStyle(),
+      makeStyleHorizontalAlignText("right"),
+      makeDefaultTextStyle(),
+    ],
+  });
+  rows.push({
+    point: { row: pointRow + 1, column: pointColumn + 1 },
+    value: currentDate.getFullYear(),
+    styles: [
+      makeYellowBackgroundStyle(),
+      makeStyleHorizontalAlignText("left"),
+      makeDefaultTextStyle(),
+    ],
+  });
   return rows;
 }

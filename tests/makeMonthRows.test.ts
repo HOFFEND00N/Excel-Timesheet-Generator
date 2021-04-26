@@ -1,4 +1,3 @@
-import { TableCell } from "../src/classes/TableCell";
 import {
   getMontlyTimesheetHeader,
   getMonthNames,
@@ -20,12 +19,12 @@ test("make date section of table + header, expect current month + year + header"
   const { column, row } = getStartMonthHeaderPoint();
 
   const expectedTable: CommonCell[] = [
-    new TableCell({
+    {
       point: startMonthHeaderPoint,
       value: getMontlyTimesheetHeader(),
       styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
-    }),
-    new TableCell({
+    },
+    {
       point: {
         column: column,
         row: row + 1,
@@ -36,8 +35,8 @@ test("make date section of table + header, expect current month + year + header"
         makeStyleHorizontalAlignText("right"),
         makeDefaultTextStyle(),
       ],
-    }),
-    new TableCell({
+    },
+    {
       point: {
         column: column + 1,
         row: row + 1,
@@ -48,7 +47,7 @@ test("make date section of table + header, expect current month + year + header"
         makeStyleHorizontalAlignText("left"),
         makeDefaultTextStyle(),
       ],
-    }),
+    },
   ];
 
   const actualTable = makeMonthRows(currentDate);

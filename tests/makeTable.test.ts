@@ -13,7 +13,6 @@ import {
   makeYellowBackgroundStyle,
   makeDefaultTextStyle,
 } from "../src/constants/styleConstants";
-import { TableCell } from "../src/classes/TableCell";
 import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
 import * as fs from "fs";
@@ -25,41 +24,35 @@ test("table data is empty expect just table headers + date", () => {
   const currentDate: Date = new Date();
   const { column, row }: Point = getStartMonthHeaderPoint();
 
-  expectedTable.push(
-    new TableCell({
-      point: {
-        column: column,
-        row: row,
-      },
-      value: getMontlyTimesheetHeader(),
-      styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
-    })
-  );
-  expectedTable.push(
-    new TableCell({
-      point: {
-        column: column,
-        row: row + 1,
-      },
-      value: getMonthNames(currentDate.getMonth()),
-      styles: [
-        makeYellowBackgroundStyle(),
-        makeStyleHorizontalAlignText("right"),
-        makeDefaultTextStyle(),
-      ],
-    })
-  );
-  expectedTable.push(
-    new TableCell({
-      point: { column: column + 1, row: row + 1 },
-      value: currentDate.getFullYear(),
-      styles: [
-        makeYellowBackgroundStyle(),
-        makeStyleHorizontalAlignText("left"),
-        makeDefaultTextStyle(),
-      ],
-    })
-  );
+  expectedTable.push({
+    point: {
+      column: column,
+      row: row,
+    },
+    value: getMontlyTimesheetHeader(),
+    styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
+  });
+  expectedTable.push({
+    point: {
+      column: column,
+      row: row + 1,
+    },
+    value: getMonthNames(currentDate.getMonth()),
+    styles: [
+      makeYellowBackgroundStyle(),
+      makeStyleHorizontalAlignText("right"),
+      makeDefaultTextStyle(),
+    ],
+  });
+  expectedTable.push({
+    point: { column: column + 1, row: row + 1 },
+    value: currentDate.getFullYear(),
+    styles: [
+      makeYellowBackgroundStyle(),
+      makeStyleHorizontalAlignText("left"),
+      makeDefaultTextStyle(),
+    ],
+  });
 
   const headerStyles: Array<Style> = [
     makeBoldCellTextStyle(),
@@ -70,13 +63,11 @@ test("table data is empty expect just table headers + date", () => {
   const tableHeaders = getTableHeaders();
   for (let i = 0; i < tableHeaders.length; i++) {
     const tableHeader = tableHeaders[i];
-    expectedTable.push(
-      new TableCell({
-        point: { column: startTablePoint.column + i, row: startTablePoint.row },
-        value: tableHeader,
-        styles: headerStyles,
-      })
-    );
+    expectedTable.push({
+      point: { column: startTablePoint.column + i, row: startTablePoint.row },
+      value: tableHeader,
+      styles: headerStyles,
+    });
   }
 
   const actualTable = makeTable(
@@ -97,58 +88,50 @@ test("make full table", () => {
   const expectedTable: CommonCell[] = [];
   const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   const currentDate: Date = new Date();
-  expectedTable.push(
-    new TableCell({
-      point: startMonthHeaderPoint,
-      value: getMontlyTimesheetHeader(),
-      styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
-    })
-  );
+  expectedTable.push({
+    point: startMonthHeaderPoint,
+    value: getMontlyTimesheetHeader(),
+    styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
+  });
 
-  expectedTable.push(
-    new TableCell({
-      point: {
-        column: startMonthHeaderPoint.column,
-        row: startMonthHeaderPoint.row + 1,
-      },
-      value: getMonthNames(currentDate.getMonth()),
-      styles: [
-        makeYellowBackgroundStyle(),
-        makeStyleHorizontalAlignText("right"),
-        makeDefaultTextStyle(),
-      ],
-    })
-  );
-  expectedTable.push(
-    new TableCell({
-      point: {
-        column: startMonthHeaderPoint.column + 1,
-        row: startMonthHeaderPoint.row + 1,
-      },
-      value: currentDate.getFullYear(),
-      styles: [
-        makeYellowBackgroundStyle(),
-        makeStyleHorizontalAlignText("left"),
-        makeDefaultTextStyle(),
-      ],
-    })
-  );
+  expectedTable.push({
+    point: {
+      column: startMonthHeaderPoint.column,
+      row: startMonthHeaderPoint.row + 1,
+    },
+    value: getMonthNames(currentDate.getMonth()),
+    styles: [
+      makeYellowBackgroundStyle(),
+      makeStyleHorizontalAlignText("right"),
+      makeDefaultTextStyle(),
+    ],
+  });
+  expectedTable.push({
+    point: {
+      column: startMonthHeaderPoint.column + 1,
+      row: startMonthHeaderPoint.row + 1,
+    },
+    value: currentDate.getFullYear(),
+    styles: [
+      makeYellowBackgroundStyle(),
+      makeStyleHorizontalAlignText("left"),
+      makeDefaultTextStyle(),
+    ],
+  });
 
   const startTablePoint = getStartTablePoint();
   const tableHeaders = getTableHeaders();
   for (let i = 0; i < tableHeaders.length; i++) {
     const tableHeader = tableHeaders[i];
-    expectedTable.push(
-      new TableCell({
-        point: { column: startTablePoint.column + i, row: startTablePoint.row },
-        value: tableHeader,
-        styles: [
-          makeBoldCellTextStyle(),
-          makeCellBorderStyle(),
-          makeDefaultTextStyle(),
-        ],
-      })
-    );
+    expectedTable.push({
+      point: { column: startTablePoint.column + i, row: startTablePoint.row },
+      value: tableHeader,
+      styles: [
+        makeBoldCellTextStyle(),
+        makeCellBorderStyle(),
+        makeDefaultTextStyle(),
+      ],
+    });
   }
   const expectedTableRows: CommonValue[][] = [
     [651, "NO", "Confirmit", "Studio", "Kachalov Alexey"],
@@ -169,7 +152,7 @@ test("make full table", () => {
       const value = expectedTableRow[j];
       let tableCell;
       if (j == 0 || j == 1) {
-        tableCell = new TableCell({
+        tableCell = {
           point: { column: startPoint.column + j, row: startPoint.row + i },
           value: value,
           styles: [
@@ -177,13 +160,13 @@ test("make full table", () => {
             makeCellBorderStyle(),
             makeDefaultTextStyle(),
           ],
-        });
+        };
       } else {
-        tableCell = new TableCell({
+        tableCell = {
           point: { column: startPoint.column + j, row: startPoint.row + i },
           value: value,
           styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
-        });
+        };
       }
       expectedTable.push(tableCell);
     }
