@@ -22,11 +22,15 @@ import { CommonCell, CommonValue } from "../src/tableBuildingFunctions/types";
 
 test("table data is empty expect just table headers + date", () => {
   const expectedTable: CommonCell[] = [];
-  const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   const currentDate: Date = new Date();
+  const { column, row }: Point = getStartMonthHeaderPoint();
+
   expectedTable.push(
     new TableCell({
-      point: startMonthHeaderPoint,
+      point: {
+        column: column,
+        row: row,
+      },
       value: getMontlyTimesheetHeader(),
       styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
     })
@@ -34,8 +38,8 @@ test("table data is empty expect just table headers + date", () => {
   expectedTable.push(
     new TableCell({
       point: {
-        column: startMonthHeaderPoint.column,
-        row: ++startMonthHeaderPoint.row,
+        column: column,
+        row: row + 1,
       },
       value: getMonthNames(currentDate.getMonth()),
       styles: [
@@ -45,10 +49,9 @@ test("table data is empty expect just table headers + date", () => {
       ],
     })
   );
-  const { column, row }: Point = startMonthHeaderPoint;
   expectedTable.push(
     new TableCell({
-      point: { column: column + 1, row },
+      point: { column: column + 1, row: row + 1 },
       value: currentDate.getFullYear(),
       styles: [
         makeYellowBackgroundStyle(),
