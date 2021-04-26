@@ -1,12 +1,8 @@
 import { makeTable } from "./tableBuildingFunctions/makeTable";
-import {
-  getStartTablePoint,
-  getWorksheetMonthlyTimesheetName,
-} from "./constants/constant";
+import { getWorksheetMonthlyTimesheetName } from "./constants/constant";
 import excel from "excel4node";
 import * as fs from "fs";
 import { TableData } from "./classes/TableData";
-import { Point } from "./classes/Point";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 import { isNumericCell, isStringCell } from "./tableBuildingFunctions/types";
@@ -16,14 +12,13 @@ const tabledata: TableData = JSON.parse(
 );
 const workBook = new excel.Workbook({});
 const workSheet = workBook.addWorksheet(getWorksheetMonthlyTimesheetName());
-const startTablePoint: Point = getStartTablePoint();
 const image: WorksheetImage = {
   path: "images/confirmit.jpg",
   column: 2,
   row: 2,
 };
 
-const table = makeTable(tabledata, startTablePoint);
+const table = makeTable(tabledata, new Date());
 
 for (const tableCell of table) {
   const cell = workSheet.cell(tableCell.point.row, tableCell.point.column);

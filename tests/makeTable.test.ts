@@ -84,7 +84,7 @@ test("table data is empty expect just table headers + date", () => {
       unit: "",
       project: "",
     },
-    getStartTablePoint()
+    currentDate
   );
 
   expect(actualTable).toEqual(expectedTable);
@@ -189,7 +189,7 @@ test("make full table", () => {
   const tabledata: TableData = JSON.parse(
     fs.readFileSync("tableData.json", "utf-8")
   );
-  const actualTable = makeTable(tabledata, getStartTablePoint());
+  const actualTable = makeTable(tabledata, currentDate);
 
   actualTable.sort(compare);
   expectedTable.sort(compare);

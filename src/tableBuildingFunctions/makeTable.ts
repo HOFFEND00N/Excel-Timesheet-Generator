@@ -4,7 +4,7 @@ import {
   makeDefaultTextStyle,
   makeStyleHorizontalAlignText,
 } from "../constants/styleConstants";
-import { getTableHeaders } from "../constants/constant";
+import { getStartTablePoint, getTableHeaders } from "../constants/constant";
 import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
@@ -14,11 +14,12 @@ import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
 import { CommonCell } from "./types";
 
-export function makeTable(tableData: TableData, startTablePoint: Point) {
+export function makeTable(tableData: TableData, currentDate: Date) {
   const table: CommonCell[] = [];
+  const startTablePoint: Point = getStartTablePoint();
 
   const tableHeaders = getTableHeaders();
-  const monthRow = makeMonthRows(new Date());
+  const monthRow = makeMonthRows(currentDate);
   const { row: pointRow, column: pointColumn }: Point = startTablePoint;
   addTableRowToTable(monthRow, table);
 
