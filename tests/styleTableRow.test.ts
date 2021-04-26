@@ -6,8 +6,10 @@ import {
 } from "../src/constants/styleConstants";
 import { CommonCell } from "../src/tableBuildingFunctions/types";
 
-test("use no styles for row, expect zero changes", () => {
-  const expectedRow: CommonCell[] = [
+let actualRow: CommonCell[];
+
+beforeEach(() => {
+  actualRow = [
     new TableCell({
       point: {
         column: 1,
@@ -17,7 +19,10 @@ test("use no styles for row, expect zero changes", () => {
       styles: [],
     }),
   ];
-  const actualRow: CommonCell[] = [
+});
+
+test("use no styles for row, expect zero changes", () => {
+  const expectedRow: CommonCell[] = [
     new TableCell({
       point: {
         column: 1,
@@ -45,16 +50,6 @@ test("use bold text + yellow background styles for row, expect changes to be app
       },
       value: "a",
       styles: [makeYellowBackgroundStyle(), makeBoldCellTextStyle()],
-    }),
-  ];
-  const actualRow: CommonCell[] = [
-    new TableCell({
-      point: {
-        column: 1,
-        row: 1,
-      },
-      value: "a",
-      styles: [],
     }),
   ];
 

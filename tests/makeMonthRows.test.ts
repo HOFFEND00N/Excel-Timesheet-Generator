@@ -17,6 +17,8 @@ import { CommonCell } from "../src/tableBuildingFunctions/types";
 test("make date section of table + header, expect current month + year + header", () => {
   const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   const currentDate: Date = new Date();
+  const { column, row } = getStartMonthHeaderPoint();
+
   const expectedTable: CommonCell[] = [
     new TableCell({
       point: startMonthHeaderPoint,
@@ -25,8 +27,8 @@ test("make date section of table + header, expect current month + year + header"
     }),
     new TableCell({
       point: {
-        column: startMonthHeaderPoint.column,
-        row: ++startMonthHeaderPoint.row,
+        column: column,
+        row: row + 1,
       },
       value: getMonthNames(currentDate.getMonth()),
       styles: [
@@ -37,8 +39,8 @@ test("make date section of table + header, expect current month + year + header"
     }),
     new TableCell({
       point: {
-        column: ++startMonthHeaderPoint.column,
-        row: startMonthHeaderPoint.row,
+        column: column + 1,
+        row: row + 1,
       },
       value: currentDate.getFullYear(),
       styles: [
