@@ -13,6 +13,7 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
 import { CommonCell } from "./types";
+import { getTasks } from "./jiraTaskFetch";
 
 export function makeTable(tableData: TableData, currentDate: Date) {
   const table: CommonCell[] = [];
@@ -54,6 +55,8 @@ export function makeTable(tableData: TableData, currentDate: Date) {
     });
     addTableRowToTable(row, table);
   }
+
+  (async () => await getTasks())();
 
   return table;
 }
