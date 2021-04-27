@@ -14,17 +14,14 @@ import { CommonCell } from "./types";
 
 export function makeMonthRows(currentDate: Date) {
   const rows: CommonCell[] = [];
-  const {
-    row: pointRow,
-    column: pointColumn,
-  }: Point = getStartMonthHeaderPoint();
+  const { row, column }: Point = getStartMonthHeaderPoint();
   rows.push({
-    point: { row: pointRow, column: pointColumn },
+    point: { row, column },
     value: getMontlyTimesheetHeader(),
     styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
   });
   rows.push({
-    point: { row: pointRow + 1, column: pointColumn },
+    point: { row: row + 1, column },
     value: getMonthNames(currentDate.getMonth()),
     styles: [
       makeYellowBackgroundStyle(),
@@ -33,7 +30,7 @@ export function makeMonthRows(currentDate: Date) {
     ],
   });
   rows.push({
-    point: { row: pointRow + 1, column: pointColumn + 1 },
+    point: { row: row + 1, column: column + 1 },
     value: currentDate.getFullYear(),
     styles: [
       makeYellowBackgroundStyle(),
