@@ -1,5 +1,5 @@
 export interface TableData {
-  unit: string;
+  unit: number;
   companyCode: string;
   companyName: string;
   project: string;

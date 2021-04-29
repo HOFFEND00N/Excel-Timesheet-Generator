@@ -1,5 +1,4 @@
 import { TableData } from "../src/classes/TableData";
-import * as fs from "fs";
 import { makeEmployeeDataRows } from "../src/tableBuildingFunctions/makeEmployeeDataRows";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", () => {
@@ -14,9 +13,23 @@ test("make two dimensional array from parsed json, json file consist of predefin
     [651, "NO", "Confirmit", "Studio", "Volyakov Dmitry"],
     [651, "NO", "Confirmit", "Studio", "Volyakova Kristina"],
   ];
-  const tabledata: TableData = JSON.parse(
-    fs.readFileSync("tableData.json", "utf-8")
-  );
+  const tabledata: TableData = {
+    unit: 651,
+    companyCode: "NO",
+    companyName: "Confirmit",
+    project: "Studio",
+    employees: [
+      "Kachalov Alexey",
+      "Kolokolenkina Natalia",
+      "Kozlova Anna",
+      "Pisarenko Dmitry",
+      "Popov Sergey",
+      "Protasov Ilya",
+      "Sumatokhin Alexey",
+      "Volyakov Dmitry",
+      "Volyakova Kristina",
+    ],
+  };
 
   const actualTable = makeEmployeeDataRows(tabledata);
 
@@ -30,7 +43,7 @@ test("make table rows values, pass empty function parameter, expect empty table"
     employees: [],
     companyCode: "",
     companyName: "",
-    unit: "",
+    unit: 0,
     project: "",
   });
 
