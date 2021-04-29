@@ -147,14 +147,14 @@ test("make full table", () => {
   ];
 
   const startPoint = getStartTablePoint();
-  for (let i = 1; i < expectedTableRows.length; i++) {
+  for (let i = 0; i < expectedTableRows.length; i++) {
     const expectedTableRow = expectedTableRows[i];
     for (let j = 0; j < expectedTableRow.length; j++) {
       const value = expectedTableRow[j];
       let tableCell;
       if (j == 0 || j == 1) {
         tableCell = {
-          point: { column: startPoint.column + j, row: startPoint.row + i },
+          point: { column: startPoint.column + j, row: startPoint.row + i + 1 },
           value: value,
           styles: [
             makeStyleHorizontalAlignText(HorizontalAlignTextWays.center),
@@ -164,7 +164,7 @@ test("make full table", () => {
         };
       } else {
         tableCell = {
-          point: { column: startPoint.column + j, row: startPoint.row + i },
+          point: { column: startPoint.column + j, row: startPoint.row + i + 1 },
           value: value,
           styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
         };

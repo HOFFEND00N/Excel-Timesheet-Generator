@@ -39,10 +39,10 @@ export function makeTable(tableData: TableData, currentDate: Date) {
   addTableRowToTable(tableHeadersRow, table);
 
   const tableRowsValues = makeEmployeeDataRows(tableData);
-  for (let i = 1; i < tableRowsValues.length; i++) {
+  for (let i = 0; i < tableRowsValues.length; i++) {
     const tableRowValues = tableRowsValues[i];
     const row = makeTableRow({
-      startPoint: { column: pointColumn, row: pointRow + i },
+      startPoint: { column: pointColumn, row: pointRow + i + 1 },
       values: tableRowValues,
     });
     styleTableRow({
