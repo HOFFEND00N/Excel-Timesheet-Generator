@@ -1,3 +1,5 @@
+import { HorizontalAlignTextWays } from "../constants/styleConstants";
+
 interface Font {
   bold?: boolean;
   size?: number;
@@ -22,7 +24,7 @@ interface Background {
 }
 
 interface Alignment {
-  horizontal?: string;
+  horizontal?: HorizontalAlignTextWays;
 }
 
 export interface Style {

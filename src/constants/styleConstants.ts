@@ -37,12 +37,25 @@ export function makeYellowBackgroundStyle(): Style {
   };
 }
 
-export function makeStyleHorizontalAlignText(way): Style {
+export function makeStyleHorizontalAlignText(
+  way: HorizontalAlignTextWays
+): Style {
   return {
     alignment: {
       horizontal: way,
     },
   };
+}
+
+export enum HorizontalAlignTextWays {
+  center = "center",
+  centerContinuous = "centerContinuous",
+  distributed = "distributed",
+  fill = "fill",
+  general = "general",
+  justify = "justify",
+  left = "left",
+  right = "right",
 }
 
 export function makeDefaultTextStyle(): Style {

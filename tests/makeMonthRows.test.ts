@@ -1,13 +1,14 @@
 import {
-  getMontlyTimesheetHeader,
   getMonthNames,
+  getMontlyTimesheetHeader,
   getStartMonthHeaderPoint,
 } from "../src/constants/constant";
 import {
+  HorizontalAlignTextWays,
   makeBoldCellTextStyle,
+  makeDefaultTextStyle,
   makeStyleHorizontalAlignText,
   makeYellowBackgroundStyle,
-  makeDefaultTextStyle,
 } from "../src/constants/styleConstants";
 import { Point } from "../src/classes/Point";
 import { makeMonthRows } from "../src/tableBuildingFunctions/makeMonthRows";
@@ -32,7 +33,7 @@ test("make date section of table + header, expect current month + year + header"
       value: getMonthNames(currentDate.getMonth()),
       styles: [
         makeYellowBackgroundStyle(),
-        makeStyleHorizontalAlignText("right"),
+        makeStyleHorizontalAlignText(HorizontalAlignTextWays.right),
         makeDefaultTextStyle(),
       ],
     },
@@ -44,7 +45,7 @@ test("make date section of table + header, expect current month + year + header"
       value: currentDate.getFullYear(),
       styles: [
         makeYellowBackgroundStyle(),
-        makeStyleHorizontalAlignText("left"),
+        makeStyleHorizontalAlignText(HorizontalAlignTextWays.left),
         makeDefaultTextStyle(),
       ],
     },

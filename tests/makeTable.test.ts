@@ -1,17 +1,18 @@
 import { makeTable } from "../src/tableBuildingFunctions/makeTable";
 import {
-  getMontlyTimesheetHeader,
   getMonthNames,
+  getMontlyTimesheetHeader,
   getStartMonthHeaderPoint,
   getStartTablePoint,
   getTableHeaders,
 } from "../src/constants/constant";
 import {
-  makeCellBorderStyle,
+  HorizontalAlignTextWays,
   makeBoldCellTextStyle,
+  makeCellBorderStyle,
+  makeDefaultTextStyle,
   makeStyleHorizontalAlignText,
   makeYellowBackgroundStyle,
-  makeDefaultTextStyle,
 } from "../src/constants/styleConstants";
 import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
@@ -40,7 +41,7 @@ test("table data is empty expect just table headers + date", () => {
     value: getMonthNames(currentDate.getMonth()),
     styles: [
       makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText("right"),
+      makeStyleHorizontalAlignText(HorizontalAlignTextWays.right),
       makeDefaultTextStyle(),
     ],
   });
@@ -49,7 +50,7 @@ test("table data is empty expect just table headers + date", () => {
     value: currentDate.getFullYear(),
     styles: [
       makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText("left"),
+      makeStyleHorizontalAlignText(HorizontalAlignTextWays.left),
       makeDefaultTextStyle(),
     ],
   });
@@ -102,7 +103,7 @@ test("make full table", () => {
     value: getMonthNames(currentDate.getMonth()),
     styles: [
       makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText("right"),
+      makeStyleHorizontalAlignText(HorizontalAlignTextWays.right),
       makeDefaultTextStyle(),
     ],
   });
@@ -114,7 +115,7 @@ test("make full table", () => {
     value: currentDate.getFullYear(),
     styles: [
       makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText("left"),
+      makeStyleHorizontalAlignText(HorizontalAlignTextWays.left),
       makeDefaultTextStyle(),
     ],
   });
@@ -156,7 +157,7 @@ test("make full table", () => {
           point: { column: startPoint.column + j, row: startPoint.row + i },
           value: value,
           styles: [
-            makeStyleHorizontalAlignText("center"),
+            makeStyleHorizontalAlignText(HorizontalAlignTextWays.center),
             makeCellBorderStyle(),
             makeDefaultTextStyle(),
           ],

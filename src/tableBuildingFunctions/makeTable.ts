@@ -1,4 +1,5 @@
 import {
+  HorizontalAlignTextWays,
   makeBoldCellTextStyle,
   makeCellBorderStyle,
   makeDefaultTextStyle,
@@ -13,7 +14,6 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
 import { CommonCell } from "./types";
-import { getTasks } from "./fetchJiraTasks";
 
 export function makeTable(tableData: TableData, currentDate: Date) {
   const table: CommonCell[] = [];
@@ -47,7 +47,9 @@ export function makeTable(tableData: TableData, currentDate: Date) {
     });
     styleTableRow({
       row: [row[0], row[1]],
-      cellStyles: [makeStyleHorizontalAlignText("center")],
+      cellStyles: [
+        makeStyleHorizontalAlignText(HorizontalAlignTextWays.center),
+      ],
     });
     styleTableRow({
       row,
@@ -56,7 +58,7 @@ export function makeTable(tableData: TableData, currentDate: Date) {
     addTableRowToTable(row, table);
   }
 
-  // (async () => console.log(await getTasks()))();
+  // (async () => console.log(await getEmployeesTasks(fetchJiraUserTasks, "AnnaKo")))();
 
   return table;
 }
