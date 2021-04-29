@@ -76,7 +76,7 @@ test("table data is empty expect just table headers + date", () => {
       employees: [],
       companyCode: "",
       companyName: "",
-      unit: "",
+      unit: 0,
       project: "",
     },
     currentDate
