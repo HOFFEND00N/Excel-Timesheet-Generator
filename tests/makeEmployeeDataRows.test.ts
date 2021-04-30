@@ -1,5 +1,6 @@
 import { TableData } from "../src/classes/TableData";
 import { makeEmployeeDataRows } from "../src/tableBuildingFunctions/makeEmployeeDataRows";
+import { getTableHeaders } from "../src/constants/constant";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", () => {
   const expectedTable = [
@@ -19,19 +20,49 @@ test("make two dimensional array from parsed json, json file consist of predefin
     companyName: "Confirmit",
     project: "Studio",
     employees: [
-      "Kachalov Alexey",
-      "Kolokolenkina Natalia",
-      "Kozlova Anna",
-      "Pisarenko Dmitry",
-      "Popov Sergey",
-      "Protasov Ilya",
-      "Sumatokhin Alexey",
-      "Volyakov Dmitry",
-      "Volyakova Kristina",
+      {
+        name: "Kachalov Alexey",
+        jiraUsername: "alexeyk",
+      },
+      {
+        name: "Kolokolenkina Natalia",
+        jiraUsername: "NataliaK",
+      },
+      {
+        name: "Kozlova Anna",
+        jiraUsername: "AnnaKo",
+      },
+      {
+        name: "Pisarenko Dmitry",
+        jiraUsername: "DmitryP",
+      },
+      {
+        name: "Popov Sergey",
+        jiraUsername: "SergeyPo",
+      },
+      {
+        name: "Protasov Ilya",
+        jiraUsername: "Ilia.Protasov",
+      },
+      {
+        name: "Sumatokhin Alexey",
+        jiraUsername: "AlexeySu",
+      },
+      {
+        name: "Volyakov Dmitry",
+        jiraUsername: "DmitryV",
+      },
+      {
+        name: "Volyakova Kristina",
+        jiraUsername: "KristinaZ",
+      },
     ],
   };
 
-  const actualTable = makeEmployeeDataRows(tabledata);
+  const actualTable = makeEmployeeDataRows({
+    tableData: tabledata,
+    headers: getTableHeaders().map((item) => item.label),
+  });
 
   expect(actualTable).toEqual(expectedTable);
 });
@@ -40,11 +71,14 @@ test("make table rows values, pass empty function parameter, expect empty table"
   const expectedTable = [];
 
   const actualTable = makeEmployeeDataRows({
-    employees: [],
-    companyCode: "",
-    companyName: "",
-    unit: 0,
-    project: "",
+    tableData: {
+      employees: [],
+      companyCode: "",
+      companyName: "",
+      unit: 0,
+      project: "",
+    },
+    headers: [],
   });
 
   expect(actualTable).toEqual(expectedTable);

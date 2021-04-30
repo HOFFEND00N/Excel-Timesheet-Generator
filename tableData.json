@@ -4,14 +4,41 @@
   "companyName": "Confirmit",
   "project": "Studio",
   "employees": [
-    "Kachalov Alexey",
-    "Kolokolenkina Natalia",
-    "Kozlova Anna",
-    "Pisarenko Dmitry",
-    "Popov Sergey",
-    "Protasov Ilya",
-    "Sumatokhin Alexey",
-    "Volyakov Dmitry",
-    "Volyakova Kristina"
+    {
+      "name": "Kachalov Alexey",
+      "jiraUsername": "alexeyk"
+    },
+    {
+      "name": "Kolokolenkina Natalia",
+      "jiraUsername": "NataliaK"
+    },
+    {
+      "name": "Kozlova Anna",
+      "jiraUsername": "AnnaKo"
+    },
+    {
+      "name": "Pisarenko Dmitry",
+      "jiraUsername": "DmitryP"
+    },
+    {
+      "name": "Popov Sergey",
+      "jiraUsername": "SergeyPo"
+    },
+    {
+      "name": "Protasov Ilya",
+      "jiraUsername": "Ilia.Protasov"
+    },
+    {
+      "name": "Sumatokhin Alexey",
+      "jiraUsername": "AlexeySu"
+    },
+    {
+      "name": "Volyakov Dmitry",
+      "jiraUsername": "DmitryV"
+    },
+    {
+      "name": "Volyakova Kristina",
+      "jiraUsername": "KristinaZ"
+    }
   ]
 }

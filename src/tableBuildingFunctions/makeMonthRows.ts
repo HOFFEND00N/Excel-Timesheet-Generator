@@ -1,9 +1,10 @@
 import {
-  getMontlyTimesheetHeader,
   getMonthNames,
+  getMontlyTimesheetHeader,
   getStartMonthHeaderPoint,
 } from "../constants/constant";
 import {
+  HorizontalAlignTextWays,
   makeBoldCellTextStyle,
   makeDefaultTextStyle,
   makeStyleHorizontalAlignText,
@@ -25,7 +26,7 @@ export function makeMonthRows(currentDate: Date) {
     value: getMonthNames(currentDate.getMonth()),
     styles: [
       makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText("right"),
+      makeStyleHorizontalAlignText(HorizontalAlignTextWays.right),
       makeDefaultTextStyle(),
     ],
   });
@@ -34,7 +35,7 @@ export function makeMonthRows(currentDate: Date) {
     value: currentDate.getFullYear(),
     styles: [
       makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText("left"),
+      makeStyleHorizontalAlignText(HorizontalAlignTextWays.left),
       makeDefaultTextStyle(),
     ],
   });

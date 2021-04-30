@@ -18,14 +18,14 @@ export async function fetchJiraUserTasks(jiraUserName: string) {
 }
 
 export async function getEmployeesTasks(
-  fetchUserTasks: (jiraUserName: string) => string[],
+  fetchUserTasks: (jiraUserName: string) => Promise<string[]>,
   jiraUserNames: string[]
 ) {
   const tasks: string[][] = [];
 
   for (const jiraUserName of jiraUserNames) {
     try {
-      tasks.push(fetchUserTasks(jiraUserName));
+      tasks.push(await fetchUserTasks(jiraUserName));
     } catch (res) {
       console.log(res);
     }

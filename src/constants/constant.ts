@@ -4,14 +4,14 @@ export function getWorksheetMonthlyTimesheetName() {
 
 export function getTableHeaders() {
   return [
-    "Unit",
-    "Interco",
-    "Product",
-    "Project",
-    "Employee",
-    "Task",
-    "Over-Time",
-    "Man-Hours",
+    { label: "Unit", dataKey: "unit" },
+    { label: "Interco", dataKey: "companyCode" },
+    { label: "Product", dataKey: "companyName" },
+    { label: "Project", dataKey: "project" },
+    { label: "Employee", dataKey: "employee" },
+    { label: "Task", dataKey: "task" },
+    { label: "Over-Time", dataKey: "overTime" },
+    { label: "Man-Hours", dataKey: "manHours" },
   ];
 }
 
@@ -43,4 +43,19 @@ export function getStartTablePoint() {
 
 export function getStartMonthHeaderPoint() {
   return { column: 2, row: 5 };
+}
+
+//depends just on right order, easy to make wrong table, people tasks can be shuffled
+export function getJiraUserNames() {
+  return [
+    "alexeyk",
+    "NataliaK",
+    "AnnaKo",
+    "DmitryP",
+    "SergeyPo",
+    "Ilia.Protasov",
+    "AlexeySu",
+    "DmitryV",
+    "KristinaZ",
+  ];
 }

@@ -14,8 +14,19 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
 import { CommonCell } from "./types";
+import { getEmployeesTasks } from "./fetchJiraTasks";
 
-export function makeTable(tableData: TableData, currentDate: Date) {
+export async function makeTable({
+  tableData,
+  currentDate,
+  fetchUserTasks,
+  jiraUserNames,
+}: {
+  tableData: TableData;
+  currentDate: Date;
+  fetchUserTasks: (jiraUserName: string) => Promise<string[]>;
+  jiraUserNames: string[];
+}) {
   const table: CommonCell[] = [];
   const startTablePoint: Point = getStartTablePoint();
 
@@ -26,7 +37,7 @@ export function makeTable(tableData: TableData, currentDate: Date) {
 
   const tableHeadersRow = makeTableRow({
     startPoint: { column: pointColumn, row: pointRow },
-    values: tableHeaders,
+    values: tableHeaders.map((item) => item.label),
   });
   styleTableRow({
     row: tableHeadersRow,
@@ -38,7 +49,10 @@ export function makeTable(tableData: TableData, currentDate: Date) {
   });
   addTableRowToTable(tableHeadersRow, table);
 
-  const tableRowsValues = makeEmployeeDataRows(tableData);
+  const tableRowsValues = makeEmployeeDataRows({
+    tableData,
+    headers: tableHeadersRow.map((item) => item.value),
+  });
   for (let i = 0; i < tableRowsValues.length; i++) {
     const tableRowValues = tableRowsValues[i];
     const row = makeTableRow({
@@ -58,7 +72,20 @@ export function makeTable(tableData: TableData, currentDate: Date) {
     addTableRowToTable(row, table);
   }
 
-  // (async () => console.log(await getEmployeesTasks(fetchJiraUserTasks, "AnnaKo")))();
+  const tasks = await getEmployeesTasks(fetchUserTasks, jiraUserNames);
+  const headerTasksCell = table.find((item) => item.value == "Task");
+
+  for (let i = 0; i < tasks.length; i++) {
+    const task = tasks[i];
+    table.push({
+      point: {
+        column: headerTasksCell.point.column,
+        row: headerTasksCell.point.row + i + 1,
+      },
+      styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
+      value: task.toString(),
+    });
+  }
 
   return table;
 }
