@@ -30,6 +30,13 @@ export async function buildDocument() {
     jiraUserNames: getJiraUserNames(),
   });
 
+  workSheet
+    .column(table.find((item) => item.value == "Employee").point.column)
+    .setWidth(25);
+  workSheet
+    .column(table.find((item) => item.value == "Task").point.column)
+    .setWidth(50);
+
   for (const tableCell of table) {
     const cell = workSheet.cell(tableCell.point.row, tableCell.point.column);
     if (isNumericCell(tableCell)) cell.number(tableCell.value);
