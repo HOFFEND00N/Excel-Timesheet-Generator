@@ -5,7 +5,6 @@ import {
   getStartMonthHeaderPoint,
   getStartTablePoint,
   getTableHeaders,
-  getJiraUserNames,
 } from "../src/constants/constant";
 import {
   HorizontalAlignTextWays,
@@ -17,7 +16,6 @@ import {
 } from "../src/constants/styleConstants";
 import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
-import * as fs from "fs";
 import { Style } from "../src/classes/Style";
 import { CommonCell, CommonValue } from "../src/tableBuildingFunctions/types";
 import { getEmployeesTasks } from "../src/tableBuildingFunctions/fetchJiraTasks";
@@ -84,6 +82,9 @@ test("table data is empty expect just table headers + date", async () => {
     currentDate: currentDate,
     fetchUserTasks: () => Promise.resolve([]),
     jiraUserNames: [],
+    getCredentials: () => {
+      return { login: "", password: "" };
+    },
   });
 
   expect(actualTable).toEqual(expectedTable);
@@ -177,8 +178,8 @@ test("make full table", async () => {
     }
   }
 
-  const tasks: string[][] = await getEmployeesTasks(
-    (jiraUserName) => {
+  const tasks: string[][] = await getEmployeesTasks({
+    fetchUserTasks: (user) => {
       const tmp = {
         alexeyk: ["task 1"],
         NataliaK: ["task 2"],
@@ -190,9 +191,9 @@ test("make full table", async () => {
         DmitryV: ["task 8"],
         KristinaZ: ["task 9"],
       };
-      return tmp[jiraUserName];
+      return tmp[user.jiraUserName];
     },
-    [
+    jiraUserNames: [
       "alexeyk",
       "NataliaK",
       "AnnaKo",
@@ -202,8 +203,11 @@ test("make full table", async () => {
       "AlexeySu",
       "DmitryV",
       "KristinaZ",
-    ]
-  );
+    ],
+    getCredentials: () => {
+      return { login: "", password: "" };
+    },
+  });
 
   const headerTasksCell = expectedTable.find((item) => item.value == "Task");
 
@@ -267,7 +271,7 @@ test("make full table", async () => {
   const actualTable = await makeTable({
     tableData: tabledata,
     currentDate,
-    fetchUserTasks: (jiraUserName) => {
+    fetchUserTasks: (user) => {
       const tmp = {
         alexeyk: ["task 1"],
         NataliaK: ["task 2"],
@@ -279,7 +283,7 @@ test("make full table", async () => {
         DmitryV: ["task 8"],
         KristinaZ: ["task 9"],
       };
-      return tmp[jiraUserName];
+      return tmp[user.jiraUserName];
     },
     jiraUserNames: [
       "alexeyk",
@@ -292,6 +296,9 @@ test("make full table", async () => {
       "DmitryV",
       "KristinaZ",
     ],
+    getCredentials: () => {
+      return { login: "", password: "" };
+    },
   });
 
   actualTable.sort(compare);

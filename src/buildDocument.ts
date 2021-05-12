@@ -9,7 +9,10 @@ import { TableData } from "./classes/TableData";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 import { isNumericCell, isStringCell } from "./tableBuildingFunctions/types";
-import { fetchJiraUserTasks } from "./tableBuildingFunctions/fetchJiraTasks";
+import {
+  fetchJiraUserTasks,
+  getCredentials,
+} from "./tableBuildingFunctions/fetchJiraTasks";
 
 export async function buildDocument() {
   const tabledata: TableData = JSON.parse(
@@ -28,30 +31,34 @@ export async function buildDocument() {
     currentDate: new Date(),
     fetchUserTasks: fetchJiraUserTasks,
     jiraUserNames: getJiraUserNames(),
+    getCredentials,
   });
 
-  workSheet
-    .column(table.find((item) => item.value == "Employee").point.column)
-    .setWidth(25);
-  workSheet
-    .column(table.find((item) => item.value == "Task").point.column)
-    .setWidth(50);
+  //not tested, need to test excel file appearance too?
+  const employeeColumn = table.find((item) => item.value == "Employee").point
+    .column;
+  const taskColumn = table.find((item) => item.value == "Task").point.column;
+
+  workSheet.column(employeeColumn).setWidth(25);
+  workSheet.column(taskColumn).setWidth(50);
 
   for (const tableCell of table) {
     const cell = workSheet.cell(tableCell.point.row, tableCell.point.column);
     if (isNumericCell(tableCell)) cell.number(tableCell.value);
     if (isStringCell(tableCell)) cell.string(tableCell.value);
 
+    if (tableCell.point.column == taskColumn)
+      cell.style(
+        workBook.createStyle({
+          alignment: {
+            wrapText: true,
+          },
+        })
+      );
+
     for (const style of tableCell.styles) {
       cell.style(workBook.createStyle(style));
     }
-    cell.style(
-      workBook.createStyle({
-        alignment: {
-          wrapText: true,
-        },
-      })
-    );
   }
   workSheet.addImage(new WorkSheetImageAdapter(image));
 

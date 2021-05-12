@@ -21,11 +21,21 @@ export async function makeTable({
   currentDate,
   fetchUserTasks,
   jiraUserNames,
+  getCredentials,
 }: {
   tableData: TableData;
   currentDate: Date;
-  fetchUserTasks: (jiraUserName: string) => Promise<string[]>;
+  fetchUserTasks: ({
+    jiraUserName,
+    login,
+    password,
+  }: {
+    jiraUserName: string;
+    login: string;
+    password: string;
+  }) => Promise<string[]>;
   jiraUserNames: string[];
+  getCredentials: () => { login: string; password: string };
 }) {
   const table: CommonCell[] = [];
   const startTablePoint: Point = getStartTablePoint();
@@ -72,7 +82,11 @@ export async function makeTable({
     addTableRowToTable(row, table);
   }
 
-  const tasks = await getEmployeesTasks(fetchUserTasks, jiraUserNames);
+  const tasks = await getEmployeesTasks({
+    fetchUserTasks,
+    jiraUserNames,
+    getCredentials,
+  });
   const headerTasksCell = table.find((item) => item.value == "Task");
 
   for (let i = 0; i < tasks.length; i++) {
