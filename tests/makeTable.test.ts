@@ -18,7 +18,7 @@ import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
 import { Style } from "../src/classes/Style";
 import { CommonCell, CommonValue } from "../src/tableBuildingFunctions/types";
-import { getEmployeesTasks } from "../src/tableBuildingFunctions/fetchJiraTasks";
+import { getEmployeesTasks } from "../src/tableBuildingFunctions/getEmployeesTasks";
 
 test("table data is empty expect just table headers + date", async () => {
   const expectedTable: CommonCell[] = [];

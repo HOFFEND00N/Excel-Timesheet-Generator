@@ -1,4 +1,4 @@
-import { getEmployeesTasks } from "../src/tableBuildingFunctions/fetchJiraTasks";
+import { getEmployeesTasks } from "../src/tableBuildingFunctions/getEmployeesTasks";
 
 test("fetch tasks from zero employees, expect zero task", async () => {
   const expectedTasks: string[] = [];

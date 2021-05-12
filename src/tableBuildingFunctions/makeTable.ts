@@ -14,7 +14,7 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
 import { CommonCell } from "./types";
-import { getEmployeesTasks } from "./fetchJiraTasks";
+import { getEmployeesTasks } from "./getEmployeesTasks";
 
 export async function makeTable({
   tableData,

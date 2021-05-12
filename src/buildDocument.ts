@@ -9,10 +9,8 @@ import { TableData } from "./classes/TableData";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 import { isNumericCell, isStringCell } from "./tableBuildingFunctions/types";
-import {
-  fetchJiraUserTasks,
-  getCredentials,
-} from "./tableBuildingFunctions/fetchJiraTasks";
+import { fetchJiraUserTasks } from "./tableBuildingFunctions/fetchJiraUserTasks";
+import { getCredentials } from "./tableBuildingFunctions/getCredentials";
 
 export async function buildDocument() {
   const tabledata: TableData = JSON.parse(
