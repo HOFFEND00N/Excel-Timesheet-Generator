@@ -19,7 +19,6 @@ export async function getEmployeesTasks({
   };
 }) {
   const tasks: string[][] = [];
-  //tests fails here, i ask for credentials while mocking fetchUserTasks()
   const { login, password } = getCredentials();
 
   for (const jiraUserName of jiraUserNames) {

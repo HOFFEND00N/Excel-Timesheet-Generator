@@ -33,6 +33,7 @@ export async function buildDocument() {
   });
 
   //not tested, need to test excel file appearance too?
+  //may be compare screenshots
   const employeeColumn = table.find((item) => item.value == "Employee").point
     .column;
   const taskColumn = table.find((item) => item.value == "Task").point.column;
