@@ -82,9 +82,7 @@ test("table data is empty expect just table headers + date", async () => {
     currentDate: currentDate,
     fetchUserTasks: () => Promise.resolve([]),
     jiraUserNames: [],
-    getCredentials: () => {
-      return { login: "", password: "" };
-    },
+    getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 
   expect(actualTable).toEqual(expectedTable);
@@ -204,9 +202,7 @@ test("make full table", async () => {
       "DmitryV",
       "KristinaZ",
     ],
-    getCredentials: () => {
-      return { login: "", password: "" };
-    },
+    getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 
   const headerTasksCell = expectedTable.find((item) => item.value == "Task");
@@ -296,9 +292,7 @@ test("make full table", async () => {
       "DmitryV",
       "KristinaZ",
     ],
-    getCredentials: () => {
-      return { login: "", password: "" };
-    },
+    getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 
   actualTable.sort(compare);

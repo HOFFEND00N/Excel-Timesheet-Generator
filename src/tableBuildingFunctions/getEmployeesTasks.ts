@@ -13,13 +13,13 @@ export async function getEmployeesTasks({
     password: string;
   }) => Promise<string[]>;
   jiraUserNames: string[];
-  getCredentials: () => {
+  getCredentials: () => Promise<{
     login: string;
     password: string;
-  };
+  }>;
 }) {
   const tasks: string[][] = [];
-  const { login, password } = getCredentials();
+  const { login, password } = await getCredentials();
 
   for (const jiraUserName of jiraUserNames) {
     try {

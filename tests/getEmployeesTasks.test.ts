@@ -6,9 +6,7 @@ test("fetch tasks from zero employees, expect zero task", async () => {
   const actualTasks = await getEmployeesTasks({
     fetchUserTasks: () => Promise.resolve([]),
     jiraUserNames: [],
-    getCredentials: () => {
-      return { login: "", password: "" };
-    },
+    getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 
   expect(actualTasks).toEqual(expectedTasks);
@@ -20,9 +18,7 @@ test("fetch tasks from one employee, expect two tasks", async () => {
   const actualTasks = await getEmployeesTasks({
     fetchUserTasks: () => Promise.resolve(["task 1", "task 2"]),
     jiraUserNames: ["first"],
-    getCredentials: () => {
-      return { login: "", password: "" };
-    },
+    getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 
   expect(actualTasks).toEqual(expectedTasks);
@@ -37,9 +33,7 @@ test("fetch tasks from two employees, expect three tasks", async () => {
       return tmp[user.jiraUserName];
     },
     jiraUserNames: ["first", "second"],
-    getCredentials: () => {
-      return { login: "", password: "" };
-    },
+    getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 
   expect(actualTasks).toEqual(expectedTasks);

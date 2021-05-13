@@ -35,7 +35,7 @@ export async function makeTable({
     password: string;
   }) => Promise<string[]>;
   jiraUserNames: string[];
-  getCredentials: () => { login: string; password: string };
+  getCredentials: () => Promise<{ login: string; password: string }>;
 }) {
   const table: CommonCell[] = [];
   const startTablePoint: Point = getStartTablePoint();
