@@ -178,7 +178,7 @@ test("make full table", async () => {
 
   const tasks: string[][] = await getEmployeesTasks({
     fetchUserTasks: (user) => {
-      const tmp = {
+      const users = {
         alexeyk: ["task 1"],
         NataliaK: ["task 2"],
         AnnaKo: ["task 3"],
@@ -189,7 +189,7 @@ test("make full table", async () => {
         DmitryV: ["task 8"],
         KristinaZ: ["task 9"],
       };
-      return tmp[user.jiraUserName];
+      return users[user.jiraUserName];
     },
     jiraUserNames: [
       "alexeyk",
@@ -268,7 +268,7 @@ test("make full table", async () => {
     tableData: tabledata,
     currentDate,
     fetchUserTasks: (user) => {
-      const tmp = {
+      const users = {
         alexeyk: ["task 1"],
         NataliaK: ["task 2"],
         AnnaKo: ["task 3"],
@@ -279,7 +279,7 @@ test("make full table", async () => {
         DmitryV: ["task 8"],
         KristinaZ: ["task 9"],
       };
-      return tmp[user.jiraUserName];
+      return users[user.jiraUserName];
     },
     jiraUserNames: [
       "alexeyk",

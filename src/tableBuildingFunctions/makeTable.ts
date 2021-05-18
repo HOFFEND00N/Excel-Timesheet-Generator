@@ -16,13 +16,7 @@ import { addTableRowToTable } from "./addTableToRow";
 import { CommonCell } from "./types";
 import { getEmployeesTasks } from "./getEmployeesTasks";
 
-export async function makeTable({
-  tableData,
-  currentDate,
-  fetchUserTasks,
-  jiraUserNames,
-  getCredentials,
-}: {
+type makeTableArguments = {
   tableData: TableData;
   currentDate: Date;
   fetchUserTasks: ({
@@ -36,7 +30,15 @@ export async function makeTable({
   }) => Promise<string[]>;
   jiraUserNames: string[];
   getCredentials: () => Promise<{ login: string; password: string }>;
-}) {
+};
+
+export async function makeTable({
+  tableData,
+  currentDate,
+  fetchUserTasks,
+  jiraUserNames,
+  getCredentials,
+}: makeTableArguments) {
   const table: CommonCell[] = [];
   const startTablePoint: Point = getStartTablePoint();
 
