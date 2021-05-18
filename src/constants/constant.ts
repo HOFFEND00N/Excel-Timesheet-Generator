@@ -1,3 +1,6 @@
+import { TableData } from "../classes/TableData";
+import fs from "fs";
+
 export function getWorksheetMonthlyTimesheetName() {
   return "Monthly timesheet";
 }
@@ -47,15 +50,12 @@ export function getStartMonthHeaderPoint() {
 
 //depends just on right order, easy to make wrong table, people tasks can be shuffled
 export function getJiraUserNames() {
-  return [
-    "alexeyk",
-    "NataliaK",
-    "AnnaKo",
-    "DmitryP",
-    "SergeyPo",
-    "Ilia.Protasov",
-    "AlexeySu",
-    "DmitryV",
-    "KristinaZ",
-  ];
+  const tabledata: TableData = JSON.parse(
+    fs.readFileSync("tableData.json", "utf-8")
+  );
+  const jirauserNames: string[] = [];
+  for (const employee of tabledata.employees) {
+    jirauserNames.push(employee.jiraUsername);
+  }
+  return jirauserNames;
 }
