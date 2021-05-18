@@ -48,7 +48,6 @@ export function getStartMonthHeaderPoint() {
   return { column: 2, row: 5 };
 }
 
-//depends just on right order, easy to make wrong table, people tasks can be shuffled
 export function getJiraUserNames() {
   const tabledata: TableData = JSON.parse(
     fs.readFileSync("tableData.json", "utf-8")
