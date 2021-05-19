@@ -23,6 +23,7 @@ type MakeTableArguments = {
     password,
   }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
+  getNonWorkingHoursRows: (tableData: TableData) => Promise<string[][]>;
 };
 
 export async function makeTable({
@@ -30,6 +31,7 @@ export async function makeTable({
   currentDate,
   fetchUserTasks,
   getCredentials,
+  getNonWorkingHoursRows,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = START_TABLE_POINT;
@@ -64,6 +66,30 @@ export async function makeTable({
     const row = makeTableRow({
       startPoint: { column: pointColumn, row: pointRow + i + 1 },
       values: tableRowValues,
+    });
+    styleTableRow({
+      row: [row[0], row[1]],
+      cellStyles: [
+        makeStyleHorizontalAlignText(HorizontalAlignTextWays.center),
+      ],
+    });
+    styleTableRow({
+      row,
+      cellStyles: [makeCellBorderStyle(), makeDefaultTextStyle()],
+    });
+    table.push(...row);
+  }
+
+  const result = await getNonWorkingHoursRows(tableData);
+
+  const startPoint: Point = {
+    column: startTablePoint.column,
+    row: startTablePoint.row + tableRowsValues.length,
+  };
+  for (let i = 0; i < result.length; i++) {
+    const row = makeTableRow({
+      startPoint: { column: startPoint.column, row: startPoint.row + i + 1 },
+      values: result[i],
     });
     styleTableRow({
       row: [row[0], row[1]],
