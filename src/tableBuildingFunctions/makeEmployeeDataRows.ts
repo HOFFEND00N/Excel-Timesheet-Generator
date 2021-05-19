@@ -2,13 +2,29 @@ import { TableData } from "../classes/TableData";
 import { CommonValue } from "./types";
 import { getTableHeaders } from "../constants/constant";
 
-export function makeEmployeeDataRows({
-  tableData,
-  headers,
-}: {
+type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
   headers: CommonValue[];
-}) {
+  fetchUserTasks: ({
+    jiraUserName,
+    login,
+    password,
+  }: {
+    jiraUserName: string;
+    login: string;
+    password: string;
+  }) => Promise<string[]>;
+  getCredentials: () => Promise<{ login: string; password: string }>;
+};
+
+export async function makeEmployeeDataRows({
+  tableData,
+  headers,
+  fetchUserTasks,
+  getCredentials,
+}: MakeEmployeeDataRowsArguments) {
+  const { login, password } = await getCredentials();
+
   const tableHeaders = getTableHeaders();
   const dataArr: CommonValue[][] = [];
   for (let i = 0; i < tableData.employees.length; i++) {
@@ -19,6 +35,12 @@ export function makeEmployeeDataRows({
         rowArr.push(tableData[tableHeader.dataKey]);
     }
     rowArr.push(tableData.employees[i].name);
+    const task = await fetchUserTasks({
+      jiraUserName: tableData.employees[i].jiraUsername,
+      login,
+      password,
+    });
+    rowArr.push(task.toString());
     dataArr.push(rowArr);
   }
   return dataArr;

@@ -81,7 +81,6 @@ test("table data is empty expect just table headers + date", async () => {
     },
     currentDate: currentDate,
     fetchUserTasks: () => Promise.resolve([]),
-    jiraUserNames: [],
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 
@@ -281,17 +280,6 @@ test("make full table", async () => {
       };
       return users[user.jiraUserName];
     },
-    jiraUserNames: [
-      "alexeyk",
-      "NataliaK",
-      "AnnaKo",
-      "DmitryP",
-      "SergeyPo",
-      "Ilia.Protasov",
-      "AlexeySu",
-      "DmitryV",
-      "KristinaZ",
-    ],
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 

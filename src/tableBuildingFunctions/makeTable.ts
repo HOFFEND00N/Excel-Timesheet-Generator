@@ -14,9 +14,8 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { addTableRowToTable } from "./addTableToRow";
 import { CommonCell } from "./types";
-import { getEmployeesTasks } from "./getEmployeesTasks";
 
-type makeTableArguments = {
+type MakeTableArguments = {
   tableData: TableData;
   currentDate: Date;
   fetchUserTasks: ({
@@ -28,7 +27,6 @@ type makeTableArguments = {
     login: string;
     password: string;
   }) => Promise<string[]>;
-  jiraUserNames: string[];
   getCredentials: () => Promise<{ login: string; password: string }>;
 };
 
@@ -36,9 +34,8 @@ export async function makeTable({
   tableData,
   currentDate,
   fetchUserTasks,
-  jiraUserNames,
   getCredentials,
-}: makeTableArguments) {
+}: MakeTableArguments) {
   const table: CommonCell[] = [];
   const startTablePoint: Point = getStartTablePoint();
 
@@ -61,9 +58,11 @@ export async function makeTable({
   });
   addTableRowToTable(tableHeadersRow, table);
 
-  const tableRowsValues = makeEmployeeDataRows({
+  const tableRowsValues = await makeEmployeeDataRows({
     tableData,
     headers: tableHeadersRow.map((item) => item.value),
+    fetchUserTasks,
+    getCredentials,
   });
   for (let i = 0; i < tableRowsValues.length; i++) {
     const tableRowValues = tableRowsValues[i];
@@ -82,25 +81,6 @@ export async function makeTable({
       cellStyles: [makeCellBorderStyle(), makeDefaultTextStyle()],
     });
     addTableRowToTable(row, table);
-  }
-
-  const tasks = await getEmployeesTasks({
-    fetchUserTasks,
-    jiraUserNames,
-    getCredentials,
-  });
-  const headerTasksCell = table.find((item) => item.value == "Task");
-
-  for (let i = 0; i < tasks.length; i++) {
-    const task = tasks[i];
-    table.push({
-      point: {
-        column: headerTasksCell.point.column,
-        row: headerTasksCell.point.row + i + 1,
-      },
-      styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
-      value: task.toString(),
-    });
   }
 
   return table;

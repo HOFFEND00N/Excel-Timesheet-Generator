@@ -1,8 +1,5 @@
 import { makeTable } from "./tableBuildingFunctions/makeTable";
-import {
-  getJiraUserNames,
-  getWorksheetMonthlyTimesheetName,
-} from "./constants/constant";
+import { getWorksheetMonthlyTimesheetName } from "./constants/constant";
 import excel from "excel4node";
 import * as fs from "fs";
 import { TableData } from "./classes/TableData";
@@ -28,7 +25,6 @@ export async function buildDocument() {
     tableData: tabledata,
     currentDate: new Date(),
     fetchUserTasks: fetchJiraUserTasks,
-    jiraUserNames: getJiraUserNames(),
     getCredentials,
   });
 

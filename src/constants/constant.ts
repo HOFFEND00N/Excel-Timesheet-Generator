@@ -1,6 +1,3 @@
-import { TableData } from "../classes/TableData";
-import fs from "fs";
-
 export function getWorksheetMonthlyTimesheetName() {
   return "Monthly timesheet";
 }
@@ -46,15 +43,4 @@ export function getStartTablePoint() {
 
 export function getStartMonthHeaderPoint() {
   return { column: 2, row: 5 };
-}
-
-export function getJiraUserNames() {
-  const tabledata: TableData = JSON.parse(
-    fs.readFileSync("tableData.json", "utf-8")
-  );
-  const jirauserNames: string[] = [];
-  for (const employee of tabledata.employees) {
-    jirauserNames.push(employee.jiraUsername);
-  }
-  return jirauserNames;
 }
