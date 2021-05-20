@@ -18,7 +18,6 @@ import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
 import { Style } from "../src/classes/Style";
 import { CommonCell, CommonValue } from "../src/tableBuildingFunctions/types";
-import { getEmployeesTasks } from "../src/tableBuildingFunctions/getEmployeesTasks";
 
 test("table data is empty expect just table headers + date", async () => {
   const expectedTable: CommonCell[] = [];
@@ -175,34 +174,17 @@ test("make full table", async () => {
     }
   }
 
-  const tasks: string[][] = await getEmployeesTasks({
-    fetchUserTasks: (user) => {
-      const users = {
-        alexeyk: ["task 1"],
-        NataliaK: ["task 2"],
-        AnnaKo: ["task 3"],
-        DmitryP: ["task 4"],
-        SergeyPo: ["task 5"],
-        "Ilia.Protasov": ["task 6"],
-        AlexeySu: ["task 7"],
-        DmitryV: ["task 8"],
-        KristinaZ: ["task 9"],
-      };
-      return users[user.jiraUserName];
-    },
-    jiraUserNames: [
-      "alexeyk",
-      "NataliaK",
-      "AnnaKo",
-      "DmitryP",
-      "SergeyPo",
-      "Ilia.Protasov",
-      "AlexeySu",
-      "DmitryV",
-      "KristinaZ",
-    ],
-    getCredentials: () => Promise.resolve({ login: "", password: "" }),
-  });
+  const tasks: string[][] = [
+    ["task 1"],
+    ["task 2"],
+    ["task 3"],
+    ["task 4"],
+    ["task 5"],
+    ["task 6"],
+    ["task 7"],
+    ["task 8"],
+    ["task 9"],
+  ];
 
   const headerTasksCell = expectedTable.find((item) => item.value == "Task");
 
