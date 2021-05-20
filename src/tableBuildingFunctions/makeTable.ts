@@ -23,7 +23,9 @@ type MakeTableArguments = {
     password,
   }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
-  getNonWorkingHoursRows: (tableData: TableData) => Promise<string[][]>;
+  getNonWorkingHoursRows: (
+    tableData: TableData
+  ) => Promise<(string | number)[][]>;
 };
 
 export async function makeTable({
