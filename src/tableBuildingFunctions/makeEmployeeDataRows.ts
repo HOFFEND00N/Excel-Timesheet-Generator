@@ -40,7 +40,12 @@ export async function makeEmployeeDataRows({
       login,
       password,
     });
-    rowArr.push(task.toString());
+    rowArr.push(
+      task.reduce(
+        (taskAccumulator, currentTask) => taskAccumulator + " " + currentTask,
+        ""
+      )
+    );
     dataArr.push(rowArr);
   }
   return dataArr;
