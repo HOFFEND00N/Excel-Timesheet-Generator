@@ -13,7 +13,6 @@ export async function fetchJiraUserTasks({
     "base64"
   );
 
-  const userTasks: string[] = [];
   const fetchResult = await fetch(
     `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status+changed+BY+${jiraUserName}+after+startOfMonth()+OR+created+%3E%3D+startOfMonth()+AND+creator+%3D+${jiraUserName}&fields=key`,
     {
@@ -24,7 +23,6 @@ export async function fetchJiraUserTasks({
     }
   );
   const jsonResult = await fetchResult.json();
-  jsonResult.issues.forEach((elem) => userTasks.push(elem.key));
 
-  return userTasks;
+  return jsonResult.issues.map((elem) => elem.key);
 }

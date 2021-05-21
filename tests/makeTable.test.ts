@@ -54,7 +54,7 @@ test("table data is empty expect just table headers + date", async () => {
     ],
   });
 
-  const headerStyles: Array<Style> = [
+  const headerStyles: Style[] = [
     makeBoldCellTextStyle(),
     makeCellBorderStyle(),
     makeDefaultTextStyle(),
