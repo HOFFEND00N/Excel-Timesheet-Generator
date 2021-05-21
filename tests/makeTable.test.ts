@@ -136,7 +136,7 @@ test("make full table", async () => {
     });
   }
   const expectedTableRows: CommonValue[][] = [
-    [651, "NO", "Confirmit", "Studio", "Kachalov Alexey", "task 1"],
+    [651, "NO", "Confirmit", "Studio", "Kachalov Alexey", "task 1 task 1"],
     [651, "NO", "Confirmit", "Studio", "Kolokolenkina Natalia", "task 2"],
     [651, "NO", "Confirmit", "Studio", "Kozlova Anna", "task 3"],
     [651, "NO", "Confirmit", "Studio", "Pisarenko Dmitry", "task 4"],
@@ -224,7 +224,7 @@ test("make full table", async () => {
     currentDate,
     fetchUserTasks: (user) => {
       const users = {
-        alexeyk: ["task 1"],
+        alexeyk: ["task 1", "task 1"],
         NataliaK: ["task 2"],
         AnnaKo: ["task 3"],
         DmitryP: ["task 4"],

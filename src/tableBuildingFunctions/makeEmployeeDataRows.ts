@@ -29,14 +29,14 @@ export async function makeEmployeeDataRows({
   const dataArr: CommonValue[][] = [];
 
   for (let i = 0; i < tableData.employees.length; i++) {
-    const rowArr: string[] = [];
+    const employeeDataRows: string[] = [];
 
     for (const header of headers) {
       const tableHeader = tableHeaders.find((item) => item.label == header);
       if (header != "Employee" && tableData[tableHeader.dataKey] != undefined)
-        rowArr.push(tableData[tableHeader.dataKey]);
+        employeeDataRows.push(tableData[tableHeader.dataKey]);
     }
-    rowArr.push(tableData.employees[i].name);
+    employeeDataRows.push(tableData.employees[i].name);
 
     const task = await fetchUserTasks({
       jiraUserName: tableData.employees[i].jiraUsername,
@@ -44,13 +44,8 @@ export async function makeEmployeeDataRows({
       password,
     });
 
-    rowArr.push(task.reduce(concatStrings, ""));
-    dataArr.push(rowArr);
+    employeeDataRows.push(task.join(" "));
+    dataArr.push(employeeDataRows);
   }
   return dataArr;
-}
-
-function concatStrings(taskAccumulator: string, currentTask: string): string {
-  if (taskAccumulator == "") return currentTask;
-  return taskAccumulator + " " + currentTask;
 }
