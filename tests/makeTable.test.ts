@@ -136,15 +136,15 @@ test("make full table", async () => {
     });
   }
   const expectedTableRows: CommonValue[][] = [
-    [651, "NO", "Confirmit", "Studio", "Kachalov Alexey"],
-    [651, "NO", "Confirmit", "Studio", "Kolokolenkina Natalia"],
-    [651, "NO", "Confirmit", "Studio", "Kozlova Anna"],
-    [651, "NO", "Confirmit", "Studio", "Pisarenko Dmitry"],
-    [651, "NO", "Confirmit", "Studio", "Popov Sergey"],
-    [651, "NO", "Confirmit", "Studio", "Protasov Ilya"],
-    [651, "NO", "Confirmit", "Studio", "Sumatokhin Alexey"],
-    [651, "NO", "Confirmit", "Studio", "Volyakov Dmitry"],
-    [651, "NO", "Confirmit", "Studio", "Volyakova Kristina"],
+    [651, "NO", "Confirmit", "Studio", "Kachalov Alexey", "task 1"],
+    [651, "NO", "Confirmit", "Studio", "Kolokolenkina Natalia", "task 2"],
+    [651, "NO", "Confirmit", "Studio", "Kozlova Anna", "task 3"],
+    [651, "NO", "Confirmit", "Studio", "Pisarenko Dmitry", "task 4"],
+    [651, "NO", "Confirmit", "Studio", "Popov Sergey", "task 5"],
+    [651, "NO", "Confirmit", "Studio", "Protasov Ilya", "task 6"],
+    [651, "NO", "Confirmit", "Studio", "Sumatokhin Alexey", "task 7"],
+    [651, "NO", "Confirmit", "Studio", "Volyakov Dmitry", "task 8"],
+    [651, "NO", "Confirmit", "Studio", "Volyakova Kristina", "task 9"],
   ];
 
   const startPoint = getStartTablePoint();
@@ -174,33 +174,7 @@ test("make full table", async () => {
     }
   }
 
-  const tasks: string[][] = [
-    ["task 1"],
-    ["task 2"],
-    ["task 3"],
-    ["task 4"],
-    ["task 5"],
-    ["task 6"],
-    ["task 7"],
-    ["task 8"],
-    ["task 9"],
-  ];
-
-  const headerTasksCell = expectedTable.find((item) => item.value == "Task");
-
-  for (let i = 0; i < tasks.length; i++) {
-    const task = tasks[i];
-    expectedTable.push({
-      point: {
-        column: headerTasksCell.point.column,
-        row: headerTasksCell.point.row + i + 1,
-      },
-      styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
-      value: task.toString(),
-    });
-  }
-
-  const tabledata: TableData = {
+  const tableData: TableData = {
     unit: 651,
     companyCode: "NO",
     companyName: "Confirmit",
@@ -246,7 +220,7 @@ test("make full table", async () => {
   };
 
   const actualTable = await makeTable({
-    tableData: tabledata,
+    tableData,
     currentDate,
     fetchUserTasks: (user) => {
       const users = {
