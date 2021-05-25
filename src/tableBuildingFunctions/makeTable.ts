@@ -12,7 +12,13 @@ import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
-import { CommonCell, FetchUserTasksArguments } from "./types";
+import { CommonCell, FetchUserTasksArguments, CommonValue } from "./types";
+
+export type fetchUserTasksArguments = {
+  jiraUserName: string;
+  login: string;
+  password: string;
+};
 
 type MakeTableArguments = {
   tableData: TableData;
@@ -23,9 +29,7 @@ type MakeTableArguments = {
     password,
   }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
-  getNonWorkingHoursRows: (
-    tableData: TableData
-  ) => Promise<(string | number)[][]>;
+  getNonWorkingHoursRows: (tableData: TableData) => Promise<CommonValue[][]>;
 };
 
 export async function makeTable({
@@ -63,35 +67,17 @@ export async function makeTable({
     fetchUserTasks,
     getCredentials,
   });
+  const nonWorkingHoursRows = await getNonWorkingHoursRows(tableData);
+
+  for (const nonWorkingHoursRow of nonWorkingHoursRows) {
+    tableRowsValues.push(nonWorkingHoursRow);
+  }
+
   for (let i = 0; i < tableRowsValues.length; i++) {
     const tableRowValues = tableRowsValues[i];
     const row = makeTableRow({
       startPoint: { column: pointColumn, row: pointRow + i + 1 },
       values: tableRowValues,
-    });
-    styleTableRow({
-      row: [row[0], row[1]],
-      cellStyles: [
-        makeStyleHorizontalAlignText(HorizontalAlignTextWays.center),
-      ],
-    });
-    styleTableRow({
-      row,
-      cellStyles: [makeCellBorderStyle(), makeDefaultTextStyle()],
-    });
-    table.push(...row);
-  }
-
-  const result = await getNonWorkingHoursRows(tableData);
-
-  const startPoint: Point = {
-    column: startTablePoint.column,
-    row: startTablePoint.row + tableRowsValues.length,
-  };
-  for (let i = 0; i < result.length; i++) {
-    const row = makeTableRow({
-      startPoint: { column: startPoint.column, row: startPoint.row + i + 1 },
-      values: result[i],
     });
     styleTableRow({
       row: [row[0], row[1]],

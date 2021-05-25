@@ -1,10 +1,11 @@
 import { getNonWorkingHoursFile } from "./getNonWorkingHoursFile";
 import xlsx from "xlsx";
 import { TableData } from "../classes/TableData";
+import { CommonValue } from "./types";
 
 export async function getNonWorkingHoursRows(
   tableData: TableData
-): Promise<(string | number)[][]> {
+): Promise<CommonValue[][]> {
   const nonWorkingHoursFile = await getNonWorkingHoursFile();
   const nonWorkingHoursFileSheetName = nonWorkingHoursFile.SheetNames[0];
   const workSheet = nonWorkingHoursFile.Sheets[nonWorkingHoursFileSheetName];
@@ -18,18 +19,19 @@ export async function getNonWorkingHoursRows(
     dateNF: 'dd"."mm"."yyyy',
   });
 
-  const nonWorkingHoursRows: (string | number)[][] = [];
   //remove "" in the beginning of row
   for (let i = 0; i < nonWorkingHoursJson.length; i++) {
     nonWorkingHoursJson[i].shift();
   }
 
-  for (const row of nonWorkingHoursJson) {
-    for (const cellValue of row) {
-      if (tableData.employees.find((item) => item.name == cellValue))
-        nonWorkingHoursRows.push(row);
+  const nonWorkingHoursRows: (string | number)[][] = nonWorkingHoursJson.filter(
+    (row) => {
+      for (const cellValue of row)
+        if (tableData.employees.find((employee) => employee.name == cellValue))
+          return true;
+      return false;
     }
-  }
+  );
 
   for (const row of nonWorkingHoursRows) {
     for (let i = 0; i < row.length; i++) {
