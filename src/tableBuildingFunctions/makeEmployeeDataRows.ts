@@ -23,20 +23,22 @@ export async function makeEmployeeDataRows({
   getCredentials,
 }: MakeEmployeeDataRowsArguments) {
   const { login, password } = await getCredentials();
-
   const dataArr: CommonValue[][] = [];
 
   for (let i = 0; i < tableData.employees.length; i++) {
-    const employeeDataRows: string[] = [];
+    const employeeDataRows = headers
+      .filter((header) => tableData[header.dataKey] != undefined)
+      .map((header) => {
+        if (header.label != "Employee") return tableData[header.dataKey];
+      });
+    const employee = tableData.employees[i];
+    employeeDataRows.push(employee.name);
 
-    for (const header of headers) {
-      if (header.label != "Employee" && tableData[header.dataKey] != undefined)
-        employeeDataRows.push(tableData[header.dataKey]);
-    }
-    employeeDataRows.push(tableData.employees[i].name);
-
+    console.log(
+      `Fetching tasks from Jira for ${employee.name}. Please wait...`
+    );
     const userTasks = await fetchUserTasks({
-      jiraUserName: tableData.employees[i].jiraUsername,
+      jiraUserName: employee.jiraUsername,
       login,
       password,
     });
