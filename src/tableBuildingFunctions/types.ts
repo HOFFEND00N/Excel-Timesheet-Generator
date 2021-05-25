@@ -20,3 +20,11 @@ export type tableHeader = {
   label: string;
   dataKey: string;
 };
+
+export type jiraJSONfetchResult = {
+  issues: jiraIssue[];
+};
+
+type jiraIssue = {
+  key: string;
+};

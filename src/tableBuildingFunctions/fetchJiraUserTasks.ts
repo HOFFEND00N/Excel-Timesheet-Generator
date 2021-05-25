@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { jiraJSONfetchResult } from "./types";
 
 export async function fetchJiraUserTasks({
   jiraUserName,
@@ -8,7 +9,7 @@ export async function fetchJiraUserTasks({
   jiraUserName: string;
   login: string;
   password: string;
-}) {
+}): Promise<string[]> {
   const authorizationKey = Buffer.from(`${login}:${password}`).toString(
     "base64"
   );
@@ -22,7 +23,7 @@ export async function fetchJiraUserTasks({
       },
     }
   );
-  const jsonResult = await fetchResult.json();
+  const jsonResult: jiraJSONfetchResult = await fetchResult.json();
 
   return jsonResult.issues.map((elem) => elem.key);
 }
