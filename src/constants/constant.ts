@@ -1,8 +1,10 @@
+import { tableHeader } from "../tableBuildingFunctions/types";
+
 export function getWorksheetMonthlyTimesheetName() {
   return "Monthly timesheet";
 }
 
-export function getTableHeaders() {
+export function getTableHeaders(): tableHeader[] {
   return [
     { label: "Unit", dataKey: "unit" },
     { label: "Interco", dataKey: "companyCode" },

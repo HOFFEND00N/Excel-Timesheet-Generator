@@ -1,10 +1,9 @@
 import { TableData } from "../classes/TableData";
-import { CommonValue } from "./types";
-import { getTableHeaders } from "../constants/constant";
+import { CommonValue, tableHeader } from "./types";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
-  headers: CommonValue[];
+  headers: tableHeader[];
   fetchUserTasks: ({
     jiraUserName,
     login,
@@ -25,26 +24,24 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments) {
   const { login, password } = await getCredentials();
 
-  const tableHeaders = getTableHeaders();
   const dataArr: CommonValue[][] = [];
 
   for (let i = 0; i < tableData.employees.length; i++) {
     const employeeDataRows: string[] = [];
 
     for (const header of headers) {
-      const tableHeader = tableHeaders.find((item) => item.label == header);
-      if (header != "Employee" && tableData[tableHeader.dataKey] != undefined)
-        employeeDataRows.push(tableData[tableHeader.dataKey]);
+      if (header.label != "Employee" && tableData[header.dataKey] != undefined)
+        employeeDataRows.push(tableData[header.dataKey]);
     }
     employeeDataRows.push(tableData.employees[i].name);
 
-    const task = await fetchUserTasks({
+    const userTasks = await fetchUserTasks({
       jiraUserName: tableData.employees[i].jiraUsername,
       login,
       password,
     });
 
-    employeeDataRows.push(task.join(" "));
+    employeeDataRows.push(userTasks.join(" "));
     dataArr.push(employeeDataRows);
   }
   return dataArr;

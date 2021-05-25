@@ -15,3 +15,8 @@ export function isStringCell(tableCell: CommonCell): tableCell is StringCell {
 export type NumberValue = number;
 export type StringValue = string;
 export type CommonValue = NumberValue | StringValue;
+
+export type tableHeader = {
+  label: string;
+  dataKey: string;
+};

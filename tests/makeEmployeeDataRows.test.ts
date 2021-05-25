@@ -61,7 +61,7 @@ test("make two dimensional array from parsed json, json file consist of predefin
 
   const actualTable = await makeEmployeeDataRows({
     tableData: tabledata,
-    headers: getTableHeaders().map((item) => item.label),
+    headers: getTableHeaders(),
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     fetchUserTasks: () => Promise.resolve([]),
   });

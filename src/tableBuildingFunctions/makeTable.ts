@@ -60,7 +60,7 @@ export async function makeTable({
 
   const tableRowsValues = await makeEmployeeDataRows({
     tableData,
-    headers: tableHeadersRow.map((item) => item.value),
+    headers: tableHeaders,
     fetchUserTasks,
     getCredentials,
   });
