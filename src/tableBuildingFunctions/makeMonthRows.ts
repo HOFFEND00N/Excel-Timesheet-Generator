@@ -13,15 +13,15 @@ import {
 import { Point } from "../classes/Point";
 import { CommonCell } from "./types";
 
-export function makeMonthRows(currentDate: Date) {
-  const rows: CommonCell[] = [];
+export function makeMonthRows(currentDate: Date): CommonCell[] {
+  const monthRows: CommonCell[] = [];
   const { row, column }: Point = getStartMonthHeaderPoint();
-  rows.push({
+  monthRows.push({
     point: { row, column },
     value: getMontlyTimesheetHeader(),
     styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
   });
-  rows.push({
+  monthRows.push({
     point: { row: row + 1, column },
     value: getMonthNames(currentDate.getMonth()),
     styles: [
@@ -30,7 +30,7 @@ export function makeMonthRows(currentDate: Date) {
       makeDefaultTextStyle(),
     ],
   });
-  rows.push({
+  monthRows.push({
     point: { row: row + 1, column: column + 1 },
     value: currentDate.getFullYear(),
     styles: [
@@ -39,5 +39,5 @@ export function makeMonthRows(currentDate: Date) {
       makeDefaultTextStyle(),
     ],
   });
-  return rows;
+  return monthRows;
 }

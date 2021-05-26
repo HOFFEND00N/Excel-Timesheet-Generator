@@ -21,18 +21,20 @@ export async function makeEmployeeDataRows({
   headers,
   fetchUserTasks,
   getCredentials,
-}: MakeEmployeeDataRowsArguments) {
+}: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
-  const dataArr: CommonValue[][] = [];
+  const employeeDataRows: CommonValue[][] = [];
 
   for (let i = 0; i < tableData.employees.length; i++) {
-    const employeeDataRows = headers
-      .filter((header) => tableData[header.dataKey] != undefined)
-      .map((header) => {
-        if (header.label != "Employee") return tableData[header.dataKey];
-      });
+    const employeeDataRow = headers
+      .filter(
+        (header) =>
+          tableData[header.dataKey] != undefined && header.label != "Employee"
+      )
+      .map((header) => tableData[header.dataKey]);
+
     const employee = tableData.employees[i];
-    employeeDataRows.push(employee.name);
+    employeeDataRow.push(employee.name);
 
     console.log(
       `Fetching tasks from Jira for ${employee.name}. Please wait...`
@@ -43,8 +45,8 @@ export async function makeEmployeeDataRows({
       password,
     });
 
-    employeeDataRows.push(userTasks.join(" "));
-    dataArr.push(employeeDataRows);
+    employeeDataRow.push(userTasks.join(" "));
+    employeeDataRows.push(employeeDataRow);
   }
-  return dataArr;
+  return employeeDataRows;
 }

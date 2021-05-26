@@ -7,7 +7,7 @@ export function styleTableRow({
 }: {
   row: CommonCell[];
   cellStyles: Style[];
-}) {
+}): void {
   for (let i = 0; i < row.length; i++) {
     for (const cellStyle of cellStyles) {
       row[i].styles.push(cellStyle);

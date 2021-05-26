@@ -19,7 +19,7 @@ import { TableData } from "../src/classes/TableData";
 import { Style } from "../src/classes/Style";
 import { CommonCell, CommonValue } from "../src/tableBuildingFunctions/types";
 
-test("table data is empty expect just table headers + date", async () => {
+test("table data is empty, expect to return table headers + date", async () => {
   const expectedTable: CommonCell[] = [];
   const currentDate: Date = new Date();
   const { column, row }: Point = getStartMonthHeaderPoint();

@@ -1,18 +1,18 @@
-import { addTableRowToTable } from "../src/tableBuildingFunctions/addTableToRow";
+import { addRowToTable } from "../src/tableBuildingFunctions/addRowToTable";
 import { makeBoldCellTextStyle } from "../src/constants/styleConstants";
 import { CommonCell } from "../src/tableBuildingFunctions/types";
 
-test("add empty row, expect empty table", () => {
+test("add empty row to empty table, expect empty table", () => {
   const row: CommonCell[] = [];
   const actualTable: CommonCell[] = [];
   const expectedTable: CommonCell[] = [];
 
-  addTableRowToTable(row, actualTable);
+  addRowToTable(row, actualTable);
 
   expect(actualTable).toEqual(expectedTable);
 });
 
-test("add empty row, expect the same table", () => {
+test("add empty row to table with one row, expect the same table", () => {
   const row: CommonCell[] = [];
   const actualTable: CommonCell[] = [
     { point: { column: 1, row: 1 }, value: "a", styles: [] },
@@ -21,12 +21,12 @@ test("add empty row, expect the same table", () => {
     { point: { column: 1, row: 1 }, value: "a", styles: [] },
   ];
 
-  addTableRowToTable(row, actualTable);
+  addRowToTable(row, actualTable);
 
   expect(actualTable).toEqual(expectedTable);
 });
 
-test("add one row, expect two rows", () => {
+test("add one row to table with one row, expect two rows", () => {
   const row: CommonCell[] = [
     {
       point: { column: 2, row: 2 },
@@ -46,7 +46,7 @@ test("add one row, expect two rows", () => {
     },
   ];
 
-  addTableRowToTable(row, actualTable);
+  addRowToTable(row, actualTable);
 
   expect(actualTable).toEqual(expectedTable);
 });

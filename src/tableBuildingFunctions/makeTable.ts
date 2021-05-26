@@ -12,7 +12,7 @@ import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
-import { addTableRowToTable } from "./addTableToRow";
+import { addRowToTable } from "./addRowToTable";
 import { CommonCell } from "./types";
 
 type MakeTableArguments = {
@@ -35,14 +35,14 @@ export async function makeTable({
   currentDate,
   fetchUserTasks,
   getCredentials,
-}: MakeTableArguments) {
+}: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = getStartTablePoint();
 
   const tableHeaders = getTableHeaders();
   const monthRow = makeMonthRows(currentDate);
   const { row: pointRow, column: pointColumn }: Point = startTablePoint;
-  addTableRowToTable(monthRow, table);
+  addRowToTable(monthRow, table);
 
   const tableHeadersRow = makeTableRow({
     startPoint: { column: pointColumn, row: pointRow },
@@ -56,7 +56,7 @@ export async function makeTable({
       makeDefaultTextStyle(),
     ],
   });
-  addTableRowToTable(tableHeadersRow, table);
+  addRowToTable(tableHeadersRow, table);
 
   const tableRowsValues = await makeEmployeeDataRows({
     tableData,
@@ -80,7 +80,7 @@ export async function makeTable({
       row,
       cellStyles: [makeCellBorderStyle(), makeDefaultTextStyle()],
     });
-    addTableRowToTable(row, table);
+    addRowToTable(row, table);
   }
 
   return table;

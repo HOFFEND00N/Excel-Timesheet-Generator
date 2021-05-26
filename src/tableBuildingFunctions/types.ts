@@ -21,7 +21,7 @@ export type tableHeader = {
   dataKey: string;
 };
 
-export type jiraJSONfetchResult = {
+export type jiraJsonFetchResult = {
   issues: jiraIssue[];
 };
 
