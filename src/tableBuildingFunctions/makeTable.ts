@@ -29,7 +29,11 @@ type MakeTableArguments = {
     password,
   }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
-  getNonWorkingHoursRows: (tableData: TableData) => Promise<CommonValue[][]>;
+  getNonWorkingHoursRows: (
+    tableData: TableData,
+    getNonWorkingHoursFile: () => Promise<string[][]>
+  ) => Promise<CommonValue[][]>;
+  getNonWorkingHoursFile: () => Promise<string[][]>;
 };
 
 export async function makeTable({
@@ -38,6 +42,7 @@ export async function makeTable({
   fetchUserTasks,
   getCredentials,
   getNonWorkingHoursRows,
+  getNonWorkingHoursFile,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = START_TABLE_POINT;
@@ -67,7 +72,10 @@ export async function makeTable({
     fetchUserTasks,
     getCredentials,
   });
-  const nonWorkingHoursRows = await getNonWorkingHoursRows(tableData);
+  const nonWorkingHoursRows = await getNonWorkingHoursRows(
+    tableData,
+    getNonWorkingHoursFile
+  );
 
   for (const nonWorkingHoursRow of nonWorkingHoursRows) {
     tableRowsValues.push(nonWorkingHoursRow);

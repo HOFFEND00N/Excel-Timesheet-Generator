@@ -9,6 +9,7 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/fetchJiraUserTasks"
 import { getCredentials } from "./tableBuildingFunctions/getCredentials";
 import { WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { getNonWorkingHoursRows } from "./tableBuildingFunctions/getNonWorkingHoursRows";
+import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHoursFile";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -28,6 +29,7 @@ import { getNonWorkingHoursRows } from "./tableBuildingFunctions/getNonWorkingHo
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
     getNonWorkingHoursRows,
+    getNonWorkingHoursFile,
   });
 
   //not tested, need to test excel file appearance too?
