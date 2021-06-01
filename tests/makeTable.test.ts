@@ -55,6 +55,7 @@ test("table data is empty, expect to return table headers + date", async () => {
     fetchUserTasks: () => Promise.resolve([]),
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     getNonWorkingHoursFile: () => Promise.resolve([]),
+    getWorkingHoursForMonth: () => Promise.resolve(120),
   });
 
   expect(actualTable).toEqual(expectedTable);
@@ -89,9 +90,9 @@ test("make full table", async () => {
       "Molotkova Maria",
       "task 1 task 3",
       "",
-      "",
+      120,
     ],
-    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", ""],
+    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 112],
     [
       651,
       "RU",
@@ -154,6 +155,7 @@ test("make full table", async () => {
           "8",
         ],
       ]),
+    getWorkingHoursForMonth: () => Promise.resolve(120),
   });
 
   actualTable.sort(compare);

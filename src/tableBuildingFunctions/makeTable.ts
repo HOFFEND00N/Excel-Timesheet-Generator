@@ -14,6 +14,8 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { CommonCell, FetchUserTasksArguments } from "./types";
 import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
+import { makeWorkingHoursByEmployees } from "./makeWorkingHoursByEmployees";
+import { makeNonWorkingHoursByEmployees } from "./makeNonWorkingHoursByEmployees";
 
 type MakeTableArguments = {
   tableData: TableData;
@@ -25,6 +27,7 @@ type MakeTableArguments = {
   }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   getNonWorkingHoursFile: () => Promise<string[][]>;
+  getWorkingHoursForMonth: () => Promise<number>;
 };
 
 export async function makeTable({
@@ -33,6 +36,7 @@ export async function makeTable({
   fetchUserTasks,
   getCredentials,
   getNonWorkingHoursFile,
+  getWorkingHoursForMonth,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = START_TABLE_POINT;
@@ -86,6 +90,40 @@ export async function makeTable({
       cellStyles: [makeCellBorderStyle(), makeDefaultTextStyle()],
     });
     table.push(...row);
+  }
+
+  const tableHeadersLabels = tableHeaders.map((item) => item.label);
+  const employeeColumn = tableHeadersLabels.indexOf("Employee");
+  const manHoursColumn = tableHeadersLabels.indexOf("Man-Hours");
+
+  const nonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
+    employeeColumn,
+    manHoursColumn,
+    nonWorkingHoursRows,
+  });
+
+  const workingHoursPerMonth = await getWorkingHoursForMonth();
+  const employeesNames = tableData.employees.map((employee) => employee.name);
+  const workingHoursByEmployees = makeWorkingHoursByEmployees({
+    nonWorkingHoursByEmployees,
+    workingHoursPerMonth,
+    employeesNames,
+  });
+
+  for (let i = 0; i < tableData.employees.length; i++) {
+    const employee = tableData.employees[i];
+    table.push({
+      value: Number(workingHoursPerMonth),
+      styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
+      point: {
+        column: startTablePoint.column + manHoursColumn,
+        row: startTablePoint.row + i + 1,
+      },
+    });
+
+    const workingHoursByEmployee = workingHoursByEmployees.get(employee.name);
+    if (workingHoursByEmployee)
+      table[table.length - 1].value = workingHoursByEmployee;
   }
 
   return table;

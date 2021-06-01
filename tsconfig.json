@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true
-  },
+    "esModuleInterop": true,
+    // to iterate over map
+    "target": "es2020",
+    //fix ts problem, not found modules
+    "moduleResolution": "Node"
+  }
 }
