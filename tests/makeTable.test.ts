@@ -136,15 +136,8 @@ test("make full table", async () => {
     });
   }
   const expectedTableRows: CommonValue[][] = [
-    [651, "NO", "Confirmit", "Studio", "Kachalov Alexey", "task 1 task 1"],
-    [651, "NO", "Confirmit", "Studio", "Kolokolenkina Natalia", "task 2"],
-    [651, "NO", "Confirmit", "Studio", "Kozlova Anna", "task 3"],
-    [651, "NO", "Confirmit", "Studio", "Pisarenko Dmitry", "task 4"],
-    [651, "NO", "Confirmit", "Studio", "Popov Sergey", "task 5"],
-    [651, "NO", "Confirmit", "Studio", "Protasov Ilya", "task 6"],
-    [651, "NO", "Confirmit", "Studio", "Sumatokhin Alexey", "task 7"],
-    [651, "NO", "Confirmit", "Studio", "Volyakov Dmitry", "task 8"],
-    [651, "NO", "Confirmit", "Studio", "Volyakova Kristina", "task 9"],
+    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "task 1 task 1"],
+    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2"],
   ];
 
   const startPoint = getStartTablePoint();
@@ -181,40 +174,12 @@ test("make full table", async () => {
     project: "Studio",
     employees: [
       {
-        name: "Kachalov Alexey",
-        jiraUsername: "alexeyk",
+        name: "Molotkova Maria",
+        jiraUsername: "MolotkovaM",
       },
       {
-        name: "Kolokolenkina Natalia",
-        jiraUsername: "NataliaK",
-      },
-      {
-        name: "Kozlova Anna",
-        jiraUsername: "AnnaKo",
-      },
-      {
-        name: "Pisarenko Dmitry",
-        jiraUsername: "DmitryP",
-      },
-      {
-        name: "Popov Sergey",
-        jiraUsername: "SergeyPo",
-      },
-      {
-        name: "Protasov Ilya",
-        jiraUsername: "Ilia.Protasov",
-      },
-      {
-        name: "Sumatokhin Alexey",
-        jiraUsername: "AlexeySu",
-      },
-      {
-        name: "Volyakov Dmitry",
-        jiraUsername: "DmitryV",
-      },
-      {
-        name: "Volyakova Kristina",
-        jiraUsername: "KristinaZ",
+        name: "Matrosova Marianna",
+        jiraUsername: "MatrosovaM",
       },
     ],
   };
@@ -224,15 +189,8 @@ test("make full table", async () => {
     currentDate,
     fetchUserTasks: (user) => {
       const users = {
-        alexeyk: ["task 1", "task 1"],
-        NataliaK: ["task 2"],
-        AnnaKo: ["task 3"],
-        DmitryP: ["task 4"],
-        SergeyPo: ["task 5"],
-        "Ilia.Protasov": ["task 6"],
-        AlexeySu: ["task 7"],
-        DmitryV: ["task 8"],
-        KristinaZ: ["task 9"],
+        MolotkovaM: ["task 1", "task 1"],
+        MatrosovaM: ["task 2"],
       };
       return users[user.jiraUserName];
     },

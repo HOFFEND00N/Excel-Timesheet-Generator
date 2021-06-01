@@ -4,15 +4,8 @@ import { getTableHeaders } from "../src/constants/constant";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", async () => {
   const expectedTable = [
-    [651, "NO", "Confirmit", "Studio", "Kachalov Alexey", ""],
-    [651, "NO", "Confirmit", "Studio", "Kolokolenkina Natalia", ""],
-    [651, "NO", "Confirmit", "Studio", "Kozlova Anna", ""],
-    [651, "NO", "Confirmit", "Studio", "Pisarenko Dmitry", ""],
-    [651, "NO", "Confirmit", "Studio", "Popov Sergey", ""],
-    [651, "NO", "Confirmit", "Studio", "Protasov Ilya", ""],
-    [651, "NO", "Confirmit", "Studio", "Sumatokhin Alexey", ""],
-    [651, "NO", "Confirmit", "Studio", "Volyakov Dmitry", ""],
-    [651, "NO", "Confirmit", "Studio", "Volyakova Kristina", ""],
+    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", ""],
+    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", ""],
   ];
   const tableData: TableData = {
     unit: 651,
@@ -21,40 +14,12 @@ test("make two dimensional array from parsed json, json file consist of predefin
     project: "Studio",
     employees: [
       {
-        name: "Kachalov Alexey",
-        jiraUsername: "alexeyk",
+        name: "Molotkova Maria",
+        jiraUsername: "MolotkovaM",
       },
       {
-        name: "Kolokolenkina Natalia",
-        jiraUsername: "NataliaK",
-      },
-      {
-        name: "Kozlova Anna",
-        jiraUsername: "AnnaKo",
-      },
-      {
-        name: "Pisarenko Dmitry",
-        jiraUsername: "DmitryP",
-      },
-      {
-        name: "Popov Sergey",
-        jiraUsername: "SergeyPo",
-      },
-      {
-        name: "Protasov Ilya",
-        jiraUsername: "Ilia.Protasov",
-      },
-      {
-        name: "Sumatokhin Alexey",
-        jiraUsername: "AlexeySu",
-      },
-      {
-        name: "Volyakov Dmitry",
-        jiraUsername: "DmitryV",
-      },
-      {
-        name: "Volyakova Kristina",
-        jiraUsername: "KristinaZ",
+        name: "Matrosova Marianna",
+        jiraUsername: "MatrosovaM",
       },
     ],
   };
