@@ -16,15 +16,15 @@ export type NumberValue = number;
 export type StringValue = string;
 export type CommonValue = NumberValue | StringValue;
 
-export type tableHeader = {
+export type TableHeader = {
   label: string;
   dataKey: string;
 };
 
-export type jiraJsonFetchResult = {
-  issues: jiraIssue[];
+export type JiraJsonFetchResult = {
+  issues: JiraIssue[];
 };
 
-type jiraIssue = {
+type JiraIssue = {
   key: string;
 };

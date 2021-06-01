@@ -1,9 +1,9 @@
 import { TableData } from "../classes/TableData";
-import { CommonValue, tableHeader } from "./types";
+import { CommonValue, TableHeader } from "./types";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
-  headers: tableHeader[];
+  headers: TableHeader[];
   fetchUserTasks: ({
     jiraUserName,
     login,
