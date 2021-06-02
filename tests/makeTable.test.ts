@@ -15,7 +15,6 @@ import {
   makeYellowBackgroundStyle,
 } from "../src/constants/styleConstants";
 import { Point } from "../src/classes/Point";
-import { TableData } from "../src/classes/TableData";
 import { Style } from "../src/classes/Style";
 import {
   CommonCell,
@@ -24,6 +23,10 @@ import {
   StringValue,
 } from "../src/tableBuildingFunctions/types";
 import { TableCell } from "../src/classes/TableCell";
+import {
+  getFetchUserTasksForTests,
+  getTableDataForTests,
+} from "./mockedDataForTests";
 
 test("table data is empty, expect to return table headers + date", async () => {
   const expectedTable: CommonCell[] = [];
@@ -142,7 +145,7 @@ test("make full table", async () => {
     });
   }
   const expectedTableRows: CommonValue[][] = [
-    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "task 1 task 1"],
+    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "task 1 task 3"],
     [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2"],
   ];
 
@@ -166,33 +169,12 @@ test("make full table", async () => {
     }
   }
 
-  const tableData: TableData = {
-    unit: 651,
-    companyCode: "NO",
-    companyName: "Confirmit",
-    project: "Studio",
-    employees: [
-      {
-        name: "Molotkova Maria",
-        jiraUsername: "MolotkovaM",
-      },
-      {
-        name: "Matrosova Marianna",
-        jiraUsername: "MatrosovaM",
-      },
-    ],
-  };
+  const tableData = getTableDataForTests();
 
   const actualTable = await makeTable({
     tableData,
     currentDate,
-    fetchUserTasks: (user) => {
-      const users = {
-        MolotkovaM: ["task 1", "task 1"],
-        MatrosovaM: ["task 2"],
-      };
-      return users[user.jiraUserName];
-    },
+    fetchUserTasks: getFetchUserTasksForTests(),
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
   });
 

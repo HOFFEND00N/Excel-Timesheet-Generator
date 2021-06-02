@@ -15,6 +15,12 @@ import { Point } from "../classes/Point";
 import { addRowToTable } from "./addRowToTable";
 import { CommonCell } from "./types";
 
+export type fetchUserTasksArguments = {
+  jiraUserName: string;
+  login: string;
+  password: string;
+};
+
 type MakeTableArguments = {
   tableData: TableData;
   currentDate: Date;
@@ -22,11 +28,7 @@ type MakeTableArguments = {
     jiraUserName,
     login,
     password,
-  }: {
-    jiraUserName: string;
-    login: string;
-    password: string;
-  }) => Promise<string[]>;
+  }: fetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
 };
 
