@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { JiraJsonFetchResult } from "./types";
+import { JiraResponse } from "./types";
 
 export async function fetchJiraUserTasks({
   jiraUserName,
@@ -23,7 +23,7 @@ export async function fetchJiraUserTasks({
       },
     }
   );
-  const jsonResult: JiraJsonFetchResult = await fetchResult.json();
+  const jiraResponse: JiraResponse = await fetchResult.json();
 
-  return jsonResult.issues.map((elem) => elem.key);
+  return jiraResponse.issues.map((elem) => elem.key);
 }
