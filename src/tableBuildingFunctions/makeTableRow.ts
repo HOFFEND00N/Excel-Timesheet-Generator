@@ -9,7 +9,7 @@ export function makeTableRow({
   startPoint: Point;
   values: CommonValue[];
 }): CommonCell[] {
-  const row: CommonCell[] = values.map(
+  return values.map(
     (value, index) =>
       <TableCell<StringValue> | TableCell<NumberValue>>{
         point: { column: startPoint.column + index, row: startPoint.row },
@@ -17,6 +17,4 @@ export function makeTableRow({
         styles: [],
       }
   );
-
-  return row;
 }
