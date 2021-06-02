@@ -26,27 +26,29 @@ export async function makeEmployeeDataRows({
   const employeeDataRows: CommonValue[][] = [];
 
   for (let i = 0; i < tableData.employees.length; i++) {
-    const employeeDataRow = headers
-      .filter(
-        (header) =>
-          tableData[header.dataKey] != undefined && header.label != "Employee"
-      )
-      .map((header) => tableData[header.dataKey]);
-
-    const employee = tableData.employees[i];
-    employeeDataRow.push(employee.name);
-
-    console.log(
-      `Fetching tasks from Jira for ${employee.name}. Please wait...`
+    const employeeDataRow = await Promise.all(
+      headers.map(async (header) => {
+        let cell: string;
+        const employee = tableData.employees[i];
+        if (header.label == "Employee") cell = tableData.employees[i].name;
+        else if (header.label == "Task") {
+          console.log(
+            `Fetching tasks from Jira for ${employee.name}. Please wait...`
+          );
+          const userTasks = await fetchUserTasks({
+            jiraUserName: employee.jiraUsername,
+            login,
+            password,
+          });
+          cell = userTasks.join(" ");
+        } else cell = tableData[header.dataKey];
+        return cell;
+      })
     );
-    const userTasks = await fetchUserTasks({
-      jiraUserName: employee.jiraUsername,
-      login,
-      password,
-    });
 
-    employeeDataRow.push(userTasks.join(" "));
-    employeeDataRows.push(employeeDataRow);
+    employeeDataRows.push(
+      employeeDataRow.map((cell) => (cell == undefined ? "" : cell))
+    );
   }
   return employeeDataRows;
 }
