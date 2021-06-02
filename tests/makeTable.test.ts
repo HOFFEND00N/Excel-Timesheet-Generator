@@ -17,7 +17,13 @@ import {
 import { Point } from "../src/classes/Point";
 import { TableData } from "../src/classes/TableData";
 import { Style } from "../src/classes/Style";
-import { CommonCell, CommonValue } from "../src/tableBuildingFunctions/types";
+import {
+  CommonCell,
+  CommonValue,
+  NumberValue,
+  StringValue,
+} from "../src/tableBuildingFunctions/types";
+import { TableCell } from "../src/classes/TableCell";
 
 test("table data is empty, expect to return table headers + date", async () => {
   const expectedTable: CommonCell[] = [];
@@ -145,24 +151,17 @@ test("make full table", async () => {
     const expectedTableRow = expectedTableRows[i];
     for (let j = 0; j < expectedTableRow.length; j++) {
       const value = expectedTableRow[j];
-      let tableCell;
-      if (j == 0 || j == 1) {
-        tableCell = {
-          point: { column: startPoint.column + j, row: startPoint.row + i + 1 },
-          value: value,
-          styles: [
-            makeStyleHorizontalAlignText(HorizontalAlignTextWays.center),
-            makeCellBorderStyle(),
-            makeDefaultTextStyle(),
-          ],
-        };
-      } else {
-        tableCell = {
-          point: { column: startPoint.column + j, row: startPoint.row + i + 1 },
-          value: value,
-          styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
-        };
-      }
+      const tableCell: CommonCell = <
+        TableCell<StringValue> | TableCell<NumberValue>
+      >{
+        point: { column: startPoint.column + j, row: startPoint.row + i + 1 },
+        value: value,
+        styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
+      };
+      if (j == 0 || j == 1)
+        tableCell.styles.unshift(
+          makeStyleHorizontalAlignText(HorizontalAlignTextWays.center)
+        );
       expectedTable.push(tableCell);
     }
   }
