@@ -1,7 +1,7 @@
 import { TableHeader } from "../tableBuildingFunctions/types";
 import { Point } from "../classes/Point";
 
-export function getWorksheetMonthlyTimesheetName(): string {
+export function getWorksheetMonthlyTimesheetName() {
   return "Monthly timesheet";
 }
 
@@ -18,11 +18,11 @@ export function getTableHeaders(): TableHeader[] {
   ];
 }
 
-export function getMontlyTimesheetHeader(): string {
+export function getMonthlyTimesheetHeader() {
   return "Monthly Timesheet for";
 }
 
-export function getMonthNames(monthIndex: number): string {
+export function getMonthNames(monthIndex: number) {
   const months = [
     "Jan",
     "Feb",

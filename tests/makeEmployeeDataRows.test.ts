@@ -4,8 +4,8 @@ import { getTableHeaders } from "../src/constants/constant";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", async () => {
   const expectedTable = [
-    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", ""],
-    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", ""],
+    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "task 1"],
+    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2"],
   ];
   const tableData: TableData = {
     unit: 651,
@@ -28,7 +28,13 @@ test("make two dimensional array from parsed json, json file consist of predefin
     tableData,
     headers: getTableHeaders(),
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
-    fetchUserTasks: () => Promise.resolve([]),
+    fetchUserTasks: (user) => {
+      const users = {
+        MolotkovaM: ["task 1"],
+        MatrosovaM: ["task 2"],
+      };
+      return users[user.jiraUserName];
+    },
   });
 
   expect(actualTable).toEqual(expectedTable);

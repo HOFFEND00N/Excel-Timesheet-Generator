@@ -1,6 +1,6 @@
 import {
   getMonthNames,
-  getMontlyTimesheetHeader,
+  getMonthlyTimesheetHeader,
   getStartMonthHeaderPoint,
 } from "../constants/constant";
 import {
@@ -18,7 +18,7 @@ export function makeMonthRows(currentDate: Date): CommonCell[] {
   const { row, column }: Point = getStartMonthHeaderPoint();
   monthRows.push({
     point: { row, column },
-    value: getMontlyTimesheetHeader(),
+    value: getMonthlyTimesheetHeader(),
     styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
   });
   monthRows.push({

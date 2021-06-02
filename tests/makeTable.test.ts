@@ -1,7 +1,7 @@
 import { makeTable } from "../src/tableBuildingFunctions/makeTable";
 import {
   getMonthNames,
-  getMontlyTimesheetHeader,
+  getMonthlyTimesheetHeader,
   getStartMonthHeaderPoint,
   getStartTablePoint,
   getTableHeaders,
@@ -29,7 +29,7 @@ test("table data is empty, expect to return table headers + date", async () => {
       column: column,
       row: row,
     },
-    value: getMontlyTimesheetHeader(),
+    value: getMonthlyTimesheetHeader(),
     styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
   });
   expectedTable.push({
@@ -92,7 +92,7 @@ test("make full table", async () => {
   const currentDate: Date = new Date();
   expectedTable.push({
     point: startMonthHeaderPoint,
-    value: getMontlyTimesheetHeader(),
+    value: getMonthlyTimesheetHeader(),
     styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
   });
 

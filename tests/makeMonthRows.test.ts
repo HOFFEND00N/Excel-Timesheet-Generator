@@ -1,6 +1,6 @@
 import {
   getMonthNames,
-  getMontlyTimesheetHeader,
+  getMonthlyTimesheetHeader,
   getStartMonthHeaderPoint,
 } from "../src/constants/constant";
 import {
@@ -22,7 +22,7 @@ test("make date section of table + header, expect current month + year + header"
   const expectedTable: CommonCell[] = [
     {
       point: startMonthHeaderPoint,
-      value: getMontlyTimesheetHeader(),
+      value: getMonthlyTimesheetHeader(),
       styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
     },
     {
