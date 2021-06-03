@@ -14,7 +14,7 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { CommonCell } from "./types";
 
-export type fetchUserTasksArguments = {
+export type FetchUserTasksArguments = {
   jiraUserName: string;
   login: string;
   password: string;
@@ -27,7 +27,7 @@ type MakeTableArguments = {
     jiraUserName,
     login,
     password,
-  }: fetchUserTasksArguments) => Promise<string[]>;
+  }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
 };
 

@@ -1,5 +1,5 @@
 import { TableData } from "../src/classes/TableData";
-import { fetchUserTasksArguments } from "../src/tableBuildingFunctions/makeTable";
+import { FetchUserTasksArguments } from "../src/tableBuildingFunctions/makeTable";
 import { Point } from "../src/classes/Point";
 import {
   getMonthlyTimesheetHeader,
@@ -38,7 +38,7 @@ export function getFetchUserTasksForTests(): ({
   jiraUserName,
   login,
   password,
-}: fetchUserTasksArguments) => Promise<string[]> {
+}: FetchUserTasksArguments) => Promise<string[]> {
   return (user) => {
     const users = {
       MolotkovaM: ["task 1", "task 3"],
