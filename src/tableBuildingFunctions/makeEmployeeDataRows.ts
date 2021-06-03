@@ -25,10 +25,9 @@ export async function makeEmployeeDataRows({
   for (let i = 0; i < tableData.employees.length; i++) {
     const employeeDataRow = await Promise.all(
       headers.map(async (header) => {
-        let cell: string;
         const employee = tableData.employees[i];
-        if (header.label == "Employee") cell = tableData.employees[i].name;
-        else if (header.label == "Task") {
+        if (header.label == "Employee") return tableData.employees[i].name;
+        if (header.label == "Task") {
           console.log(
             `Fetching tasks from Jira for ${employee.name}. Please wait...`
           );
@@ -37,15 +36,15 @@ export async function makeEmployeeDataRows({
             login,
             password,
           });
-          cell = userTasks.join(" ");
-        } else cell = tableData[header.dataKey];
-        return cell;
+          return userTasks.join(" ");
+        }
+
+        const cell: CommonValue = tableData[header.dataKey];
+        return cell == undefined ? "" : cell;
       })
     );
 
-    employeeDataRows.push(
-      employeeDataRow.map((cell) => (cell == undefined ? "" : cell))
-    );
+    employeeDataRows.push(employeeDataRow);
   }
   return employeeDataRows;
 }
