@@ -14,12 +14,6 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { CommonCell, FetchUserTasksArguments, CommonValue } from "./types";
 
-export type fetchUserTasksArguments = {
-  jiraUserName: string;
-  login: string;
-  password: string;
-};
-
 type MakeTableArguments = {
   tableData: TableData;
   currentDate: Date;
