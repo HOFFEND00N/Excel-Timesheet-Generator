@@ -1,7 +1,7 @@
 import {
-  getMonthNames,
-  getMonthlyTimesheetHeader,
-  getStartMonthHeaderPoint,
+  START_MONTH_HEADER_POINT,
+  MONTHLY_TIMESHEET_HEADER,
+  MONTHS,
 } from "../constants/constant";
 import {
   HorizontalAlignTextWays,
@@ -15,15 +15,15 @@ import { CommonCell } from "./types";
 
 export function makeMonthRows(currentDate: Date): CommonCell[] {
   const monthRows: CommonCell[] = [];
-  const { row, column }: Point = getStartMonthHeaderPoint();
+  const { row, column }: Point = START_MONTH_HEADER_POINT;
   monthRows.push({
     point: { row, column },
-    value: getMonthlyTimesheetHeader(),
+    value: MONTHLY_TIMESHEET_HEADER,
     styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
   });
   monthRows.push({
     point: { row: row + 1, column },
-    value: getMonthNames(currentDate.getMonth()),
+    value: MONTHS[currentDate.getMonth()],
     styles: [
       makeYellowBackgroundStyle(),
       makeStyleHorizontalAlignText(HorizontalAlignTextWays.right),

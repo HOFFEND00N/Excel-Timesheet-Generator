@@ -1,8 +1,8 @@
 import { TableData } from "../src/classes/TableData";
 import { Point } from "../src/classes/Point";
 import {
-  getMonthlyTimesheetHeader,
-  getStartMonthHeaderPoint,
+  START_MONTH_HEADER_POINT,
+  MONTHLY_TIMESHEET_HEADER,
 } from "../src/constants/constant";
 import {
   CommonCell,
@@ -50,11 +50,11 @@ export function getFetchUserTasksForTests(): ({
 }
 
 export function getMonthRowsForTests() {
-  const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
+  const startMonthHeaderPoint: Point = START_MONTH_HEADER_POINT;
   const monthRows: CommonCell[] = [];
   monthRows.push({
     point: startMonthHeaderPoint,
-    value: getMonthlyTimesheetHeader(),
+    value: MONTHLY_TIMESHEET_HEADER,
     styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
   });
 

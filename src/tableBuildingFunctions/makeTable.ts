@@ -5,7 +5,7 @@ import {
   makeDefaultTextStyle,
   makeStyleHorizontalAlignText,
 } from "../constants/styleConstants";
-import { getStartTablePoint, getTableHeaders } from "../constants/constant";
+import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
 import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
@@ -32,9 +32,9 @@ export async function makeTable({
   getCredentials,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
-  const startTablePoint: Point = getStartTablePoint();
+  const startTablePoint: Point = START_TABLE_POINT;
 
-  const tableHeaders = getTableHeaders();
+  const tableHeaders = TABLE_HEADERS;
   const monthRow = makeMonthRows(currentDate);
   const { row: pointRow, column: pointColumn }: Point = startTablePoint;
   table.push(...monthRow);

@@ -1,5 +1,4 @@
 import { makeTable } from "./tableBuildingFunctions/makeTable";
-import { getWorksheetMonthlyTimesheetName } from "./constants/constant";
 import excel from "excel4node";
 import * as fs from "fs";
 import { TableData } from "./classes/TableData";
@@ -8,10 +7,11 @@ import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 import { isNumericCell, isStringCell } from "./tableBuildingFunctions/types";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/fetchJiraUserTasks";
 import { getCredentials } from "./tableBuildingFunctions/getCredentials";
+import { WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 
 (async () => {
   const workBook = new excel.Workbook({});
-  const workSheet = workBook.addWorksheet(getWorksheetMonthlyTimesheetName());
+  const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
   const image: WorksheetImage = {
     path: "images/confirmit.jpg",
     column: 2,

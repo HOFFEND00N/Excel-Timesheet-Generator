@@ -1,9 +1,9 @@
 import { makeEmployeeDataRows } from "../src/tableBuildingFunctions/makeEmployeeDataRows";
-import { getTableHeaders } from "../src/constants/constant";
 import {
   getFetchUserTasksForTests,
   getTableDataForTests,
 } from "./mockedDataForTests";
+import { TABLE_HEADERS } from "../src/constants/constant";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", async () => {
   const expectedTable = [
@@ -23,7 +23,7 @@ test("make two dimensional array from parsed json, json file consist of predefin
 
   const actualTable = await makeEmployeeDataRows({
     tableData,
-    headers: getTableHeaders(),
+    headers: TABLE_HEADERS,
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     fetchUserTasks: getFetchUserTasksForTests(),
   });

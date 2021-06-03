@@ -1,5 +1,5 @@
 import { makeTable } from "../src/tableBuildingFunctions/makeTable";
-import { getStartTablePoint, getTableHeaders } from "../src/constants/constant";
+import { START_TABLE_POINT, TABLE_HEADERS } from "../src/constants/constant";
 import {
   HorizontalAlignTextWays,
   makeBoldCellTextStyle,
@@ -32,8 +32,8 @@ test("table data is empty, expect to return table headers + date", async () => {
     makeCellBorderStyle(),
     makeDefaultTextStyle(),
   ];
-  const startTablePoint = getStartTablePoint();
-  const tableHeaders = getTableHeaders();
+  const startTablePoint = START_TABLE_POINT;
+  const tableHeaders = TABLE_HEADERS;
   for (let i = 0; i < tableHeaders.length; i++) {
     const tableHeader = tableHeaders[i];
     expectedTable.push({
@@ -65,8 +65,8 @@ test("make full table", async () => {
   const currentDate: Date = new Date("2020-05-11");
   expectedTable.push(...getMonthRowsForTests());
 
-  const startTablePoint = getStartTablePoint();
-  const tableHeaders = getTableHeaders();
+  const startTablePoint = START_TABLE_POINT;
+  const tableHeaders = TABLE_HEADERS;
   for (let i = 0; i < tableHeaders.length; i++) {
     const tableHeader = tableHeaders[i];
     expectedTable.push({
@@ -93,7 +93,7 @@ test("make full table", async () => {
     [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", ""],
   ];
 
-  const startPoint = getStartTablePoint();
+  const startPoint = START_TABLE_POINT;
   for (let i = 0; i < expectedTableRows.length; i++) {
     const expectedTableRow = expectedTableRows[i];
     for (let j = 0; j < expectedTableRow.length; j++) {

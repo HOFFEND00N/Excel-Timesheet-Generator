@@ -1,49 +1,35 @@
-import { TableHeader } from "../tableBuildingFunctions/types";
 import { Point } from "../classes/Point";
 
-export function getWorksheetMonthlyTimesheetName() {
-  return "Monthly timesheet";
-}
+export const WORKSHEET_MONTHLY_TIMESHEET_NAME = "Monthly timesheet";
 
-export function getTableHeaders(): TableHeader[] {
-  return [
-    { label: "Unit", dataKey: "unit" },
-    { label: "Interco", dataKey: "companyCode" },
-    { label: "Product", dataKey: "companyName" },
-    { label: "Project", dataKey: "project" },
-    { label: "Employee", dataKey: "employee" },
-    { label: "Task", dataKey: "task" },
-    { label: "Over-Time", dataKey: "overTime" },
-    { label: "Man-Hours", dataKey: "manHours" },
-  ];
-}
+export const TABLE_HEADERS = [
+  { label: "Unit", dataKey: "unit" },
+  { label: "Interco", dataKey: "companyCode" },
+  { label: "Product", dataKey: "companyName" },
+  { label: "Project", dataKey: "project" },
+  { label: "Employee", dataKey: "employee" },
+  { label: "Task", dataKey: "task" },
+  { label: "Over-Time", dataKey: "overTime" },
+  { label: "Man-Hours", dataKey: "manHours" },
+];
 
-export function getMonthlyTimesheetHeader() {
-  return "Monthly Timesheet for";
-}
+export const MONTHLY_TIMESHEET_HEADER = "Monthly Timesheet for";
 
-export function getMonthNames(monthIndex: number) {
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  return months[monthIndex];
-}
+export const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
-export function getStartTablePoint(): Point {
-  return { column: 2, row: 8 };
-}
+export const START_TABLE_POINT: Point = { column: 2, row: 8 };
 
-export function getStartMonthHeaderPoint(): Point {
-  return { column: 2, row: 5 };
-}
+export const START_MONTH_HEADER_POINT: Point = { column: 2, row: 5 };
