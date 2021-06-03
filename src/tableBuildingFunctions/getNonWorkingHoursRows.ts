@@ -6,16 +6,11 @@ export async function getNonWorkingHoursRows(
   getNonWorkingHoursFile: () => Promise<string[][]>
 ): Promise<CommonValue[][]> {
   const nonWorkingHoursJson = await getNonWorkingHoursFile();
+  const employees = tableData.employees.map((employee) => employee.name);
 
   const nonWorkingHoursRows: CommonValue[][] = nonWorkingHoursJson.filter(
-    (row) => {
-      for (const cellValue of row)
-        if (tableData.employees.find((employee) => employee.name == cellValue))
-          return true;
-      return false;
-    }
+    (row) => row.some((cell) => employees.includes(cell))
   );
-
   return nonWorkingHoursRows.map((row) =>
     row.map((value) => (isNumeric(value) ? Number(value) : value))
   );
