@@ -29,8 +29,8 @@ test("pass one non working hours row, expect to return zero non working rows, be
     project: "Studio",
     employees: [
       {
-        name: "Volyakova Kristina",
-        jiraUsername: "KristinaZ",
+        name: "Molotkova Maria",
+        jiraUsername: "MolotkovaM",
       },
     ],
   };
@@ -44,7 +44,7 @@ test("pass one non working hours row, expect to return zero non working rows, be
           "RU",
           "DaysOff",
           "Sick1DQ",
-          "Khomutova Galina",
+          "Matrosova Marianna",
           "25.01.2021",
           "",
           "8",
@@ -57,16 +57,7 @@ test("pass one non working hours row, expect to return zero non working rows, be
 
 test("pass one non working hours row, expect to return one non working rows, because received row contains info about suitable employee", async () => {
   const expectedNonWorkingHoursRows: CommonValue[][] = [
-    [
-      100,
-      "RU",
-      "DaysOff",
-      "Sick1DQ",
-      "Volyakova Kristina",
-      "25.01.2021",
-      "",
-      8,
-    ],
+    [100, "RU", "DaysOff", "Sick1DQ", "Molotkova Maria", "25.01.2021", "", 8],
   ];
   const tableData: TableData = {
     unit: 651,
@@ -75,8 +66,8 @@ test("pass one non working hours row, expect to return one non working rows, bec
     project: "Studio",
     employees: [
       {
-        name: "Volyakova Kristina",
-        jiraUsername: "KristinaZ",
+        name: "Molotkova Maria",
+        jiraUsername: "MolotkovaM",
       },
     ],
   };
@@ -90,7 +81,7 @@ test("pass one non working hours row, expect to return one non working rows, bec
           "RU",
           "DaysOff",
           "Sick1DQ",
-          "Volyakova Kristina",
+          "Molotkova Maria",
           "25.01.2021",
           "",
           "8",
@@ -103,16 +94,7 @@ test("pass one non working hours row, expect to return one non working rows, bec
 
 test("pass two non working hours row, expect to return one non working rows, because received one row contains info about suitable employee and one row contains unsuitable info about employee", async () => {
   const expectedNonWorkingHoursRows: CommonValue[][] = [
-    [
-      100,
-      "RU",
-      "DaysOff",
-      "Sick1DQ",
-      "Volyakova Kristina",
-      "25.01.2021",
-      "",
-      8,
-    ],
+    [100, "RU", "DaysOff", "Sick1DQ", "Molotkova Maria", "25.01.2021", "", 8],
   ];
   const tableData: TableData = {
     unit: 651,
@@ -121,8 +103,8 @@ test("pass two non working hours row, expect to return one non working rows, bec
     project: "Studio",
     employees: [
       {
-        name: "Volyakova Kristina",
-        jiraUsername: "KristinaZ",
+        name: "Molotkova Maria",
+        jiraUsername: "MolotkovaM",
       },
     ],
   };
@@ -136,7 +118,7 @@ test("pass two non working hours row, expect to return one non working rows, bec
           "RU",
           "DaysOff",
           "Sick1DQ",
-          "Volyakova Kristina",
+          "Molotkova Maria",
           "25.01.2021",
           "",
           "8",
@@ -146,7 +128,7 @@ test("pass two non working hours row, expect to return one non working rows, bec
           "EU",
           "DaysOff",
           "Sick1DQ",
-          "Karasev Daniil",
+          "Matrosova Marianna",
           "25.01.1999",
           "",
           "6",

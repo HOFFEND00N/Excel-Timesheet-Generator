@@ -77,9 +77,7 @@ export async function makeTable({
     getNonWorkingHoursFile
   );
 
-  for (const nonWorkingHoursRow of nonWorkingHoursRows) {
-    tableRowsValues.push(nonWorkingHoursRow);
-  }
+  tableRowsValues.push(...nonWorkingHoursRows);
 
   for (let i = 0; i < tableRowsValues.length; i++) {
     const tableRowValues = tableRowsValues[i];
