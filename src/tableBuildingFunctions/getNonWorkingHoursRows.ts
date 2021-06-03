@@ -16,13 +16,9 @@ export async function getNonWorkingHoursRows(
     }
   );
 
-  for (const row of nonWorkingHoursRows) {
-    for (let i = 0; i < row.length; i++) {
-      if (isNumeric(row[i])) row[i] = Number(row[i]);
-    }
-  }
-
-  return nonWorkingHoursRows;
+  return nonWorkingHoursRows.map((row) =>
+    row.map((value) => (isNumeric(value) ? Number(value) : value))
+  );
 }
 
 function isNumeric(value): boolean {
