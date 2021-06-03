@@ -1,20 +1,12 @@
 import { makeTable } from "../src/tableBuildingFunctions/makeTable";
-import {
-  getMonthNames,
-  getMonthlyTimesheetHeader,
-  getStartMonthHeaderPoint,
-  getStartTablePoint,
-  getTableHeaders,
-} from "../src/constants/constant";
+import { getStartTablePoint, getTableHeaders } from "../src/constants/constant";
 import {
   HorizontalAlignTextWays,
   makeBoldCellTextStyle,
   makeCellBorderStyle,
   makeDefaultTextStyle,
   makeStyleHorizontalAlignText,
-  makeYellowBackgroundStyle,
 } from "../src/constants/styleConstants";
-import { Point } from "../src/classes/Point";
 import { Style } from "../src/classes/Style";
 import {
   CommonCell,
@@ -25,43 +17,15 @@ import {
 import { TableCell } from "../src/classes/TableCell";
 import {
   getFetchUserTasksForTests,
+  getMonthRowsForTests,
   getTableDataForTests,
 } from "./mockedDataForTests";
 
 test("table data is empty, expect to return table headers + date", async () => {
   const expectedTable: CommonCell[] = [];
-  const currentDate: Date = new Date();
-  const { column, row }: Point = getStartMonthHeaderPoint();
 
-  expectedTable.push({
-    point: {
-      column: column,
-      row: row,
-    },
-    value: getMonthlyTimesheetHeader(),
-    styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
-  });
-  expectedTable.push({
-    point: {
-      column: column,
-      row: row + 1,
-    },
-    value: getMonthNames(currentDate.getMonth()),
-    styles: [
-      makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText(HorizontalAlignTextWays.right),
-      makeDefaultTextStyle(),
-    ],
-  });
-  expectedTable.push({
-    point: { column: column + 1, row: row + 1 },
-    value: currentDate.getFullYear(),
-    styles: [
-      makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText(HorizontalAlignTextWays.left),
-      makeDefaultTextStyle(),
-    ],
-  });
+  const currentDate: Date = new Date();
+  expectedTable.push(...getMonthRowsForTests(currentDate));
 
   const headerStyles: Style[] = [
     makeBoldCellTextStyle(),
@@ -97,38 +61,9 @@ test("table data is empty, expect to return table headers + date", async () => {
 
 test("make full table", async () => {
   const expectedTable: CommonCell[] = [];
-  const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
-  const currentDate: Date = new Date();
-  expectedTable.push({
-    point: startMonthHeaderPoint,
-    value: getMonthlyTimesheetHeader(),
-    styles: [makeBoldCellTextStyle(), makeDefaultTextStyle()],
-  });
 
-  expectedTable.push({
-    point: {
-      column: startMonthHeaderPoint.column,
-      row: startMonthHeaderPoint.row + 1,
-    },
-    value: getMonthNames(currentDate.getMonth()),
-    styles: [
-      makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText(HorizontalAlignTextWays.right),
-      makeDefaultTextStyle(),
-    ],
-  });
-  expectedTable.push({
-    point: {
-      column: startMonthHeaderPoint.column + 1,
-      row: startMonthHeaderPoint.row + 1,
-    },
-    value: currentDate.getFullYear(),
-    styles: [
-      makeYellowBackgroundStyle(),
-      makeStyleHorizontalAlignText(HorizontalAlignTextWays.left),
-      makeDefaultTextStyle(),
-    ],
-  });
+  const currentDate: Date = new Date();
+  expectedTable.push(...getMonthRowsForTests(currentDate));
 
   const startTablePoint = getStartTablePoint();
   const tableHeaders = getTableHeaders();
