@@ -54,7 +54,6 @@ test("table data is empty, expect to return table headers + date", async () => {
     currentDate: currentDate,
     fetchUserTasks: () => Promise.resolve([]),
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
-    getNonWorkingHoursRows: () => Promise.resolve([]),
     getNonWorkingHoursFile: () => Promise.resolve([]),
   });
 
@@ -122,7 +121,6 @@ test("make full table", async () => {
     currentDate,
     fetchUserTasks: getFetchUserTasksForTests(),
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
-    getNonWorkingHoursRows: () => Promise.resolve([]),
     getNonWorkingHoursFile: () => Promise.resolve([]),
   });
 

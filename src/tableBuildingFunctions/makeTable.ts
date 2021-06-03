@@ -12,7 +12,8 @@ import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
-import { CommonCell, FetchUserTasksArguments, CommonValue } from "./types";
+import { CommonCell, FetchUserTasksArguments } from "./types";
+import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
 
 type MakeTableArguments = {
   tableData: TableData;
@@ -23,10 +24,6 @@ type MakeTableArguments = {
     password,
   }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
-  getNonWorkingHoursRows: (
-    tableData: TableData,
-    getNonWorkingHoursFile: () => Promise<string[][]>
-  ) => Promise<CommonValue[][]>;
   getNonWorkingHoursFile: () => Promise<string[][]>;
 };
 
@@ -35,7 +32,6 @@ export async function makeTable({
   currentDate,
   fetchUserTasks,
   getCredentials,
-  getNonWorkingHoursRows,
   getNonWorkingHoursFile,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];

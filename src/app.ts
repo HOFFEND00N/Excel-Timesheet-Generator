@@ -8,7 +8,6 @@ import { isNumericCell, isStringCell } from "./tableBuildingFunctions/types";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/fetchJiraUserTasks";
 import { getCredentials } from "./tableBuildingFunctions/getCredentials";
 import { WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
-import { getNonWorkingHoursRows } from "./tableBuildingFunctions/getNonWorkingHoursRows";
 import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHoursFile";
 
 (async () => {
@@ -28,7 +27,6 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
     currentDate: new Date(),
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
-    getNonWorkingHoursRows,
     getNonWorkingHoursFile,
   });
 
