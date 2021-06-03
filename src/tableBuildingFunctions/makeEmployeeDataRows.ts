@@ -1,6 +1,5 @@
 import { TableData } from "../classes/TableData";
-import { CommonValue, TableHeader } from "./types";
-import { FetchUserTasksArguments } from "./makeTable";
+import { CommonValue, FetchUserTasksArguments, TableHeader } from "./types";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;

@@ -1,15 +1,11 @@
 import fetch from "node-fetch";
-import { JiraResponse } from "./types";
+import { FetchUserTasksArguments, JiraResponse } from "./types";
 
 export async function fetchJiraUserTasks({
   jiraUserName,
   login,
   password,
-}: {
-  jiraUserName: string;
-  login: string;
-  password: string;
-}): Promise<string[]> {
+}: FetchUserTasksArguments): Promise<string[]> {
   const authorizationKey = Buffer.from(`${login}:${password}`).toString(
     "base64"
   );

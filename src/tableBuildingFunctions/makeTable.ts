@@ -12,13 +12,7 @@ import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
-import { CommonCell } from "./types";
-
-export type FetchUserTasksArguments = {
-  jiraUserName: string;
-  login: string;
-  password: string;
-};
+import { CommonCell, FetchUserTasksArguments } from "./types";
 
 type MakeTableArguments = {
   tableData: TableData;

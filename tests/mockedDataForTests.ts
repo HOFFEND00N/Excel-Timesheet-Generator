@@ -1,12 +1,14 @@
 import { TableData } from "../src/classes/TableData";
-import { FetchUserTasksArguments } from "../src/tableBuildingFunctions/makeTable";
 import { Point } from "../src/classes/Point";
 import {
   getMonthlyTimesheetHeader,
   getMonthNames,
   getStartMonthHeaderPoint,
 } from "../src/constants/constant";
-import { CommonCell } from "../src/tableBuildingFunctions/types";
+import {
+  CommonCell,
+  FetchUserTasksArguments,
+} from "../src/tableBuildingFunctions/types";
 import {
   HorizontalAlignTextWays,
   makeBoldCellTextStyle,

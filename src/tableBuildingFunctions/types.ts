@@ -28,3 +28,9 @@ export type JiraResponse = {
 type JiraIssue = {
   key: string;
 };
+
+export type FetchUserTasksArguments = {
+  jiraUserName: string;
+  login: string;
+  password: string;
+};
