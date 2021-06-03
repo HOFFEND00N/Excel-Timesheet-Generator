@@ -92,6 +92,16 @@ test("make full table", async () => {
       "",
     ],
     [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", ""],
+    [
+      651,
+      "RU",
+      "Confirmit",
+      "DaysOff",
+      "Matrosova Marianna",
+      "25.01.2021",
+      "",
+      8,
+    ],
   ];
 
   const startPoint = START_TABLE_POINT;
@@ -121,7 +131,29 @@ test("make full table", async () => {
     currentDate,
     fetchUserTasks: getFetchUserTasksForTests(),
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
-    getNonWorkingHoursFile: () => Promise.resolve([]),
+    getNonWorkingHoursFile: () =>
+      Promise.resolve([
+        [
+          "651",
+          "RU",
+          "Confirmit",
+          "DaysOff",
+          "Matrosova Marianna",
+          "25.01.2021",
+          "",
+          "8",
+        ],
+        [
+          "651",
+          "RU",
+          "Confirmit",
+          "DaysOff",
+          "Karaseva Svetlana",
+          "20.01.2021",
+          "",
+          "8",
+        ],
+      ]),
   });
 
   actualTable.sort(compare);
