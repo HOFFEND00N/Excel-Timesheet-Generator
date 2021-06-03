@@ -2,7 +2,6 @@ import { TableData } from "../src/classes/TableData";
 import { Point } from "../src/classes/Point";
 import {
   getMonthlyTimesheetHeader,
-  getMonthNames,
   getStartMonthHeaderPoint,
 } from "../src/constants/constant";
 import {
@@ -50,7 +49,7 @@ export function getFetchUserTasksForTests(): ({
   };
 }
 
-export function getMonthRowsForTests(currentDate: Date) {
+export function getMonthRowsForTests() {
   const startMonthHeaderPoint: Point = getStartMonthHeaderPoint();
   const monthRows: CommonCell[] = [];
   monthRows.push({
@@ -64,7 +63,7 @@ export function getMonthRowsForTests(currentDate: Date) {
       column: startMonthHeaderPoint.column,
       row: startMonthHeaderPoint.row + 1,
     },
-    value: getMonthNames(currentDate.getMonth()),
+    value: "May",
     styles: [
       makeYellowBackgroundStyle(),
       makeStyleHorizontalAlignText(HorizontalAlignTextWays.right),
@@ -76,7 +75,7 @@ export function getMonthRowsForTests(currentDate: Date) {
       column: startMonthHeaderPoint.column + 1,
       row: startMonthHeaderPoint.row + 1,
     },
-    value: currentDate.getFullYear(),
+    value: 2020,
     styles: [
       makeYellowBackgroundStyle(),
       makeStyleHorizontalAlignText(HorizontalAlignTextWays.left),

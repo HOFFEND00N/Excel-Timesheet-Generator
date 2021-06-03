@@ -24,8 +24,8 @@ import {
 test("table data is empty, expect to return table headers + date", async () => {
   const expectedTable: CommonCell[] = [];
 
-  const currentDate: Date = new Date();
-  expectedTable.push(...getMonthRowsForTests(currentDate));
+  const currentDate: Date = new Date("2020-05-11");
+  expectedTable.push(...getMonthRowsForTests());
 
   const headerStyles: Style[] = [
     makeBoldCellTextStyle(),
@@ -62,8 +62,8 @@ test("table data is empty, expect to return table headers + date", async () => {
 test("make full table", async () => {
   const expectedTable: CommonCell[] = [];
 
-  const currentDate: Date = new Date();
-  expectedTable.push(...getMonthRowsForTests(currentDate));
+  const currentDate: Date = new Date("2020-05-11");
+  expectedTable.push(...getMonthRowsForTests());
 
   const startTablePoint = getStartTablePoint();
   const tableHeaders = getTableHeaders();
