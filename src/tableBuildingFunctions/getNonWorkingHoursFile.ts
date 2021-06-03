@@ -24,9 +24,5 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
   });
 
   //remove "" in the beginning of row
-  for (let i = 0; i < nonWorkingHoursJson.length; i++) {
-    nonWorkingHoursJson[i].shift();
-  }
-
-  return nonWorkingHoursJson;
+  return nonWorkingHoursJson.map((row) => row.splice(1));
 }
