@@ -1,5 +1,6 @@
 import { TableData } from "../classes/TableData";
 import { CommonValue, TableHeader } from "./types";
+import { fetchUserTasksArguments } from "./makeTable";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -8,11 +9,7 @@ type MakeEmployeeDataRowsArguments = {
     jiraUserName,
     login,
     password,
-  }: {
-    jiraUserName: string;
-    login: string;
-    password: string;
-  }) => Promise<string[]>;
+  }: fetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
 };
 
