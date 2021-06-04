@@ -2,11 +2,11 @@ import { makeWorkingHoursByEmployees } from "../src/tableBuildingFunctions/makeW
 
 test("pass zero non working hours, expect to return employees with same rate, total employees count = 2", () => {
   const expectedWorkingHoursByEmployees = new Map([
-    ["employee A", 120],
-    ["employee B", 120],
+    ["Molotkova Maria", 120],
+    ["Matrosova Marianna", 120],
   ]);
 
-  const employeesNames = ["employee A", "employee B"];
+  const employeesNames = ["Molotkova Maria", "Matrosova Marianna"];
 
   const actualWorkingHoursByEmployees = makeWorkingHoursByEmployees({
     nonWorkingHoursByEmployees: new Map(),
@@ -37,14 +37,14 @@ test("pass zero employees, expect to return empty Map, total employees count = 0
 
 test("pass non working hours for one employee, expect to return employees with same different rate, total employees count = 2", () => {
   const expectedWorkingHoursByEmployees = new Map([
-    ["employee A", 120],
-    ["employee B", 100],
+    ["Molotkova Maria", 120],
+    ["Matrosova Marianna", 100],
   ]);
 
-  const employeesNames = ["employee A", "employee B"];
+  const employeesNames = ["Molotkova Maria", "Matrosova Marianna"];
 
   const actualWorkingHoursByEmployees = makeWorkingHoursByEmployees({
-    nonWorkingHoursByEmployees: new Map([["employee B", 20]]),
+    nonWorkingHoursByEmployees: new Map([["Matrosova Marianna", 20]]),
     workingHoursPerMonth: 120,
     employeesNames,
   });
