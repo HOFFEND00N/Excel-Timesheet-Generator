@@ -25,7 +25,7 @@ export async function makeEmployeeDataRows({
     const employeeDataRow = await Promise.all(
       headers.map(async (header) => {
         const employee = tableData.employees[i];
-        if (header.label == "Employee") return tableData.employees[i].name;
+        if (header.label == "Employee") return employee.name;
         if (header.label == "Task") {
           console.log(
             `Fetching tasks from Jira for ${employee.name}. Please wait...`
