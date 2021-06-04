@@ -39,7 +39,7 @@ export async function makeEmployeeDataRows({
         }
 
         const cell: CommonValue = tableData[header.dataKey];
-        return cell == undefined ? "" : cell;
+        return cell ?? "";
       })
     );
 
