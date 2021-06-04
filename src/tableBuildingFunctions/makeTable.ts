@@ -111,19 +111,16 @@ export async function makeTable({
   });
 
   for (let i = 0; i < tableData.employees.length; i++) {
-    const employee = tableData.employees[i];
-    table.push({
-      value: Number(workingHoursPerMonth),
-      styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
-      point: {
-        column: startTablePoint.column + manHoursColumn,
-        row: startTablePoint.row + i + 1,
-      },
-    });
+    const cell = table.find(
+      (cell) =>
+        cell.point.column == startTablePoint.column + manHoursColumn &&
+        cell.point.row == startTablePoint.row + i + 1
+    );
+    cell.value = Number(workingHoursPerMonth);
 
+    const employee = tableData.employees[i];
     const workingHoursByEmployee = workingHoursByEmployees.get(employee.name);
-    if (workingHoursByEmployee)
-      table[table.length - 1].value = workingHoursByEmployee;
+    if (workingHoursByEmployee) cell.value = workingHoursByEmployee;
   }
 
   return table;
