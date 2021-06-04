@@ -8,7 +8,7 @@ export function makeNonWorkingHoursByEmployees({
   employeeColumn: number;
   manHoursColumn: number;
   nonWorkingHoursRows: CommonValue[][];
-}): Map<string, number> {
+}) {
   const nonWorkingHoursByEmployees: Map<string, number> = new Map();
 
   for (const nonWorkingHoursRow of nonWorkingHoursRows) {

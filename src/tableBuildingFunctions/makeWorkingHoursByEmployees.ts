@@ -6,7 +6,7 @@ export function makeWorkingHoursByEmployees({
   nonWorkingHoursByEmployees: Map<string, number>;
   workingHoursPerMonth: number;
   employeesNames: string[];
-}): Map<string, number> {
+}) {
   const workingHoursByEmployees: Map<string, number> = new Map();
   for (const employeeName of employeesNames) {
     let nonWorkingEmployeeHours = nonWorkingHoursByEmployees.get(employeeName);
