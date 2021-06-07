@@ -3,10 +3,10 @@ import inquirer from "inquirer";
 export async function getWorkingHoursForMonth(): Promise<number> {
   const { workingHoursPerMonth } = await inquirer.prompt([
     {
-      type: "input",
+      type: "number",
       name: "workingHoursPerMonth",
       message: "Enter working hours for the month: ",
     },
   ]);
-  return Number(workingHoursPerMonth);
+  return workingHoursPerMonth;
 }
