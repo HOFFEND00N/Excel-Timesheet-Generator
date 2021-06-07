@@ -20,7 +20,7 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
   const employeeDataRows: CommonValue[][] = [];
-  const tasks: Promise<string[]>[] = tableData.employees.map((employee) =>
+  const tasks = tableData.employees.map((employee) =>
     fetchUserTasks({ jiraUserName: employee.jiraUsername, login, password })
   );
 
