@@ -20,28 +20,24 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
   const employeeDataRows: CommonValue[][] = [];
+  const tasks: Promise<string[]>[] = [];
+  for (const employee of tableData.employees) {
+    tasks.push(
+      fetchUserTasks({ jiraUserName: employee.jiraUsername, login, password })
+    );
+  }
+  console.log(`Fetching tasks from Jira for employees. Please wait...`);
+  const tasksRows = await Promise.all(tasks);
 
   for (let i = 0; i < tableData.employees.length; i++) {
-    const employeeDataRow = await Promise.all(
-      headers.map(async (header) => {
-        const employee = tableData.employees[i];
-        if (header.label == "Employee") return employee.name;
-        if (header.label == "Task") {
-          console.log(
-            `Fetching tasks from Jira for ${employee.name}. Please wait...`
-          );
-          const userTasks = await fetchUserTasks({
-            jiraUserName: employee.jiraUsername,
-            login,
-            password,
-          });
-          return userTasks.join(" ");
-        }
+    const employeeDataRow = headers.map((header) => {
+      const employee = tableData.employees[i];
+      if (header.label == "Employee") return employee.name;
+      if (header.label == "Task") return tasksRows[i].join(" ");
 
-        const cell: CommonValue = tableData[header.dataKey];
-        return cell ?? "";
-      })
-    );
+      const cell: CommonValue = tableData[header.dataKey];
+      return cell ?? "";
+    });
 
     employeeDataRows.push(employeeDataRow);
   }
