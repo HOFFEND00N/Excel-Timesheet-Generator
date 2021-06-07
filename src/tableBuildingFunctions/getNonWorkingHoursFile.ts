@@ -23,6 +23,7 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
     dateNF: 'dd"."mm"."yyyy',
   });
 
-  //remove "" in the beginning of row
-  return nonWorkingHoursJson.map((row) => row.splice(1));
+  return nonWorkingHoursJson.map((rowWithEmptyCellAtTheBeginning) =>
+    rowWithEmptyCellAtTheBeginning.splice(1)
+  );
 }
