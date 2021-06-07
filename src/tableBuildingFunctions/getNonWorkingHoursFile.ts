@@ -1,5 +1,6 @@
 import inquirer from "inquirer";
 import xlsx from "xlsx";
+import { RETURN_ARRAY_OF_ARRAYS } from "../constants/constant";
 
 export async function getNonWorkingHoursFile(): Promise<string[][]> {
   console.log("Enter path to a excel file with non-working hours please ");
@@ -14,10 +15,9 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
   const nonWorkingHoursFileSheetName = nonWorkingHoursFile.SheetNames[0];
   const workSheet = nonWorkingHoursFile.Sheets[nonWorkingHoursFileSheetName];
 
-  //header: 1 means that method return array of arrays
   const nonWorkingHoursJson: string[][] = xlsx.utils.sheet_to_json(workSheet, {
     defval: "",
-    header: 1,
+    header: RETURN_ARRAY_OF_ARRAYS,
     raw: false,
     blankrows: false,
     dateNF: 'dd"."mm"."yyyy',
