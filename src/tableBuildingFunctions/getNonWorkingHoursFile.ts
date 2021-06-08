@@ -15,7 +15,7 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
   const nonWorkingHoursFileSheetName = nonWorkingHoursFile.SheetNames[0];
   const workSheet = nonWorkingHoursFile.Sheets[nonWorkingHoursFileSheetName];
 
-  const nonWorkingHoursJson: string[][] = xlsx.utils.sheet_to_json(workSheet, {
+  const nonWorkingHoursRows: string[][] = xlsx.utils.sheet_to_json(workSheet, {
     defval: "",
     header: OUTPUT_FORMAT_ARRAY_OF_ARRAYS,
     raw: false,
@@ -23,7 +23,7 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
     dateNF: 'dd"."mm"."yyyy',
   });
 
-  return nonWorkingHoursJson.map((rowWithEmptyCellAtTheBeginning) =>
-    rowWithEmptyCellAtTheBeginning.splice(1)
-  );
+  return nonWorkingHoursRows.map(removeEmptyCellAtTheBeginning);
 }
+
+const removeEmptyCellAtTheBeginning = (row: string[]) => row.splice(1);
