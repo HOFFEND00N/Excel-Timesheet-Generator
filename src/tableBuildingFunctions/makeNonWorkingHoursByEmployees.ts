@@ -9,18 +9,19 @@ export function makeNonWorkingHoursByEmployees({
   manHoursColumn: number;
   nonWorkingHoursRows: CommonValue[][];
 }) {
-  const nonWorkingHoursByEmployees: Map<string, number> = new Map();
+  return nonWorkingHoursRows.reduce(
+    (nonWorkingHoursByEmployees, nonWorkingHoursRow) => {
+      const key = nonWorkingHoursRow[employeeColumn].toString();
+      const value = Number(nonWorkingHoursRow[manHoursColumn]);
 
-  for (const nonWorkingHoursRow of nonWorkingHoursRows) {
-    const key = nonWorkingHoursRow[employeeColumn].toString();
-    const value = Number(nonWorkingHoursRow[manHoursColumn]);
-
-    if (nonWorkingHoursByEmployees.has(key))
-      nonWorkingHoursByEmployees.set(
-        key,
-        nonWorkingHoursByEmployees.get(key) + value
-      );
-    else nonWorkingHoursByEmployees.set(key, value);
-  }
-  return nonWorkingHoursByEmployees;
+      if (nonWorkingHoursByEmployees.has(key))
+        nonWorkingHoursByEmployees.set(
+          key,
+          nonWorkingHoursByEmployees.get(key) + value
+        );
+      else nonWorkingHoursByEmployees.set(key, value);
+      return nonWorkingHoursByEmployees;
+    },
+    new Map<string, number>()
+  );
 }
