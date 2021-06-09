@@ -10,6 +10,7 @@ type MakeEmployeeDataRowsArguments = {
     password,
   }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
+  workingHoursByEmployees: Map<string, number>;
 };
 
 export async function makeEmployeeDataRows({
@@ -17,6 +18,7 @@ export async function makeEmployeeDataRows({
   headers,
   fetchUserTasks,
   getCredentials,
+  workingHoursByEmployees,
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
   const employeeDataRows: CommonValue[][] = [];
@@ -32,7 +34,8 @@ export async function makeEmployeeDataRows({
       const employee = tableData.employees[i];
       if (header.label == "Employee") return employee.name;
       if (header.label == "Task") return tasksRows[i].join(" ");
-
+      if (header.label == "Man-Hours")
+        return workingHoursByEmployees.get(tableData.employees[i].name);
       const cell: CommonValue = tableData[header.dataKey];
       return cell ?? "";
     });

@@ -60,16 +60,36 @@ export async function makeTable({
   });
   table.push(...tableHeadersRow);
 
+  const nonWorkingHoursRows = await getNonWorkingHoursRows(
+    tableData,
+    getNonWorkingHoursFile
+  );
+
+  const tableHeadersLabels = tableHeaders.map((item) => item.label);
+  const employeeColumn = tableHeadersLabels.indexOf("Employee");
+  const manHoursColumn = tableHeadersLabels.indexOf("Man-Hours");
+
+  const nonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
+    employeeColumn,
+    manHoursColumn,
+    nonWorkingHoursRows,
+  });
+
+  const workingHoursPerMonth = await getWorkingHoursForMonth();
+  const employeesNames = tableData.employees.map((employee) => employee.name);
+  const workingHoursByEmployees = makeWorkingHoursByEmployees({
+    nonWorkingHoursByEmployees,
+    workingHoursPerMonth,
+    employeesNames,
+  });
+
   const tableRowsValues = await makeEmployeeDataRows({
     tableData,
     headers: tableHeaders,
     fetchUserTasks,
     getCredentials,
+    workingHoursByEmployees,
   });
-  const nonWorkingHoursRows = await getNonWorkingHoursRows(
-    tableData,
-    getNonWorkingHoursFile
-  );
 
   tableRowsValues.push(...nonWorkingHoursRows);
 
@@ -90,37 +110,6 @@ export async function makeTable({
       cellStyles: [makeCellBorderStyle(), makeDefaultTextStyle()],
     });
     table.push(...row);
-  }
-
-  const tableHeadersLabels = tableHeaders.map((item) => item.label);
-  const employeeColumn = tableHeadersLabels.indexOf("Employee");
-  const manHoursColumn = tableHeadersLabels.indexOf("Man-Hours");
-
-  const nonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
-    employeeColumn,
-    manHoursColumn,
-    nonWorkingHoursRows,
-  });
-
-  const workingHoursPerMonth = await getWorkingHoursForMonth();
-  const employeesNames = tableData.employees.map((employee) => employee.name);
-  const workingHoursByEmployees = makeWorkingHoursByEmployees({
-    nonWorkingHoursByEmployees,
-    workingHoursPerMonth,
-    employeesNames,
-  });
-
-  for (let i = 0; i < tableData.employees.length; i++) {
-    const cell = table.find(
-      (cell) =>
-        cell.point.column == startTablePoint.column + manHoursColumn &&
-        cell.point.row == startTablePoint.row + i + 1
-    );
-    cell.value = Number(workingHoursPerMonth);
-
-    const employee = tableData.employees[i];
-    const workingHoursByEmployee = workingHoursByEmployees.get(employee.name);
-    if (workingHoursByEmployee) cell.value = workingHoursByEmployee;
   }
 
   return table;
