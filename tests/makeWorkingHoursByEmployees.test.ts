@@ -1,15 +1,16 @@
 import { makeWorkingHoursByEmployees } from "../src/tableBuildingFunctions/makeWorkingHoursByEmployees";
+import { HoursByEmployees } from "../src/tableBuildingFunctions/types";
 
 test("pass zero non working hours, expect to return employees with same rate, total employees count = 2", () => {
-  const expectedWorkingHoursByEmployees = new Map([
-    ["Molotkova Maria", 120],
-    ["Matrosova Marianna", 120],
-  ]);
+  const expectedWorkingHoursByEmployees: HoursByEmployees = {
+    "Molotkova Maria": 120,
+    "Matrosova Marianna": 120,
+  };
 
   const employeesNames = ["Molotkova Maria", "Matrosova Marianna"];
 
   const actualWorkingHoursByEmployees = makeWorkingHoursByEmployees({
-    nonWorkingHoursByEmployees: new Map(),
+    nonWorkingHoursByEmployees: {},
     workingHoursPerMonth: 120,
     employeesNames,
   });
@@ -20,12 +21,12 @@ test("pass zero non working hours, expect to return employees with same rate, to
 });
 
 test("pass zero employees, expect to return empty Map, total employees count = 0", () => {
-  const expectedWorkingHoursByEmployees = new Map();
+  const expectedWorkingHoursByEmployees: HoursByEmployees = {};
 
   const employeesNames = [];
 
   const actualWorkingHoursByEmployees = makeWorkingHoursByEmployees({
-    nonWorkingHoursByEmployees: new Map(),
+    nonWorkingHoursByEmployees: {},
     workingHoursPerMonth: 120,
     employeesNames,
   });
@@ -36,15 +37,15 @@ test("pass zero employees, expect to return empty Map, total employees count = 0
 });
 
 test("pass non working hours for one employee, expect to return employees with same different rate, total employees count = 2", () => {
-  const expectedWorkingHoursByEmployees = new Map([
-    ["Molotkova Maria", 120],
-    ["Matrosova Marianna", 100],
-  ]);
+  const expectedWorkingHoursByEmployees: HoursByEmployees = {
+    "Molotkova Maria": 120,
+    "Matrosova Marianna": 100,
+  };
 
   const employeesNames = ["Molotkova Maria", "Matrosova Marianna"];
 
   const actualWorkingHoursByEmployees = makeWorkingHoursByEmployees({
-    nonWorkingHoursByEmployees: new Map([["Matrosova Marianna", 20]]),
+    nonWorkingHoursByEmployees: { "Matrosova Marianna": 20 },
     workingHoursPerMonth: 120,
     employeesNames,
   });

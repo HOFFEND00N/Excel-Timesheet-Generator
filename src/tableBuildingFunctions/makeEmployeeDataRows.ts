@@ -1,5 +1,10 @@
 import { TableData } from "../classes/TableData";
-import { CommonValue, FetchUserTasksArguments, TableHeader } from "./types";
+import {
+  CommonValue,
+  FetchUserTasksArguments,
+  HoursByEmployees,
+  TableHeader,
+} from "./types";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -10,7 +15,7 @@ type MakeEmployeeDataRowsArguments = {
     password,
   }: FetchUserTasksArguments) => Promise<string[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
-  workingHoursByEmployees: Map<string, number>;
+  workingHoursByEmployees: HoursByEmployees;
 };
 
 export async function makeEmployeeDataRows({
@@ -35,7 +40,7 @@ export async function makeEmployeeDataRows({
       if (header.label == "Employee") return employee.name;
       if (header.label == "Task") return tasksRows[i].join(" ");
       if (header.label == "Man-Hours")
-        return workingHoursByEmployees.get(tableData.employees[i].name);
+        return workingHoursByEmployees[tableData.employees[i].name];
       const cell: CommonValue = tableData[header.dataKey];
       return cell ?? "";
     });

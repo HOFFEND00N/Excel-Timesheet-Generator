@@ -1,21 +1,21 @@
+import { HoursByEmployees } from "./types";
+
 export function makeWorkingHoursByEmployees({
   nonWorkingHoursByEmployees,
   workingHoursPerMonth,
   employeesNames,
 }: {
-  nonWorkingHoursByEmployees: Map<string, number>;
+  nonWorkingHoursByEmployees: HoursByEmployees;
   workingHoursPerMonth: number;
   employeesNames: string[];
 }) {
-  const workingHoursByEmployees: Map<string, number> = new Map();
+  const workingHoursByEmployees: HoursByEmployees = {};
   for (const employeeName of employeesNames) {
-    let nonWorkingEmployeeHours = nonWorkingHoursByEmployees.get(employeeName);
+    let nonWorkingEmployeeHours = nonWorkingHoursByEmployees[employeeName];
     if (nonWorkingEmployeeHours == undefined) nonWorkingEmployeeHours = 0;
 
-    workingHoursByEmployees.set(
-      employeeName,
-      workingHoursPerMonth - nonWorkingEmployeeHours
-    );
+    workingHoursByEmployees[employeeName] =
+      workingHoursPerMonth - nonWorkingEmployeeHours;
   }
   return workingHoursByEmployees;
 }

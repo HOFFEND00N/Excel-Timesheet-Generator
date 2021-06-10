@@ -26,9 +26,10 @@ test("make two dimensional array from parsed json, json file consist of predefin
     headers: TABLE_HEADERS,
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     fetchUserTasks: getFetchUserTasksForTests(),
-    workingHoursByEmployees: new Map<string, number>()
-      .set("Molotkova Maria", 120)
-      .set("Matrosova Marianna", 120),
+    workingHoursByEmployees: {
+      "Molotkova Maria": 120,
+      "Matrosova Marianna": 120,
+    },
   });
 
   expect(actualTable).toEqual(expectedTable);
@@ -48,7 +49,7 @@ test("make table rows values, pass empty function parameter, expect empty table"
     headers: [],
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     fetchUserTasks: () => Promise.resolve([]),
-    workingHoursByEmployees: new Map<string, number>(),
+    workingHoursByEmployees: {},
   });
 
   expect(actualTable).toEqual(expectedTable);

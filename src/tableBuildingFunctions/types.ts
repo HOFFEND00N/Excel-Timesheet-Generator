@@ -34,3 +34,5 @@ export type FetchUserTasksArguments = {
   login: string;
   password: string;
 };
+
+export type HoursByEmployees = Record<string, number>;

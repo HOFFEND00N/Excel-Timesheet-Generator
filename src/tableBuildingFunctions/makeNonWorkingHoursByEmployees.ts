@@ -1,4 +1,4 @@
-import { CommonValue } from "./types";
+import { CommonValue, HoursByEmployees } from "./types";
 
 export function makeNonWorkingHoursByEmployees({
   employeeColumn,
@@ -10,18 +10,16 @@ export function makeNonWorkingHoursByEmployees({
   nonWorkingHoursRows: CommonValue[][];
 }) {
   return nonWorkingHoursRows.reduce(
-    (nonWorkingHoursByEmployees, nonWorkingHoursRow) => {
+    (nonWorkingHoursByEmployees: HoursByEmployees, nonWorkingHoursRow) => {
       const key = nonWorkingHoursRow[employeeColumn].toString();
       const value = Number(nonWorkingHoursRow[manHoursColumn]);
 
-      if (nonWorkingHoursByEmployees.has(key))
-        nonWorkingHoursByEmployees.set(
-          key,
-          nonWorkingHoursByEmployees.get(key) + value
-        );
-      else nonWorkingHoursByEmployees.set(key, value);
+      if (nonWorkingHoursByEmployees[key] !== undefined)
+        nonWorkingHoursByEmployees[key] =
+          nonWorkingHoursByEmployees[key] + value;
+      else nonWorkingHoursByEmployees[key] = value;
       return nonWorkingHoursByEmployees;
     },
-    new Map<string, number>()
+    {}
   );
 }

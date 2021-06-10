@@ -1,7 +1,8 @@
 import { makeNonWorkingHoursByEmployees } from "../src/tableBuildingFunctions/makeNonWorkingHoursByEmployees";
+import { HoursByEmployees } from "../src/tableBuildingFunctions/types";
 
 test("pass zero non working hours rows, expect to return empty map", () => {
-  const expectedNonWorkingHoursByEmployees: Map<string, number> = new Map();
+  const expectedNonWorkingHoursByEmployees: HoursByEmployees = {};
 
   const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
     employeeColumn: 4,
@@ -15,8 +16,9 @@ test("pass zero non working hours rows, expect to return empty map", () => {
 });
 
 test("pass one non working hours row, expect to return map with one element", () => {
-  const expectedNonWorkingHoursByEmployees: Map<string, number> = new Map();
-  expectedNonWorkingHoursByEmployees.set("Molotkova Maria", 24);
+  const expectedNonWorkingHoursByEmployees: HoursByEmployees = {
+    "Molotkova Maria": 24,
+  };
 
   const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
     employeeColumn: 4,
@@ -41,9 +43,10 @@ test("pass one non working hours row, expect to return map with one element", ()
 });
 
 test("pass two non working hours row with two different employees, expect to return map with two element", () => {
-  const expectedNonWorkingHoursByEmployees: Map<string, number> = new Map();
-  expectedNonWorkingHoursByEmployees.set("Molotkova Maria", 24);
-  expectedNonWorkingHoursByEmployees.set("Matrosova Marianna", 8);
+  const expectedNonWorkingHoursByEmployees: HoursByEmployees = {
+    "Molotkova Maria": 24,
+    "Matrosova Marianna": 8,
+  };
 
   const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
     employeeColumn: 4,
@@ -78,9 +81,10 @@ test("pass two non working hours row with two different employees, expect to ret
 });
 
 test("pass three non working hours row with two rows for one employee and the rest row for the other employee, expect to return map with two element", () => {
-  const expectedNonWorkingHoursByEmployees: Map<string, number> = new Map();
-  expectedNonWorkingHoursByEmployees.set("Molotkova Maria", 32);
-  expectedNonWorkingHoursByEmployees.set("Matrosova Marianna", 8);
+  const expectedNonWorkingHoursByEmployees: HoursByEmployees = {
+    "Molotkova Maria": 32,
+    "Matrosova Marianna": 8,
+  };
 
   const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
     employeeColumn: 4,
