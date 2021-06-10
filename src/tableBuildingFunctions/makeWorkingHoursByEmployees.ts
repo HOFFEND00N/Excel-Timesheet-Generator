@@ -9,13 +9,15 @@ export function makeWorkingHoursByEmployees({
   workingHoursPerMonth: number;
   employeesNames: string[];
 }) {
-  const workingHoursByEmployees: HoursByEmployees = {};
-  for (const employeeName of employeesNames) {
-    let nonWorkingEmployeeHours = nonWorkingHoursByEmployees[employeeName];
-    if (nonWorkingEmployeeHours == undefined) nonWorkingEmployeeHours = 0;
+  return employeesNames.reduce(
+    (workingHoursByEmployees: HoursByEmployees, employeeName) => {
+      let nonWorkingEmployeeHours = nonWorkingHoursByEmployees[employeeName];
+      if (nonWorkingEmployeeHours == undefined) nonWorkingEmployeeHours = 0;
 
-    workingHoursByEmployees[employeeName] =
-      workingHoursPerMonth - nonWorkingEmployeeHours;
-  }
-  return workingHoursByEmployees;
+      workingHoursByEmployees[employeeName] =
+        workingHoursPerMonth - nonWorkingEmployeeHours;
+      return workingHoursByEmployees;
+    },
+    {}
+  );
 }
