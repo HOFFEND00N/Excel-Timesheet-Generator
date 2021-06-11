@@ -11,13 +11,13 @@ export function makeNonWorkingHoursByEmployees({
 }) {
   return nonWorkingHoursRows.reduce(
     (nonWorkingHoursByEmployees: HoursByEmployees, nonWorkingHoursRow) => {
-      const key = nonWorkingHoursRow[employeeColumn].toString();
-      const value = Number(nonWorkingHoursRow[manHoursColumn]);
+      const employee = nonWorkingHoursRow[employeeColumn].toString();
+      const manHours = Number(nonWorkingHoursRow[manHoursColumn]);
 
-      if (nonWorkingHoursByEmployees[key] !== undefined)
-        nonWorkingHoursByEmployees[key] =
-          nonWorkingHoursByEmployees[key] + value;
-      else nonWorkingHoursByEmployees[key] = value;
+      if (nonWorkingHoursByEmployees[employee] !== undefined)
+        nonWorkingHoursByEmployees[employee] =
+          nonWorkingHoursByEmployees[employee] + manHours;
+      else nonWorkingHoursByEmployees[employee] = manHours;
       return nonWorkingHoursByEmployees;
     },
     {}
