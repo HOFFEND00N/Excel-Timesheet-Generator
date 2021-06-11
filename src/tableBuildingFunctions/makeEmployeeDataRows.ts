@@ -40,7 +40,7 @@ export async function makeEmployeeDataRows({
       if (header.label == "Employee") return employee.name;
       if (header.label == "Task") return tasksRows[i].join(" ");
       if (header.label == "Man-Hours")
-        return workingHoursByEmployees[tableData.employees[i].name];
+        return workingHoursByEmployees[employee.name];
       const cell: CommonValue = tableData[header.dataKey];
       return cell ?? "";
     });
