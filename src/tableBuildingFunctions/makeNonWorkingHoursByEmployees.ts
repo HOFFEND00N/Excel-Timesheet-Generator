@@ -14,10 +14,8 @@ export function makeNonWorkingHoursByEmployees({
       const employee = nonWorkingHoursRow[employeeColumn].toString();
       const manHours = Number(nonWorkingHoursRow[manHoursColumn]);
 
-      if (nonWorkingHoursByEmployees[employee] !== undefined)
-        nonWorkingHoursByEmployees[employee] =
-          nonWorkingHoursByEmployees[employee] + manHours;
-      else nonWorkingHoursByEmployees[employee] = manHours;
+      nonWorkingHoursByEmployees[employee] =
+        (nonWorkingHoursByEmployees[employee] ?? 0) + manHours;
       return nonWorkingHoursByEmployees;
     },
     {}
