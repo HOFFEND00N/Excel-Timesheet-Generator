@@ -15,7 +15,7 @@ test("make two dimensional array from parsed json, json file consist of predefin
       "Molotkova Maria",
       "task 1 task 3",
       "",
-      120,
+      112,
     ],
     [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 120],
   ];
@@ -26,10 +26,10 @@ test("make two dimensional array from parsed json, json file consist of predefin
     headers: TABLE_HEADERS,
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     fetchUserTasks: getFetchUserTasksForTests(),
-    workingHoursByEmployees: {
-      "Molotkova Maria": 120,
-      "Matrosova Marianna": 120,
+    nonWorkingHoursByEmployees: {
+      "Molotkova Maria": 8,
     },
+    workingHoursPerMonth: 120,
   });
 
   expect(actualTable).toEqual(expectedTable);
@@ -49,7 +49,8 @@ test("make table rows values, pass empty function parameter, expect empty table"
     headers: [],
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     fetchUserTasks: () => Promise.resolve([]),
-    workingHoursByEmployees: {},
+    nonWorkingHoursByEmployees: {},
+    workingHoursPerMonth: 120,
   });
 
   expect(actualTable).toEqual(expectedTable);
