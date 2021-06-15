@@ -64,9 +64,12 @@ export async function makeTable({
     getNonWorkingHoursFile
   );
 
-  const tableHeadersLabels = tableHeaders.map((item) => item.label);
-  const employeeColumn = tableHeadersLabels.indexOf("Employee");
-  const manHoursColumn = tableHeadersLabels.indexOf("Man-Hours");
+  const employeeColumn = tableHeaders.findIndex(
+    (item) => item.label === "Employee"
+  );
+  const manHoursColumn = tableHeaders.findIndex(
+    (item) => item.label === "Man-Hours"
+  );
 
   const nonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
     employeeColumn,
