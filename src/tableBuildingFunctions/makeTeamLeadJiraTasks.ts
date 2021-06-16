@@ -9,13 +9,7 @@ export function makeTeamLeadJiraTasks(
       .map((task) => task.epicKey)
   );
 
-  const teamLeadTasks = new Set<string>();
-
-  for (const jiraEpicUserTasks of jiraEpicTasks) {
-    for (const jiraEpicUserTask of jiraEpicUserTasks) {
-      teamLeadTasks.add(jiraEpicUserTask);
-    }
-  }
+  const teamLeadTasks = new Set<string>([].concat(...jiraEpicTasks));
 
   return [...teamLeadTasks].map((task) => {
     return { taskKey: task, epicKey: null };
