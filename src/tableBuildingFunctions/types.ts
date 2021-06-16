@@ -27,12 +27,22 @@ export type JiraResponse = {
 
 type JiraIssue = {
   key: string;
+  fields: Fields;
+};
+
+type Fields = {
+  customfield_10006: string;
 };
 
 export type FetchUserTasksArguments = {
   jiraUserName: string;
   login: string;
   password: string;
+};
+
+export type ParsedJiraResponse = {
+  epicKey: string;
+  taskKey: string;
 };
 
 export type HoursByEmployees = Record<string, number>;

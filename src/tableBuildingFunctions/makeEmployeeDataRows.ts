@@ -2,9 +2,12 @@ import { TableData } from "../classes/TableData";
 import {
   CommonValue,
   FetchUserTasksArguments,
+  ParsedJiraResponse,
   HoursByEmployees,
   TableHeader,
 } from "./types";
+import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
+import { TEAMLEAD_JIRA_USERNAME } from "../constants/constant";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -13,7 +16,7 @@ type MakeEmployeeDataRowsArguments = {
     jiraUserName,
     login,
     password,
-  }: FetchUserTasksArguments) => Promise<string[]>;
+  }: FetchUserTasksArguments) => Promise<ParsedJiraResponse[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   nonWorkingHoursByEmployees: HoursByEmployees;
   workingHoursPerMonth: number;
@@ -35,6 +38,12 @@ export async function makeEmployeeDataRows({
 
   console.log(`Fetching tasks from Jira for employees. Please wait...`);
   const tasksRows = await Promise.all(tasks);
+
+  const teamLeadIndex = tableData.employees.findIndex(
+    (employee) => employee.jiraUsername == TEAMLEAD_JIRA_USERNAME
+  );
+  if (teamLeadIndex != -1)
+    tasksRows[teamLeadIndex] = makeTeamLeadJiraTasks(tasksRows);
 
   for (let i = 0; i < tableData.employees.length; i++) {
     const employeeDataRow = headers.map((header) => {

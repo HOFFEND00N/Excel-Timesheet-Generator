@@ -12,7 +12,11 @@ import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
-import { CommonCell, FetchUserTasksArguments } from "./types";
+import {
+  CommonCell,
+  FetchUserTasksArguments,
+  ParsedJiraResponse,
+} from "./types";
 import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
 import { makeNonWorkingHoursByEmployees } from "./makeNonWorkingHoursByEmployees";
 
@@ -23,7 +27,7 @@ type MakeTableArguments = {
     jiraUserName,
     login,
     password,
-  }: FetchUserTasksArguments) => Promise<string[]>;
+  }: FetchUserTasksArguments) => Promise<ParsedJiraResponse[]>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   getNonWorkingHoursFile: () => Promise<string[][]>;
   getWorkingHoursForMonth: () => Promise<number>;

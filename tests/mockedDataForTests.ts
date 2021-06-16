@@ -7,6 +7,7 @@ import {
 import {
   CommonCell,
   FetchUserTasksArguments,
+  ParsedJiraResponse,
 } from "../src/tableBuildingFunctions/types";
 import {
   HorizontalAlignTextWays,
@@ -39,11 +40,14 @@ export function getFetchUserTasksForTests(): ({
   jiraUserName,
   login,
   password,
-}: FetchUserTasksArguments) => Promise<string[]> {
+}: FetchUserTasksArguments) => Promise<ParsedJiraResponse[]> {
   return (user) => {
     const users = {
-      MolotkovaM: ["task 1", "task 3"],
-      MatrosovaM: ["task 2"],
+      MolotkovaM: [
+        { taskKey: "task 1", epicKey: null },
+        { taskKey: "task 3", epicKey: null },
+      ],
+      MatrosovaM: [{ taskKey: "task 2", epicKey: null }],
     };
     return users[user.jiraUserName];
   };
