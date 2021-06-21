@@ -17,8 +17,14 @@ export async function fetchJiraUserTasks({
     "base64"
   );
 
+  const currentDate = new Date();
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  const taskUpdated = `${currentDate.getFullYear()}/${
+    currentDate.getMonth() + 1
+  }/1`;
+
   const fetchResult = await fetch(
-    `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status+changed+BY+${jiraUserName}+after+startOfMonth()+OR+created+%3E%3D+startOfMonth()+AND+creator+%3D+${jiraUserName}&fields=key,+customfield_10006`,
+    `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in ("In Progress", "In Code Review", "IN QA", "QA Verified", Investigation, "Code Completed") AND assignee in (${jiraUserName}) and updated >= "${taskUpdated}" or status CHANGED BY ${jiraUserName} after startOfMonth()`,
     {
       method: "get",
       headers: {
