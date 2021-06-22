@@ -49,7 +49,8 @@ export async function makeEmployeeDataRows({
     const employeeDataRow = headers.map((header) => {
       const employee = tableData.employees[i];
       if (header.label == "Employee") return employee.name;
-      if (header.label == "Task") return tasksRows[i].join(" ");
+      if (header.label == "Task")
+        return tasksRows[i].map((cell) => cell.taskKey).join(" ");
       if (header.label == "Man-Hours")
         return (
           workingHoursPerMonth -
