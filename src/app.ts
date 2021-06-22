@@ -23,9 +23,10 @@ import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHour
   const tableData: TableData = JSON.parse(
     fs.readFileSync("tableData.json", "utf-8")
   );
+  const currentDate = new Date();
   const table = await makeTable({
     tableData,
-    currentDate: new Date(),
+    currentDate,
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
     getNonWorkingHoursFile,
@@ -60,7 +61,10 @@ import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHour
     }
   }
   workSheet.addImage(new WorkSheetImageAdapter(image));
-
-  workBook.write("Report.xlsx");
-  console.log("Successfully generated Report.xlsx");
+  const months = currentDate.getMonth() + 1;
+  const reportName = `${currentDate.getFullYear()}-${
+    months < 10 ? "0" + months : months
+  }-651.xls`;
+  workBook.write(reportName);
+  console.log(`Successfully generated ${reportName}`);
 })();
