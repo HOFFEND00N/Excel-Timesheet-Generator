@@ -6,6 +6,7 @@ import {
 } from "../src/constants/constant";
 import {
   CommonCell,
+  EmployeePosition,
   FetchUserTasksArguments,
   ParsedJiraResponse,
 } from "../src/tableBuildingFunctions/types";
@@ -27,10 +28,12 @@ export function getTableDataForTests(): TableData {
       {
         name: "Molotkova Maria",
         jiraUsername: "MolotkovaM",
+        position: EmployeePosition.SoftwareEngineer,
       },
       {
         name: "Matrosova Marianna",
         jiraUsername: "MatrosovaM",
+        position: EmployeePosition.SoftwareEngineer,
       },
     ],
   };

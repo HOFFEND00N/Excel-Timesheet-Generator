@@ -6,39 +6,48 @@
   "employees": [
     {
       "name": "Kachalov Alexey",
-      "jiraUsername": "alexeyk"
+      "jiraUsername": "alexeyk",
+      "position": "TeamLead"
     },
     {
       "name": "Kolokolenkina Natalia",
-      "jiraUsername": "NataliaK"
+      "jiraUsername": "NataliaK",
+      "position": "SoftwareEngineer"
     },
     {
       "name": "Kozlova Anna",
-      "jiraUsername": "AnnaKo"
+      "jiraUsername": "AnnaKo",
+      "position": "SoftwareEngineer"
     },
     {
       "name": "Pisarenko Dmitry",
-      "jiraUsername": "DmitryP"
+      "jiraUsername": "DmitryP",
+      "position": "SoftwareEngineer"
     },
     {
       "name": "Popov Sergey",
-      "jiraUsername": "SergeyPo"
+      "jiraUsername": "SergeyPo",
+      "position": "SoftwareEngineer"
     },
     {
       "name": "Protasov Ilya",
-      "jiraUsername": "Ilia.Protasov"
+      "jiraUsername": "Ilia.Protasov",
+      "position": "SoftwareEngineer"
     },
     {
       "name": "Sumatokhin Alexey",
-      "jiraUsername": "AlexeySu"
+      "jiraUsername": "AlexeySu",
+      "position": "SoftwareEngineer"
     },
     {
       "name": "Volyakov Dmitry",
-      "jiraUsername": "DmitryV"
+      "jiraUsername": "DmitryV",
+      "position": "SoftwareEngineer"
     },
     {
       "name": "Volyakova Kristina",
-      "jiraUsername": "KristinaZ"
+      "jiraUsername": "KristinaZ",
+      "position": "SoftwareEngineer"
     }
   ]
 }

@@ -1,4 +1,7 @@
-import { CommonValue } from "../src/tableBuildingFunctions/types";
+import {
+  CommonValue,
+  EmployeePosition,
+} from "../src/tableBuildingFunctions/types";
 import { getNonWorkingHoursRows } from "../src/tableBuildingFunctions/getNonWorkingHoursRows";
 import { TableData } from "../src/classes/TableData";
 
@@ -31,6 +34,7 @@ test("pass one non working hours row, expect to return zero non working rows, be
       {
         name: "Molotkova Maria",
         jiraUsername: "MolotkovaM",
+        position: EmployeePosition.SoftwareEngineer,
       },
     ],
   };
@@ -68,6 +72,7 @@ test("pass one non working hours row, expect to return one non working rows, bec
       {
         name: "Molotkova Maria",
         jiraUsername: "MolotkovaM",
+        position: EmployeePosition.SoftwareEngineer,
       },
     ],
   };
@@ -115,10 +120,12 @@ test("pass two non working hours row, expect to return one non working rows, bec
       {
         name: "Molotkova Maria",
         jiraUsername: "MolotkovaM",
+        position: EmployeePosition.SoftwareEngineer,
       },
       {
         name: "Karaseva Svetlana",
         jiraUsername: "KarasevaS",
+        position: EmployeePosition.SoftwareEngineer,
       },
     ],
   };

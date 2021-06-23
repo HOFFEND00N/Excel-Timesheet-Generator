@@ -4,15 +4,12 @@ import {
   JiraResponse,
   ParsedJiraResponse,
 } from "./types";
-import { TEAMLEAD_JIRA_USERNAME } from "../constants/constant";
 
 export async function fetchJiraUserTasks({
   jiraUserName,
   login,
   password,
 }: FetchUserTasksArguments): Promise<ParsedJiraResponse[]> {
-  if (TEAMLEAD_JIRA_USERNAME == jiraUserName) return Promise.resolve([]);
-
   const authorizationKey = Buffer.from(`${login}:${password}`).toString(
     "base64"
   );
