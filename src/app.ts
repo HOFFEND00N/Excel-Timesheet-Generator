@@ -61,10 +61,12 @@ import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHour
     }
   }
   workSheet.addImage(new WorkSheetImageAdapter(image));
-  const months = currentDate.getMonth() + 1;
+  const months = (currentDate.getMonth() + 1).toString();
+
   const reportName = `${currentDate.getFullYear()}-${
-    months < 10 ? "0" + months : months
-  }-651.xls`;
+    months.length < 2 ? months.toString().padStart(2, "0") : months
+  }-${tableData.unit}.xls`;
+
   workBook.write(reportName);
   console.log(`Successfully generated ${reportName}`);
 })();
