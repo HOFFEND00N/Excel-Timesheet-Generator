@@ -63,10 +63,7 @@ import { generateReportFileName } from "./generateReportFileName";
   }
   workSheet.addImage(new WorkSheetImageAdapter(image));
 
-  const reportName = generateReportFileName(
-    currentDate,
-    tableData.unit.toString()
-  );
+  const reportName = generateReportFileName(currentDate, tableData.unit);
 
   workBook.write(reportName);
   console.log(`Successfully generated ${reportName}`);
