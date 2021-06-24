@@ -4,6 +4,7 @@ import {
   JiraResponse,
   ParsedJiraResponse,
 } from "./types";
+import { EPIC_KEY } from "../constants/constant";
 
 export async function fetchJiraUserTasks({
   jiraUserName,
@@ -21,7 +22,7 @@ export async function fetchJiraUserTasks({
   }/1`;
 
   const fetchResult = await fetch(
-    `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in ("In Progress", "In Code Review", "IN QA", "QA Verified", Investigation, "Code Completed") AND assignee in (${jiraUserName}) and updated >= "${taskUpdated}" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, customfield_10006,`,
+    `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in ("In Progress", "In Code Review", "IN QA", "QA Verified", Investigation, "Code Completed") AND assignee in (${jiraUserName}) and updated >= "${taskUpdated}" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY},`,
     {
       method: "get",
       headers: {
@@ -31,7 +32,7 @@ export async function fetchJiraUserTasks({
   );
   const jiraResponse: JiraResponse = await fetchResult.json();
 
-  return jiraResponse.issues.map((elem) => {
-    return { taskKey: elem.key, epicKey: elem.fields.customfield_10006 };
+  return jiraResponse.issues.map((issue) => {
+    return { taskKey: issue.key, epicKey: issue.fields[EPIC_KEY] };
   });
 }
