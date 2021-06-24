@@ -8,7 +8,6 @@ import {
   TableHeader,
 } from "./types";
 import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
-import { TEAMLEAD_JIRA_USERNAME } from "../constants/constant";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -33,25 +32,32 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
   const employeeDataRows: CommonValue[][] = [];
+  const employees = [];
   const tasks = tableData.employees
     .filter((employee) => employee.position != EmployeePosition.TeamLead)
-    .map((employee) =>
-      fetchUserTasks({ jiraUserName: employee.jiraUsername, login, password })
-    );
+    .map((employee) => {
+      employees.push(employee);
+      return fetchUserTasks({
+        jiraUserName: employee.jiraUsername,
+        login,
+        password,
+      });
+    });
 
   console.log(`Fetching tasks from Jira for employees. Please wait...`);
   const tasksRows = await Promise.all(tasks);
+  const teamLead = tableData.employees.find(
+    (employee) => employee.position == EmployeePosition.TeamLead
+  );
 
-  if (
-    tableData.employees.find(
-      (employee) => employee.jiraUsername == TEAMLEAD_JIRA_USERNAME
-    )
-  )
+  if (teamLead != undefined) {
     tasksRows.push(makeTeamLeadJiraTasks(tasksRows));
+    employees.push(teamLead);
+  }
 
-  for (let i = 0; i < tableData.employees.length; i++) {
+  for (let i = 0; i < employees.length; i++) {
     const employeeDataRow = headers.map((header) => {
-      const employee = tableData.employees[i];
+      const employee = employees[i];
       if (header.label == "Employee") return employee.name;
       if (header.label == "Task")
         return tasksRows[i].map((cell) => cell.taskKey).join(" ");

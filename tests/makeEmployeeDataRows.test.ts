@@ -7,17 +7,27 @@ import { TABLE_HEADERS } from "../src/constants/constant";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", async () => {
   const expectedTable = [
+    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 120],
+    [
+      651,
+      "NO",
+      "Confirmit",
+      "Studio",
+      "Karaseva Svetlana",
+      "task 1 task 3",
+      "",
+      120,
+    ],
     [
       651,
       "NO",
       "Confirmit",
       "Studio",
       "Molotkova Maria",
-      "task 1 task 3",
+      "epic task 1",
       "",
       112,
     ],
-    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 120],
   ];
   const tableData = getTableDataForTests();
 

@@ -48,6 +48,6 @@ export type ParsedJiraResponse = {
 export type HoursByEmployees = Record<string, number>;
 
 export enum EmployeePosition {
-  SoftwareEngineer,
-  TeamLead,
+  SoftwareEngineer = "Software engineer",
+  TeamLead = "TeamLead",
 }

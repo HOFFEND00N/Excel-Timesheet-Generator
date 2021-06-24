@@ -82,17 +82,27 @@ test("make full table", async () => {
     });
   }
   const expectedTableRows: CommonValue[][] = [
+    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 112],
+    [
+      651,
+      "NO",
+      "Confirmit",
+      "Studio",
+      "Karaseva Svetlana",
+      "task 1 task 3",
+      "",
+      112,
+    ],
     [
       651,
       "NO",
       "Confirmit",
       "Studio",
       "Molotkova Maria",
-      "task 1 task 3",
+      "epic task 1",
       "",
       120,
     ],
-    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 112],
     [
       651,
       "RU",
@@ -100,6 +110,16 @@ test("make full table", async () => {
       "DaysOff",
       "Matrosova Marianna",
       "25.01.2021",
+      "",
+      8,
+    ],
+    [
+      651,
+      "RU",
+      "Confirmit",
+      "DaysOff",
+      "Karaseva Svetlana",
+      "20.01.2021",
       "",
       8,
     ],

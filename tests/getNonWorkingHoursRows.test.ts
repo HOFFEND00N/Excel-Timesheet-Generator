@@ -34,7 +34,7 @@ test("pass one non working hours row, expect to return zero non working rows, be
       {
         name: "Molotkova Maria",
         jiraUsername: "MolotkovaM",
-        position: EmployeePosition.SoftwareEngineer,
+        position: EmployeePosition.TeamLead,
       },
     ],
   };
@@ -72,7 +72,7 @@ test("pass one non working hours row, expect to return one non working rows, bec
       {
         name: "Molotkova Maria",
         jiraUsername: "MolotkovaM",
-        position: EmployeePosition.SoftwareEngineer,
+        position: EmployeePosition.TeamLead,
       },
     ],
   };
@@ -120,7 +120,7 @@ test("pass two non working hours row, expect to return one non working rows, bec
       {
         name: "Molotkova Maria",
         jiraUsername: "MolotkovaM",
-        position: EmployeePosition.SoftwareEngineer,
+        position: EmployeePosition.TeamLead,
       },
       {
         name: "Karaseva Svetlana",

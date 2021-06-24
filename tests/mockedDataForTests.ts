@@ -28,11 +28,16 @@ export function getTableDataForTests(): TableData {
       {
         name: "Molotkova Maria",
         jiraUsername: "MolotkovaM",
-        position: EmployeePosition.SoftwareEngineer,
+        position: EmployeePosition.TeamLead,
       },
       {
         name: "Matrosova Marianna",
         jiraUsername: "MatrosovaM",
+        position: EmployeePosition.SoftwareEngineer,
+      },
+      {
+        name: "Karaseva Svetlana",
+        jiraUsername: "KarasevaS",
         position: EmployeePosition.SoftwareEngineer,
       },
     ],
@@ -46,11 +51,11 @@ export function getFetchUserTasksForTests(): ({
 }: FetchUserTasksArguments) => Promise<ParsedJiraResponse[]> {
   return (user) => {
     const users = {
-      MolotkovaM: [
+      KarasevaS: [
         { taskKey: "task 1", epicKey: null },
         { taskKey: "task 3", epicKey: null },
       ],
-      MatrosovaM: [{ taskKey: "task 2", epicKey: null }],
+      MatrosovaM: [{ taskKey: "task 2", epicKey: "epic task 1" }],
     };
     return users[user.jiraUserName];
   };
