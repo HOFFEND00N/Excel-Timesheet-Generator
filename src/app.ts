@@ -10,6 +10,7 @@ import { getCredentials } from "./tableBuildingFunctions/getCredentials";
 import { WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHoursFile";
 import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHoursForMonth";
+import { generateReportFileName } from "./generateReportFileName";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -61,11 +62,11 @@ import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHour
     }
   }
   workSheet.addImage(new WorkSheetImageAdapter(image));
-  const month = (currentDate.getMonth() + 1).toString();
 
-  const reportName = `${currentDate.getFullYear()}-${month.padStart(2, "0")}-${
-    tableData.unit
-  }.xls`;
+  const reportName = generateReportFileName(
+    currentDate,
+    tableData.unit.toString()
+  );
 
   workBook.write(reportName);
   console.log(`Successfully generated ${reportName}`);
