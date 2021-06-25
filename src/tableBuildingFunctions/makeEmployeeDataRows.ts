@@ -8,6 +8,7 @@ import {
   TableHeader,
 } from "./types";
 import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
+import { Employee } from "../classes/Employee";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -32,7 +33,7 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
   const employeeDataRows: CommonValue[][] = [];
-  const employees = [];
+  const employees: Employee[] = [];
   const tasks = tableData.employees
     .filter((employee) => employee.position != EmployeePosition.TeamLead)
     .map((employee) => {

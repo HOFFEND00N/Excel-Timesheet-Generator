@@ -52,8 +52,8 @@ export function getFetchUserTasksForTests(): ({
   return (user) => {
     const users = {
       KarasevaS: [
-        { taskKey: "task 1", epicKey: null },
-        { taskKey: "task 3", epicKey: null },
+        { taskKey: "task 1", epicKey: "" },
+        { taskKey: "task 3", epicKey: "" },
       ],
       MatrosovaM: [{ taskKey: "task 2", epicKey: "epic task 1" }],
     };
