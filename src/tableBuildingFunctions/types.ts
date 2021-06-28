@@ -45,6 +45,11 @@ export type ParsedJiraResponse = {
   taskKey: string;
 };
 
+export type UserTasks = {
+  tasks: ParsedJiraResponse[];
+  userName: string;
+};
+
 export type HoursByEmployees = Record<string, number>;
 
 export enum EmployeePosition {

@@ -52,7 +52,7 @@ test("table data is empty, expect to return table headers + date", async () => {
       project: "",
     },
     currentDate: currentDate,
-    fetchUserTasks: () => Promise.resolve([]),
+    fetchUserTasks: () => Promise.resolve({ tasks: [], userName: "" }),
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     getNonWorkingHoursFile: () => Promise.resolve([]),
     getWorkingHoursForMonth: () => Promise.resolve(120),

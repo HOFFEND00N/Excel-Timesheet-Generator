@@ -4,11 +4,12 @@ import {
   EmployeePosition,
   FetchUserTasksArguments,
   HoursByEmployees,
-  ParsedJiraResponse,
   TableHeader,
+  UserTasks,
 } from "./types";
 import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
-import { Employee } from "../classes/Employee";
+import { makeUserTasksByEmployeeUsername } from "./makeUserTasksByEmployeeUsername";
+import { ensureThatValueIsNotNullAndIsNotUndefined } from "../utilities/ensureThatValueIsNotNullAndIsNotUndefined";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -17,7 +18,7 @@ type MakeEmployeeDataRowsArguments = {
     jiraUserName,
     login,
     password,
-  }: FetchUserTasksArguments) => Promise<ParsedJiraResponse[]>;
+  }: FetchUserTasksArguments) => Promise<UserTasks>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   nonWorkingHoursByEmployees: HoursByEmployees;
   workingHoursPerMonth: number;
@@ -33,17 +34,15 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
   const employeeDataRows: CommonValue[][] = [];
-  const employees: Employee[] = [];
   const tasks = tableData.employees
     .filter((employee) => employee.position != EmployeePosition.TeamLead)
-    .map((employee) => {
-      employees.push(employee);
-      return fetchUserTasks({
+    .map((employee) =>
+      fetchUserTasks({
         jiraUserName: employee.jiraUsername,
         login,
         password,
-      });
-    });
+      })
+    );
 
   console.log(`Fetching tasks from Jira for employees. Please wait...`);
   const tasksRows = await Promise.all(tasks);
@@ -52,16 +51,23 @@ export async function makeEmployeeDataRows({
   );
 
   if (teamLead != undefined) {
-    tasksRows.push(makeTeamLeadJiraTasks(tasksRows));
-    employees.push(teamLead);
+    tasksRows.push(makeTeamLeadJiraTasks(tasksRows, teamLead.jiraUsername));
   }
 
-  for (let i = 0; i < employees.length; i++) {
+  const userTasksByEmployeeUsername = makeUserTasksByEmployeeUsername(
+    tasksRows
+  );
+
+  for (let i = 0; i < tasksRows.length; i++) {
     const employeeDataRow = headers.map((header) => {
-      const employee = employees[i];
+      const employee = ensureThatValueIsNotNullAndIsNotUndefined(
+        tableData.employees.find(
+          (employee) => employee.jiraUsername == tasksRows[i].userName
+        )
+      );
       if (header.label == "Employee") return employee.name;
       if (header.label == "Task")
-        return tasksRows[i].map((cell) => cell.taskKey).join(" ");
+        return userTasksByEmployeeUsername[employee.jiraUsername];
       if (header.label == "Man-Hours")
         return (
           workingHoursPerMonth -

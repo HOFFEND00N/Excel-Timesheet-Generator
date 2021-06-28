@@ -1,15 +1,21 @@
-import { ParsedJiraResponse } from "./types";
+import { UserTasks } from "./types";
 
 export function makeTeamLeadJiraTasks(
-  teamTasks: ParsedJiraResponse[][]
-): ParsedJiraResponse[] {
+  teamTasks: UserTasks[],
+  jiraUserName: string
+): UserTasks {
   const teamLeadTasksWithDuplications = teamTasks.map((userTasks) =>
-    userTasks.filter((task) => task.epicKey != "").map((task) => task.epicKey)
+    userTasks.tasks
+      .filter((task) => task.epicKey != "")
+      .map((task) => task.epicKey)
   );
 
   const teamLeadTasks = new Set<string>(teamLeadTasksWithDuplications.flat());
 
-  return [...teamLeadTasks].map((task) => {
-    return { taskKey: task, epicKey: "" };
-  });
+  return {
+    userName: jiraUserName,
+    tasks: [...teamLeadTasks].map((task) => {
+      return { taskKey: task, epicKey: "" };
+    }),
+  };
 }

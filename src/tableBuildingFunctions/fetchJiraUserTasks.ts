@@ -1,16 +1,12 @@
 import fetch from "node-fetch";
-import {
-  FetchUserTasksArguments,
-  JiraResponse,
-  ParsedJiraResponse,
-} from "./types";
+import { FetchUserTasksArguments, JiraResponse, UserTasks } from "./types";
 import { EPIC_KEY } from "../constants/constant";
 
 export async function fetchJiraUserTasks({
   jiraUserName,
   login,
   password,
-}: FetchUserTasksArguments): Promise<ParsedJiraResponse[]> {
+}: FetchUserTasksArguments): Promise<UserTasks> {
   const authorizationKey = Buffer.from(`${login}:${password}`).toString(
     "base64"
   );
@@ -32,7 +28,9 @@ export async function fetchJiraUserTasks({
   );
   const jiraResponse: JiraResponse = await fetchResult.json();
 
-  return jiraResponse.issues.map((issue) => {
+  const userTasks = jiraResponse.issues.map((issue) => {
     return { taskKey: issue.key, epicKey: issue.fields[EPIC_KEY] };
   });
+
+  return { userName: jiraUserName, tasks: userTasks };
 }

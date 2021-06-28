@@ -58,7 +58,7 @@ test("make table rows values, pass empty function parameter, expect empty table"
     },
     headers: [],
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
-    fetchUserTasks: () => Promise.resolve([]),
+    fetchUserTasks: () => Promise.resolve({ tasks: [], userName: "" }),
     nonWorkingHoursByEmployees: {},
     workingHoursPerMonth: 120,
   });
