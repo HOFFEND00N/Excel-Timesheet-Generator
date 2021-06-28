@@ -44,24 +44,3 @@ test("make two dimensional array from parsed json, json file consist of predefin
 
   expect(actualTable).toEqual(expectedTable);
 });
-
-test("make table rows values, pass empty function parameter, expect empty table", async () => {
-  const expectedTable = [];
-
-  const actualTable = await makeEmployeeDataRows({
-    tableData: {
-      employees: [],
-      companyCode: "",
-      companyName: "",
-      unit: 0,
-      project: "",
-    },
-    headers: [],
-    getCredentials: () => Promise.resolve({ login: "", password: "" }),
-    fetchUserTasks: () => Promise.resolve({ tasks: [], userName: "" }),
-    nonWorkingHoursByEmployees: {},
-    workingHoursPerMonth: 120,
-  });
-
-  expect(actualTable).toEqual(expectedTable);
-});

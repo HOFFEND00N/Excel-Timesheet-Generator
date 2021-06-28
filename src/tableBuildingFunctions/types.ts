@@ -51,8 +51,3 @@ export type UserTasks = {
 };
 
 export type HoursByEmployees = Record<string, number>;
-
-export enum EmployeePosition {
-  SoftwareEngineer = "Software engineer",
-  TeamLead = "TeamLead",
-}

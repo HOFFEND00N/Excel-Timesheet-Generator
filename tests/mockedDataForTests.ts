@@ -6,7 +6,6 @@ import {
 } from "../src/constants/constant";
 import {
   CommonCell,
-  EmployeePosition,
   FetchUserTasksArguments,
   UserTasks,
 } from "../src/tableBuildingFunctions/types";
@@ -26,21 +25,18 @@ export function getTableDataForTests(): TableData {
     project: "Studio",
     employees: [
       {
-        name: "Molotkova Maria",
-        jiraUsername: "MolotkovaM",
-        position: EmployeePosition.TeamLead,
-      },
-      {
         name: "Matrosova Marianna",
         jiraUsername: "MatrosovaM",
-        position: EmployeePosition.SoftwareEngineer,
       },
       {
         name: "Karaseva Svetlana",
         jiraUsername: "KarasevaS",
-        position: EmployeePosition.SoftwareEngineer,
       },
     ],
+    teamLead: {
+      name: "Molotkova Maria",
+      jiraUsername: "MolotkovaM",
+    },
   };
 }
 

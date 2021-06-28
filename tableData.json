@@ -5,49 +5,40 @@
   "project": "Studio",
   "employees": [
     {
-      "name": "Kachalov Alexey",
-      "jiraUsername": "alexeyk",
-      "position": "TeamLead"
-    },
-    {
       "name": "Kolokolenkina Natalia",
-      "jiraUsername": "NataliaK",
-      "position": "Software engineer"
+      "jiraUsername": "NataliaK"
     },
     {
       "name": "Kozlova Anna",
-      "jiraUsername": "AnnaKo",
-      "position": "Software engineer"
+      "jiraUsername": "AnnaKo"
     },
     {
       "name": "Pisarenko Dmitry",
-      "jiraUsername": "DmitryP",
-      "position": "Software engineer"
+      "jiraUsername": "DmitryP"
     },
     {
       "name": "Popov Sergey",
-      "jiraUsername": "SergeyPo",
-      "position": "Software engineer"
+      "jiraUsername": "SergeyPo"
     },
     {
       "name": "Protasov Ilya",
-      "jiraUsername": "Ilia.Protasov",
-      "position": "Software engineer"
+      "jiraUsername": "Ilia.Protasov"
     },
     {
       "name": "Sumatokhin Alexey",
-      "jiraUsername": "AlexeySu",
-      "position": "Software engineer"
+      "jiraUsername": "AlexeySu"
     },
     {
       "name": "Volyakov Dmitry",
-      "jiraUsername": "DmitryV",
-      "position": "Software engineer"
+      "jiraUsername": "DmitryV"
     },
     {
       "name": "Volyakova Kristina",
-      "jiraUsername": "KristinaZ",
-      "position": "Software engineer"
+      "jiraUsername": "KristinaZ"
     }
-  ]
+  ],
+  "teamLead": {
+    "name": "Kachalov Alexey",
+    "jiraUsername": "alexeyk"
+  }
 }

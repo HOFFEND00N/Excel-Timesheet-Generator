@@ -1,7 +1,6 @@
 import { TableData } from "../classes/TableData";
 import {
   CommonValue,
-  EmployeePosition,
   FetchUserTasksArguments,
   HoursByEmployees,
   TableHeader,
@@ -34,25 +33,19 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
   const employeeDataRows: CommonValue[][] = [];
-  const tasks = tableData.employees
-    .filter((employee) => employee.position != EmployeePosition.TeamLead)
-    .map((employee) =>
-      fetchUserTasks({
-        jiraUserName: employee.jiraUsername,
-        login,
-        password,
-      })
-    );
+  const tasks = tableData.employees.map((employee) =>
+    fetchUserTasks({
+      jiraUserName: employee.jiraUsername,
+      login,
+      password,
+    })
+  );
 
   console.log(`Fetching tasks from Jira for employees. Please wait...`);
   const tasksRows = await Promise.all(tasks);
-  const teamLead = tableData.employees.find(
-    (employee) => employee.position == EmployeePosition.TeamLead
+  tasksRows.push(
+    makeTeamLeadJiraTasks(tasksRows, tableData.teamLead.jiraUsername)
   );
-
-  if (teamLead != undefined) {
-    tasksRows.push(makeTeamLeadJiraTasks(tasksRows, teamLead.jiraUsername));
-  }
 
   const userTasksByEmployeeUsername = makeUserTasksByEmployeeUsername(
     tasksRows
@@ -63,7 +56,7 @@ export async function makeEmployeeDataRows({
       const employee = ensureThatValueIsNotNullAndIsNotUndefined(
         tableData.employees.find(
           (employee) => employee.jiraUsername == tasksRows[i].userName
-        )
+        ) ?? tableData.teamLead
       );
       if (header.label == "Employee") return employee.name;
       if (header.label == "Task")

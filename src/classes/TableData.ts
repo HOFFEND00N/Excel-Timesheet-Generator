@@ -6,4 +6,5 @@ export interface TableData {
   companyName: string;
   project: string;
   employees: Employee[];
+  teamLead: Employee;
 }
