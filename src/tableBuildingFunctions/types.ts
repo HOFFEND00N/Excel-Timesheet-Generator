@@ -41,7 +41,7 @@ export type FetchUserTasksArguments = {
 };
 
 export type ParsedJiraResponse = {
-  epicKey: string;
+  epicKey: string | undefined;
   taskKey: string;
 };
 

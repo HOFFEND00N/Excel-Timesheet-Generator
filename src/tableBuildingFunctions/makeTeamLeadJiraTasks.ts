@@ -10,12 +10,12 @@ export function makeTeamLeadJiraTasks(
       .map((task) => task.epicKey)
   );
 
-  const teamLeadTasks = new Set<string>(teamLeadTasksWithDuplications.flat());
+  const teamLeadTasks = new Set(teamLeadTasksWithDuplications.flat());
 
   return {
     userName: jiraUserName,
-    tasks: [...teamLeadTasks].map((task) => {
-      return { taskKey: task, epicKey: "" };
+    tasks: [...teamLeadTasks].map((task: string) => {
+      return { taskKey: task, epicKey: undefined };
     }),
   };
 }

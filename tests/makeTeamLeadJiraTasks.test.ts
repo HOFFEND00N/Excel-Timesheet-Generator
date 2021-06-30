@@ -30,7 +30,7 @@ test("pass tasks for one employee, these tasks are separate from any epics, expe
 
 test("pass tasks for one employee, one task have connection to epic ,expect to return one teamLead task", () => {
   const expectedTeamLeadTasks: UserTasks = {
-    tasks: [{ taskKey: "epic task 1", epicKey: "" }],
+    tasks: [{ taskKey: "epic task 1", epicKey: undefined }],
     userName: "AlexU",
   };
 
@@ -53,8 +53,8 @@ test("pass tasks for one employee, one task have connection to epic ,expect to r
 test("pass tasks for one employee, two tasks have connections to different epics ,expect to return two teamLead tasks", () => {
   const expectedTeamLeadTasks: UserTasks = {
     tasks: [
-      { taskKey: "epic task 1", epicKey: "" },
-      { taskKey: "epic task 2", epicKey: "" },
+      { taskKey: "epic task 1", epicKey: undefined },
+      { taskKey: "epic task 2", epicKey: undefined },
     ],
     userName: "AlexU",
   };
@@ -78,8 +78,8 @@ test("pass tasks for one employee, two tasks have connections to different epics
 test("pass tasks for two employees, two tasks from first employee have connections to different epics, the second employee task don't have connection to any epic  ,expect to return two teamLead tasks", () => {
   const expectedTeamLeadTasks: UserTasks = {
     tasks: [
-      { taskKey: "epic task 1", epicKey: "" },
-      { taskKey: "epic task 2", epicKey: "" },
+      { taskKey: "epic task 1", epicKey: undefined },
+      { taskKey: "epic task 2", epicKey: undefined },
     ],
     userName: "AlexU",
   };
@@ -107,8 +107,8 @@ test("pass tasks for two employees, two tasks from first employee have connectio
 test("pass tasks for two employees, two tasks from first employee have connections to different epics, the second employee first task have connection to the same epic as fist employee, his second task have no connection to epics. expect to return two teamLead tasks", () => {
   const expectedTeamLeadTasks: UserTasks = {
     tasks: [
-      { taskKey: "epic task 1", epicKey: "" },
-      { taskKey: "epic task 2", epicKey: "" },
+      { taskKey: "epic task 1", epicKey: undefined },
+      { taskKey: "epic task 2", epicKey: undefined },
     ],
     userName: "AlexU",
   };
@@ -142,9 +142,9 @@ test("pass tasks for two employees, two tasks from first employee have connectio
 test("pass tasks for two employees, two tasks from first employee have connections to different epics, the second employee first task have connection to the same epic as fist employee, his second task have no connection to epics, third task have connection to new epic. expect to return three teamLead tasks", () => {
   const expectedTeamLeadTasks: UserTasks = {
     tasks: [
-      { taskKey: "epic task 1", epicKey: "" },
-      { taskKey: "epic task 2", epicKey: "" },
-      { taskKey: "epic task 3", epicKey: "" },
+      { taskKey: "epic task 1", epicKey: undefined },
+      { taskKey: "epic task 2", epicKey: undefined },
+      { taskKey: "epic task 3", epicKey: undefined },
     ],
     userName: "AlexU",
   };
