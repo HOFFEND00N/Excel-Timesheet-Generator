@@ -29,7 +29,7 @@ export async function fetchJiraUserTasks({
   const jiraResponse: JiraResponse = await fetchResult.json();
 
   const userTasks = jiraResponse.issues.map((issue) => {
-    return { taskKey: issue.key, epicKey: issue.fields[EPIC_KEY] };
+    return { taskKey: issue.key, epicKey: issue.fields[EPIC_KEY] ?? "" };
   });
 
   return { userName: jiraUserName, tasks: userTasks };

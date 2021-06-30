@@ -6,7 +6,7 @@ export function makeTeamLeadJiraTasks(
 ): UserTasks {
   const teamLeadTasksWithDuplications = teamTasks.map((userTasks) =>
     userTasks.tasks
-      .filter((task) => task.epicKey != "" && task.epicKey != null)
+      .filter((task) => task.epicKey != "")
       .map((task) => task.epicKey)
   );
 
