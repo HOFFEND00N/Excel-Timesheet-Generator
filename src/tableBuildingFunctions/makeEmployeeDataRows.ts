@@ -19,7 +19,7 @@ type MakeEmployeeDataRowsArguments = {
     password,
   }: FetchUserTasksArguments) => Promise<UserTasks>;
   getCredentials: () => Promise<{ login: string; password: string }>;
-  nonWorkingHoursByEmployees: HoursByEmployees;
+  nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursPerMonth: number;
 };
 
@@ -28,7 +28,7 @@ export async function makeEmployeeDataRows({
   headers,
   fetchUserTasks,
   getCredentials,
-  nonWorkingHoursByEmployees,
+  nonWorkingHoursByEmployeesUsername,
   workingHoursPerMonth,
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
@@ -57,7 +57,7 @@ export async function makeEmployeeDataRows({
         headers,
         userTasksByEmployeeUsername,
         workingHoursPerMonth,
-        nonWorkingHoursByEmployees,
+        nonWorkingHoursByEmployeesUsername,
         tableData,
         employee,
       })
@@ -69,7 +69,7 @@ export async function makeEmployeeDataRows({
       headers,
       userTasksByEmployeeUsername,
       workingHoursPerMonth,
-      nonWorkingHoursByEmployees,
+      nonWorkingHoursByEmployeesUsername,
       tableData,
       employee: tableData.teamLead,
     })

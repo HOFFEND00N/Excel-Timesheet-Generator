@@ -5,7 +5,7 @@ import { Employee } from "../classes/Employee";
 type makeEmployeeDataRowArguments = {
   tableData: TableData;
   headers: TableHeader[];
-  nonWorkingHoursByEmployees: HoursByEmployees;
+  nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursPerMonth: number;
   employee: Employee;
   userTasksByEmployeeUsername: Record<string, string>;
@@ -15,7 +15,7 @@ export function makeEmployeeDataRow({
   headers,
   userTasksByEmployeeUsername,
   workingHoursPerMonth,
-  nonWorkingHoursByEmployees,
+  nonWorkingHoursByEmployeesUsername,
   tableData,
   employee,
 }: makeEmployeeDataRowArguments) {
@@ -25,7 +25,8 @@ export function makeEmployeeDataRow({
       return userTasksByEmployeeUsername[employee.jiraUsername];
     if (header.label == "Man-Hours")
       return (
-        workingHoursPerMonth - (nonWorkingHoursByEmployees[employee.name] ?? 0)
+        workingHoursPerMonth -
+        (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0)
       );
     const cell: CommonValue = tableData[header.dataKey];
     return cell ?? "";

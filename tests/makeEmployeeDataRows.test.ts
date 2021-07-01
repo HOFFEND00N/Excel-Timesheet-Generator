@@ -36,8 +36,8 @@ test("make two dimensional array from parsed json, json file consist of predefin
     headers: TABLE_HEADERS,
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     fetchUserTasks: getFetchUserTasksForTests(),
-    nonWorkingHoursByEmployees: {
-      "Molotkova Maria": 8,
+    nonWorkingHoursByEmployeesUsername: {
+      MolotkovaM: 8,
     },
     workingHoursPerMonth: 120,
   });

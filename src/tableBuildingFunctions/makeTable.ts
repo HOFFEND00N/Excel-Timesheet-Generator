@@ -14,7 +14,7 @@ import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
 import { CommonCell, FetchUserTasksArguments, UserTasks } from "./types";
 import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
-import { makeNonWorkingHoursByEmployees } from "./makeNonWorkingHoursByEmployees";
+import { makeNonWorkingHoursByEmployeesUserName } from "./makeNonWorkingHoursByEmployeesUserName";
 
 type MakeTableArguments = {
   tableData: TableData;
@@ -71,11 +71,14 @@ export async function makeTable({
     (item) => item.label === "Man-Hours"
   );
 
-  const nonWorkingHoursByEmployees = makeNonWorkingHoursByEmployees({
-    employeeColumn,
-    manHoursColumn,
-    nonWorkingHoursRows,
-  });
+  const nonWorkingHoursByEmployeesUsername = makeNonWorkingHoursByEmployeesUserName(
+    {
+      employeeColumn,
+      manHoursColumn,
+      nonWorkingHoursRows,
+      tableData,
+    }
+  );
 
   const workingHoursPerMonth = await getWorkingHoursForMonth();
 
@@ -84,7 +87,7 @@ export async function makeTable({
     headers: tableHeaders,
     fetchUserTasks,
     getCredentials,
-    nonWorkingHoursByEmployees,
+    nonWorkingHoursByEmployeesUsername,
     workingHoursPerMonth,
   });
 

@@ -20,7 +20,7 @@ test("pass data for one row", () => {
     tableData: getTableDataForTests(),
     employee: { name: "Karaseva Svetlana", jiraUsername: "KarasevaS" },
     userTasksByEmployeeUsername: { KarasevaS: "task 1 task 3" },
-    nonWorkingHoursByEmployees: { "Karaseva Svetlana": 8 },
+    nonWorkingHoursByEmployeesUsername: { KarasevaS: 8 },
     workingHoursPerMonth: 120,
   });
 
