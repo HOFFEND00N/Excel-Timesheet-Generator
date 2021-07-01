@@ -8,7 +8,7 @@ import {
 } from "./types";
 import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
 import { makeUserTasksByEmployeeUsername } from "./makeUserTasksByEmployeeUsername";
-import { ensureThatValueIsNotNullAndIsNotUndefined } from "../utilities/ensureThatValueIsNotNullAndIsNotUndefined";
+import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -51,26 +51,29 @@ export async function makeEmployeeDataRows({
     tasksRows
   );
 
-  for (let i = 0; i < tasksRows.length; i++) {
-    const employeeDataRow = headers.map((header) => {
-      const employee = ensureThatValueIsNotNullAndIsNotUndefined(
-        tableData.employees.find(
-          (employee) => employee.jiraUsername == tasksRows[i].userName
-        ) ?? tableData.teamLead
-      );
-      if (header.label == "Employee") return employee.name;
-      if (header.label == "Task")
-        return userTasksByEmployeeUsername[employee.jiraUsername];
-      if (header.label == "Man-Hours")
-        return (
-          workingHoursPerMonth -
-          (nonWorkingHoursByEmployees[employee.name] ?? 0)
-        );
-      const cell: CommonValue = tableData[header.dataKey];
-      return cell ?? "";
-    });
-
-    employeeDataRows.push(employeeDataRow);
+  for (const employee of tableData.employees) {
+    employeeDataRows.push(
+      makeEmployeeDataRow({
+        headers,
+        userTasksByEmployeeUsername,
+        workingHoursPerMonth,
+        nonWorkingHoursByEmployees,
+        tableData,
+        employee,
+      })
+    );
   }
+
+  employeeDataRows.push(
+    makeEmployeeDataRow({
+      headers,
+      userTasksByEmployeeUsername,
+      workingHoursPerMonth,
+      nonWorkingHoursByEmployees,
+      tableData,
+      employee: tableData.teamLead,
+    })
+  );
+
   return employeeDataRows;
 }
