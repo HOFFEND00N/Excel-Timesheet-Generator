@@ -16,8 +16,8 @@ test("pass tasks for one employee, these tasks are separate from any epics, expe
     [
       {
         tasks: [
-          { taskKey: "task 1", epicKey: "" },
-          { taskKey: "task 3", epicKey: "" },
+          { taskKey: "task 1", epicKey: undefined },
+          { taskKey: "task 3", epicKey: undefined },
         ],
         userName: "MatrosovaM",
       },
@@ -39,7 +39,7 @@ test("pass tasks for one employee, one task have connection to epic ,expect to r
       {
         tasks: [
           { taskKey: "task 1", epicKey: "epic task 1" },
-          { taskKey: "task 3", epicKey: "" },
+          { taskKey: "task 3", epicKey: undefined },
         ],
         userName: "MatrosovaM",
       },
@@ -94,7 +94,7 @@ test("pass tasks for two employees, two tasks from first employee have connectio
         userName: "MatrosovaM",
       },
       {
-        tasks: [{ taskKey: "task 2", epicKey: "" }],
+        tasks: [{ taskKey: "task 2", epicKey: undefined }],
         userName: "MolotkovaM",
       },
     ],
@@ -124,7 +124,7 @@ test("pass tasks for two employees, two tasks from first employee have connectio
       },
       {
         tasks: [
-          { taskKey: "task 2", epicKey: "" },
+          { taskKey: "task 2", epicKey: undefined },
           {
             taskKey: "task 4",
             epicKey: "epic task 1",
@@ -160,7 +160,7 @@ test("pass tasks for two employees, two tasks from first employee have connectio
       },
       {
         tasks: [
-          { taskKey: "task 2", epicKey: "" },
+          { taskKey: "task 2", epicKey: undefined },
           {
             taskKey: "task 4",
             epicKey: "epic task 1",
