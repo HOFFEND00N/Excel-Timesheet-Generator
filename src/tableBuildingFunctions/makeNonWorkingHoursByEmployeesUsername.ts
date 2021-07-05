@@ -1,16 +1,16 @@
 import { CommonValue, HoursByEmployees } from "./types";
-import { TableData } from "../classes/TableData";
+import { Employee } from "../classes/Employee";
 
-export function makeNonWorkingHoursByEmployeesUserName({
+export function makeNonWorkingHoursByEmployeesUsername({
   employeeColumn,
   manHoursColumn,
   nonWorkingHoursRows,
-  tableData,
+  employees,
 }: {
   employeeColumn: number;
   manHoursColumn: number;
   nonWorkingHoursRows: CommonValue[][];
-  tableData: TableData;
+  employees: Employee[];
 }) {
   return nonWorkingHoursRows.reduce(
     (
@@ -19,9 +19,10 @@ export function makeNonWorkingHoursByEmployeesUserName({
     ) => {
       const employeeName = nonWorkingHoursRow[employeeColumn].toString();
       const manHours = Number(nonWorkingHoursRow[manHoursColumn]);
-      const employee =
-        tableData.employees.find((employee) => employee.name == employeeName) ??
-        tableData.teamLead;
+      const employee = employees.find(
+        (employee) => employee.name == employeeName
+      );
+      if (!employee) throw `Nonexistent employee with name ${employeeName}`;
 
       nonWorkingHoursByEmployeesUsername[employee.jiraUsername] =
         (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0) +

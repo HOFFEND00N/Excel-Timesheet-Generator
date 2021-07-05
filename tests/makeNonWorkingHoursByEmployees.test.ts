@@ -1,16 +1,17 @@
-import { makeNonWorkingHoursByEmployeesUserName } from "../src/tableBuildingFunctions/makeNonWorkingHoursByEmployeesUserName";
+import { makeNonWorkingHoursByEmployeesUsername } from "../src/tableBuildingFunctions/makeNonWorkingHoursByEmployeesUsername";
 import { HoursByEmployees } from "../src/tableBuildingFunctions/types";
 import { getTableDataForTests } from "./mockedDataForTests";
 
 test("pass zero non working hours rows, expect to return empty map", () => {
   const expectedNonWorkingHoursByEmployees: HoursByEmployees = {};
 
-  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUserName(
+  const tableData = getTableDataForTests();
+  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUsername(
     {
       employeeColumn: 4,
       manHoursColumn: 7,
       nonWorkingHoursRows: [],
-      tableData: getTableDataForTests(),
+      employees: [...tableData.employees, tableData.teamLead],
     }
   );
 
@@ -24,7 +25,8 @@ test("pass one non working hours row, expect to return map with one element", ()
     MolotkovaM: 24,
   };
 
-  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUserName(
+  const tableData = getTableDataForTests();
+  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUsername(
     {
       employeeColumn: 4,
       manHoursColumn: 7,
@@ -40,7 +42,7 @@ test("pass one non working hours row, expect to return map with one element", ()
           24,
         ],
       ],
-      tableData: getTableDataForTests(),
+      employees: [...tableData.employees, tableData.teamLead],
     }
   );
 
@@ -55,7 +57,8 @@ test("pass two non working hours row with two different employees, expect to ret
     MatrosovaM: 8,
   };
 
-  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUserName(
+  const tableData = getTableDataForTests();
+  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUsername(
     {
       employeeColumn: 4,
       manHoursColumn: 7,
@@ -81,7 +84,7 @@ test("pass two non working hours row with two different employees, expect to ret
           8,
         ],
       ],
-      tableData: getTableDataForTests(),
+      employees: [...tableData.employees, tableData.teamLead],
     }
   );
 
@@ -95,8 +98,9 @@ test("pass three non working hours row with two rows for one employee and the re
     MolotkovaM: 32,
     MatrosovaM: 8,
   };
+  const tableData = getTableDataForTests();
 
-  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUserName(
+  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUsername(
     {
       employeeColumn: 4,
       manHoursColumn: 7,
@@ -132,7 +136,7 @@ test("pass three non working hours row with two rows for one employee and the re
           8,
         ],
       ],
-      tableData: getTableDataForTests(),
+      employees: [...tableData.employees, tableData.teamLead],
     }
   );
 
