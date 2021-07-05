@@ -16,7 +16,7 @@ test("make two dimensional array from parsed json, json file consist of predefin
       "Karaseva Svetlana",
       "task 1 task 3",
       "",
-      120,
+      96,
     ],
     [
       651,
@@ -38,6 +38,7 @@ test("make two dimensional array from parsed json, json file consist of predefin
     fetchUserTasks: getFetchUserTasksForTests(),
     nonWorkingHoursByEmployeesUsername: {
       MolotkovaM: 8,
+      KarasevaS: 24,
     },
     workingHoursPerMonth: 120,
   });
