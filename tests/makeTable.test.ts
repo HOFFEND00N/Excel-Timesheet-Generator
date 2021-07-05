@@ -60,7 +60,7 @@ test("make full table", async () => {
       "Molotkova Maria",
       "epic task 1",
       "",
-      120,
+      96,
     ],
     [
       651,
@@ -81,6 +81,16 @@ test("make full table", async () => {
       "20.01.2021",
       "",
       8,
+    ],
+    [
+      651,
+      "RU",
+      "Confirmit",
+      "Holidays",
+      "Molotkova Maria",
+      "20.01.2021-23.01.2021",
+      "",
+      24,
     ],
   ];
 
@@ -132,6 +142,16 @@ test("make full table", async () => {
           "20.01.2021",
           "",
           "8",
+        ],
+        [
+          "651",
+          "RU",
+          "Confirmit",
+          "Holidays",
+          "Molotkova Maria",
+          "20.01.2021-23.01.2021",
+          "",
+          "24",
         ],
       ]),
     getWorkingHoursForMonth: () => Promise.resolve(120),
