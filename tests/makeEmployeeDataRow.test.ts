@@ -19,7 +19,7 @@ test("pass data for one row", () => {
     headers: TABLE_HEADERS,
     tableData: getTableDataForTests(),
     employee: { name: "Karaseva Svetlana", jiraUsername: "KarasevaS" },
-    userTasksByEmployeeUsername: { KarasevaS: "task 1 task 3" },
+    userTasksByEmployeeUsername: { KarasevaS: ["task 1 task 3"] },
     nonWorkingHoursByEmployeesUsername: { KarasevaS: 8 },
     workingHoursPerMonth: 120,
   });

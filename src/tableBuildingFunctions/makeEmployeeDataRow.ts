@@ -8,7 +8,7 @@ type makeEmployeeDataRowArguments = {
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursPerMonth: number;
   employee: Employee;
-  userTasksByEmployeeUsername: Record<string, string>;
+  userTasksByEmployeeUsername: Record<string, string[]>;
 };
 
 export function makeEmployeeDataRow({
@@ -22,7 +22,7 @@ export function makeEmployeeDataRow({
   return headers.map((header) => {
     if (header.label == "Employee") return employee.name;
     if (header.label == "Task")
-      return userTasksByEmployeeUsername[employee.jiraUsername];
+      return userTasksByEmployeeUsername[employee.jiraUsername].join(" ");
     if (header.label == "Man-Hours")
       return (
         workingHoursPerMonth -

@@ -9,8 +9,8 @@ test("pass zero user tasks, expect to return empty record", () => {
 });
 
 test("pass one user task, expect to return record with one task", () => {
-  const expectedUserTasksByEmployee: Record<string, string> = {
-    KarasevaS: "task 1",
+  const expectedUserTasksByEmployee: Record<string, string[]> = {
+    KarasevaS: ["task 1"],
   };
 
   const actualUserTasksByEmployee = makeUserTasksByEmployeeUsername([
@@ -21,8 +21,8 @@ test("pass one user task, expect to return record with one task", () => {
 });
 
 test("pass two user tasks, expect to return record with two task", () => {
-  const expectedUserTasksByEmployee: Record<string, string> = {
-    KarasevaS: "task 1 task 2",
+  const expectedUserTasksByEmployee: Record<string, string[]> = {
+    KarasevaS: ["task 1 task 2"],
   };
 
   const actualUserTasksByEmployee = makeUserTasksByEmployeeUsername([
@@ -36,9 +36,9 @@ test("pass two user tasks, expect to return record with two task", () => {
 });
 
 test("pass two user tasks for two users, expect to return two records with two task", () => {
-  const expectedUserTasksByEmployee: Record<string, string> = {
-    KarasevaS: "task 1 task 2",
-    MatrosovaM: "task 3 task 4",
+  const expectedUserTasksByEmployee: Record<string, string[]> = {
+    KarasevaS: ["task 1 task 2"],
+    MatrosovaM: ["task 3 task 4"],
   };
 
   const actualUserTasksByEmployee = makeUserTasksByEmployeeUsername([
