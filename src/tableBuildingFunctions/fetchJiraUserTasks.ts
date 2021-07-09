@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import { FetchUserTasksArguments, JiraResponse, UserTasks } from "./types";
-import { EPIC_KEY } from "../constants/constant";
+import { EPIC_KEY, TASKS_STATUSES } from "../constants/constant";
 
 export async function fetchJiraUserTasks({
   jiraUserName,
@@ -17,15 +17,17 @@ export async function fetchJiraUserTasks({
     currentDate.getMonth() + 1
   }/1`;
 
-  const fetchResult = await fetch(
-    `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in ("In Progress", "In Code Review", "IN QA", "QA Verified", Investigation, "Code Completed") AND assignee in (${jiraUserName}) and updated >= "${taskUpdated}" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY},`,
-    {
-      method: "get",
-      headers: {
-        Authorization: `Basic ${authorizationKey}`,
-      },
-    }
+  const tasksStatuses = TASKS_STATUSES.map((status) => '"' + status + '"').join(
+    ", "
   );
+  const query = `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (${tasksStatuses}) AND assignee in (${jiraUserName}) and updated >= "${taskUpdated}" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY},`;
+
+  const fetchResult = await fetch(query, {
+    method: "get",
+    headers: {
+      Authorization: `Basic ${authorizationKey}`,
+    },
+  });
   const jiraResponse: JiraResponse = await fetchResult.json();
 
   const userTasks = jiraResponse.issues.map((issue) => {

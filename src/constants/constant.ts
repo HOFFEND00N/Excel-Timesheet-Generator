@@ -37,3 +37,12 @@ export const START_MONTH_HEADER_POINT: Point = { column: 2, row: 5 };
 export const OUTPUT_FORMAT_ARRAY_OF_ARRAYS = 1;
 
 export const EPIC_KEY = "customfield_10006";
+
+export const TASKS_STATUSES = [
+  "In Progress",
+  "In Code Review",
+  "IN QA",
+  "QA Verified",
+  "Investigation",
+  "Code Completed",
+];
