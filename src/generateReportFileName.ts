@@ -4,5 +4,5 @@ export function generateReportFileName(currentDate: Date, companyUnit: number) {
   return `${currentDate.getFullYear()}-${month.padStart(
     2,
     "0"
-  )}-${companyUnit}.xls`;
+  )}-${companyUnit}.xlsx`;
 }

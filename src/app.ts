@@ -14,6 +14,18 @@ import {
 } from "./constants/constant";
 import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHoursForMonth";
 import { generateReportFileName } from "./generateReportFileName";
+import { makePivotCacheDefinition } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotCacheDefinition";
+import { makeContentTypes } from "./XMLGeneratingFunctions/makeContentTypes";
+import { makeWorkbook } from "./XMLGeneratingFunctions/makeWorkbook";
+import { makePivotTable } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotTable";
+import { makePivotCacheRecords } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotCacheRecords";
+import { makePivotCacheDefinitionRels } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotCacheDefinitionRels";
+import { makeWorksheetWithPivotTable } from "./XMLGeneratingFunctions/makeWorksheetWithPivotTable";
+import { makeWorksheetWithPivotTableRels } from "./XMLGeneratingFunctions/makeWorksheetWithPivotTableRels";
+import { makeWorkbookRels } from "./XMLGeneratingFunctions/makeWorkbookRels";
+import admZip from "adm-zip";
+import path from "path";
+import { makePivotTableRels } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotTableRels";
 import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHoursFile";
 
 (async () => {
@@ -70,6 +82,75 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
 
   const reportName = generateReportFileName(currentDate, tableData.unit);
 
-  workBook.write(reportName);
+  await makeXlsxFileWithoutPivotTable(workBook, reportName);
+  let zip = new admZip(`${reportName}`);
+  const whereToExtract = "testFolder";
+  zip.extractAllTo(whereToExtract, true);
+
+  const xl_pivotCache = path.join(whereToExtract, "xl/pivotCache");
+  const xl_pivotCache_rels = path.join(xl_pivotCache, "_rels");
+  const xl_pivotTables = path.join(whereToExtract, "xl/pivotTables");
+  const xl_pivotTables_rels = path.join(xl_pivotTables, "_rels");
+  const xl_worksheets = path.join(whereToExtract, "xl/worksheets");
+  const xl_worksheets_rels = path.join(xl_worksheets, "_rels");
+  // should i check for all folders?
+  if (!fs.existsSync(xl_pivotCache)) {
+    fs.mkdirSync(xl_pivotCache);
+    fs.mkdirSync(xl_pivotCache_rels);
+    fs.mkdirSync(xl_pivotTables);
+    fs.mkdirSync(xl_pivotTables_rels);
+  }
+
+  fs.writeFileSync(
+    path.join(whereToExtract, "xl/_rels/workbook.xml.rels"),
+    makeWorkbookRels().end()
+  );
+  fs.writeFileSync(
+    path.join(xl_pivotCache, "pivotCacheDefinition1.xml"),
+    makePivotCacheDefinition(tableData.employees).end()
+  );
+  fs.writeFileSync(
+    path.join(xl_pivotCache, "pivotCacheRecords1.xml"),
+    makePivotCacheRecords(table, tableData.employees).end()
+  );
+  fs.writeFileSync(
+    path.join(xl_pivotCache_rels, "pivotCacheDefinition1.xml.rels"),
+    makePivotCacheDefinitionRels().end()
+  );
+  fs.writeFileSync(
+    path.join(xl_pivotTables_rels, "pivotTable1.xml.rels"),
+    makePivotTableRels().end()
+  );
+  fs.writeFileSync(
+    path.join(xl_pivotTables, "pivotTable1.xml"),
+    makePivotTable(tableData).end()
+  );
+  fs.writeFileSync(
+    path.join(xl_worksheets_rels, "sheet2.xml.rels"),
+    makeWorksheetWithPivotTableRels().end()
+  );
+  //TODO: fix hardcoded working hours per month
+  fs.writeFileSync(
+    path.join(xl_worksheets, "sheet2.xml"),
+    makeWorksheetWithPivotTable(tableData, 120).end()
+  );
+  fs.writeFileSync(
+    path.join(whereToExtract, "xl/workbook.xml"),
+    makeWorkbook().end()
+  );
+  fs.writeFileSync(
+    path.join(whereToExtract, "[Content_Types].xml"),
+    makeContentTypes().end()
+  );
+
+  zip = new admZip();
+  zip.addLocalFolder(whereToExtract);
+  zip.writeZip(`${reportName}`);
   console.log(`Successfully generated ${reportName}`);
 })();
+
+function makeXlsxFileWithoutPivotTable(workBook, reportName: string) {
+  return new Promise((resolve) => {
+    workBook.write(reportName, resolve);
+  });
+}
