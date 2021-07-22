@@ -1,7 +1,7 @@
 import { generateReportFileName } from "../src/generateReportFileName";
 
 test("pass may of 2021, expect to return fileName with month = 06", () => {
-  const expectedFileName = "2021-06-7.xls";
+  const expectedFileName = "2021-06-7.xlsx";
 
   const actualFileName = generateReportFileName(new Date(2021, 5), 7);
 
@@ -9,7 +9,7 @@ test("pass may of 2021, expect to return fileName with month = 06", () => {
 });
 
 test("pass january of 2021, expect to return fileName with month = 01", () => {
-  const expectedFileName = "2021-01-7.xls";
+  const expectedFileName = "2021-01-7.xlsx";
 
   const actualFileName = generateReportFileName(new Date(2021, 0), 7);
 
@@ -17,7 +17,7 @@ test("pass january of 2021, expect to return fileName with month = 01", () => {
 });
 
 test("pass december of 2020, expect to return fileName with month = 12", () => {
-  const expectedFileName = "2020-12-7.xls";
+  const expectedFileName = "2020-12-7.xlsx";
 
   const actualFileName = generateReportFileName(new Date(2020, 11), 7);
 
