@@ -84,10 +84,10 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   workSheet.addImage(new WorkSheetImageAdapter(image));
 
   const reportName = generateReportFileName(currentDate, tableData.unit);
-
   await makeXlsxFileWithoutPivotTable(workBook, reportName);
+
   let zip = new admZip(`${reportName}`);
-  const whereToExtract = "testFolder";
+  const whereToExtract = "unzippedXlsxFile";
   zip.extractAllTo(whereToExtract, true);
 
   const xl_pivotCache = path.join(whereToExtract, "xl/pivotCache");
@@ -96,6 +96,7 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   const xl_pivotTables_rels = path.join(xl_pivotTables, "_rels");
   const xl_worksheets = path.join(whereToExtract, "xl/worksheets");
   const xl_worksheets_rels = path.join(xl_worksheets, "_rels");
+
   // should i check for all folders?
   if (!fs.existsSync(xl_pivotCache)) {
     fs.mkdirSync(xl_pivotCache);
@@ -151,6 +152,8 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   zip = new admZip();
   zip.addLocalFolder(whereToExtract);
   zip.writeZip(`${reportName}`);
+
+  fs.rmdirSync(whereToExtract, { recursive: true });
   console.log(`Successfully generated ${reportName}`);
 })();
 
