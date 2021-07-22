@@ -107,7 +107,10 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   );
   fs.writeFileSync(
     path.join(xl_pivotCache, "pivotCacheDefinition1.xml"),
-    makePivotCacheDefinition(tableData.employees).end()
+    makePivotCacheDefinition(
+      tableData.employees,
+      table[table.length - 1].point
+    ).end()
   );
   fs.writeFileSync(
     path.join(xl_pivotCache, "pivotCacheRecords1.xml"),

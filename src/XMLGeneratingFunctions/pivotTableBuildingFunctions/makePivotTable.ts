@@ -1,9 +1,10 @@
 import { create } from "xmlbuilder2";
 import { TableData } from "../../classes/TableData";
 import { XMLBuilder } from "xmlbuilder2/lib/interfaces";
+import { TABLE_HEADERS } from "../../constants/constant";
 
 export function makePivotTable(tableData: TableData): XMLBuilder {
-  return create({
+  let pivotTable = create({
     encoding: "utf-8",
     standalone: "yes",
   })
@@ -20,7 +21,7 @@ export function makePivotTable(tableData: TableData): XMLBuilder {
       firstDataCol: "1",
     })
     .up()
-    .ele("pivotFields", { count: "8" })
+    .ele("pivotFields", { count: `${TABLE_HEADERS.length}` })
     .ele("pivotField", { showAll: "0" })
     .up()
     .ele("pivotField", { showAll: "0" })
@@ -30,25 +31,13 @@ export function makePivotTable(tableData: TableData): XMLBuilder {
     .ele("pivotField", { showAll: "0" })
     .up()
     .ele("pivotField", { showAll: "0", axis: "axisRow" })
-    .ele("items", { count: "10" })
-    .ele("item", { x: "0" })
-    .up()
-    .ele("item", { x: "1" })
-    .up()
-    .ele("item", { x: "2" })
-    .up()
-    .ele("item", { x: "3" })
-    .up()
-    .ele("item", { x: "4" })
-    .up()
-    .ele("item", { x: "5" })
-    .up()
-    .ele("item", { x: "6" })
-    .up()
-    .ele("item", { x: "7" })
-    .up()
-    .ele("item", { x: "8" })
-    .up()
+    .ele("items", { count: `${tableData.employees.length + 1}` });
+
+  for (let i = 0; i < tableData.employees.length; i++) {
+    makePivotFieldItem(pivotTable, i);
+  }
+
+  pivotTable = pivotTable
     .ele("item", { t: "default" })
     .up()
     .up()
@@ -64,43 +53,13 @@ export function makePivotTable(tableData: TableData): XMLBuilder {
     .ele("field", { x: "4" })
     .up()
     .up()
-    .ele("rowItems", { count: "10" })
-    .ele("i")
-    .ele("x")
-    .up()
-    .up()
-    .ele("i")
-    .ele("x", { v: "1" })
-    .up()
-    .up()
-    .ele("i")
-    .ele("x", { v: "2" })
-    .up()
-    .up()
-    .ele("i")
-    .ele("x", { v: "3" })
-    .up()
-    .up()
-    .ele("i")
-    .ele("x", { v: "4" })
-    .up()
-    .up()
-    .ele("i")
-    .ele("x", { v: "5" })
-    .up()
-    .up()
-    .ele("i")
-    .ele("x", { v: "6" })
-    .up()
-    .up()
-    .ele("i")
-    .ele("x", { v: "7" })
-    .up()
-    .up()
-    .ele("i")
-    .ele("x", { v: "8" })
-    .up()
-    .up()
+    .ele("rowItems", { count: `${tableData.employees.length + 1}` });
+
+  for (let i = 0; i < tableData.employees.length; i++) {
+    makeRowItem(pivotTable, i);
+  }
+
+  pivotTable = pivotTable
     .ele("i", { t: "grand" })
     .ele("x")
     .up()
@@ -124,4 +83,13 @@ export function makePivotTable(tableData: TableData): XMLBuilder {
       showLastColumn: "1",
     })
     .up();
+  return pivotTable;
+}
+
+function makeRowItem(xml: XMLBuilder, index: number) {
+  xml.ele("i").ele("x", { v: `${index}` });
+}
+
+function makePivotFieldItem(xml: XMLBuilder, index: number) {
+  xml.ele("item", { x: `${index}` });
 }

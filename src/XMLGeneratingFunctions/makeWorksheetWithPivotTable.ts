@@ -54,6 +54,7 @@ export function makeWorksheetWithPivotTable(
       employeeName: tableData.employees[i].name,
       xml: worksheet,
       row: i + 4,
+      workingHoursPerMonth,
     });
   }
 
@@ -87,10 +88,12 @@ function addRowSheetWithPivotTable({
   employeeName,
   xml,
   row,
+  workingHoursPerMonth,
 }: {
   employeeName: string;
   xml: XMLBuilder;
   row: number;
+  workingHoursPerMonth: number;
 }): XMLBuilder {
   return xml
     .ele("row", { r: `${row}` })
@@ -101,7 +104,7 @@ function addRowSheetWithPivotTable({
     .up()
     .ele("c", { r: `B${row}` })
     .ele("v")
-    .txt("120")
+    .txt(`${workingHoursPerMonth}`)
     .up()
     .up()
     .up();

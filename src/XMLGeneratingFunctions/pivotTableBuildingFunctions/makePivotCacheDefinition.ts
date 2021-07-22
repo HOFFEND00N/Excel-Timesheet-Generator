@@ -1,9 +1,24 @@
 import { Employee } from "../../classes/Employee";
 import { create } from "xmlbuilder2";
 import { XMLBuilder } from "xmlbuilder2/lib/interfaces";
-import { TABLE_HEADERS } from "../../constants/constant";
+import {
+  ENGLISH_ALPHABET,
+  START_TABLE_POINT,
+  TABLE_HEADERS,
+} from "../../constants/constant";
+import { Point } from "../../classes/Point";
 
-export function makePivotCacheDefinition(employees: Employee[]): XMLBuilder {
+export function makePivotCacheDefinition(
+  employees: Employee[],
+  tableBottomRightPoint: Point
+): XMLBuilder {
+  const worksheetSourceRef =
+    convertNumberToExcelColumn(START_TABLE_POINT.column) +
+    START_TABLE_POINT.row +
+    ":" +
+    convertNumberToExcelColumn(tableBottomRightPoint.column) +
+    tableBottomRightPoint.row;
+
   const pivotCacheDefinition = create({
     encoding: "utf-8",
     standalone: "yes",
@@ -15,7 +30,10 @@ export function makePivotCacheDefinition(employees: Employee[]): XMLBuilder {
       "r:id": "rId1",
     })
     .ele("cacheSource", { type: "worksheet" })
-    .ele("worksheetSource", { ref: "B8:I22", sheet: "Monthly timesheet" })
+    .ele("worksheetSource", {
+      ref: `${worksheetSourceRef}`,
+      sheet: "Monthly timesheet",
+    })
     .up()
     .up()
     .ele("cacheFields", { count: `${TABLE_HEADERS.length}` });
@@ -23,7 +41,7 @@ export function makePivotCacheDefinition(employees: Employee[]): XMLBuilder {
   for (const tableHeader of TABLE_HEADERS) {
     makePivotCacheField({
       name: tableHeader.label,
-      xml: pivotCacheDefinition,
+      xmlNode: pivotCacheDefinition,
       employees,
     });
   }
@@ -33,31 +51,37 @@ export function makePivotCacheDefinition(employees: Employee[]): XMLBuilder {
 
 function makePivotCacheField({
   name,
-  xml,
+  xmlNode,
   employees,
 }: {
   name: string;
-  xml: XMLBuilder;
+  xmlNode: XMLBuilder;
   employees: Employee[];
-}): XMLBuilder {
-  xml = xml.ele("cacheField", { name: name, numFmtId: "0" }).ele("sharedItems");
-  if (name == "Employee") makePivotCacheFieldEmployees(xml, employees);
-
-  return xml.up().up();
+}) {
+  xmlNode = xmlNode
+    .ele("cacheField", { name: name, numFmtId: "0" })
+    .ele("sharedItems");
+  if (name == "Employee") makePivotCacheFieldEmployees(xmlNode, employees);
 }
 
 function makePivotCacheFieldEmployees(
-  pivotCacheDefinition: XMLBuilder,
+  xmlNode: XMLBuilder,
   employees: Employee[]
 ) {
-  pivotCacheDefinition = pivotCacheDefinition.att(
-    "count",
-    `${employees.length}`
-  );
+  xmlNode = xmlNode.att("count", `${employees.length}`);
   for (const employee of employees) {
-    pivotCacheDefinition = pivotCacheDefinition
-      .ele("s", { v: `${employee.name}` })
-      .up();
+    xmlNode = xmlNode.ele("s", { v: `${employee.name}` }).up();
   }
-  pivotCacheDefinition.up().up();
+}
+
+//TODO: test convertNumberToExcelColumn()
+function convertNumberToExcelColumn(value: number) {
+  let excelColumn = "";
+  while (value > 0) {
+    value -= 1;
+    const module = value % ENGLISH_ALPHABET.length;
+    value = Math.floor(value / ENGLISH_ALPHABET.length);
+    excelColumn = ENGLISH_ALPHABET[module].concat(excelColumn);
+  }
+  return excelColumn;
 }
