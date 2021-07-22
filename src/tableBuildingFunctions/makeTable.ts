@@ -27,7 +27,7 @@ type MakeTableArguments = {
   }: FetchUserTasksArguments) => Promise<UserTasks>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   getNonWorkingHoursFile: () => Promise<string[][]>;
-  getWorkingHoursForMonth: () => Promise<number>;
+  workingHoursPerMonth: number;
 };
 
 export async function makeTable({
@@ -36,7 +36,7 @@ export async function makeTable({
   fetchUserTasks,
   getCredentials,
   getNonWorkingHoursFile,
-  getWorkingHoursForMonth,
+  workingHoursPerMonth,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = START_TABLE_POINT;
@@ -80,8 +80,6 @@ export async function makeTable({
       employees: [...tableData.employees, tableData.teamLead],
     }
   );
-
-  const workingHoursPerMonth = await getWorkingHoursForMonth();
 
   const tableRowsValues = await errorHandler(makeEmployeeDataRows, {
     tableData,

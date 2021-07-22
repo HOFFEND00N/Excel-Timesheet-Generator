@@ -154,7 +154,7 @@ test("make full table", async () => {
           "24",
         ],
       ]),
-    getWorkingHoursForMonth: () => Promise.resolve(120),
+    workingHoursPerMonth: 120,
   });
 
   actualTable.sort(compare);

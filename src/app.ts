@@ -12,7 +12,7 @@ import {
   TABLE_HEADERS,
   WORKSHEET_MONTHLY_TIMESHEET_NAME,
 } from "./constants/constant";
-import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHoursForMonth";
+import { getWorkingHoursPerMonth } from "./tableBuildingFunctions/getWorkingHoursPerMonth";
 import { generateReportFileName } from "./generateReportFileName";
 import { makePivotCacheDefinition } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotCacheDefinition";
 import { makeContentTypes } from "./XMLGeneratingFunctions/makeContentTypes";
@@ -40,6 +40,9 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   const tableData: TableData = JSON.parse(
     fs.readFileSync("tableData.json", "utf-8")
   );
+
+  const workingHoursPerMonth = await getWorkingHoursPerMonth();
+
   const currentDate = new Date();
   const table = await makeTable({
     tableData,
@@ -47,7 +50,7 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
     getNonWorkingHoursFile,
-    getWorkingHoursForMonth,
+    workingHoursPerMonth,
   });
 
   const employeeColumn =
@@ -132,10 +135,9 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
     path.join(xl_worksheets_rels, "sheet2.xml.rels"),
     makeWorksheetWithPivotTableRels().end()
   );
-  //TODO: fix hardcoded working hours per month
   fs.writeFileSync(
     path.join(xl_worksheets, "sheet2.xml"),
-    makeWorksheetWithPivotTable(tableData, 120).end()
+    makeWorksheetWithPivotTable(tableData, workingHoursPerMonth).end()
   );
   fs.writeFileSync(
     path.join(whereToExtract, "xl/workbook.xml"),
