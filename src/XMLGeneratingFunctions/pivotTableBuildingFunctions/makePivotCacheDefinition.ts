@@ -1,12 +1,9 @@
 import { Employee } from "../../classes/Employee";
 import { create } from "xmlbuilder2";
 import { XMLBuilder } from "xmlbuilder2/lib/interfaces";
-import {
-  ENGLISH_ALPHABET,
-  START_TABLE_POINT,
-  TABLE_HEADERS,
-} from "../../constants/constant";
+import { START_TABLE_POINT, TABLE_HEADERS } from "../../constants/constant";
 import { Point } from "../../classes/Point";
+import { convertNumberToExcelColumn } from "../../utils/convertNumberToExcelColumn";
 
 export function makePivotCacheDefinition(
   employees: Employee[],
@@ -72,16 +69,4 @@ function makePivotCacheFieldEmployees(
   for (const employee of employees) {
     xmlNode = xmlNode.ele("s", { v: `${employee.name}` }).up();
   }
-}
-
-//TODO: test convertNumberToExcelColumn()
-function convertNumberToExcelColumn(value: number) {
-  let excelColumn = "";
-  while (value > 0) {
-    value -= 1;
-    const module = value % ENGLISH_ALPHABET.length;
-    value = Math.floor(value / ENGLISH_ALPHABET.length);
-    excelColumn = ENGLISH_ALPHABET[module].concat(excelColumn);
-  }
-  return excelColumn;
 }
