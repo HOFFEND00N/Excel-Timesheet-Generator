@@ -49,8 +49,7 @@
     "*.ts": [
       "eslint --fix",
       "prettier --write",
-      "git add",
-      "jest"
+      "git add"
     ]
   },
   "type": "module"
