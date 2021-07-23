@@ -1,9 +1,9 @@
 import { create } from "xmlbuilder2";
-import { TableData } from "../../classes/TableData";
 import { XMLBuilder } from "xmlbuilder2/lib/interfaces";
 import { TABLE_HEADERS } from "../../constants/constant";
+import { Employee } from "../../classes/Employee";
 
-export function makePivotTable(tableData: TableData): XMLBuilder {
+export function makePivotTable(employees: Employee[]): XMLBuilder {
   let pivotTable = create({
     encoding: "utf-8",
     standalone: "yes",
@@ -15,7 +15,7 @@ export function makePivotTable(tableData: TableData): XMLBuilder {
       dataCaption: "Values",
     })
     .ele("location", {
-      ref: `A3:B${tableData.employees.length + 4}`,
+      ref: `A3:B${employees.length + 4}`,
       firstHeaderRow: "1",
       firstDataRow: "1",
       firstDataCol: "1",
@@ -31,9 +31,9 @@ export function makePivotTable(tableData: TableData): XMLBuilder {
     .ele("pivotField", { showAll: "0" })
     .up()
     .ele("pivotField", { showAll: "0", axis: "axisRow" })
-    .ele("items", { count: `${tableData.employees.length + 1}` });
+    .ele("items", { count: `${employees.length + 1}` });
 
-  for (let i = 0; i < tableData.employees.length; i++) {
+  for (let i = 0; i < employees.length; i++) {
     makePivotFieldItem(pivotTable, i);
   }
 
@@ -53,9 +53,9 @@ export function makePivotTable(tableData: TableData): XMLBuilder {
     .ele("field", { x: "4" })
     .up()
     .up()
-    .ele("rowItems", { count: `${tableData.employees.length + 1}` });
+    .ele("rowItems", { count: `${employees.length + 1}` });
 
-  for (let i = 0; i < tableData.employees.length; i++) {
+  for (let i = 0; i < employees.length; i++) {
     makeRowItem(pivotTable, i);
   }
 

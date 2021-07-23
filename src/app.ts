@@ -111,14 +111,17 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   );
   fs.writeFileSync(
     path.join(xl_pivotCache, "pivotCacheDefinition1.xml"),
-    makePivotCacheDefinition(
-      tableData.employees,
-      table[table.length - 1].point
-    ).end()
+    makePivotCacheDefinition({
+      employees: [...tableData.employees, tableData.teamLead],
+      tableBottomRightPoint: table[table.length - 1].point,
+    }).end()
   );
   fs.writeFileSync(
     path.join(xl_pivotCache, "pivotCacheRecords1.xml"),
-    makePivotCacheRecords(table, tableData.employees).end()
+    makePivotCacheRecords({
+      table,
+      employees: [...tableData.employees, tableData.teamLead],
+    }).end()
   );
   fs.writeFileSync(
     path.join(xl_pivotCache_rels, "pivotCacheDefinition1.xml.rels"),
@@ -130,7 +133,7 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   );
   fs.writeFileSync(
     path.join(xl_pivotTables, "pivotTable1.xml"),
-    makePivotTable(tableData).end()
+    makePivotTable([...tableData.employees, tableData.teamLead]).end()
   );
   fs.writeFileSync(
     path.join(xl_worksheets_rels, "sheet2.xml.rels"),
@@ -138,7 +141,10 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   );
   fs.writeFileSync(
     path.join(xl_worksheets, "sheet2.xml"),
-    makeWorksheetWithPivotTable(tableData, workingHoursPerMonth).end()
+    makeWorksheetWithPivotTable({
+      employees: [...tableData.employees, tableData.teamLead],
+      workingHoursPerMonth,
+    }).end()
   );
   fs.writeFileSync(
     path.join(whereToExtract, "xl/workbook.xml"),

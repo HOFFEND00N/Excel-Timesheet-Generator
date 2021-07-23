@@ -5,10 +5,13 @@ import { START_TABLE_POINT, TABLE_HEADERS } from "../../constants/constant";
 import { Point } from "../../classes/Point";
 import { convertNumberToExcelColumn } from "../../utils/convertNumberToExcelColumn";
 
-export function makePivotCacheDefinition(
-  employees: Employee[],
-  tableBottomRightPoint: Point
-): XMLBuilder {
+export function makePivotCacheDefinition({
+  employees,
+  tableBottomRightPoint,
+}: {
+  employees: Employee[];
+  tableBottomRightPoint: Point;
+}): XMLBuilder {
   const worksheetSourceRef =
     convertNumberToExcelColumn(START_TABLE_POINT.column) +
     START_TABLE_POINT.row +

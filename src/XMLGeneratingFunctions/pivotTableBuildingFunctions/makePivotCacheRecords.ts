@@ -4,10 +4,13 @@ import { CommonCell } from "../../tableBuildingFunctions/types";
 import { makePivotRowValue } from "./makePivotRowValue";
 import { Employee } from "../../classes/Employee";
 
-export function makePivotCacheRecords(
-  table: CommonCell[],
-  employees: Employee[]
-) {
+export function makePivotCacheRecords({
+  table,
+  employees,
+}: {
+  table: CommonCell[];
+  employees: Employee[];
+}) {
   const tableRowsCount =
     table.reduce(
       (maxRow: number, tableCell) =>

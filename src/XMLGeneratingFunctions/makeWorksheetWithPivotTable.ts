@@ -1,11 +1,14 @@
 import { create } from "xmlbuilder2";
 import { XMLBuilder } from "xmlbuilder2/lib/interfaces";
-import { TableData } from "../classes/TableData";
+import { Employee } from "../classes/Employee";
 
-export function makeWorksheetWithPivotTable(
-  tableData: TableData,
-  workingHoursPerMonth: number
-): XMLBuilder {
+export function makeWorksheetWithPivotTable({
+  employees,
+  workingHoursPerMonth,
+}: {
+  employees: Employee[];
+  workingHoursPerMonth: number;
+}): XMLBuilder {
   const worksheet = create({
     encoding: "utf-8",
     standalone: "yes",
@@ -13,7 +16,7 @@ export function makeWorksheetWithPivotTable(
     .ele("worksheet", {
       xmlns: "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
     })
-    .ele("dimension", { ref: `A3:B${tableData.employees.length + 4}` })
+    .ele("dimension", { ref: `A3:B${employees.length + 4}` })
     .up()
     .ele("sheetFormatPr", { defaultRowHeight: "15" })
     .up()
@@ -49,9 +52,9 @@ export function makeWorksheetWithPivotTable(
     .up()
     .up();
 
-  for (let i = 0; i < tableData.employees.length; i++) {
+  for (let i = 0; i < employees.length; i++) {
     addRowSheetWithPivotTable({
-      employeeName: tableData.employees[i].name,
+      employeeName: employees[i].name,
       xml: worksheet,
       row: i + 4,
       workingHoursPerMonth,
@@ -59,15 +62,15 @@ export function makeWorksheetWithPivotTable(
   }
 
   worksheet
-    .ele("row", { r: `${tableData.employees.length + 4}` })
-    .ele("c", { r: `A${tableData.employees.length + 4}`, t: "str" })
+    .ele("row", { r: `${employees.length + 4}` })
+    .ele("c", { r: `A${employees.length + 4}`, t: "str" })
     .ele("v")
     .txt("Grand Total")
     .up()
     .up()
-    .ele("c", { r: `B${tableData.employees.length + 4}` })
+    .ele("c", { r: `B${employees.length + 4}` })
     .ele("v")
-    .txt(`${tableData.employees.length * workingHoursPerMonth}`)
+    .txt(`${employees.length * workingHoursPerMonth}`)
     .up()
     .up()
     .up()
