@@ -50,7 +50,7 @@
       "eslint --fix",
       "prettier --write",
       "git add",
-      "jest --coverage"
+      "jest"
     ]
   },
   "type": "module"
