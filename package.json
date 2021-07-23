@@ -6,7 +6,7 @@
   "scripts": {
     "compileTs": "babel src --ignore \\\"**/tests/**\\\" --out-dir build --extensions \".ts\" --source-maps",
     "start": "npm run compileTs && node build/app.js --input-type=module",
-    "test": "jest",
+    "test": "jest --coverage",
     "eslint": "eslint \"./{src,tests}/**/*.ts\"",
     "eslint-fix": "eslint --fix \"./{src,tests}/**/*.ts\"",
     "pre-commit": "lint-staged",
