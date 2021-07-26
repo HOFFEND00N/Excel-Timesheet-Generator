@@ -97,13 +97,12 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   const xl_worksheets = path.join(whereToExtract, "xl/worksheets");
   const xl_worksheets_rels = path.join(xl_worksheets, "_rels");
 
-  // should i check for all folders?
-  if (!fs.existsSync(xl_pivotCache)) {
-    fs.mkdirSync(xl_pivotCache);
-    fs.mkdirSync(xl_pivotCache_rels);
-    fs.mkdirSync(xl_pivotTables);
-    fs.mkdirSync(xl_pivotTables_rels);
-  }
+  fs.mkdirSync(xl_pivotCache);
+  fs.mkdirSync(xl_pivotCache_rels);
+  fs.mkdirSync(xl_pivotTables);
+  fs.mkdirSync(xl_pivotTables_rels);
+
+  const employeesWithTeamLead = [...tableData.employees, tableData.teamLead];
 
   fs.writeFileSync(
     path.join(whereToExtract, "xl/_rels/workbook.xml.rels"),
@@ -112,7 +111,7 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   fs.writeFileSync(
     path.join(xl_pivotCache, "pivotCacheDefinition1.xml"),
     makePivotCacheDefinition({
-      employees: [...tableData.employees, tableData.teamLead],
+      employees: employeesWithTeamLead,
       tableBottomRightPoint: table[table.length - 1].point,
     }).end()
   );
@@ -120,7 +119,7 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
     path.join(xl_pivotCache, "pivotCacheRecords1.xml"),
     makePivotCacheRecords({
       table,
-      employees: [...tableData.employees, tableData.teamLead],
+      employees: employeesWithTeamLead,
     }).end()
   );
   fs.writeFileSync(
@@ -133,7 +132,7 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   );
   fs.writeFileSync(
     path.join(xl_pivotTables, "pivotTable1.xml"),
-    makePivotTable([...tableData.employees, tableData.teamLead]).end()
+    makePivotTable(employeesWithTeamLead).end()
   );
   fs.writeFileSync(
     path.join(xl_worksheets_rels, "sheet2.xml.rels"),
@@ -142,7 +141,7 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
   fs.writeFileSync(
     path.join(xl_worksheets, "sheet2.xml"),
     makeWorksheetWithPivotTable({
-      employees: [...tableData.employees, tableData.teamLead],
+      employees: employeesWithTeamLead,
       workingHoursPerMonth,
     }).end()
   );
