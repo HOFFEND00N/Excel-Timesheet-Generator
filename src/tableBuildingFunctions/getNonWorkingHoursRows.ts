@@ -1,5 +1,6 @@
 import { TableData } from "../classes/TableData";
 import { CommonValue } from "./types";
+import { isNumeric } from "../utils/isNumeric";
 
 export async function getNonWorkingHoursRows(
   tableData: TableData,
@@ -14,9 +15,4 @@ export async function getNonWorkingHoursRows(
     .map((row) =>
       row.map((value) => (isNumeric(value) ? Number(value) : value))
     );
-}
-
-function isNumeric(value): boolean {
-  const numberValue = Number(value);
-  return !isNaN(numberValue) && value != "";
 }

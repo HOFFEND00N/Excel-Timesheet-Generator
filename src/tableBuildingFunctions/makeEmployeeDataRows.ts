@@ -41,17 +41,30 @@ export async function makeEmployeeDataRows({
     })
   );
 
-  console.log(`Fetching tasks from Jira for employees. Please wait...`);
-  const tasksRows = await Promise.all(tasks);
-  tasksRows.push(
-    makeTeamLeadJiraTasks(tasksRows, tableData.teamLead.jiraUsername)
-  );
+  try {
+    console.log(`Fetching tasks from Jira for employees. Please wait...`);
+    const tasksRows = await Promise.all(tasks);
+    tasksRows.push(
+      makeTeamLeadJiraTasks(tasksRows, tableData.teamLead.jiraUsername)
+    );
 
-  const userTasksByEmployeeUsername = makeUserTasksByEmployeeUsername(
-    tasksRows
-  );
+    const userTasksByEmployeeUsername = makeUserTasksByEmployeeUsername(
+      tasksRows
+    );
 
-  for (const employee of tableData.employees) {
+    for (const employee of tableData.employees) {
+      employeeDataRows.push(
+        makeEmployeeDataRow({
+          headers,
+          userTasksByEmployeeUsername,
+          workingHoursPerMonth,
+          nonWorkingHoursByEmployeesUsername,
+          tableData,
+          employee,
+        })
+      );
+    }
+
     employeeDataRows.push(
       makeEmployeeDataRow({
         headers,
@@ -59,21 +72,20 @@ export async function makeEmployeeDataRows({
         workingHoursPerMonth,
         nonWorkingHoursByEmployeesUsername,
         tableData,
-        employee,
+        employee: tableData.teamLead,
       })
     );
-  }
 
-  employeeDataRows.push(
-    makeEmployeeDataRow({
-      headers,
-      userTasksByEmployeeUsername,
-      workingHoursPerMonth,
-      nonWorkingHoursByEmployeesUsername,
+    return employeeDataRows;
+  } catch (error) {
+    console.log(error.message);
+    return makeEmployeeDataRows({
       tableData,
-      employee: tableData.teamLead,
-    })
-  );
-
-  return employeeDataRows;
+      fetchUserTasks,
+      getCredentials,
+      nonWorkingHoursByEmployeesUsername,
+      workingHoursPerMonth,
+      headers,
+    });
+  }
 }
