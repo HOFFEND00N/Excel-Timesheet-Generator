@@ -4,29 +4,34 @@ import * as fs from "fs";
 import { TableData } from "./classes/TableData";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
-import { isNumericCell, isStringCell } from "./tableBuildingFunctions/types";
-import { fetchJiraUserTasks } from "./tableBuildingFunctions/fetchJiraUserTasks";
-import { getCredentials } from "./tableBuildingFunctions/getCredentials";
+import {
+  isNumericCell,
+  isStringCell,
+  fetchJiraUserTasks,
+  getCredentials,
+  getNonWorkingHoursFile,
+  getWorkingHoursPerMonth,
+} from "./tableBuildingFunctions";
 import {
   START_TABLE_POINT,
   TABLE_HEADERS,
   WORKSHEET_MONTHLY_TIMESHEET_NAME,
 } from "./constants/constant";
-import { getWorkingHoursPerMonth } from "./tableBuildingFunctions/getWorkingHoursPerMonth";
-import { generateReportFileName } from "./generateReportFileName";
-import { makePivotCacheDefinition } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotCacheDefinition";
-import { makeContentTypes } from "./XMLGeneratingFunctions/makeContentTypes";
-import { makeWorkbook } from "./XMLGeneratingFunctions/makeWorkbook";
-import { makePivotTable } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotTable";
-import { makePivotCacheRecords } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotCacheRecords";
-import { makePivotCacheDefinitionRels } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotCacheDefinitionRels";
-import { makeWorksheetWithPivotTable } from "./XMLGeneratingFunctions/makeWorksheetWithPivotTable";
-import { makeWorksheetWithPivotTableRels } from "./XMLGeneratingFunctions/makeWorksheetWithPivotTableRels";
-import { makeWorkbookRels } from "./XMLGeneratingFunctions/makeWorkbookRels";
+import {
+  makePivotCacheDefinition,
+  makeContentTypes,
+  makeWorkbook,
+  makePivotTable,
+  makePivotCacheRecords,
+  makePivotCacheDefinitionRels,
+  makeWorksheetWithPivotTable,
+  makeWorksheetWithPivotTableRels,
+  makeWorkbookRels,
+  makePivotTableRels,
+} from "./XMLGeneratingFunctions";
 import admZip from "adm-zip";
 import path from "path";
-import { makePivotTableRels } from "./XMLGeneratingFunctions/pivotTableBuildingFunctions/makePivotTableRels";
-import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHoursFile";
+import { generateReportFileName } from "./generateReportFileName";
 
 (async () => {
   const workBook = new excel.Workbook({});
