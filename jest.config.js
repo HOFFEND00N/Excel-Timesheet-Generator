@@ -15,11 +15,13 @@ const config = {
     "!./src/app.ts",
     "!./src/XMLGeneratingFunctions/**",
     "!./src/classes/**",
-    "!./src/tableBuildingFunctions/fetchJiraUserTasks.ts",
-    "!./src/tableBuildingFunctions/getCredentials.ts",
-    "!./src/tableBuildingFunctions/getNonWorkingHoursFile.ts",
-    "!./src/tableBuildingFunctions/getWorkingHoursForMonth.ts",
-    "!./src/tableBuildingFunctions/types.ts",
+    ...[
+      "fetchJiraUserTasks",
+      "getCredentials",
+      "getNonWorkingHoursFile",
+      "getWorkingHoursForMonth",
+      "types",
+    ].map((file) => `!./src/tableBuildingFunctions/${file}.ts`),
   ],
 };
 export default config;
