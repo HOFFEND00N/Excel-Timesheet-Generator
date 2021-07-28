@@ -10,7 +10,8 @@
     "eslint": "eslint \"./{src,tests}/**/*.ts\"",
     "eslint-fix": "eslint --fix \"./{src,tests}/**/*.ts\"",
     "pre-commit": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typeCheck": "tsc --noEmit"
   },
   "author": "ivan.petrov@confirmit.com",
   "license": "MIT",
