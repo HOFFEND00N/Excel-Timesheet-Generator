@@ -12,9 +12,10 @@ import {
   TABLE_HEADERS,
   WORKSHEET_MONTHLY_TIMESHEET_NAME,
 } from "./constants/constant";
-import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHoursFile";
 import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHoursForMonth";
 import { generateReportFileName } from "./generateReportFileName";
+import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHoursFile";
+import { userInputHandler } from "./tableBuildingFunctions/userInputHandler";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -34,12 +35,10 @@ import { generateReportFileName } from "./generateReportFileName";
     currentDate,
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
-    getNonWorkingHoursFile,
+    getNonWorkingHoursFile: () => userInputHandler(getNonWorkingHoursFile),
     getWorkingHoursForMonth,
   });
 
-  //not tested, need to test excel file appearance too?
-  //may be compare screenshots
   const employeeColumn =
     START_TABLE_POINT.column +
     TABLE_HEADERS.findIndex((header) => header.label == "Employee");

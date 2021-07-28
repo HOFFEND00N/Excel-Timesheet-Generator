@@ -16,4 +16,3 @@ export async function getWorkingHoursForMonth(): Promise<number> {
   ]);
   return workingHoursPerMonth;
 }
-//TODO: test isNumeric()

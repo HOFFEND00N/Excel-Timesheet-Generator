@@ -15,6 +15,7 @@ import { Point } from "../classes/Point";
 import { CommonCell, FetchUserTasksArguments, UserTasks } from "./types";
 import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
 import { makeNonWorkingHoursByEmployeesUsername } from "./makeNonWorkingHoursByEmployeesUsername";
+import { userInputHandler } from "./userInputHandler";
 
 type MakeTableArguments = {
   tableData: TableData;
@@ -82,7 +83,7 @@ export async function makeTable({
 
   const workingHoursPerMonth = await getWorkingHoursForMonth();
 
-  const tableRowsValues = await makeEmployeeDataRows({
+  const tableRowsValues = await userInputHandler(makeEmployeeDataRows, {
     tableData,
     headers: tableHeaders,
     fetchUserTasks,
