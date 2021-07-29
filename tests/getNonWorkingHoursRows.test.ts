@@ -1,5 +1,5 @@
 import { CommonValue } from "../src/tableBuildingFunctions/types";
-import { getNonWorkingHoursRows } from "../src/tableBuildingFunctions/getNonWorkingHoursRows";
+import { getNonWorkingHoursRows } from "../src/tableBuildingFunctions";
 import { TableData } from "../src/classes/TableData";
 
 test("pass empty array, expect to return zero rows", async () => {

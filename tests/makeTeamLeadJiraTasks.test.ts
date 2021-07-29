@@ -1,4 +1,4 @@
-import { makeTeamLeadJiraTasks } from "../src/tableBuildingFunctions/makeTeamLeadJiraTasks";
+import { makeTeamLeadJiraTasks } from "../src/tableBuildingFunctions";
 import { UserTasks } from "../src/tableBuildingFunctions/types";
 
 test("pass zero team tasks expect to return zero teamLead tasks", () => {

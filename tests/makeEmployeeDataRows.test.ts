@@ -1,4 +1,4 @@
-import { makeEmployeeDataRows } from "../src/tableBuildingFunctions/makeEmployeeDataRows";
+import { makeEmployeeDataRows } from "../src/tableBuildingFunctions";
 import {
   getFetchUserTasksForTests,
   getTableDataForTests,

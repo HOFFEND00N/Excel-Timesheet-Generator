@@ -1,4 +1,4 @@
-import { makeMonthRows } from "../src/tableBuildingFunctions/makeMonthRows";
+import { makeMonthRows } from "../src/tableBuildingFunctions";
 import { CommonCell } from "../src/tableBuildingFunctions/types";
 import { getMonthRowsForTests } from "./mockedDataForTests";
 

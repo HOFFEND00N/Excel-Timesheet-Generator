@@ -1,4 +1,4 @@
-import { makeTable } from "../src/tableBuildingFunctions/makeTable";
+import { makeTable } from "../src/tableBuildingFunctions";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../src/constants/constant";
 import {
   HorizontalAlignTextWays,

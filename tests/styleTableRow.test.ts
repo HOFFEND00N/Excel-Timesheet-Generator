@@ -1,4 +1,4 @@
-import { styleTableRow } from "../src/tableBuildingFunctions/styleTableRow";
+import { styleTableRow } from "../src/tableBuildingFunctions";
 import {
   makeBoldCellTextStyle,
   makeYellowBackgroundStyle,

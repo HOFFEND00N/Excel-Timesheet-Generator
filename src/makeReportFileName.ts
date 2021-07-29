@@ -1,4 +1,4 @@
-export function generateReportFileName(currentDate: Date, companyUnit: number) {
+export function makeReportFileName(currentDate: Date, companyUnit: number) {
   const month = (currentDate.getMonth() + 1).toString();
 
   return `${currentDate.getFullYear()}-${month.padStart(

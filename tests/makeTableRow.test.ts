@@ -1,4 +1,4 @@
-import { makeTableRow } from "../src/tableBuildingFunctions/makeTableRow";
+import { makeTableRow } from "../src/tableBuildingFunctions";
 import { CommonCell } from "../src/tableBuildingFunctions/types";
 
 test("pass empty values, expect empty array", () => {

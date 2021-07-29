@@ -1,4 +1,4 @@
-import { makeNonWorkingHoursByEmployeesUsername } from "../src/tableBuildingFunctions/makeNonWorkingHoursByEmployeesUsername";
+import { makeNonWorkingHoursByEmployeesUsername } from "../src/tableBuildingFunctions";
 import { HoursByEmployees } from "../src/tableBuildingFunctions/types";
 import { getTableDataForTests } from "./mockedDataForTests";
 

@@ -13,7 +13,7 @@ const config = {
     "**/*.ts",
     "!**/node_modules/**",
     "!./src/app.ts",
-    "!./src/XMLGeneratingFunctions/**",
+    "!./src/XMLBuildingFunctions/**",
     "!./src/classes/**",
     ...[
       "fetchJiraUserTasks",

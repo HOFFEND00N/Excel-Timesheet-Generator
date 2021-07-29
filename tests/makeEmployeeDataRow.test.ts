@@ -1,5 +1,5 @@
 import { CommonValue } from "../src/tableBuildingFunctions/types";
-import { makeEmployeeDataRow } from "../src/tableBuildingFunctions/makeEmployeeDataRow";
+import { makeEmployeeDataRow } from "../src/tableBuildingFunctions";
 import { TABLE_HEADERS } from "../src/constants/constant";
 import { getTableDataForTests } from "./mockedDataForTests";
 
