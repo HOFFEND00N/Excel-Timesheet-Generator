@@ -36,34 +36,7 @@ export const START_MONTH_HEADER_POINT: Point = { column: 2, row: 5 };
 
 export const OUTPUT_FORMAT_ARRAY_OF_ARRAYS = 1;
 
-export const ENGLISH_ALPHABET = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
+export const ENGLISH_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export const EPIC_KEY = "customfield_10006";
 

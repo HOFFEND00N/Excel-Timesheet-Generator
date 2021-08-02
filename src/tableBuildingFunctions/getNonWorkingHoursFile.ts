@@ -26,4 +26,6 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
   return nonWorkingHoursRows.map(removeEmptyCellAtTheBeginning);
 }
 
-const removeEmptyCellAtTheBeginning = (row: string[]) => row.splice(1);
+function removeEmptyCellAtTheBeginning(row: string[]) {
+  return row.splice(row.findIndex((value) => value != ""));
+}

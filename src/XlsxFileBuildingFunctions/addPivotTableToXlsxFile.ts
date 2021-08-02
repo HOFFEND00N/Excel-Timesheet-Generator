@@ -15,6 +15,7 @@ import {
   makeWorksheetWithPivotTableRels,
 } from "../XMLBuildingFunctions";
 import { CommonCell } from "../tableBuildingFunctions/types";
+import { create } from "xmlbuilder2";
 
 export function addPivotTableToXlsxFile({
   reportName,
@@ -51,9 +52,11 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(xl_pivotCache, "pivotCacheDefinition1.xml"),
-    makePivotCacheDefinition({
-      employees: employeesWithTeamLead,
-      tableBottomRightPoint: table[table.length - 1].point,
+    create({
+      pivotCacheDefinition: makePivotCacheDefinition({
+        employees: employeesWithTeamLead,
+        tableBottomRightPoint: table[table.length - 1].point,
+      }),
     }).end()
   );
   fs.writeFileSync(

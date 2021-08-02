@@ -23,6 +23,9 @@ import {
   addPivotTableToXlsxFile,
 } from "./XlsxFileBuildingFunctions";
 
+//TODO: check how program works with new file with non-working hours
+//TODO: test pivot table generation? Separate content generation and actual xml file building?
+
 (async () => {
   const workBook = new excel.Workbook({});
   const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
@@ -89,5 +92,3 @@ import {
   });
   console.log(`Successfully generated ${reportName}`);
 })();
-
-//TODO: test pivot table generation? Separate content generation and actual xml file building?
