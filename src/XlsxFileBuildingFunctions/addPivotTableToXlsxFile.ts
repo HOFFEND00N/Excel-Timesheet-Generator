@@ -68,7 +68,7 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(xl_pivotCache_rels, "pivotCacheDefinition1.xml.rels"),
-    makePivotCacheDefinitionRels().end()
+    create({ Relationships: makePivotCacheDefinitionRels() }).end()
   );
   fs.writeFileSync(
     path.join(xl_pivotTables_rels, "pivotTable1.xml.rels"),

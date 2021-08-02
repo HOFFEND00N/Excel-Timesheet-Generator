@@ -1,18 +1,13 @@
-import { create } from "xmlbuilder2";
-import { XMLBuilder } from "xmlbuilder2/lib/interfaces";
+import { PivotCacheDefinitionRels } from "../../XlsxFileClasses/pivotCacheDefinitionRels";
 
-export function makePivotCacheDefinitionRels(): XMLBuilder {
-  return create({
-    encoding: "utf-8",
-    standalone: "yes",
-  })
-    .ele("Relationships", {
-      xmlns: "http://schemas.openxmlformats.org/package/2006/relationships",
-    })
-    .ele("Relationship", {
-      Id: "rId1",
-      Type:
+export function makePivotCacheDefinitionRels(): PivotCacheDefinitionRels {
+  return {
+    "@xmlns": "http://schemas.openxmlformats.org/package/2006/relationships",
+    Relationship: {
+      "@Id": "rId1",
+      "@Type":
         "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotCacheRecords",
-      Target: "pivotCacheRecords1.xml",
-    });
+      "@Target": "pivotCacheRecords1.xml",
+    },
+  };
 }
