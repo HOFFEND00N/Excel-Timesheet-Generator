@@ -22,6 +22,8 @@ const config = {
       "getWorkingHoursForMonth",
       "types",
     ].map((file) => `!./src/tableBuildingFunctions/${file}.ts`),
+    "!./src/XlsxFileBuildingFunctions/**",
+    "!./src/tableBuildingFunctions/index.ts",
   ],
 };
 export default config;

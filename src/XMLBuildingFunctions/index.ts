@@ -7,7 +7,6 @@ export {
   makePivotCacheDefinition,
   makePivotCacheDefinitionRels,
   makePivotCacheRecords,
-  makePivotRowValue,
   makePivotTable,
   makePivotTableRels,
 } from "./pivotTableBuildingFunctions";

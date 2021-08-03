@@ -16,6 +16,7 @@ import {
 } from "../XMLBuildingFunctions";
 import { CommonCell } from "../tableBuildingFunctions/types";
 import { create } from "xmlbuilder2";
+import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
 
 export function addPivotTableToXlsxFile({
   reportName,
@@ -61,9 +62,13 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(xl_pivotCache, "pivotCacheRecords1.xml"),
-    makePivotCacheRecords({
-      table,
-      employees: employeesWithTeamLead,
+    create({
+      pivotCacheRecords: makePivotCacheRecords({
+        table,
+        employees: employeesWithTeamLead,
+        recordElementsCount: TABLE_HEADERS.length,
+        startTablePoint: START_TABLE_POINT,
+      }),
     }).end()
   );
   fs.writeFileSync(
