@@ -1,4 +1,4 @@
-import { PivotCacheDefinitionRels } from "../../XlsxFileClasses/pivotCacheDefinitionRels";
+import { PivotCacheDefinitionRels } from "../../XlsxFileClasses/PivotCacheDefinitionRels";
 
 export function makePivotCacheDefinitionRels(): PivotCacheDefinitionRels {
   return {

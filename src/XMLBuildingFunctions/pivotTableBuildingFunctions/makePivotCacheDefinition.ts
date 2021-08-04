@@ -6,7 +6,7 @@ import {
   CacheField,
   PivotCacheDefinition,
   SharedItem,
-} from "../../XlsxFileClasses/pivotCacheDefinition";
+} from "../../XlsxFileClasses/PivotCacheDefinition";
 
 export function makePivotCacheDefinition({
   employees,

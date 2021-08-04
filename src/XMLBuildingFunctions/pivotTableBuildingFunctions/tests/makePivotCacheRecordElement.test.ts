@@ -1,4 +1,4 @@
-import { PivotCacheRecordElement } from "../../../XlsxFileClasses/pivotCacheRecords";
+import { PivotCacheRecordElement } from "../../../XlsxFileClasses/PivotCacheRecords";
 import { makePivotCacheRecordElement } from "../makePivotCacheRecordElement";
 
 test("pass string, expect to return string pivot cache record element", () => {

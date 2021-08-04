@@ -1,6 +1,6 @@
 import { CommonValue } from "../../tableBuildingFunctions/types";
 import { Employee } from "../../classes/Employee";
-import { PivotCacheRecordElement } from "../../XlsxFileClasses/pivotCacheRecords";
+import { PivotCacheRecordElement } from "../../XlsxFileClasses/PivotCacheRecords";
 
 export function makePivotCacheRecordElement({
   value,

@@ -1,4 +1,4 @@
-import { SharedItem } from "./pivotCacheDefinition";
+import { SharedItem } from "./PivotCacheDefinition";
 
 export type PivotTableDefinition = {
   "@xmlns": string;

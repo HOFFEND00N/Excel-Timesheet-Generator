@@ -4,7 +4,7 @@ import {
   RowItem,
   Item,
   PivotTableDefinition,
-} from "../../XlsxFileClasses/pivotTableDefinition";
+} from "../../XlsxFileClasses/PivotTableDefinition";
 
 export function makePivotTable({
   employees,

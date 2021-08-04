@@ -110,7 +110,7 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(whereToExtract, "[Content_Types].xml"),
-    makeContentTypes().end()
+    create({ Types: makeContentTypes() }).end()
   );
 
   zip = new admZip();

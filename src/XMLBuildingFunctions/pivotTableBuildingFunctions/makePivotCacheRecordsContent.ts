@@ -1,6 +1,6 @@
 import { CommonCell } from "../../tableBuildingFunctions/types";
 import { Employee } from "../../classes/Employee";
-import { PivotCacheRecord } from "../../XlsxFileClasses/pivotCacheRecords";
+import { PivotCacheRecord } from "../../XlsxFileClasses/PivotCacheRecords";
 import { TABLE_HEADERS } from "../../constants/constant";
 import { makePivotCacheRecordElement } from "./makePivotCacheRecordElement";
 

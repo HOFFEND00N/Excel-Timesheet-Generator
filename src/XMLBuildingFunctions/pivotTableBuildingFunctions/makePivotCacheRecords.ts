@@ -1,6 +1,6 @@
 import { CommonCell } from "../../tableBuildingFunctions/types";
 import { Employee } from "../../classes/Employee";
-import { PivotCacheRecords } from "../../XlsxFileClasses/pivotCacheRecords";
+import { PivotCacheRecords } from "../../XlsxFileClasses/PivotCacheRecords";
 import { makePivotCacheRecordsContent } from "./makePivotCacheRecordsContent";
 import { Point } from "../../classes/Point";
 
