@@ -34,7 +34,7 @@ export function makePivotCacheDefinition({
         "@sheet": "Monthly timesheet",
       },
     },
-    cacheFields: { cacheField: [], "@count": `${TABLE_HEADERS.length}` },
+    cacheFields: { cacheField: [], "@count": TABLE_HEADERS.length },
   };
   makePivotCacheFields(pivotCacheDefinition, employees);
 
@@ -65,7 +65,7 @@ function makePivotCacheFieldEmployees(employees: Employee[], name: string) {
     "@name": name,
     "@numFmtId": "0",
     sharedItems: {
-      "@count": `${employees.length}`,
+      "@count": employees.length,
       s: makePivotCacheFieldSharedItems(employees),
     },
   };

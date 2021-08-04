@@ -23,11 +23,15 @@ export function addPivotTableToXlsxFile({
   tableData,
   workingHoursPerMonth,
   table,
+  employeeColumnIndex,
+  manHoursColumnIndex,
 }: {
   reportName: string;
   tableData: TableData;
   workingHoursPerMonth: number;
   table: CommonCell[];
+  employeeColumnIndex: number;
+  manHoursColumnIndex: number;
 }) {
   let zip = new admZip(`${reportName}`);
   const whereToExtract = "unzippedXlsxFile";
@@ -81,7 +85,13 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(xl_pivotTables, "pivotTable1.xml"),
-    makePivotTable(employeesWithTeamLead).end()
+    create({
+      pivotTableDefinition: makePivotTable({
+        employees: employeesWithTeamLead,
+        employeeColumnIndex: employeeColumnIndex,
+        manHoursColumnIndex: manHoursColumnIndex,
+      }),
+    }).end()
   );
   fs.writeFileSync(
     path.join(xl_worksheets_rels, "sheet2.xml.rels"),

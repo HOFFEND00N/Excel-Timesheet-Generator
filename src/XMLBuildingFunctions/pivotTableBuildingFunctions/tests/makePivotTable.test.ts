@@ -1,21 +1,13 @@
-import { TABLE_HEADERS } from "../../constants/constant";
-import { Employee } from "../../classes/Employee";
-import {
-  RowItem,
-  Item,
-  PivotTableDefinition,
-} from "../../XlsxFileClasses/pivotTableDefinition";
+import { PivotTableDefinition } from "../../../XlsxFileClasses/pivotTableDefinition";
+import { TABLE_HEADERS } from "../../../constants/constant";
+import { Employee } from "../../../classes/Employee";
+import { makePivotTable } from "../makePivotTable";
 
-export function makePivotTable({
-  employees,
-  employeeColumnIndex,
-  manHoursColumnIndex,
-}: {
-  employees: Employee[];
-  employeeColumnIndex: number;
-  manHoursColumnIndex: number;
-}) {
-  const pivotTable: PivotTableDefinition = {
+test("pass one employee, expect to return pivot table definition", () => {
+  const employees: Employee[] = [
+    { name: "Karaseva Svetlana", jiraUsername: "KarasevaS" },
+  ];
+  const expectedPivotTableDefinition: PivotTableDefinition = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
     "@name": "PivotTable1",
     "@cacheId": "1",
@@ -46,7 +38,7 @@ export function makePivotTable({
           "@axis": "axisRow",
           items: {
             "@count": employees.length + 1,
-            item: makePivotFieldItems(employees.length),
+            item: [{ "@x": "0" }, { "@t": "default" }],
           },
         },
         {
@@ -63,17 +55,17 @@ export function makePivotTable({
     },
     rowFields: {
       "@count": 1,
-      field: { "@x": employeeColumnIndex },
+      field: { "@x": 1 },
     },
     rowItems: {
       "@count": employees.length + 1,
-      i: makeRowItems(employees.length),
+      i: [{ x: { "@v": "0" } }, { "@t": "grand", x: {} }],
     },
     dataFields: {
       "@count": 1,
       dataField: {
         "@name": "Sum of Man-Hours",
-        "@fld": manHoursColumnIndex,
+        "@fld": 2,
         "@baseField": "0",
         "@baseItem": "0",
       },
@@ -88,23 +80,11 @@ export function makePivotTable({
     },
   };
 
-  return pivotTable;
-}
+  const actualPivotTableDefinition = makePivotTable({
+    employees,
+    employeeColumnIndex: 1,
+    manHoursColumnIndex: 2,
+  });
 
-function makePivotFieldItems(itemsCount: number) {
-  const items: Item[] = [];
-  for (let i = 0; i < itemsCount; i++) {
-    items.push({ "@x": `${i}` });
-  }
-  items.push({ "@t": "default" });
-  return items;
-}
-
-function makeRowItems(itemsCount: number) {
-  const rowItems: RowItem[] = [];
-  for (let i = 0; i < itemsCount; i++) {
-    rowItems.push({ x: { "@v": `${i}` } });
-  }
-  rowItems.push({ "@t": "grand", x: {} });
-  return rowItems;
-}
+  expect(actualPivotTableDefinition).toEqual(expectedPivotTableDefinition);
+});

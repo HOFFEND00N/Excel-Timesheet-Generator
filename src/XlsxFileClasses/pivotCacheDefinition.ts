@@ -17,7 +17,7 @@ type WorksheetSource = {
 };
 
 type CacheFields = {
-  "@count": string;
+  "@count": number;
   cacheField: CacheField[];
 };
 
@@ -28,10 +28,10 @@ export type CacheField = {
 };
 
 export type SharedItems = {
-  "@count"?: string;
+  "@count"?: number;
   s?: SharedItem[];
 };
 
 export type SharedItem = {
-  "@v": string;
+  "@v"?: string;
 };

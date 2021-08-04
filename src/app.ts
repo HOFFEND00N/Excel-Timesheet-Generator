@@ -84,11 +84,17 @@ import {
   const reportName = makeReportFileName(currentDate, tableData.unit);
   await makeXlsxFile(workBook, reportName);
 
+  const manHoursColumn = TABLE_HEADERS.findIndex(
+    (header) => header.label == "Man-Hours"
+  );
+
   addPivotTableToXlsxFile({
     reportName,
     tableData,
     workingHoursPerMonth,
     table,
+    employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
+    manHoursColumnIndex: manHoursColumn,
   });
   console.log(`Successfully generated ${reportName}`);
 })();

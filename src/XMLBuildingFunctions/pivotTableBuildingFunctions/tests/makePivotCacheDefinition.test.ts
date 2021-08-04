@@ -15,7 +15,7 @@ test("pass one employee, expect to return pivot cache definition with one employ
       },
     },
     cacheFields: {
-      "@count": "8",
+      "@count": 8,
       cacheField: [
         { "@name": "Unit", "@numFmtId": "0", sharedItems: {} },
         { "@name": "Interco", "@numFmtId": "0", sharedItems: {} },
@@ -24,7 +24,7 @@ test("pass one employee, expect to return pivot cache definition with one employ
         {
           "@name": "Employee",
           "@numFmtId": "0",
-          sharedItems: { "@count": "1", s: [{ "@v": "Karaseva Svetlana" }] },
+          sharedItems: { "@count": 1, s: [{ "@v": "Karaseva Svetlana" }] },
         },
         { "@name": "Task", "@numFmtId": "0", sharedItems: {} },
         { "@name": "Over-Time", "@numFmtId": "0", sharedItems: {} },
@@ -60,7 +60,7 @@ test("pass several employee, expect to return pivot cache definition with severa
       },
     },
     cacheFields: {
-      "@count": "8",
+      "@count": 8,
       cacheField: [
         { "@name": "Unit", "@numFmtId": "0", sharedItems: {} },
         { "@name": "Interco", "@numFmtId": "0", sharedItems: {} },
@@ -70,7 +70,7 @@ test("pass several employee, expect to return pivot cache definition with severa
           "@name": "Employee",
           "@numFmtId": "0",
           sharedItems: {
-            "@count": "2",
+            "@count": 2,
             s: [{ "@v": "Karaseva Svetlana" }, { "@v": "Matrosova Marianna" }],
           },
         },
