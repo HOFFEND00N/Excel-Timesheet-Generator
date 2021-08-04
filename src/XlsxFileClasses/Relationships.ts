@@ -1,6 +1,6 @@
-export type PivotCacheDefinitionRels = {
+export type Relationships = {
   "@xmlns": string;
-  Relationship: Relationship;
+  Relationship: Relationship[];
 };
 
 export type Relationship = {

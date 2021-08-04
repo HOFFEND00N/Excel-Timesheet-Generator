@@ -53,7 +53,7 @@ export function addPivotTableToXlsxFile({
 
   fs.writeFileSync(
     path.join(whereToExtract, "xl/_rels/workbook.xml.rels"),
-    makeWorkbookRels().end()
+    create({ Relationships: makeWorkbookRels() }).end()
   );
   fs.writeFileSync(
     path.join(xl_pivotCache, "pivotCacheDefinition1.xml"),
@@ -95,7 +95,7 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(xl_worksheets_rels, "sheet2.xml.rels"),
-    makeWorksheetWithPivotTableRels().end()
+    create({ Relationships: makeWorksheetWithPivotTableRels() }).end()
   );
   fs.writeFileSync(
     path.join(xl_worksheets, "sheet2.xml"),
