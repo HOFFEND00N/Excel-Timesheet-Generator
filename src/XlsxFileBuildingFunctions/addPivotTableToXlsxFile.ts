@@ -106,7 +106,7 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(whereToExtract, "xl/workbook.xml"),
-    makeWorkbook().end()
+    create({ workbook: makeWorkbook() }).end()
   );
   fs.writeFileSync(
     path.join(whereToExtract, "[Content_Types].xml"),
