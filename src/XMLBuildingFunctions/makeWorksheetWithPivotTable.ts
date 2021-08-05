@@ -1,6 +1,5 @@
-import { create } from "xmlbuilder2";
-import { XMLBuilder } from "xmlbuilder2/lib/interfaces";
 import { Employee } from "../classes/Employee";
+import { Row } from "../XlsxFileClasses/Worksheet";
 
 export function makeWorksheetWithPivotTable({
   employees,
@@ -8,107 +7,70 @@ export function makeWorksheetWithPivotTable({
 }: {
   employees: Employee[];
   workingHoursPerMonth: number;
-}): XMLBuilder {
-  const worksheet = create({
-    encoding: "utf-8",
-    standalone: "yes",
-  })
-    .ele("worksheet", {
-      xmlns: "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-    })
-    .ele("dimension", { ref: `A3:B${employees.length + 4}` })
-    .up()
-    .ele("sheetFormatPr", { defaultRowHeight: "15" })
-    .up()
-    .ele("cols")
-    .ele("col", {
-      width: "20",
-      bestFit: "1",
-      min: "1",
-      max: "1",
-      customWidth: "1",
-    })
-    .up()
-    .ele("col", {
-      width: "17.125",
-      bestFit: "1",
-      min: "2",
-      max: "2",
-      customWidth: "1",
-    })
-    .up()
-    .up()
-    .ele("sheetData")
-    .ele("row", { r: "3" })
-    .ele("c", { r: "A3", t: "str" })
-    .ele("v")
-    .txt("Row Labels")
-    .up()
-    .up()
-    .ele("c", { r: "B3", t: "str" })
-    .ele("v")
-    .txt("Sum of Man-Hours")
-    .up()
-    .up()
-    .up();
+}) {
+  return {
+    "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
+    dimension: { "@ref": `A3:B${employees.length + 4}` },
+    sheetFormatPr: { "@defaultRowHeight": 15 },
+    cols: {
+      col: [
+        {
+          "@width": 20,
+          "@bestFit": true,
+          "@min": 1,
+          "@max": 1,
+          "@customWidth": true,
+        },
+        {
+          "@width": 17.125,
+          "@bestFit": true,
+          "@min": 2,
+          "@max": 2,
+          "@customWidth": true,
+        },
+      ],
+    },
+    sheetData: {
+      row: makeSheetDataRows(employees, workingHoursPerMonth),
+    },
+  };
+}
+
+function makeSheetDataRows(
+  employees: Employee[],
+  workingHoursPerMonth: number
+) {
+  const rows: Row[] = [];
+  rows.push({
+    "@r": 3,
+    c: [
+      { "@r": "A3", "@t": "str", v: "Row Labels" },
+      { "@r": "B3", "@t": "str", v: "Sum of Man-Hours" },
+    ],
+  });
 
   for (let i = 0; i < employees.length; i++) {
-    addRowSheetWithPivotTable({
-      employeeName: employees[i].name,
-      xml: worksheet,
-      row: i + 4,
-      workingHoursPerMonth,
+    rows.push({
+      "@r": i + 4,
+      c: [
+        { "@r": `A${i + 4}`, "@t": "str", v: `${employees[i].name}` },
+        {
+          "@r": `B${i + 4}`,
+          v: `${workingHoursPerMonth}`,
+        },
+      ],
     });
   }
 
-  worksheet
-    .ele("row", { r: `${employees.length + 4}` })
-    .ele("c", { r: `A${employees.length + 4}`, t: "str" })
-    .ele("v")
-    .txt("Grand Total")
-    .up()
-    .up()
-    .ele("c", { r: `B${employees.length + 4}` })
-    .ele("v")
-    .txt(`${employees.length * workingHoursPerMonth}`)
-    .up()
-    .up()
-    .up()
-    .up()
-    .ele("pageMargins", {
-      left: "0.7",
-      right: "0.7",
-      top: "0.75",
-      bottom: "0.75",
-      header: "0.3",
-      footer: "0.3",
-    });
-
-  return worksheet;
-}
-
-function addRowSheetWithPivotTable({
-  employeeName,
-  xml,
-  row,
-  workingHoursPerMonth,
-}: {
-  employeeName: string;
-  xml: XMLBuilder;
-  row: number;
-  workingHoursPerMonth: number;
-}): XMLBuilder {
-  return xml
-    .ele("row", { r: `${row}` })
-    .ele("c", { r: `A${row}`, t: "str" })
-    .ele("v")
-    .txt(`${employeeName}`)
-    .up()
-    .up()
-    .ele("c", { r: `B${row}` })
-    .ele("v")
-    .txt(`${workingHoursPerMonth}`)
-    .up()
-    .up()
-    .up();
+  rows.push({
+    "@r": employees.length + 4,
+    c: [
+      { "@r": `A${employees.length + 4}`, "@t": "str", v: "Grand Total" },
+      {
+        "@r": `B${employees.length + 4}`,
+        v: `${employees.length * workingHoursPerMonth}`,
+      },
+    ],
+  });
+  return rows;
 }

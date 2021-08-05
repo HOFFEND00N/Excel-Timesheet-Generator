@@ -99,9 +99,11 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(xl_worksheets, "sheet2.xml"),
-    makeWorksheetWithPivotTable({
-      employees: employeesWithTeamLead,
-      workingHoursPerMonth,
+    create({
+      worksheet: makeWorksheetWithPivotTable({
+        employees: employeesWithTeamLead,
+        workingHoursPerMonth,
+      }),
     }).end()
   );
   fs.writeFileSync(
