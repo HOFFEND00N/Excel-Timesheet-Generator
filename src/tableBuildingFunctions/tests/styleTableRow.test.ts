@@ -1,9 +1,9 @@
-import { styleTableRow } from "../src/tableBuildingFunctions";
+import { styleTableRow } from "../index";
 import {
   makeBoldCellTextStyle,
   makeYellowBackgroundStyle,
-} from "../src/constants/styleConstants";
-import { CommonCell } from "../src/tableBuildingFunctions/types";
+} from "../../constants/styleConstants";
+import { CommonCell } from "../types";
 
 let actualRow: CommonCell[];
 

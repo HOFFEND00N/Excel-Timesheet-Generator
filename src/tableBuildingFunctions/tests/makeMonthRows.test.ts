@@ -1,5 +1,5 @@
-import { makeMonthRows } from "../src/tableBuildingFunctions";
-import { CommonCell } from "../src/tableBuildingFunctions/types";
+import { makeMonthRows } from "../index";
+import { CommonCell } from "../types";
 import { getMonthRowsForTests } from "./mockedDataForTests";
 
 test("make date section of table + header, expect current month + year + header", () => {

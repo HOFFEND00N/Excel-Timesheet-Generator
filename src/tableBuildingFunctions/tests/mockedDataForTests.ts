@@ -1,21 +1,17 @@
-import { TableData } from "../src/classes/TableData";
-import { Point } from "../src/classes/Point";
+import { TableData } from "../../classes/TableData";
+import { Point } from "../../classes/Point";
 import {
   START_MONTH_HEADER_POINT,
   MONTHLY_TIMESHEET_HEADER,
-} from "../src/constants/constant";
-import {
-  CommonCell,
-  FetchUserTasksArguments,
-  UserTasks,
-} from "../src/tableBuildingFunctions/types";
+} from "../../constants/constant";
+import { CommonCell, FetchUserTasksArguments, UserTasks } from "../types";
 import {
   HorizontalAlignTextWays,
   makeBoldCellTextStyle,
   makeDefaultTextStyle,
   makeStyleHorizontalAlignText,
   makeYellowBackgroundStyle,
-} from "../src/constants/styleConstants";
+} from "../../constants/styleConstants";
 
 export function getTableDataForTests(): TableData {
   return {

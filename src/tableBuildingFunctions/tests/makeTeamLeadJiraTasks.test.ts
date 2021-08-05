@@ -1,5 +1,5 @@
-import { makeTeamLeadJiraTasks } from "../src/tableBuildingFunctions";
-import { UserTasks } from "../src/tableBuildingFunctions/types";
+import { makeTeamLeadJiraTasks } from "../index";
+import { UserTasks } from "../types";
 
 test("pass zero team tasks expect to return zero teamLead tasks", () => {
   const expectedTeamLeadTasks: UserTasks = { tasks: [], userName: "AlexU" };

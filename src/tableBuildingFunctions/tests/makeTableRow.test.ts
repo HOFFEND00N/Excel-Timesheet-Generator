@@ -1,5 +1,5 @@
-import { makeTableRow } from "../src/tableBuildingFunctions";
-import { CommonCell } from "../src/tableBuildingFunctions/types";
+import { makeTableRow } from "../index";
+import { CommonCell } from "../types";
 
 test("pass empty values, expect empty array", () => {
   const expectedRow: CommonCell[] = [];

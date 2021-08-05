@@ -1,6 +1,6 @@
-import { CommonValue } from "../src/tableBuildingFunctions/types";
-import { makeEmployeeDataRow } from "../src/tableBuildingFunctions";
-import { TABLE_HEADERS } from "../src/constants/constant";
+import { CommonValue } from "../types";
+import { makeEmployeeDataRow } from "../index";
+import { TABLE_HEADERS } from "../../constants/constant";
 import { getTableDataForTests } from "./mockedDataForTests";
 
 test("pass data for one row", () => {

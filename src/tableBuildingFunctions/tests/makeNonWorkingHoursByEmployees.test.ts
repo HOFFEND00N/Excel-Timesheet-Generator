@@ -1,5 +1,5 @@
-import { makeNonWorkingHoursByEmployeesUsername } from "../src/tableBuildingFunctions";
-import { HoursByEmployees } from "../src/tableBuildingFunctions/types";
+import { makeNonWorkingHoursByEmployeesUsername } from "../index";
+import { HoursByEmployees } from "../types";
 import { getTableDataForTests } from "./mockedDataForTests";
 
 test("pass zero non working hours rows, expect to return empty map", () => {

@@ -1,4 +1,4 @@
-import { convertNumberToExcelColumn } from "../src/utils/convertNumberToExcelColumn";
+import { convertNumberToExcelColumn } from "../convertNumberToExcelColumn";
 
 test("pass 1 expect to return A", () => {
   expect(convertNumberToExcelColumn(1)).toEqual("A");

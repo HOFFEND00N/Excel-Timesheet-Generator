@@ -1,19 +1,14 @@
-import { makeTable } from "../src/tableBuildingFunctions";
-import { START_TABLE_POINT, TABLE_HEADERS } from "../src/constants/constant";
+import { makeTable } from "../index";
+import { START_TABLE_POINT, TABLE_HEADERS } from "../../constants/constant";
 import {
   HorizontalAlignTextWays,
   makeBoldCellTextStyle,
   makeCellBorderStyle,
   makeDefaultTextStyle,
   makeStyleHorizontalAlignText,
-} from "../src/constants/styleConstants";
-import {
-  CommonCell,
-  CommonValue,
-  NumberValue,
-  StringValue,
-} from "../src/tableBuildingFunctions/types";
-import { TableCell } from "../src/classes/TableCell";
+} from "../../constants/styleConstants";
+import { CommonCell, CommonValue, NumberValue, StringValue } from "../types";
+import { TableCell } from "../../classes/TableCell";
 import {
   getFetchUserTasksForTests,
   getMonthRowsForTests,

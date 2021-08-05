@@ -1,4 +1,4 @@
-import { makeUserTasksByEmployeeUsername } from "../src/tableBuildingFunctions";
+import { makeUserTasksByEmployeeUsername } from "../index";
 
 test("pass zero user tasks, expect to return empty record", () => {
   const expectedUserTasksByEmployee: Record<string, string> = {};
