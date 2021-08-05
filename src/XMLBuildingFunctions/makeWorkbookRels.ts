@@ -1,4 +1,4 @@
-import { Relationships } from "../XlsxFileClasses/Relationships";
+import { Relationships } from "../XlsxFileClasses";
 
 export function makeWorkbookRels(): Relationships {
   return {

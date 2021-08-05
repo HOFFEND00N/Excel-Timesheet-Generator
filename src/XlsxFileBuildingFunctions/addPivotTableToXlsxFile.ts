@@ -81,7 +81,7 @@ export function addPivotTableToXlsxFile({
   );
   fs.writeFileSync(
     path.join(xl_pivotTables_rels, "pivotTable1.xml.rels"),
-    makePivotTableRels().end()
+    create({ Relationships: makePivotTableRels() }).end()
   );
   fs.writeFileSync(
     path.join(xl_pivotTables, "pivotTable1.xml"),

@@ -1,4 +1,4 @@
-import { ContentTypes } from "../XlsxFileClasses/ContentTypes";
+import { ContentTypes } from "../XlsxFileClasses";
 
 export function makeContentTypes(): ContentTypes {
   return {

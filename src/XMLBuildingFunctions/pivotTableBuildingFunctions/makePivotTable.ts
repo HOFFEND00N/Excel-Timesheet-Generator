@@ -1,10 +1,6 @@
 import { TABLE_HEADERS } from "../../constants/constant";
 import { Employee } from "../../classes/Employee";
-import {
-  RowItem,
-  Item,
-  PivotTableDefinition,
-} from "../../XlsxFileClasses/PivotTableDefinition";
+import { RowItem, Item, PivotTableDefinition } from "../../XlsxFileClasses";
 
 export function makePivotTable({
   employees,
