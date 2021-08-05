@@ -3,7 +3,7 @@ export type Workbook = {
   "@xmlns:r": string;
   workbookPr: WorkbookPr;
   sheets: Sheets;
-  calcPr: CalcPr;
+  calcPr: CalculationProperties;
   pivotCaches: PivotCaches;
 };
 
@@ -21,7 +21,7 @@ export type Sheet = {
   "@r:id": string;
 };
 
-export type CalcPr = {
+export type CalculationProperties = {
   "@calcId": number;
 };
 

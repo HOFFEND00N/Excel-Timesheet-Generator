@@ -1,8 +1,8 @@
 export type Worksheet = {
   "@xmlns": string;
   dimension: Dimension;
-  sheetFormatPr: SheetFormatPr;
-  cols: Cols;
+  sheetFormatPr: SheetFormatProperties;
+  cols: Columns;
   sheetData: SheetData;
 };
 
@@ -10,15 +10,15 @@ export type Dimension = {
   "@ref": string;
 };
 
-export type SheetFormatPr = {
+export type SheetFormatProperties = {
   "@defaultRowHeight": number;
 };
 
-export type Cols = {
-  col: Col[];
+export type Columns = {
+  col: Column[];
 };
 
-export type Col = {
+export type Column = {
   "@width": number;
   "@bestFit": boolean;
   "@min": number;
@@ -32,10 +32,10 @@ export type SheetData = {
 
 export type Row = {
   "@r": number;
-  c: C[];
+  c: Cell[];
 };
 
-export type C = {
+export type Cell = {
   "@r": string;
   "@t"?: string;
   v: string;
