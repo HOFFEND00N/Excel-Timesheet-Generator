@@ -1,7 +1,6 @@
 import { CommonCell } from "../../tableBuildingFunctions/types";
 import { Employee } from "../../classes/Employee";
 import { PivotCacheRecord } from "../../XlsxFileClasses";
-import { TABLE_HEADERS } from "../../constants/constant";
 import { makePivotCacheRecordElement } from "./makePivotCacheRecordElement";
 
 export function makePivotCacheRecordsContent({
@@ -15,16 +14,17 @@ export function makePivotCacheRecordsContent({
   employees: Employee[];
   recordElementsCount: number;
 }): PivotCacheRecord[] {
+  let counter = recordElementsCount;
   const records: PivotCacheRecord[] = [{ "#": [] }];
   for (let i = startTableContentIndex; i < table.length; i++) {
-    if (recordElementsCount == 0) {
-      recordElementsCount = TABLE_HEADERS.length;
+    if (counter == 0) {
+      counter = recordElementsCount;
       records.push({ "#": [] });
     }
     records[records.length - 1]["#"].push(
       makePivotCacheRecordElement({ value: table[i].value, employees })
     );
-    recordElementsCount--;
+    counter--;
   }
   return records;
 }
