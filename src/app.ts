@@ -15,7 +15,6 @@ import {
 import { getWorkingHoursForMonth } from "./tableBuildingFunctions/getWorkingHoursForMonth";
 import { generateReportFileName } from "./generateReportFileName";
 import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHoursFile";
-import { userInputHandler } from "./tableBuildingFunctions/userInputHandler";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -35,7 +34,7 @@ import { userInputHandler } from "./tableBuildingFunctions/userInputHandler";
     currentDate,
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
-    getNonWorkingHoursFile: () => userInputHandler(getNonWorkingHoursFile),
+    getNonWorkingHoursFile: getNonWorkingHoursFile,
     getWorkingHoursForMonth,
   });
 
