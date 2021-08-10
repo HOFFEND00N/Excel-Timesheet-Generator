@@ -1,4 +1,4 @@
-import { PivotTableDefinition } from "../../../XlsxFileClasses/PivotTableDefinition";
+import { PivotTableDefinition } from "../../types/PivotTableDefinition";
 import { TABLE_HEADERS } from "../../../constants/constant";
 import { Employee } from "../../../classes/Employee";
 import { makePivotTable } from "../makePivotTable";

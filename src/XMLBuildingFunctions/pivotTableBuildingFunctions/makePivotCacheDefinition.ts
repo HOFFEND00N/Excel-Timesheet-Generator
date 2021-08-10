@@ -2,11 +2,7 @@ import { Employee } from "../../classes/Employee";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../../constants/constant";
 import { Point } from "../../classes/Point";
 import { convertNumberToExcelColumn } from "../../utils/convertNumberToExcelColumn";
-import {
-  CacheField,
-  PivotCacheDefinition,
-  SharedItem,
-} from "../../XlsxFileClasses";
+import { CacheField, PivotCacheDefinition, SharedItem } from "../types";
 
 export function makePivotCacheDefinition({
   employees,

@@ -1,4 +1,4 @@
-import { Worksheet } from "../../XlsxFileClasses/Worksheet";
+import { Worksheet } from "../types/Worksheet";
 import { Employee } from "../../classes/Employee";
 import { makeWorksheetWithPivotTable } from "../makeWorksheetWithPivotTable";
 

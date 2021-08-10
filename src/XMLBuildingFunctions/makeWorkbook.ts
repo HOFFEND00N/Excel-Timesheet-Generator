@@ -1,4 +1,4 @@
-import { Workbook } from "../XlsxFileClasses";
+import { Workbook } from "./types";
 
 export function makeWorkbook(): Workbook {
   return {

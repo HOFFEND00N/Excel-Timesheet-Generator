@@ -1,5 +1,5 @@
 import { Employee } from "../classes/Employee";
-import { Row } from "../XlsxFileClasses";
+import { Row } from "./types";
 
 export function makeWorksheetWithPivotTable({
   employees,

@@ -1,4 +1,4 @@
-import { Relationships } from "../XlsxFileClasses";
+import { Relationships } from "./types";
 
 export function makeWorksheetWithPivotTableRels(): Relationships {
   return {

@@ -1,4 +1,4 @@
-import { PivotCacheDefinition } from "../../../XlsxFileClasses/PivotCacheDefinition";
+import { PivotCacheDefinition } from "../../types/PivotCacheDefinition";
 import { makePivotCacheDefinition } from "../makePivotCacheDefinition";
 
 test("pass one employee, expect to return pivot cache definition with one employee", () => {
