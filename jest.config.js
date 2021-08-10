@@ -19,7 +19,7 @@ const config = {
       "fetchJiraUserTasks",
       "getCredentials",
       "getNonWorkingHoursFile",
-      "getWorkingHoursForMonth",
+      "getWorkingHoursPerMonth",
       "types",
     ].map((file) => `!./src/tableBuildingFunctions/${file}.ts`),
     "!./src/XlsxFileBuildingFunctions/**",
