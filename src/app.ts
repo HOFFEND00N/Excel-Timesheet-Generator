@@ -34,7 +34,7 @@ import { getNonWorkingHoursFile } from "./tableBuildingFunctions/getNonWorkingHo
     currentDate,
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
-    getNonWorkingHoursFile: getNonWorkingHoursFile,
+    getNonWorkingHoursFile,
     getWorkingHoursForMonth,
   });
 
