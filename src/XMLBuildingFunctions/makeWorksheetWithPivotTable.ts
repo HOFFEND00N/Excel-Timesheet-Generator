@@ -8,9 +8,12 @@ export function makeWorksheetWithPivotTable({
   employees: Employee[];
   workingHoursPerMonth: number;
 }) {
+  const pivotTableOffset = 4;
   return {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-    dimension: { "@ref": `A3:B${employees.length + 4}` },
+    dimension: {
+      "@ref": `A3:B${getLastPivotTableColumn({ employees, pivotTableOffset })}`,
+    },
     sheetFormatPr: { "@defaultRowHeight": 15 },
     cols: {
       col: [
@@ -31,14 +34,15 @@ export function makeWorksheetWithPivotTable({
       ],
     },
     sheetData: {
-      row: makeSheetDataRows(employees, workingHoursPerMonth),
+      row: makeSheetDataRows(employees, workingHoursPerMonth, pivotTableOffset),
     },
   };
 }
 
 function makeSheetDataRows(
   employees: Employee[],
-  workingHoursPerMonth: number
+  workingHoursPerMonth: number,
+  pivotTableOffset: number
 ) {
   const rows: Row[] = [];
   rows.push({
@@ -51,11 +55,15 @@ function makeSheetDataRows(
 
   for (let i = 0; i < employees.length; i++) {
     rows.push({
-      "@r": i + 4,
+      "@r": i + pivotTableOffset,
       c: [
-        { "@r": `A${i + 4}`, "@t": "str", v: `${employees[i].name}` },
         {
-          "@r": `B${i + 4}`,
+          "@r": `A${i + pivotTableOffset}`,
+          "@t": "str",
+          v: `${employees[i].name}`,
+        },
+        {
+          "@r": `B${i + pivotTableOffset}`,
           v: `${workingHoursPerMonth}`,
         },
       ],
@@ -63,14 +71,26 @@ function makeSheetDataRows(
   }
 
   rows.push({
-    "@r": employees.length + 4,
+    "@r": getLastPivotTableColumn({ employees, pivotTableOffset }),
     c: [
-      { "@r": `A${employees.length + 4}`, "@t": "str", v: "Grand Total" },
       {
-        "@r": `B${employees.length + 4}`,
+        "@r": `A${getLastPivotTableColumn({ employees, pivotTableOffset })}`,
+        "@t": "str",
+        v: "Grand Total",
+      },
+      {
+        "@r": `B${getLastPivotTableColumn({ employees, pivotTableOffset })}`,
         v: `${employees.length * workingHoursPerMonth}`,
       },
     ],
   });
   return rows;
 }
+
+const getLastPivotTableColumn = ({
+  employees,
+  pivotTableOffset,
+}: {
+  employees: Employee[];
+  pivotTableOffset: number;
+}) => employees.length + pivotTableOffset;
