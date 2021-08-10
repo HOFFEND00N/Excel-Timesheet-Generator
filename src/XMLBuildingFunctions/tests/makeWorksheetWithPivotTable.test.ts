@@ -10,7 +10,7 @@ test("pass 2 employees, expect to return correct worksheet", () => {
   const workingHoursPerMonth = 160;
   const expectedWorksheetWithPivotTable: Worksheet = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-    dimension: { "@ref": `A3:B${employees.length + 4}` },
+    dimension: { "@ref": `A3:B6` },
     sheetFormatPr: { "@defaultRowHeight": 15 },
     cols: {
       col: [
@@ -56,9 +56,9 @@ test("pass 2 employees, expect to return correct worksheet", () => {
         {
           "@r": 6,
           c: [
-            { "@r": `A${employees.length + 4}`, "@t": "str", v: "Grand Total" },
+            { "@r": `A6`, "@t": "str", v: "Grand Total" },
             {
-              "@r": `B${employees.length + 4}`,
+              "@r": `B6`,
               v: `${employees.length * workingHoursPerMonth}`,
             },
           ],
