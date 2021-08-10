@@ -22,7 +22,7 @@ export function makeNonWorkingHoursByEmployeesUsername({
       const employee = employees.find(
         (employee) => employee.name == employeeName
       );
-      if (!employee) throw `Nonexistent employee with name ${employeeName}`;
+      if (!employee) return nonWorkingHoursByEmployeesUsername;
 
       nonWorkingHoursByEmployeesUsername[employee.jiraUsername] =
         (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0) +

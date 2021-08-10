@@ -146,13 +146,13 @@ test("pass three non working hours row with two rows for one employee and the re
 });
 
 test("pass non working hours row with non-existent employee, expect to throw exception", () => {
-  const expectedError = new Error(
-    "Nonexistent employee with name Koroleva Glasha"
-  );
+  const expectedNonWorkingHoursByEmployees: HoursByEmployees = {
+    MolotkovaM: 8,
+  };
   const tableData = getTableDataForTests();
 
-  const makeNonWorkingHoursByEmployeesUsernameFunction = () =>
-    makeNonWorkingHoursByEmployeesUsername({
+  const actualNonWorkingHoursByEmployees = makeNonWorkingHoursByEmployeesUsername(
+    {
       employeeColumn: 4,
       manHoursColumn: 7,
       nonWorkingHoursRows: [
@@ -178,7 +178,10 @@ test("pass non working hours row with non-existent employee, expect to throw exc
         ],
       ],
       employees: [...tableData.employees, tableData.teamLead],
-    });
+    }
+  );
 
-  expect(makeNonWorkingHoursByEmployeesUsernameFunction).toThrow(expectedError);
+  expect(actualNonWorkingHoursByEmployees).toEqual(
+    expectedNonWorkingHoursByEmployees
+  );
 });
