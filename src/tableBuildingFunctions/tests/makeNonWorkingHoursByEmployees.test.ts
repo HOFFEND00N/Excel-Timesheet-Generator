@@ -145,7 +145,7 @@ test("pass three non working hours row with two rows for one employee and the re
   );
 });
 
-test("pass non working hours row with non-existent employee, expect to throw exception", () => {
+test("pass non working hours row with non-existent employee, expect to skip this row", () => {
   const expectedNonWorkingHoursByEmployees: HoursByEmployees = {
     MolotkovaM: 8,
   };
