@@ -15,6 +15,7 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
       name: "nonWorkingHoursFilePath",
       message: "path: ",
       source: searchFilesAndDirectories,
+      suggestOnly: true,
     },
   ]);
   const nonWorkingHoursFile = xlsx.readFile(nonWorkingHoursFilePath, {
@@ -95,5 +96,11 @@ function findSuitableFilesAndDirectories(searchPath: string) {
     .readdirSync(alreadyDefinedPath)
     .map((element) => alreadyDefinedPath.concat(element));
   const results = fuzzy.filter(searchPath, filesAndDirectories);
-  return results.map((result) => result.string);
+  const suitableFilesAndFolders = results.map((fileOrFolder) => {
+    const path = fileOrFolder.string;
+    if (fs.existsSync(path) && fs.lstatSync(path).isDirectory())
+      return path.concat("/");
+    return path;
+  });
+  return suitableFilesAndFolders;
 }
