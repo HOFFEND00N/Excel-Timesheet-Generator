@@ -2,6 +2,7 @@ import inquirer from "inquirer";
 import xlsx from "xlsx";
 import { OUTPUT_FORMAT_ARRAY_OF_ARRAYS } from "../constants/constant";
 import inquirer_autocomplete_prompt from "inquirer-autocomplete-prompt";
+import fsPromisified from "fs/promises";
 import fs from "fs";
 import { spawn } from "child_process";
 import fuzzy from "fuzzy";
@@ -41,20 +42,18 @@ function removeEmptyCellAtTheBeginning(row: string[]) {
   return row.splice(row.findIndex((value) => value !== ""));
 }
 
-function searchFilesAndDirectories(previousAnswers, input) {
+async function searchFilesAndDirectories(previousAnswers, input) {
   input = input || "";
-  return new Promise((resolve) => {
-    let files;
-    try {
-      if (input == "") files = listDrives();
-      else {
-        files = findSuitableFilesAndDirectories(input);
-      }
-    } catch (error) {
-      if (error.code == "ENOENT") files = [];
+  let files: Promise<string[]> = new Promise<string[]>(() => []);
+  try {
+    if (input == "") files = listDrives();
+    else {
+      files = findSuitableFilesAndDirectories(input);
     }
-    resolve(files);
-  });
+  } catch (error) {
+    if (error.code == "ENOENT") files = new Promise<string[]>(() => []);
+  }
+  return files;
 }
 
 function listDrives() {
@@ -87,20 +86,19 @@ function listDrives() {
   });
 }
 
-function findSuitableFilesAndDirectories(searchPath: string) {
+async function findSuitableFilesAndDirectories(searchPath: string) {
   const alreadyDefinedPath = searchPath.slice(
     0,
     searchPath.lastIndexOf("/") + 1
   );
-  const filesAndDirectories = fs
-    .readdirSync(alreadyDefinedPath)
-    .map((element) => alreadyDefinedPath.concat(element));
-  const results = fuzzy.filter(searchPath, filesAndDirectories);
-  const suitableFilesAndFolders = results.map((fileOrFolder) => {
+  const filesAndDirectories = (
+    await fsPromisified.readdir(alreadyDefinedPath)
+  ).map((element) => alreadyDefinedPath.concat(element));
+  const suitableFilesAndFolders = fuzzy.filter(searchPath, filesAndDirectories);
+  return suitableFilesAndFolders.map((fileOrFolder) => {
     const path = fileOrFolder.string;
     if (fs.existsSync(path) && fs.lstatSync(path).isDirectory())
       return path.concat("/");
     return path;
   });
-  return suitableFilesAndFolders;
 }
