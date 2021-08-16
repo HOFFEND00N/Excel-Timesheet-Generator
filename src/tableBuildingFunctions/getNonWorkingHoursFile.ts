@@ -2,10 +2,8 @@ import inquirer from "inquirer";
 import xlsx from "xlsx";
 import { OUTPUT_FORMAT_ARRAY_OF_ARRAYS } from "../constants/constant";
 import inquirer_autocomplete_prompt from "inquirer-autocomplete-prompt";
-import fsPromisified from "fs/promises";
-import fs from "fs";
 import { spawn } from "child_process";
-import fuzzy from "fuzzy";
+import { findSuitableFilesAndDirectories } from "./findSuitableFilesAndDirectories";
 
 export async function getNonWorkingHoursFile(): Promise<string[][]> {
   inquirer.registerPrompt("autocomplete", inquirer_autocomplete_prompt);
@@ -44,14 +42,14 @@ function removeEmptyCellAtTheBeginning(row: string[]) {
 
 async function searchFilesAndDirectories(previousAnswers, input) {
   input = input || "";
-  let files: Promise<string[]> = new Promise<string[]>(() => []);
+  let files: string[] = [];
   try {
-    if (input == "") files = listDrives();
+    if (input == "") files = await listDrives();
     else {
-      files = findSuitableFilesAndDirectories(input);
+      files = await findSuitableFilesAndDirectories(input);
     }
   } catch (error) {
-    if (error.code == "ENOENT") files = new Promise<string[]>(() => []);
+    if (error.code == "ENOENT") files = [];
   }
   return files;
 }
@@ -83,22 +81,5 @@ function listDrives() {
 
     list.stdin.write("wmic logicaldisk get name\n");
     list.stdin.end();
-  });
-}
-
-async function findSuitableFilesAndDirectories(searchPath: string) {
-  const alreadyDefinedPath = searchPath.slice(
-    0,
-    searchPath.lastIndexOf("/") + 1
-  );
-  const filesAndDirectories = (
-    await fsPromisified.readdir(alreadyDefinedPath)
-  ).map((element) => alreadyDefinedPath.concat(element));
-  const suitableFilesAndFolders = fuzzy.filter(searchPath, filesAndDirectories);
-  return suitableFilesAndFolders.map((fileOrFolder) => {
-    const path = fileOrFolder.string;
-    if (fs.existsSync(path) && fs.lstatSync(path).isDirectory())
-      return path.concat("/");
-    return path;
   });
 }
