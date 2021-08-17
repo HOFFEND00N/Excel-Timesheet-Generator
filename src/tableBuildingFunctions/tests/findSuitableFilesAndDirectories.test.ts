@@ -50,3 +50,31 @@ test("pass file and folder, expect to return folder concatenated with /", async 
 
   expect(actualSuitableFiles).toEqual(expectedSuitableFiles);
 });
+
+test("pass files and folder, expect to return files and folders concatenated with /", async () => {
+  const basePath = path.join("folderA", "folderB");
+  fs.existsSync = jest.fn().mockReturnValue(true);
+  fs.statSync = jest.fn().mockImplementation((searchPath: string) => {
+    return {
+      isDirectory: jest.fn().mockImplementation(() => {
+        return searchPath
+          .slice(searchPath.lastIndexOf(path.sep))
+          .includes("folder");
+      }),
+    };
+  });
+  fsPromisified.readdir = jest
+    .fn()
+    .mockReturnValue(["fileA", "fileB", "folderC", ".git"]);
+  const expectedSuitableFiles = [
+    path.join(basePath, "fileA"),
+    path.join(basePath, "fileB"),
+    path.join(basePath, "folderC").concat(path.sep),
+  ];
+
+  const actualSuitableFiles = await findSuitableFilesAndDirectories(
+    path.join(basePath, "f")
+  );
+
+  expect(actualSuitableFiles).toEqual(expectedSuitableFiles);
+});
