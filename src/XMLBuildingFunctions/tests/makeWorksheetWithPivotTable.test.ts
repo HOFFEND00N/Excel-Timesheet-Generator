@@ -43,14 +43,14 @@ test("pass 2 employees, expect to return correct worksheet", () => {
           "@r": 4,
           c: [
             { "@r": "A4", "@t": "str", v: "Karaseva Svetlana" },
-            { "@r": "B4", v: `${workingHoursPerMonth}` },
+            { "@r": "B4", v: workingHoursPerMonth },
           ],
         },
         {
           "@r": 5,
           c: [
             { "@r": "A5", "@t": "str", v: "Matrosova Marianna" },
-            { "@r": "B5", v: `${workingHoursPerMonth}` },
+            { "@r": "B5", v: workingHoursPerMonth },
           ],
         },
         {
@@ -59,7 +59,7 @@ test("pass 2 employees, expect to return correct worksheet", () => {
             { "@r": `A6`, "@t": "str", v: "Grand Total" },
             {
               "@r": `B6`,
-              v: `${employees.length * workingHoursPerMonth}`,
+              v: employees.length * workingHoursPerMonth,
             },
           ],
         },

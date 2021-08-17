@@ -69,15 +69,10 @@ function makeSheetDataRows(
         },
         {
           "@r": `B${i + pivotTableOffset}`,
-          v: `${workingHoursByEmployeesUsername[employees[i].jiraUsername]}`,
+          v: workingHoursByEmployeesUsername[employees[i].jiraUsername],
         },
       ],
     });
-  }
-
-  let workingHoursSum = 0;
-  for (const employee of employees) {
-    workingHoursSum += workingHoursByEmployeesUsername[employee.jiraUsername];
   }
 
   rows.push({
@@ -90,7 +85,11 @@ function makeSheetDataRows(
       },
       {
         "@r": `B${getLastPivotTableColumn({ employees, pivotTableOffset })}`,
-        v: `${workingHoursSum}`,
+        v: employees.reduce(
+          (sum, employee) =>
+            sum + workingHoursByEmployeesUsername[employee.jiraUsername],
+          0
+        ),
       },
     ],
   });

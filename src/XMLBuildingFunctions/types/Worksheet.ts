@@ -38,5 +38,5 @@ export type Row = {
 export type Cell = {
   "@r": string;
   "@t"?: string;
-  v: string;
+  v: string | number;
 };
