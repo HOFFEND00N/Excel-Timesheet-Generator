@@ -1,20 +1,24 @@
 import fsPromisified from "fs/promises";
-import fuzzy from "fuzzy";
+import fuzzy, { FilterResult } from "fuzzy";
 import fs from "fs";
+import path from "path";
 
 export async function findSuitableFilesAndDirectories(searchPath: string) {
-  const alreadyDefinedPath = searchPath.slice(
+  const parentDirectory = searchPath.slice(
     0,
-    searchPath.lastIndexOf("/") + 1
+    searchPath.lastIndexOf(path.sep) + 1
   );
   const filesAndDirectories = (
-    await fsPromisified.readdir(alreadyDefinedPath)
-  ).map((element) => alreadyDefinedPath.concat(element));
+    await fsPromisified.readdir(parentDirectory)
+  ).map((element: string) => parentDirectory.concat(element));
   const suitableFilesAndFolders = fuzzy.filter(searchPath, filesAndDirectories);
-  return suitableFilesAndFolders.map((fileOrFolder) => {
-    const path = fileOrFolder.string;
-    if (fs.existsSync(path) && fs.statSync(path).isDirectory())
-      return path.concat("/");
-    return path;
+  return suitableFilesAndFolders.map((fileOrFolder: FilterResult<string>) => {
+    const pathToFileOrFolder = fileOrFolder.string;
+    if (
+      fs.existsSync(pathToFileOrFolder) &&
+      fs.statSync(pathToFileOrFolder).isDirectory()
+    )
+      return pathToFileOrFolder.concat(path.sep);
+    return pathToFileOrFolder;
   });
 }

@@ -2,8 +2,9 @@ import inquirer from "inquirer";
 import xlsx from "xlsx";
 import { OUTPUT_FORMAT_ARRAY_OF_ARRAYS } from "../constants/constant";
 import inquirer_autocomplete_prompt from "inquirer-autocomplete-prompt";
-import { spawn } from "child_process";
 import { findSuitableFilesAndDirectories } from "./findSuitableFilesAndDirectories";
+import nodeDiskInfo from "node-disk-info";
+import path from "path";
 
 export async function getNonWorkingHoursFile(): Promise<string[][]> {
   inquirer.registerPrompt("autocomplete", inquirer_autocomplete_prompt);
@@ -40,8 +41,7 @@ function removeEmptyCellAtTheBeginning(row: string[]) {
   return row.splice(row.findIndex((value) => value !== ""));
 }
 
-async function searchFilesAndDirectories(previousAnswers, input) {
-  input = input || "";
+async function searchFilesAndDirectories(previousAnswers: unknown, input = "") {
   let files: string[] = [];
   try {
     if (input == "") files = await listDrives();
@@ -54,32 +54,7 @@ async function searchFilesAndDirectories(previousAnswers, input) {
   return files;
 }
 
-function listDrives() {
-  const list = spawn("cmd");
-
-  return new Promise<string[]>((resolve, reject) => {
-    list.stdout.on("data", function (data) {
-      const output = String(data);
-      const out = output
-        .split("\r\n")
-        .map((e) => e.trim())
-        .filter((e) => e != "");
-      if (out[0] === "Name") {
-        resolve(out.slice(1).map((str) => str.concat("/")));
-      }
-    });
-
-    list.stderr.on("data", function (data) {
-      console.log("stderr: " + data);
-    });
-
-    list.on("exit", function (code) {
-      if (code !== 0) {
-        reject(code);
-      }
-    });
-
-    list.stdin.write("wmic logicaldisk get name\n");
-    list.stdin.end();
-  });
+async function listDrives() {
+  const drives = await nodeDiskInfo.getDiskInfo();
+  return drives.map((drive) => drive.mounted.concat(path.sep));
 }
