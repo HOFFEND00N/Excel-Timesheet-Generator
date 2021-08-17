@@ -8,7 +8,7 @@ import {
   fetchJiraUserTasks,
   getCredentials,
   getNonWorkingHoursFile,
-  getWorkingHoursPerMonth,
+  getWorkingHoursByEmployeesUsername,
   isNumericCell,
   isStringCell,
   makeTable,
@@ -28,7 +28,9 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
 
   const tableData: TableData = JSON.parse(fs.readFileSync("tableData.json", "utf-8"));
 
-  const workingHoursPerMonth = await getWorkingHoursPerMonth();
+  const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername(
+    [...tableData.employees, tableData.teamLead]
+  );
 
   const currentDate = new Date();
   const table = await makeTable({
@@ -37,8 +39,8 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
     getNonWorkingHoursFile,
-    workingHoursPerMonth,
     isJiraCredentialsCorrect: areJiraCredentialsCorrect,
+    workingHoursByEmployeesUsername: workingHoursByEmployeesUsername,
   });
 
   const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
@@ -75,7 +77,7 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
   addPivotTableToXlsxFile({
     reportName,
     tableData,
-    workingHoursPerMonth,
+    workingHoursByEmployeesUsername,
     table,
     employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
     manHoursColumnIndex: manHoursColumn,

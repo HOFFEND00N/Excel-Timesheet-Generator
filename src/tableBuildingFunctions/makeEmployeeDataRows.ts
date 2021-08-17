@@ -10,8 +10,8 @@ type MakeEmployeeDataRowsArguments = {
   fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
-  workingHoursPerMonth: number;
   isJiraCredentialsCorrect: ({ login, password }: { login: string; password: string }) => Promise<boolean>;
+  workingHoursByEmployeesUsername: HoursByEmployees;
 };
 
 export async function makeEmployeeDataRows({
@@ -20,7 +20,7 @@ export async function makeEmployeeDataRows({
   fetchUserTasks,
   getCredentials,
   nonWorkingHoursByEmployeesUsername,
-  workingHoursPerMonth,
+  workingHoursByEmployeesUsername,
   isJiraCredentialsCorrect,
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
@@ -53,7 +53,8 @@ export async function makeEmployeeDataRows({
       makeEmployeeDataRow({
         headers,
         userTasksByEmployeeUsername,
-        workingHoursPerMonth,
+        workingHoursPerMonth:
+          workingHoursByEmployeesUsername[employee.jiraUsername],
         nonWorkingHoursByEmployeesUsername,
         tableData,
         employee,
@@ -65,7 +66,8 @@ export async function makeEmployeeDataRows({
     makeEmployeeDataRow({
       headers,
       userTasksByEmployeeUsername,
-      workingHoursPerMonth,
+      workingHoursPerMonth:
+        workingHoursByEmployeesUsername[tableData.teamLead.jiraUsername],
       nonWorkingHoursByEmployeesUsername,
       tableData,
       employee: tableData.teamLead,

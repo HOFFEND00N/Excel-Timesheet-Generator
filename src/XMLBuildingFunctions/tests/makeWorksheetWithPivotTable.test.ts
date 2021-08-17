@@ -69,7 +69,10 @@ test("pass 2 employees, expect to return correct worksheet", () => {
 
   const actualWorksheetWithPivotTable = makeWorksheetWithPivotTable({
     employees,
-    workingHoursPerMonth,
+    workingHoursByEmployeesUsername: {
+      KarasevaS: workingHoursPerMonth,
+      MatrosovaM: workingHoursPerMonth,
+    },
   });
 
   expect(actualWorksheetWithPivotTable).toEqual(expectedWorksheetWithPivotTable);

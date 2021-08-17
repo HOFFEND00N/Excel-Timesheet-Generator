@@ -19,8 +19,12 @@ test("make two dimensional array from parsed json, json file consist of predefin
       MolotkovaM: 8,
       KarasevaS: 24,
     },
-    workingHoursPerMonth: 120,
     isJiraCredentialsCorrect: () => Promise.resolve(true),
+    workingHoursByEmployeesUsername: {
+      MolotkovaM: 120,
+      KarasevaS: 120,
+      MatrosovaM: 120,
+    },
   });
 
   expect(actualTable).toEqual(expectedTable);
@@ -36,8 +40,12 @@ test("pass wrong credentials, expect to throw exception", async () => {
       getCredentials: () => Promise.resolve({ login: "", password: "" }),
       fetchUserTasks: getFetchUserTasksForTests(),
       nonWorkingHoursByEmployeesUsername: {},
-      workingHoursPerMonth: 120,
       isJiraCredentialsCorrect: () => Promise.resolve(false),
+      workingHoursByEmployeesUsername: {
+        MolotkovaM: 120,
+        KarasevaS: 120,
+        MatrosovaM: 120,
+      },
     });
   };
 

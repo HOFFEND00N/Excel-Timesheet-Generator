@@ -14,21 +14,21 @@ import {
   makeWorksheetWithPivotTable,
   makeWorksheetWithPivotTableRels,
 } from "../XMLBuildingFunctions";
-import { CommonCell } from "../tableBuildingFunctions/types";
+import { CommonCell, HoursByEmployees } from "../tableBuildingFunctions/types";
 import { create } from "xmlbuilder2";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
 
 export function addPivotTableToXlsxFile({
   reportName,
   tableData,
-  workingHoursPerMonth,
+  workingHoursByEmployeesUsername: workingHoursByEmployeesUsername,
   table,
   employeeColumnIndex,
   manHoursColumnIndex,
 }: {
   reportName: string;
   tableData: TableData;
-  workingHoursPerMonth: number;
+  workingHoursByEmployeesUsername: HoursByEmployees;
   table: CommonCell[];
   employeeColumnIndex: number;
   manHoursColumnIndex: number;
@@ -102,7 +102,7 @@ export function addPivotTableToXlsxFile({
     create({
       worksheet: makeWorksheetWithPivotTable({
         employees: employeesWithTeamLead,
-        workingHoursPerMonth,
+        workingHoursByEmployeesUsername,
       }),
     }).end()
   );

@@ -1,7 +1,7 @@
-import inquirer from "inquirer";
 import { isNumeric } from "../utils/isNumeric";
+import inquirer from "inquirer";
 
-export async function getWorkingHoursPerMonth(): Promise<number> {
+export async function getWorkingHoursPerMonth() {
   const { workingHoursPerMonth } = await inquirer.prompt([
     {
       type: "input",
@@ -14,5 +14,5 @@ export async function getWorkingHoursPerMonth(): Promise<number> {
       },
     },
   ]);
-  return workingHoursPerMonth;
+  return Number(workingHoursPerMonth);
 }

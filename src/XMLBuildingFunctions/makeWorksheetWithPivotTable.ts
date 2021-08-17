@@ -1,12 +1,13 @@
 import { Employee } from "../classes/Employee";
 import { Row } from "./types";
+import { HoursByEmployees } from "../tableBuildingFunctions/types";
 
 export function makeWorksheetWithPivotTable({
   employees,
-  workingHoursPerMonth,
+  workingHoursByEmployeesUsername,
 }: {
   employees: Employee[];
-  workingHoursPerMonth: number;
+  workingHoursByEmployeesUsername: HoursByEmployees;
 }) {
   const pivotTableOffset = 4;
   return {
@@ -34,12 +35,20 @@ export function makeWorksheetWithPivotTable({
       ],
     },
     sheetData: {
-      row: makeSheetDataRows(employees, workingHoursPerMonth, pivotTableOffset),
+      row: makeSheetDataRows(
+        employees,
+        workingHoursByEmployeesUsername,
+        pivotTableOffset
+      ),
     },
   };
 }
 
-function makeSheetDataRows(employees: Employee[], workingHoursPerMonth: number, pivotTableOffset: number) {
+function makeSheetDataRows(
+  employees: Employee[],
+  workingHoursByEmployeesUsername: HoursByEmployees,
+  pivotTableOffset: number
+) {
   const rows: Row[] = [];
   rows.push({
     "@r": 3,
@@ -60,10 +69,15 @@ function makeSheetDataRows(employees: Employee[], workingHoursPerMonth: number, 
         },
         {
           "@r": `B${i + pivotTableOffset}`,
-          v: `${workingHoursPerMonth}`,
+          v: `${workingHoursByEmployeesUsername[employees[i].jiraUsername]}`,
         },
       ],
     });
+  }
+
+  let workingHoursSum = 0;
+  for (const employee of employees) {
+    workingHoursSum += workingHoursByEmployeesUsername[employee.jiraUsername];
   }
 
   rows.push({
@@ -76,17 +90,19 @@ function makeSheetDataRows(employees: Employee[], workingHoursPerMonth: number, 
       },
       {
         "@r": `B${getLastPivotTableColumn({ employees, pivotTableOffset })}`,
-        v: `${employees.length * workingHoursPerMonth}`,
+        v: `${workingHoursSum}`,
       },
     ],
   });
   return rows;
 }
 
-const getLastPivotTableColumn = ({
+function getLastPivotTableColumn ({
   employees,
   pivotTableOffset,
 }: {
   employees: Employee[];
   pivotTableOffset: number;
-}) => employees.length + pivotTableOffset;
+}) {
+  return employees.length + pivotTableOffset;
+}

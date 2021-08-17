@@ -64,8 +64,12 @@ test("make full table", async () => {
         ["651", "RU", "Confirmit", "DaysOff", "Karaseva Svetlana", "20.01.2021", "", "8"],
         ["651", "RU", "Confirmit", "Holidays", "Molotkova Maria", "20.01.2021-23.01.2021", "", "24"],
       ]),
-    workingHoursPerMonth: 120,
     isJiraCredentialsCorrect: () => Promise.resolve(true),
+    workingHoursByEmployeesUsername: {
+      KarasevaS: 120,
+      MolotkovaM: 120,
+      MatrosovaM: 120,
+    },
   });
 
   actualTable.sort(compare);

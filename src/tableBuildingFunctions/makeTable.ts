@@ -12,7 +12,12 @@ import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { TableData } from "../classes/TableData";
 import { Point } from "../classes/Point";
-import { CommonCell, FetchUserTasksArguments, UserTasks } from "./types";
+import {
+  CommonCell,
+  FetchUserTasksArguments,
+  HoursByEmployees,
+  UserTasks,
+} from "./types";
 import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
 import { makeNonWorkingHoursByEmployeesUsername } from "./makeNonWorkingHoursByEmployeesUsername";
 import { errorHandler } from "./errorHandler";
@@ -23,8 +28,8 @@ type MakeTableArguments = {
   fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   getNonWorkingHoursFile: () => Promise<string[][]>;
-  workingHoursPerMonth: number;
   isJiraCredentialsCorrect: ({ login, password }: { login: string; password: string }) => Promise<boolean>;
+  workingHoursByEmployeesUsername: HoursByEmployees;
 };
 
 export async function makeTable({
@@ -33,8 +38,8 @@ export async function makeTable({
   fetchUserTasks,
   getCredentials,
   getNonWorkingHoursFile,
-  workingHoursPerMonth,
   isJiraCredentialsCorrect,
+  workingHoursByEmployeesUsername,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = START_TABLE_POINT;
@@ -72,8 +77,8 @@ export async function makeTable({
     fetchUserTasks,
     getCredentials,
     nonWorkingHoursByEmployeesUsername,
-    workingHoursPerMonth,
     isJiraCredentialsCorrect,
+    workingHoursByEmployeesUsername,
   });
 
   tableRowsValues.push(...nonWorkingHoursRows);

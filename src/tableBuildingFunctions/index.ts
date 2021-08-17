@@ -2,7 +2,7 @@ export { fetchJiraUserTasks } from "./fetchJiraUserTasks";
 export { isNumericCell, isStringCell } from "./types";
 export { getCredentials } from "./getCredentials";
 export { getNonWorkingHoursFile } from "./getNonWorkingHoursFile";
-export { getWorkingHoursPerMonth } from "./getWorkingHoursPerMonth";
+export { getWorkingHoursByEmployeesUsername } from "./getWorkingHoursByEmployeesUsername";
 export { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
 export { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 export { makeEmployeeDataRows } from "./makeEmployeeDataRows";
