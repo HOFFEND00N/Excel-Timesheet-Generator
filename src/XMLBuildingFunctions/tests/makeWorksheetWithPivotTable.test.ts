@@ -1,4 +1,4 @@
-import { Worksheet } from "../types/Worksheet";
+import { Worksheet } from "../types";
 import { Employee } from "../../classes/Employee";
 import { makeWorksheetWithPivotTable } from "../makeWorksheetWithPivotTable";
 
@@ -7,7 +7,6 @@ test("pass 2 employees, expect to return correct worksheet", () => {
     { name: "Karaseva Svetlana", jiraUsername: "KarasevaS" },
     { name: "Matrosova Marianna", jiraUsername: "MatrosovaM" },
   ];
-  const workingHoursPerMonth = 160;
   const expectedWorksheetWithPivotTable: Worksheet = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
     dimension: { "@ref": `A3:B6` },
@@ -43,14 +42,14 @@ test("pass 2 employees, expect to return correct worksheet", () => {
           "@r": 4,
           c: [
             { "@r": "A4", "@t": "str", v: "Karaseva Svetlana" },
-            { "@r": "B4", v: workingHoursPerMonth },
+            { "@r": "B4", v: 160 },
           ],
         },
         {
           "@r": 5,
           c: [
             { "@r": "A5", "@t": "str", v: "Matrosova Marianna" },
-            { "@r": "B5", v: workingHoursPerMonth },
+            { "@r": "B5", v: 140 },
           ],
         },
         {
@@ -59,7 +58,7 @@ test("pass 2 employees, expect to return correct worksheet", () => {
             { "@r": `A6`, "@t": "str", v: "Grand Total" },
             {
               "@r": `B6`,
-              v: employees.length * workingHoursPerMonth,
+              v: 300,
             },
           ],
         },
@@ -70,8 +69,8 @@ test("pass 2 employees, expect to return correct worksheet", () => {
   const actualWorksheetWithPivotTable = makeWorksheetWithPivotTable({
     employees,
     workingHoursByEmployeesUsername: {
-      KarasevaS: workingHoursPerMonth,
-      MatrosovaM: workingHoursPerMonth,
+      KarasevaS: 160,
+      MatrosovaM: 140,
     },
   });
 

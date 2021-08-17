@@ -4,8 +4,8 @@ import { TABLE_HEADERS } from "../../constants/constant";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", async () => {
   const expectedTable = [
-    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 120],
-    [651, "NO", "Confirmit", "Studio", "Karaseva Svetlana", "task 1 task 3", "", 96],
+    [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 160],
+    [651, "NO", "Confirmit", "Studio", "Karaseva Svetlana", "task 1 task 3", "", 116],
     [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "epic task 1", "", 112],
   ];
   const tableData = getTableDataForTests();
@@ -22,8 +22,8 @@ test("make two dimensional array from parsed json, json file consist of predefin
     isJiraCredentialsCorrect: () => Promise.resolve(true),
     workingHoursByEmployeesUsername: {
       MolotkovaM: 120,
-      KarasevaS: 120,
-      MatrosovaM: 120,
+      KarasevaS: 140,
+      MatrosovaM: 160,
     },
   });
 
@@ -43,8 +43,6 @@ test("pass wrong credentials, expect to throw exception", async () => {
       isJiraCredentialsCorrect: () => Promise.resolve(false),
       workingHoursByEmployeesUsername: {
         MolotkovaM: 120,
-        KarasevaS: 120,
-        MatrosovaM: 120,
       },
     });
   };

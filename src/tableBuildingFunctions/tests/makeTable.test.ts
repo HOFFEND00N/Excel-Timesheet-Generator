@@ -29,8 +29,8 @@ test("make full table", async () => {
   }
   const expectedTableRows: CommonValue[][] = [
     [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 112],
-    [651, "NO", "Confirmit", "Studio", "Karaseva Svetlana", "task 1 task 3", "", 112],
-    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "epic task 1", "", 96],
+    [651, "NO", "Confirmit", "Studio", "Karaseva Svetlana", "task 1 task 3", "", 152],
+    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "epic task 1", "", 116],
     [651, "RU", "Confirmit", "DaysOff", "Matrosova Marianna", "25.01.2021", "", 8],
     [651, "RU", "Confirmit", "DaysOff", "Karaseva Svetlana", "20.01.2021", "", 8],
     [651, "RU", "Confirmit", "Holidays", "Molotkova Maria", "20.01.2021-23.01.2021", "", 24],
@@ -66,8 +66,8 @@ test("make full table", async () => {
       ]),
     isJiraCredentialsCorrect: () => Promise.resolve(true),
     workingHoursByEmployeesUsername: {
-      KarasevaS: 120,
-      MolotkovaM: 120,
+      KarasevaS: 160,
+      MolotkovaM: 140,
       MatrosovaM: 120,
     },
   });
