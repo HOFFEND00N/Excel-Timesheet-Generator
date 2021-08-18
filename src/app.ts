@@ -16,6 +16,9 @@ import {
 import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
+import { getWorkingHoursPerMonth } from "./tableBuildingFunctions/getWorkingHoursPerMonth";
+import { isEmployeesHaveDifferentMonthlyRate } from "./tableBuildingFunctions/isEmployeesHaveDifferentMonthlyRate";
+import { getChosenEmployeesNames } from "./tableBuildingFunctions/getChosenEmployeesNames";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -28,9 +31,12 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
 
   const tableData: TableData = JSON.parse(fs.readFileSync("tableData.json", "utf-8"));
 
-  const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername(
-    [...tableData.employees, tableData.teamLead]
-  );
+  const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername({
+    employees: [...tableData.employees, tableData.teamLead],
+    getWorkingHoursPerMonth,
+    isEmployeesHaveDifferentMonthlyRate,
+    getChosenEmployeesNames,
+  });
 
   const currentDate = new Date();
   const table = await makeTable({

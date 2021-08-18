@@ -1,12 +1,17 @@
 import { Employee } from "../classes/Employee";
 import { HoursByEmployees } from "./types";
-import { getWorkingHoursPerMonth } from "./getWorkingHoursPerMonth";
-import { isEmployeesHaveDifferentMonthlyRate } from "./isEmployeesHaveDifferentMonthlyRate";
-import { getChosenEmployeesNames } from "./getChosenEmployeesNames";
 
-export async function getWorkingHoursByEmployeesUsername(
-  employees: Employee[]
-) {
+export async function getWorkingHoursByEmployeesUsername({
+  employees,
+  getWorkingHoursPerMonth,
+  isEmployeesHaveDifferentMonthlyRate,
+  getChosenEmployeesNames,
+}: {
+  employees: Employee[];
+  getWorkingHoursPerMonth: () => Promise<number>;
+  isEmployeesHaveDifferentMonthlyRate: () => Promise<boolean>;
+  getChosenEmployeesNames: (employee: Employee[]) => Promise<string>;
+}) {
   const workingHoursPerMonth = await getWorkingHoursPerMonth();
 
   const workingHoursByEmployeesUsername: HoursByEmployees = {};
