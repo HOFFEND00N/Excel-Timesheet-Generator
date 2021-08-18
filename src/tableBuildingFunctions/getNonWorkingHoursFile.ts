@@ -44,8 +44,9 @@ function removeEmptyCellAtTheBeginning(row: string[]) {
 async function searchFilesAndDirectories(previousAnswers: unknown, input = "") {
   let files: string[] = [];
   try {
-    if (input == "") files = await listDrives();
-    else {
+    if (input == "") {
+      files = await listDrives();
+    } else {
       files = await findSuitableFilesAndDirectories(input);
     }
   } catch (error) {
@@ -56,5 +57,5 @@ async function searchFilesAndDirectories(previousAnswers: unknown, input = "") {
 
 async function listDrives() {
   const drives = await nodeDiskInfo.getDiskInfo();
-  return drives.map((drive) => drive.mounted.concat(path.sep));
+  return drives.map((drive) => `${drive.mounted}${path.sep}`);
 }

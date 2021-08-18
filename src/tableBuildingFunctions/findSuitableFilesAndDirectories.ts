@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 
 export async function findSuitableFilesAndDirectories(searchPath: string) {
-  const parentDirectory = searchPath.slice(
+  const parentDirectory = searchPath.substring(
     0,
     searchPath.lastIndexOf(path.sep) + 1
   );
