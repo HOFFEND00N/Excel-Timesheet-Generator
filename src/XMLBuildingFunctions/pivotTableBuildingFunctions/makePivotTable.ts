@@ -1,6 +1,6 @@
 import { TABLE_HEADERS } from "../../constants/constant";
 import { Employee } from "../../classes/Employee";
-import { RowItem, Item, PivotTableDefinition } from "../types";
+import { Item, PivotTableDefinition, RowItem } from "../types";
 
 export function makePivotTable({
   employees,

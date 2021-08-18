@@ -4,13 +4,13 @@ import { TableData } from "./classes/TableData";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 import {
-  makeTable,
-  isNumericCell,
-  isStringCell,
   fetchJiraUserTasks,
   getCredentials,
   getNonWorkingHoursFile,
   getWorkingHoursPerMonth,
+  isNumericCell,
+  isStringCell,
+  makeTable,
 } from "./tableBuildingFunctions";
 import {
   START_TABLE_POINT,
@@ -19,8 +19,8 @@ import {
 } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import {
-  makeXlsxFile,
   addPivotTableToXlsxFile,
+  makeXlsxFile,
 } from "./XlsxFileBuildingFunctions";
 
 (async () => {
