@@ -11,5 +11,5 @@ export { makeNonWorkingHoursByEmployeesUsername } from "./makeNonWorkingHoursByE
 export { makeTable } from "./makeTable";
 export { makeTableRow } from "./makeTableRow";
 export { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
-export { makeUserTasksByEmployeeUsername } from "./makeUserTasksByEmployeeUsername";
+export { makeSortedUserTasksByEmployeeUsername } from "./makeSortedUserTasksByEmployeeUsername";
 export { styleTableRow } from "./styleTableRow";

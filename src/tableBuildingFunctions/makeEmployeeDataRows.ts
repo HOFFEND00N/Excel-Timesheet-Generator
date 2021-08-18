@@ -7,7 +7,7 @@ import {
   UserTasks,
 } from "./types";
 import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
-import { makeUserTasksByEmployeeUsername } from "./makeUserTasksByEmployeeUsername";
+import { makeSortedUserTasksByEmployeeUsername } from "./makeSortedUserTasksByEmployeeUsername";
 import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 
 type MakeEmployeeDataRowsArguments = {
@@ -47,7 +47,7 @@ export async function makeEmployeeDataRows({
     makeTeamLeadJiraTasks(tasksRows, tableData.teamLead.jiraUsername)
   );
 
-  const userTasksByEmployeeUsername = makeUserTasksByEmployeeUsername(
+  const userTasksByEmployeeUsername = makeSortedUserTasksByEmployeeUsername(
     tasksRows
   );
 
