@@ -9,6 +9,8 @@ import {
 import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
 import { makeSortedUserTasksByEmployeeUsername } from "./makeSortedUserTasksByEmployeeUsername";
 import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
+import { Employee } from "../classes/Employee";
+import fetch from "node-fetch";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -32,6 +34,17 @@ export async function makeEmployeeDataRows({
   workingHoursPerMonth,
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
+
+  if (
+    !(await checkJiraCredentialsCorrectness({
+      login,
+      password,
+      teamLead: tableData.teamLead,
+    }))
+  ) {
+    throw new Error("Wrong credentials. Please try again");
+  }
+
   const employeeDataRows: CommonValue[][] = [];
   const tasks = tableData.employees.map((employee) =>
     fetchUserTasks({
@@ -76,4 +89,34 @@ export async function makeEmployeeDataRows({
   );
 
   return employeeDataRows;
+}
+
+async function checkJiraCredentialsCorrectness({
+  login,
+  password,
+  teamLead,
+}: {
+  login: string;
+  password: string;
+  teamLead: Employee;
+}) {
+  const authorizationKey = Buffer.from(`${login}:${password}`).toString(
+    "base64"
+  );
+
+  const fetchResult = await fetch(
+    `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status CHANGED BY ${teamLead.jiraUsername}`,
+    {
+      method: "get",
+      headers: {
+        Authorization: `Basic ${authorizationKey}`,
+      },
+    }
+  );
+
+  if (fetchResult.status == 403)
+    throw new Error(
+      "Your account has been locked out, because of too many attempts. Please unlock your account."
+    );
+  return fetchResult.status != 401;
 }

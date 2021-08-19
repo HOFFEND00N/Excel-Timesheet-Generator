@@ -15,7 +15,6 @@ import { Point } from "../classes/Point";
 import { CommonCell, FetchUserTasksArguments, UserTasks } from "./types";
 import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
 import { makeNonWorkingHoursByEmployeesUsername } from "./makeNonWorkingHoursByEmployeesUsername";
-import { errorHandler } from "./errorHandler";
 
 type MakeTableArguments = {
   tableData: TableData;
@@ -81,7 +80,7 @@ export async function makeTable({
     }
   );
 
-  const tableRowsValues = await errorHandler(makeEmployeeDataRows, {
+  const tableRowsValues = await makeEmployeeDataRows({
     tableData,
     headers: tableHeaders,
     fetchUserTasks,
