@@ -8,6 +8,7 @@ import {
   getCredentials,
   getNonWorkingHoursFile,
   getWorkingHoursPerMonth,
+  isJiraCredentialsCorrect,
   isNumericCell,
   isStringCell,
   makeTable,
@@ -46,6 +47,7 @@ import {
     getCredentials,
     getNonWorkingHoursFile,
     workingHoursPerMonth,
+    isJiraCredentialsCorrect: isJiraCredentialsCorrect,
   });
 
   const employeeColumn =

@@ -41,7 +41,28 @@ test("make two dimensional array from parsed json, json file consist of predefin
       KarasevaS: 24,
     },
     workingHoursPerMonth: 120,
+    isJiraCredentialsCorrect: () => Promise.resolve(true),
   });
 
   expect(actualTable).toEqual(expectedTable);
+});
+
+test("pass wrong credentials, expect to throw exception", async () => {
+  const tableData = getTableDataForTests();
+
+  const actualTable = async () => {
+    await makeEmployeeDataRows({
+      tableData,
+      headers: TABLE_HEADERS,
+      getCredentials: () => Promise.resolve({ login: "", password: "" }),
+      fetchUserTasks: getFetchUserTasksForTests(),
+      nonWorkingHoursByEmployeesUsername: {},
+      workingHoursPerMonth: 120,
+      isJiraCredentialsCorrect: () => Promise.resolve(false),
+    });
+  };
+
+  await expect(actualTable()).rejects.toThrow(
+    "Wrong credentials. Please try again"
+  );
 });

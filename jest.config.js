@@ -21,6 +21,7 @@ const config = {
       "getNonWorkingHoursFile",
       "getWorkingHoursPerMonth",
       "types",
+      "isJiraCredentialsCorrect",
     ].map((file) => `!./src/tableBuildingFunctions/${file}.ts`),
     "!./src/XlsxFileBuildingFunctions/**",
     "!./src/tableBuildingFunctions/index.ts",

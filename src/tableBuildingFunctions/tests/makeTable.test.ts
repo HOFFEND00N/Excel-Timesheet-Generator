@@ -150,6 +150,7 @@ test("make full table", async () => {
         ],
       ]),
     workingHoursPerMonth: 120,
+    isJiraCredentialsCorrect: () => Promise.resolve(true),
   });
 
   actualTable.sort(compare);

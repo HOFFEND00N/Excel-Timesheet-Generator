@@ -15,6 +15,7 @@ import { Point } from "../classes/Point";
 import { CommonCell, FetchUserTasksArguments, UserTasks } from "./types";
 import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
 import { makeNonWorkingHoursByEmployeesUsername } from "./makeNonWorkingHoursByEmployeesUsername";
+import { Employee } from "../classes/Employee";
 
 type MakeTableArguments = {
   tableData: TableData;
@@ -27,6 +28,15 @@ type MakeTableArguments = {
   getCredentials: () => Promise<{ login: string; password: string }>;
   getNonWorkingHoursFile: () => Promise<string[][]>;
   workingHoursPerMonth: number;
+  isJiraCredentialsCorrect: ({
+    login,
+    password,
+    teamLead,
+  }: {
+    login: string;
+    password: string;
+    teamLead: Employee;
+  }) => Promise<boolean>;
 };
 
 export async function makeTable({
@@ -36,6 +46,7 @@ export async function makeTable({
   getCredentials,
   getNonWorkingHoursFile,
   workingHoursPerMonth,
+  isJiraCredentialsCorrect,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = START_TABLE_POINT;
@@ -87,6 +98,7 @@ export async function makeTable({
     getCredentials,
     nonWorkingHoursByEmployeesUsername,
     workingHoursPerMonth,
+    isJiraCredentialsCorrect,
   });
 
   tableRowsValues.push(...nonWorkingHoursRows);
