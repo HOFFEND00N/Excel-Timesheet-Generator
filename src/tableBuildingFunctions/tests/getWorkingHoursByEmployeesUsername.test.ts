@@ -15,7 +15,7 @@ test("pass the same working hours rate fro everybody, expect to return employees
       ],
       getChosenEmployeesNames: jest.fn().mockReturnValue([]),
       getWorkingHoursPerMonth: jest.fn().mockReturnValue(120),
-      isEmployeesHaveDifferentMonthlyRate: jest.fn().mockReturnValue(false),
+      shouldUpdateEmployeeMonthRate: jest.fn().mockReturnValue(false),
     }
   );
 
@@ -30,7 +30,7 @@ test("pass the same working hours rate fro everybody, expect to return employees
     MatrosovaM: 140,
   };
 
-  let isEmployeeHaveDifferentWorkingHoursRate = true;
+  let shouldUpdateEmployeeMonthRate = true;
   const actualWorkingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername(
     {
       employees: [
@@ -39,15 +39,15 @@ test("pass the same working hours rate fro everybody, expect to return employees
       ],
       getChosenEmployeesNames: jest.fn().mockReturnValue(["Karaseva Svetlana"]),
       getWorkingHoursPerMonth: jest.fn().mockImplementation(() => {
-        if (isEmployeeHaveDifferentWorkingHoursRate) {
+        if (shouldUpdateEmployeeMonthRate) {
           return 140;
         } else {
           return 120;
         }
       }),
-      isEmployeesHaveDifferentMonthlyRate: jest.fn().mockImplementation(() => {
-        if (isEmployeeHaveDifferentWorkingHoursRate) {
-          isEmployeeHaveDifferentWorkingHoursRate = false;
+      shouldUpdateEmployeeMonthRate: jest.fn().mockImplementation(() => {
+        if (shouldUpdateEmployeeMonthRate) {
+          shouldUpdateEmployeeMonthRate = false;
           return true;
         } else {
           return false;

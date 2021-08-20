@@ -17,7 +17,7 @@ import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } fr
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
 import { getWorkingHoursPerMonth } from "./tableBuildingFunctions/getWorkingHoursPerMonth";
-import { isEmployeesHaveDifferentMonthlyRate } from "./tableBuildingFunctions/isEmployeesHaveDifferentMonthlyRate";
+import { shouldUpdateEmployeeMonthRate } from "./tableBuildingFunctions/shouldUpdateEmployeeMonthRate";
 import { getChosenEmployeesNames } from "./tableBuildingFunctions/getChosenEmployeesNames";
 
 (async () => {
@@ -34,7 +34,7 @@ import { getChosenEmployeesNames } from "./tableBuildingFunctions/getChosenEmplo
   const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername({
     employees: [...tableData.employees, tableData.teamLead],
     getWorkingHoursPerMonth,
-    isEmployeesHaveDifferentMonthlyRate,
+    shouldUpdateEmployeeMonthRate,
     getChosenEmployeesNames,
   });
 

@@ -21,7 +21,7 @@ const config = {
       "getNonWorkingHoursFile",
       "getWorkingHoursPerMonth",
       "types",
-      "isEmployeesHaveDifferentMonthlyRate",
+      "shouldUpdateEmployeeMonthRate",
       "getWorkingHoursByEmployeesUsername",
       "getChosenEmployeesNames",
       "areJiraCredentialsCorrect",

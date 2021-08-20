@@ -4,12 +4,12 @@ import { HoursByEmployees } from "./types";
 export async function getWorkingHoursByEmployeesUsername({
   employees,
   getWorkingHoursPerMonth,
-  isEmployeesHaveDifferentMonthlyRate,
+  shouldUpdateEmployeeMonthRate,
   getChosenEmployeesNames,
 }: {
   employees: Employee[];
   getWorkingHoursPerMonth: () => Promise<number>;
-  isEmployeesHaveDifferentMonthlyRate: () => Promise<boolean>;
+  shouldUpdateEmployeeMonthRate: () => Promise<boolean>;
   getChosenEmployeesNames: (employee: Employee[]) => Promise<string>;
 }) {
   const workingHoursPerMonth = await getWorkingHoursPerMonth();
@@ -25,7 +25,7 @@ export async function getWorkingHoursByEmployeesUsername({
   let isSetupCompleted = false;
 
   while (!isSetupCompleted) {
-    if (await isEmployeesHaveDifferentMonthlyRate()) {
+    if (await shouldUpdateEmployeeMonthRate()) {
       const workingHoursPerMonth = await getWorkingHoursPerMonth();
 
       const chosenEmployees = await getChosenEmployeesNames(employees);
