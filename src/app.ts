@@ -46,7 +46,7 @@ import { getChosenEmployeesNames } from "./tableBuildingFunctions/getChosenEmplo
     getCredentials,
     getNonWorkingHoursFile,
     isJiraCredentialsCorrect: areJiraCredentialsCorrect,
-    workingHoursByEmployeesUsername: workingHoursByEmployeesUsername,
+    workingHoursByEmployeesUsername,
   });
 
   const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");

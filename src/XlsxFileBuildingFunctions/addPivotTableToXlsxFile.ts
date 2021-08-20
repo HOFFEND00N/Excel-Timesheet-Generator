@@ -21,7 +21,7 @@ import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
 export function addPivotTableToXlsxFile({
   reportName,
   tableData,
-  workingHoursByEmployeesUsername: workingHoursByEmployeesUsername,
+  workingHoursByEmployeesUsername,
   table,
   employeeColumnIndex,
   manHoursColumnIndex,
