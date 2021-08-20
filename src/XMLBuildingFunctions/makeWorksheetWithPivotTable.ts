@@ -1,6 +1,6 @@
 import { Employee } from "../classes/Employee";
-import { Row } from "./types";
 import { HoursByEmployees } from "../tableBuildingFunctions/types";
+import { Row } from "./types";
 
 export function makeWorksheetWithPivotTable({
   employees,

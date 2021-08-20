@@ -1,6 +1,6 @@
 import { Point } from "../classes/Point";
-import { CommonCell, CommonValue, NumberValue, StringValue } from "./types";
 import { TableCell } from "../classes/TableCell";
+import { CommonCell, CommonValue, NumberValue, StringValue } from "./types";
 
 export function makeTableRow({ startPoint, values }: { startPoint: Point; values: CommonValue[] }): CommonCell[] {
   return values.map(

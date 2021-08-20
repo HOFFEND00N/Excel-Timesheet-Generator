@@ -1,5 +1,5 @@
-import excel from "excel4node";
 import * as fs from "fs";
+import excel from "excel4node";
 import { TableData } from "./classes/TableData";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";

@@ -1,6 +1,6 @@
-import { CommonValue, HoursByEmployees, TableHeader } from "./types";
 import { TableData } from "../classes/TableData";
 import { Employee } from "../classes/Employee";
+import { CommonValue, HoursByEmployees, TableHeader } from "./types";
 
 type makeEmployeeDataRowArguments = {
   tableData: TableData;

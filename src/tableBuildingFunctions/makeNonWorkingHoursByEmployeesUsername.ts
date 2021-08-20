@@ -1,5 +1,5 @@
-import { CommonValue, HoursByEmployees } from "./types";
 import { Employee } from "../classes/Employee";
+import { CommonValue, HoursByEmployees } from "./types";
 
 export function makeNonWorkingHoursByEmployeesUsername({
   employeeColumn,

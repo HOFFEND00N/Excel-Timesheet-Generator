@@ -1,8 +1,8 @@
 import { CommonCell } from "../../tableBuildingFunctions/types";
 import { Employee } from "../../classes/Employee";
 import { PivotCacheRecords } from "../types";
-import { makePivotCacheRecordsContent } from "./makePivotCacheRecordsContent";
 import { Point } from "../../classes/Point";
+import { makePivotCacheRecordsContent } from "./makePivotCacheRecordsContent";
 
 export function makePivotCacheRecords({
   table,

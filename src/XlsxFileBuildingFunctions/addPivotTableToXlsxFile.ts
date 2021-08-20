@@ -1,7 +1,7 @@
-import { TableData } from "../classes/TableData";
 import path from "path";
 import fs from "fs";
 import admZip from "adm-zip";
+import { create } from "xmlbuilder2";
 import {
   makeContentTypes,
   makePivotCacheDefinition,
@@ -15,7 +15,7 @@ import {
   makeWorksheetWithPivotTableRels,
 } from "../XMLBuildingFunctions";
 import { CommonCell, HoursByEmployees } from "../tableBuildingFunctions/types";
-import { create } from "xmlbuilder2";
+import { TableData } from "../classes/TableData";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
 
 export function addPivotTableToXlsxFile({

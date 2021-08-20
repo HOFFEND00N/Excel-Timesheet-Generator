@@ -6,12 +6,12 @@ import {
   makeStyleHorizontalAlignText,
 } from "../constants/styleConstants";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
+import { TableData } from "../classes/TableData";
+import { Point } from "../classes/Point";
 import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
-import { TableData } from "../classes/TableData";
-import { Point } from "../classes/Point";
 import {
   CommonCell,
   FetchUserTasksArguments,

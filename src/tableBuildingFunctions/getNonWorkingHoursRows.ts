@@ -1,6 +1,6 @@
 import { TableData } from "../classes/TableData";
-import { CommonValue } from "./types";
 import { isNumeric } from "../utils/isNumeric";
+import { CommonValue } from "./types";
 import { errorHandler } from "./errorHandler";
 
 export async function getNonWorkingHoursRows(
