@@ -21,26 +21,21 @@ export async function getWorkingHoursByEmployeesUsername({
     ] = workingHoursPerMonth;
   }
 
-  console.log(workingHoursByEmployeesUsername);
-  let isSetupCompleted = false;
-
-  while (!isSetupCompleted) {
-    if (await shouldUpdateEmployeeMonthRate()) {
-      const workingHoursPerMonth = await getWorkingHoursPerMonth();
-
-      const chosenEmployees = await getChosenEmployeesNames(employees);
-
-      for (const chosenEmployee of chosenEmployees) {
-        const employee = employees.find(
-          (employee) => employee.name == chosenEmployee
-        );
-        if (employee != undefined)
-          workingHoursByEmployeesUsername[
-            employee.jiraUsername
-          ] = workingHoursPerMonth;
-      }
-    } else isSetupCompleted = true;
+  while (await shouldUpdateEmployeeMonthRate()) {
     console.log(workingHoursByEmployeesUsername);
+
+    const chosenEmployees = await getChosenEmployeesNames(employees);
+    const workingHoursPerMonth = await getWorkingHoursPerMonth();
+
+    for (const chosenEmployee of chosenEmployees) {
+      const employee = employees.find(
+        (employee) => employee.name == chosenEmployee
+      );
+      if (employee != undefined)
+        workingHoursByEmployeesUsername[
+          employee.jiraUsername
+        ] = workingHoursPerMonth;
+    }
   }
   return workingHoursByEmployeesUsername;
 }
