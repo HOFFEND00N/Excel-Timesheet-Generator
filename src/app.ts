@@ -18,7 +18,7 @@ import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
 import { getWorkingHoursPerMonth } from "./tableBuildingFunctions/getWorkingHoursPerMonth";
 import { shouldUpdateEmployeeMonthRate } from "./tableBuildingFunctions/shouldUpdateEmployeeMonthRate";
-import { getChosenEmployeesNames } from "./tableBuildingFunctions/getChosenEmployeesNames";
+import { chooseEmployees } from "./tableBuildingFunctions/chooseEmployees";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -35,7 +35,7 @@ import { getChosenEmployeesNames } from "./tableBuildingFunctions/getChosenEmplo
     employees: [...tableData.employees, tableData.teamLead],
     getWorkingHoursPerMonth,
     shouldUpdateEmployeeMonthRate,
-    getChosenEmployeesNames,
+    getChosenEmployeesNames: chooseEmployees,
   });
 
   const currentDate = new Date();

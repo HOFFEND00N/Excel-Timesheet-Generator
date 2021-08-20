@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 import { Employee } from "../classes/Employee";
 
-export async function getChosenEmployeesNames(employees: Employee[]) {
+export async function chooseEmployees(employees: Employee[]) {
   const { chosenEmployees } = await inquirer.prompt([
     {
       type: "checkbox",
