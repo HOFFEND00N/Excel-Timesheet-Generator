@@ -7,12 +7,10 @@ jest.mock("fs");
 jest.mock("fs/promises");
 
 beforeEach(() => {
-  fs.existsSync = jest.fn().mockReturnValue(true);
-  fs.statSync = jest.fn().mockImplementation((searchPath: string) => {
+  (fs.existsSync as jest.Mock).mockReturnValue(true);
+  (fs.statSync as jest.Mock).mockImplementation((searchPath: string) => {
     return {
-      isDirectory: jest.fn().mockImplementation(() => {
-        return searchPath.substring(searchPath.lastIndexOf(path.sep)).includes("folder");
-      }),
+      isDirectory: jest.fn(() => searchPath.substring(searchPath.lastIndexOf(path.sep)).includes("folder")),
     };
   });
 });
