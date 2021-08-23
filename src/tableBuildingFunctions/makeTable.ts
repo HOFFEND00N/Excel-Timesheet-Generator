@@ -15,7 +15,7 @@ import { Point } from "../classes/Point";
 import { CommonCell, FetchUserTasksArguments, UserTasks } from "./types";
 import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
 import { makeNonWorkingHoursByEmployeesUsername } from "./makeNonWorkingHoursByEmployeesUsername";
-import { Employee } from "../classes/Employee";
+import { errorHandler } from "./errorHandler";
 
 type MakeTableArguments = {
   tableData: TableData;
@@ -31,11 +31,9 @@ type MakeTableArguments = {
   isJiraCredentialsCorrect: ({
     login,
     password,
-    teamLead,
   }: {
     login: string;
     password: string;
-    teamLead: Employee;
   }) => Promise<boolean>;
 };
 
@@ -91,7 +89,7 @@ export async function makeTable({
     }
   );
 
-  const tableRowsValues = await makeEmployeeDataRows({
+  const tableRowsValues = await errorHandler(makeEmployeeDataRows, {
     tableData,
     headers: tableHeaders,
     fetchUserTasks,

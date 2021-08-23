@@ -9,7 +9,6 @@ import {
 import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
 import { makeSortedUserTasksByEmployeeUsername } from "./makeSortedUserTasksByEmployeeUsername";
 import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
-import { Employee } from "../classes/Employee";
 
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
@@ -25,11 +24,9 @@ type MakeEmployeeDataRowsArguments = {
   isJiraCredentialsCorrect: ({
     login,
     password,
-    teamLead,
   }: {
     login: string;
     password: string;
-    teamLead: Employee;
   }) => Promise<boolean>;
 };
 
@@ -48,7 +45,6 @@ export async function makeEmployeeDataRows({
     !(await isJiraCredentialsCorrect({
       login,
       password,
-      teamLead: tableData.teamLead,
     }))
   ) {
     throw new Error("Wrong credentials. Please try again");
