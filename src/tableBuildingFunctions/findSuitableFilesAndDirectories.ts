@@ -4,10 +4,9 @@ import fs from "fs";
 import path from "path";
 
 export async function findSuitableFilesAndDirectories(searchPath: string) {
-  const parentDirectory = searchPath.substring(
-    0,
-    searchPath.lastIndexOf(path.sep) + 1
-  );
+  const lastPathSeparator = searchPath.lastIndexOf(path.sep) + 1;
+  const parentDirectory = searchPath.substring(0, lastPathSeparator);
+
   const filesAndDirectories = (
     await fsPromisified.readdir(parentDirectory)
   ).map((element: string) => parentDirectory.concat(element));
@@ -18,7 +17,7 @@ export async function findSuitableFilesAndDirectories(searchPath: string) {
       fs.existsSync(pathToFileOrFolder) &&
       fs.statSync(pathToFileOrFolder).isDirectory()
     )
-      return pathToFileOrFolder.concat(path.sep);
+      return `${pathToFileOrFolder}${path.sep}`;
     return pathToFileOrFolder;
   });
 }
