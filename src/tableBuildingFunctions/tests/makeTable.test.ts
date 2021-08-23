@@ -76,6 +76,6 @@ test("make full table", async () => {
 
 function compare(a: CommonCell, b: CommonCell) {
   const columnDiff: number = a.point.column - b.point.column;
-  if (columnDiff != 0) return columnDiff;
+  if (columnDiff !== 0) return columnDiff;
   else return a.point.row - b.point.row;
 }
