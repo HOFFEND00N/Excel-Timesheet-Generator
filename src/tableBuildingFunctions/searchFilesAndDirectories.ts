@@ -5,7 +5,7 @@ export async function searchFilesAndDirectories(
   previousAnswers: unknown,
   input = ""
 ) {
-  let files: string[] = [];
+  let files: string[];
   try {
     if (input == "") {
       files = await listDrives();
@@ -13,7 +13,7 @@ export async function searchFilesAndDirectories(
       files = await findSuitableFilesAndDirectories(input);
     }
   } catch (error) {
-    if (error.code == "ENOENT") files = [];
+    files = [];
   }
   return files;
 }

@@ -12,7 +12,7 @@ test("input is empty, expect to return drives list", async () => {
   const expectedFilesAndDirectories = [`C:${path.sep}`];
 
   (getDiskInfo as jest.Mock).mockReturnValue([{ mounted: "C:" }]);
-  const actualFilesAndDirectories = await searchFilesAndDirectories({}, "");
+  const actualFilesAndDirectories = await searchFilesAndDirectories({});
 
   expect(actualFilesAndDirectories).toEqual(expectedFilesAndDirectories);
 });
@@ -20,8 +20,8 @@ test("input is empty, expect to return drives list", async () => {
 test("input contains wrong path, expect to return nothing", async () => {
   const expectedFilesAndDirectories = [];
 
-  fsPromisified.readdir = jest.fn().mockReturnValue(new Error("ENOENT"));
-  const actualFilesAndDirectories = await searchFilesAndDirectories({}, "c");
+  fsPromisified.readdir = jest.fn().mockRejectedValue(new Error(""));
+  const actualFilesAndDirectories = await searchFilesAndDirectories({}, "f");
 
   expect(actualFilesAndDirectories).toEqual(expectedFilesAndDirectories);
 });
