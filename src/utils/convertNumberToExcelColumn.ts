@@ -6,7 +6,7 @@ export function convertNumberToExcelColumn(value: number) {
     value -= 1;
     const module = value % ENGLISH_ALPHABET.length;
     value = Math.floor(value / ENGLISH_ALPHABET.length);
-    excelColumn = ENGLISH_ALPHABET[module].concat(excelColumn);
+    excelColumn = `${ENGLISH_ALPHABET[module]}${excelColumn}`;
   }
   return excelColumn;
 }

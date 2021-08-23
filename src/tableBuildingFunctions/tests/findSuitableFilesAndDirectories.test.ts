@@ -27,7 +27,7 @@ test("pass file and folder, expect to return file and folder concatenated with /
     };
   });
   fsPromisified.readdir = jest.fn().mockReturnValue(["folderA", "fileB"]);
-  const expectedSuitableFiles = ["folderA".concat(path.sep), "fileB"];
+  const expectedSuitableFiles = [`folderA${path.sep}`, "fileB"];
 
   const actualSuitableFiles = await findSuitableFilesAndDirectories("f");
 
@@ -44,7 +44,7 @@ test("pass file and folder, expect to return folder concatenated with /", async 
     };
   });
   fsPromisified.readdir = jest.fn().mockReturnValue(["folderA", "fileB"]);
-  const expectedSuitableFiles = ["folderA".concat(path.sep)];
+  const expectedSuitableFiles = [`folderA${path.sep}`];
 
   const actualSuitableFiles = await findSuitableFilesAndDirectories("fol");
 
@@ -69,7 +69,7 @@ test("pass files and folder, expect to return files and folders concatenated wit
   const expectedSuitableFiles = [
     path.join(basePath, "fileA"),
     path.join(basePath, "fileB"),
-    path.join(basePath, "folderC").concat(path.sep),
+    `${path.join(basePath, "folderC")}${path.sep}`,
   ];
 
   const actualSuitableFiles = await findSuitableFilesAndDirectories(

@@ -9,7 +9,7 @@ export async function findSuitableFilesAndDirectories(searchPath: string) {
 
   const filesAndDirectories = (
     await fsPromisified.readdir(parentDirectory)
-  ).map((element: string) => parentDirectory.concat(element));
+  ).map((element: string) => `${parentDirectory}${element}`);
   const suitableFilesAndFolders = fuzzy.filter(searchPath, filesAndDirectories);
   return suitableFilesAndFolders.map((fileOrFolder: FilterResult<string>) => {
     const pathToFileOrFolder = fileOrFolder.string;
