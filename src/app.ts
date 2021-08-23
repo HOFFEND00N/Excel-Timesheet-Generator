@@ -41,8 +41,8 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
     isJiraCredentialsCorrect: areJiraCredentialsCorrect,
   });
 
-  const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label == "Employee");
-  const taskColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label == "Task");
+  const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
+  const taskColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Task");
 
   workSheet.column(employeeColumn).setWidth(25);
   workSheet.column(taskColumn).setWidth(50);
@@ -52,7 +52,7 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
     if (isNumericCell(tableCell)) cell.number(tableCell.value);
     if (isStringCell(tableCell)) cell.string(tableCell.value);
 
-    if (tableCell.point.column == taskColumn)
+    if (tableCell.point.column === taskColumn)
       cell.style(
         workBook.createStyle({
           alignment: {
@@ -70,7 +70,7 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
   const reportName = makeReportFileName(currentDate, tableData.unit);
   await makeXlsxFile(workBook, reportName);
 
-  const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label == "Man-Hours");
+  const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
 
   addPivotTableToXlsxFile({
     reportName,

@@ -21,7 +21,7 @@ export function makePivotCacheRecords({
 
   const startTableContentIndex = table.findIndex(
     (currentTableCell) =>
-      currentTableCell.point.row == startTablePoint.row + 1 && currentTableCell.point.column == startTablePoint.column
+      currentTableCell.point.row === startTablePoint.row + 1 && currentTableCell.point.column === startTablePoint.column
   );
 
   const pivotCacheRecords: PivotCacheRecords = {

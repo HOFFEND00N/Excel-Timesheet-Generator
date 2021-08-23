@@ -46,7 +46,7 @@ test("make full table", async () => {
         value: value,
         styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
       };
-      if (j == 0 || j == 1) tableCell.styles.unshift(makeStyleHorizontalAlignText(HorizontalAlignTextWays.center));
+      if (j === 0 || j === 1) tableCell.styles.unshift(makeStyleHorizontalAlignText(HorizontalAlignTextWays.center));
       expectedTable.push(tableCell);
     }
   }

@@ -10,7 +10,7 @@ export async function areJiraCredentialsCorrect({ login, password }: { login: st
     },
   });
 
-  if (fetchResult.status == 403)
+  if (fetchResult.status === 403)
     throw new Error("Your account has been locked out, because of too many attempts. Please unlock your account.");
   return fetchResult.status === 200;
 }

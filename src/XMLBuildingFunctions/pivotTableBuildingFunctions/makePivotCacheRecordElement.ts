@@ -9,8 +9,8 @@ export function makePivotCacheRecordElement({
   value: CommonValue;
   employees: Employee[];
 }): PivotCacheRecordElement {
-  const employeeIndex = employees.findIndex((employee) => employee.name == value);
+  const employeeIndex = employees.findIndex((employee) => employee.name === value);
   if (employeeIndex != -1) return { x: { "@v": `${employeeIndex}` } };
-  if (typeof value == "number") return { n: { "@v": `${value}` } };
+  if (typeof value === "number") return { n: { "@v": `${value}` } };
   return { s: { "@v": `${value}` } };
 }

@@ -17,7 +17,7 @@ export function makePivotCacheRecordsContent({
   let counter = recordElementsCount;
   const records: PivotCacheRecord[] = [{ "#": [] }];
   for (let i = startTableContentIndex; i < table.length; i++) {
-    if (counter == 0) {
+    if (counter === 0) {
       counter = recordElementsCount;
       records.push({ "#": [] });
     }

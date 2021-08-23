@@ -38,7 +38,7 @@ export function makePivotCacheDefinition({
 
 function makePivotCacheFields(pivotCacheDefinition: PivotCacheDefinition, employees: Employee[]) {
   for (const tableHeader of TABLE_HEADERS) {
-    if (tableHeader.label == "Employee")
+    if (tableHeader.label === "Employee")
       pivotCacheDefinition.cacheFields.cacheField.push(makePivotCacheFieldEmployees(employees, tableHeader.label));
     else
       pivotCacheDefinition.cacheFields.cacheField.push({
