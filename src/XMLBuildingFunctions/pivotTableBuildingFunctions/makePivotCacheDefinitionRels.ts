@@ -6,8 +6,7 @@ export function makePivotCacheDefinitionRels(): Relationships {
     Relationship: [
       {
         "@Id": "rId1",
-        "@Type":
-          "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotCacheRecords",
+        "@Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotCacheRecords",
         "@Target": "pivotCacheRecords1.xml",
       },
     ],

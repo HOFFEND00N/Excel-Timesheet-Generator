@@ -20,21 +20,11 @@ import { errorHandler } from "./errorHandler";
 type MakeTableArguments = {
   tableData: TableData;
   currentDate: Date;
-  fetchUserTasks: ({
-    jiraUserName,
-    login,
-    password,
-  }: FetchUserTasksArguments) => Promise<UserTasks>;
+  fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   getNonWorkingHoursFile: () => Promise<string[][]>;
   workingHoursPerMonth: number;
-  isJiraCredentialsCorrect: ({
-    login,
-    password,
-  }: {
-    login: string;
-    password: string;
-  }) => Promise<boolean>;
+  isJiraCredentialsCorrect: ({ login, password }: { login: string; password: string }) => Promise<boolean>;
 };
 
 export async function makeTable({
@@ -60,34 +50,21 @@ export async function makeTable({
   });
   styleTableRow({
     row: tableHeadersRow,
-    cellStyles: [
-      makeBoldCellTextStyle(),
-      makeCellBorderStyle(),
-      makeDefaultTextStyle(),
-    ],
+    cellStyles: [makeBoldCellTextStyle(), makeCellBorderStyle(), makeDefaultTextStyle()],
   });
   table.push(...tableHeadersRow);
 
-  const nonWorkingHoursRows = await getNonWorkingHoursRows(
-    tableData,
-    getNonWorkingHoursFile
-  );
+  const nonWorkingHoursRows = await getNonWorkingHoursRows(tableData, getNonWorkingHoursFile);
 
-  const employeeColumn = tableHeaders.findIndex(
-    (item) => item.label === "Employee"
-  );
-  const manHoursColumn = tableHeaders.findIndex(
-    (item) => item.label === "Man-Hours"
-  );
+  const employeeColumn = tableHeaders.findIndex((item) => item.label === "Employee");
+  const manHoursColumn = tableHeaders.findIndex((item) => item.label === "Man-Hours");
 
-  const nonWorkingHoursByEmployeesUsername = makeNonWorkingHoursByEmployeesUsername(
-    {
-      employeeColumn,
-      manHoursColumn,
-      nonWorkingHoursRows,
-      employees: [...tableData.employees, tableData.teamLead],
-    }
-  );
+  const nonWorkingHoursByEmployeesUsername = makeNonWorkingHoursByEmployeesUsername({
+    employeeColumn,
+    manHoursColumn,
+    nonWorkingHoursRows,
+    employees: [...tableData.employees, tableData.teamLead],
+  });
 
   const tableRowsValues = await errorHandler(makeEmployeeDataRows, {
     tableData,
@@ -109,9 +86,7 @@ export async function makeTable({
     });
     styleTableRow({
       row: [row[0], row[1]],
-      cellStyles: [
-        makeStyleHorizontalAlignText(HorizontalAlignTextWays.center),
-      ],
+      cellStyles: [makeStyleHorizontalAlignText(HorizontalAlignTextWays.center)],
     });
     styleTableRow({
       row,

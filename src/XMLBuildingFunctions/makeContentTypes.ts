@@ -13,60 +13,49 @@ export function makeContentTypes(): ContentTypes {
         "@Extension": "xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-package.relationships+xml",
+        "@ContentType": "application/vnd.openxmlformats-package.relationships+xml",
         "@Extension": "rels",
       },
     ],
     Override: [
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml",
         "@PartName": "/xl/workbook.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml",
         "@PartName": "/xl/worksheets/sheet1.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml",
         "@PartName": "/xl/worksheets/sheet2.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheDefinition+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheDefinition+xml",
         "@PartName": "/xl/pivotCache/pivotCacheDefinition1.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheRecords+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheRecords+xml",
         "@PartName": "/xl/pivotCache/pivotCacheRecords1.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml",
         "@PartName": "/xl/styles.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml",
         "@PartName": "/xl/sharedStrings.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotTable+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotTable+xml",
         "@PartName": "/xl/pivotTables/pivotTable1.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-officedocument.drawing+xml",
+        "@ContentType": "application/vnd.openxmlformats-officedocument.drawing+xml",
         "@PartName": "/xl/drawings/drawing1.xml",
       },
       {
-        "@ContentType":
-          "application/vnd.openxmlformats-package.core-properties+xml",
+        "@ContentType": "application/vnd.openxmlformats-package.core-properties+xml",
         "@PartName": "/docProps/core.xml",
       },
     ],

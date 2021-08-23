@@ -13,4 +13,4 @@ export { makeTableRow } from "./makeTableRow";
 export { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
 export { makeSortedUserTasksByEmployeeUsername } from "./makeSortedUserTasksByEmployeeUsername";
 export { styleTableRow } from "./styleTableRow";
-export { isJiraCredentialsCorrect } from "./isJiraCredentialsCorrect";
+export { areJiraCredentialsCorrect } from "./areJiraCredentialsCorrect";

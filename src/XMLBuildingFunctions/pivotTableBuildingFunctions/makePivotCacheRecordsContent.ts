@@ -21,9 +21,7 @@ export function makePivotCacheRecordsContent({
       counter = recordElementsCount;
       records.push({ "#": [] });
     }
-    records[records.length - 1]["#"].push(
-      makePivotCacheRecordElement({ value: table[i].value, employees })
-    );
+    records[records.length - 1]["#"].push(makePivotCacheRecordElement({ value: table[i].value, employees }));
     counter--;
   }
   return records;

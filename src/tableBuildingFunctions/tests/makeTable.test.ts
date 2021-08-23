@@ -9,11 +9,7 @@ import {
 } from "../../constants/styleConstants";
 import { CommonCell, CommonValue, NumberValue, StringValue } from "../types";
 import { TableCell } from "../../classes/TableCell";
-import {
-  getFetchUserTasksForTests,
-  getMonthRowsForTests,
-  getTableDataForTests,
-} from "./mockedDataForTests";
+import { getFetchUserTasksForTests, getMonthRowsForTests, getTableDataForTests } from "./mockedDataForTests";
 
 test("make full table", async () => {
   const expectedTable: CommonCell[] = [];
@@ -28,65 +24,16 @@ test("make full table", async () => {
     expectedTable.push({
       point: { column: startTablePoint.column + i, row: startTablePoint.row },
       value: tableHeader.label,
-      styles: [
-        makeBoldCellTextStyle(),
-        makeCellBorderStyle(),
-        makeDefaultTextStyle(),
-      ],
+      styles: [makeBoldCellTextStyle(), makeCellBorderStyle(), makeDefaultTextStyle()],
     });
   }
   const expectedTableRows: CommonValue[][] = [
     [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 112],
-    [
-      651,
-      "NO",
-      "Confirmit",
-      "Studio",
-      "Karaseva Svetlana",
-      "task 1 task 3",
-      "",
-      112,
-    ],
-    [
-      651,
-      "NO",
-      "Confirmit",
-      "Studio",
-      "Molotkova Maria",
-      "epic task 1",
-      "",
-      96,
-    ],
-    [
-      651,
-      "RU",
-      "Confirmit",
-      "DaysOff",
-      "Matrosova Marianna",
-      "25.01.2021",
-      "",
-      8,
-    ],
-    [
-      651,
-      "RU",
-      "Confirmit",
-      "DaysOff",
-      "Karaseva Svetlana",
-      "20.01.2021",
-      "",
-      8,
-    ],
-    [
-      651,
-      "RU",
-      "Confirmit",
-      "Holidays",
-      "Molotkova Maria",
-      "20.01.2021-23.01.2021",
-      "",
-      24,
-    ],
+    [651, "NO", "Confirmit", "Studio", "Karaseva Svetlana", "task 1 task 3", "", 112],
+    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "epic task 1", "", 96],
+    [651, "RU", "Confirmit", "DaysOff", "Matrosova Marianna", "25.01.2021", "", 8],
+    [651, "RU", "Confirmit", "DaysOff", "Karaseva Svetlana", "20.01.2021", "", 8],
+    [651, "RU", "Confirmit", "Holidays", "Molotkova Maria", "20.01.2021-23.01.2021", "", 24],
   ];
 
   const startPoint = START_TABLE_POINT;
@@ -94,17 +41,12 @@ test("make full table", async () => {
     const expectedTableRow = expectedTableRows[i];
     for (let j = 0; j < expectedTableRow.length; j++) {
       const value = expectedTableRow[j];
-      const tableCell: CommonCell = <
-        TableCell<StringValue> | TableCell<NumberValue>
-      >{
+      const tableCell: CommonCell = <TableCell<StringValue> | TableCell<NumberValue>>{
         point: { column: startPoint.column + j, row: startPoint.row + i + 1 },
         value: value,
         styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
       };
-      if (j == 0 || j == 1)
-        tableCell.styles.unshift(
-          makeStyleHorizontalAlignText(HorizontalAlignTextWays.center)
-        );
+      if (j == 0 || j == 1) tableCell.styles.unshift(makeStyleHorizontalAlignText(HorizontalAlignTextWays.center));
       expectedTable.push(tableCell);
     }
   }
@@ -118,36 +60,9 @@ test("make full table", async () => {
     getCredentials: () => Promise.resolve({ login: "", password: "" }),
     getNonWorkingHoursFile: () =>
       Promise.resolve([
-        [
-          "651",
-          "RU",
-          "Confirmit",
-          "DaysOff",
-          "Matrosova Marianna",
-          "25.01.2021",
-          "",
-          "8",
-        ],
-        [
-          "651",
-          "RU",
-          "Confirmit",
-          "DaysOff",
-          "Karaseva Svetlana",
-          "20.01.2021",
-          "",
-          "8",
-        ],
-        [
-          "651",
-          "RU",
-          "Confirmit",
-          "Holidays",
-          "Molotkova Maria",
-          "20.01.2021-23.01.2021",
-          "",
-          "24",
-        ],
+        ["651", "RU", "Confirmit", "DaysOff", "Matrosova Marianna", "25.01.2021", "", "8"],
+        ["651", "RU", "Confirmit", "DaysOff", "Karaseva Svetlana", "20.01.2021", "", "8"],
+        ["651", "RU", "Confirmit", "Holidays", "Molotkova Maria", "20.01.2021-23.01.2021", "", "24"],
       ]),
     workingHoursPerMonth: 120,
     isJiraCredentialsCorrect: () => Promise.resolve(true),

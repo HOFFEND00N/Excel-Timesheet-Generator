@@ -1,11 +1,5 @@
 import { TableData } from "../classes/TableData";
-import {
-  CommonValue,
-  FetchUserTasksArguments,
-  HoursByEmployees,
-  TableHeader,
-  UserTasks,
-} from "./types";
+import { CommonValue, FetchUserTasksArguments, HoursByEmployees, TableHeader, UserTasks } from "./types";
 import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
 import { makeSortedUserTasksByEmployeeUsername } from "./makeSortedUserTasksByEmployeeUsername";
 import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
@@ -13,21 +7,11 @@ import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 type MakeEmployeeDataRowsArguments = {
   tableData: TableData;
   headers: TableHeader[];
-  fetchUserTasks: ({
-    jiraUserName,
-    login,
-    password,
-  }: FetchUserTasksArguments) => Promise<UserTasks>;
+  fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursPerMonth: number;
-  isJiraCredentialsCorrect: ({
-    login,
-    password,
-  }: {
-    login: string;
-    password: string;
-  }) => Promise<boolean>;
+  isJiraCredentialsCorrect: ({ login, password }: { login: string; password: string }) => Promise<boolean>;
 };
 
 export async function makeEmployeeDataRows({
@@ -41,12 +25,11 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
 
-  if (
-    !(await isJiraCredentialsCorrect({
-      login,
-      password,
-    }))
-  ) {
+  const cahAuthorize = await isJiraCredentialsCorrect({
+    login,
+    password,
+  });
+  if (!cahAuthorize) {
     throw new Error("Wrong credentials. Please try again");
   }
 
@@ -61,13 +44,9 @@ export async function makeEmployeeDataRows({
 
   console.log(`Fetching tasks from Jira for employees. Please wait...`);
   const tasksRows = await Promise.all(tasks);
-  tasksRows.push(
-    makeTeamLeadJiraTasks(tasksRows, tableData.teamLead.jiraUsername)
-  );
+  tasksRows.push(makeTeamLeadJiraTasks(tasksRows, tableData.teamLead.jiraUsername));
 
-  const userTasksByEmployeeUsername = makeSortedUserTasksByEmployeeUsername(
-    tasksRows
-  );
+  const userTasksByEmployeeUsername = makeSortedUserTasksByEmployeeUsername(tasksRows);
 
   for (const employee of tableData.employees) {
     employeeDataRows.push(

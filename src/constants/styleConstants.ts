@@ -37,9 +37,7 @@ export function makeYellowBackgroundStyle(): Style {
   };
 }
 
-export function makeStyleHorizontalAlignText(
-  way: HorizontalAlignTextWays
-): Style {
+export function makeStyleHorizontalAlignText(way: HorizontalAlignTextWays): Style {
   return {
     alignment: {
       horizontal: way,

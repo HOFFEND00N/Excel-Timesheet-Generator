@@ -5,11 +5,7 @@ import { CommonCell } from "../../../tableBuildingFunctions/types";
 test("pass table with 1 row expect to return one cache record", () => {
   const expectedPivotCacheRecordsContent: PivotCacheRecord[] = [
     {
-      "#": [
-        { n: { "@v": "1" } },
-        { x: { "@v": "0" } },
-        { s: { "@v": "test" } },
-      ],
+      "#": [{ n: { "@v": "1" } }, { x: { "@v": "0" } }, { s: { "@v": "test" } }],
     },
   ];
   const table: CommonCell[] = [
@@ -35,7 +31,5 @@ test("pass table with 1 row expect to return one cache record", () => {
     recordElementsCount: 3,
   });
 
-  expect(actualPivotCacheRecordsContent).toEqual(
-    expectedPivotCacheRecordsContent
-  );
+  expect(actualPivotCacheRecordsContent).toEqual(expectedPivotCacheRecordsContent);
 });

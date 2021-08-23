@@ -4,25 +4,18 @@ import { TableData } from "./classes/TableData";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 import {
+  areJiraCredentialsCorrect,
   fetchJiraUserTasks,
   getCredentials,
   getNonWorkingHoursFile,
   getWorkingHoursPerMonth,
-  isJiraCredentialsCorrect,
   isNumericCell,
   isStringCell,
   makeTable,
 } from "./tableBuildingFunctions";
-import {
-  START_TABLE_POINT,
-  TABLE_HEADERS,
-  WORKSHEET_MONTHLY_TIMESHEET_NAME,
-} from "./constants/constant";
+import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
-import {
-  addPivotTableToXlsxFile,
-  makeXlsxFile,
-} from "./XlsxFileBuildingFunctions";
+import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -33,9 +26,7 @@ import {
     row: 2,
   };
 
-  const tableData: TableData = JSON.parse(
-    fs.readFileSync("tableData.json", "utf-8")
-  );
+  const tableData: TableData = JSON.parse(fs.readFileSync("tableData.json", "utf-8"));
 
   const workingHoursPerMonth = await getWorkingHoursPerMonth();
 
@@ -47,15 +38,11 @@ import {
     getCredentials,
     getNonWorkingHoursFile,
     workingHoursPerMonth,
-    isJiraCredentialsCorrect: isJiraCredentialsCorrect,
+    isJiraCredentialsCorrect: areJiraCredentialsCorrect,
   });
 
-  const employeeColumn =
-    START_TABLE_POINT.column +
-    TABLE_HEADERS.findIndex((header) => header.label == "Employee");
-  const taskColumn =
-    START_TABLE_POINT.column +
-    TABLE_HEADERS.findIndex((header) => header.label == "Task");
+  const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label == "Employee");
+  const taskColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label == "Task");
 
   workSheet.column(employeeColumn).setWidth(25);
   workSheet.column(taskColumn).setWidth(50);
@@ -83,9 +70,7 @@ import {
   const reportName = makeReportFileName(currentDate, tableData.unit);
   await makeXlsxFile(workBook, reportName);
 
-  const manHoursColumn = TABLE_HEADERS.findIndex(
-    (header) => header.label == "Man-Hours"
-  );
+  const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label == "Man-Hours");
 
   addPivotTableToXlsxFile({
     reportName,

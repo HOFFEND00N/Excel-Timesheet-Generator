@@ -16,22 +16,17 @@ export function makePivotCacheRecords({
   recordElementsCount: number;
 }) {
   const tableRowsCount =
-    table.reduce(
-      (maxRow: number, tableCell) =>
-        maxRow > tableCell.point.row ? maxRow : tableCell.point.row,
-      0
-    ) - startTablePoint.row;
+    table.reduce((maxRow: number, tableCell) => (maxRow > tableCell.point.row ? maxRow : tableCell.point.row), 0) -
+    startTablePoint.row;
 
   const startTableContentIndex = table.findIndex(
     (currentTableCell) =>
-      currentTableCell.point.row == startTablePoint.row + 1 &&
-      currentTableCell.point.column == startTablePoint.column
+      currentTableCell.point.row == startTablePoint.row + 1 && currentTableCell.point.column == startTablePoint.column
   );
 
   const pivotCacheRecords: PivotCacheRecords = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-    "@xmlns:r":
-      "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "@xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     "@count": `${tableRowsCount}`,
     r: makePivotCacheRecordsContent({
       table,

@@ -21,13 +21,9 @@ export function makeEmployeeDataRow({
 }: makeEmployeeDataRowArguments) {
   return headers.map((header) => {
     if (header.label == "Employee") return employee.name;
-    if (header.label == "Task")
-      return userTasksByEmployeeUsername[employee.jiraUsername].join(" ");
+    if (header.label == "Task") return userTasksByEmployeeUsername[employee.jiraUsername].join(" ");
     if (header.label == "Man-Hours")
-      return (
-        workingHoursPerMonth -
-        (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0)
-      );
+      return workingHoursPerMonth - (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0);
     const cell: CommonValue = tableData[header.dataKey];
     return cell ?? "";
   });

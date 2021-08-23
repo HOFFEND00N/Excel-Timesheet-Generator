@@ -13,7 +13,5 @@ export async function getNonWorkingHoursRows(
 
   return nonWorkingHoursJson
     .filter((row) => row.some((cell) => employees.includes(cell)))
-    .map((row) =>
-      row.map((value) => (isNumeric(value) ? Number(value) : value))
-    );
+    .map((row) => row.map((value) => (isNumeric(value) ? Number(value) : value)));
 }

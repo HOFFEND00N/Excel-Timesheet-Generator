@@ -1,10 +1,6 @@
 {
-  "presets": [
-    "@babel/preset-typescript"
-  ],
-  "plugins": [
-    "babel-plugin-add-import-extension"
-  ],
+  "presets": ["@babel/preset-typescript"],
+  "plugins": ["babel-plugin-add-import-extension"],
   "env": {
     "test": {
       "plugins": ["@babel/plugin-transform-modules-commonjs"]

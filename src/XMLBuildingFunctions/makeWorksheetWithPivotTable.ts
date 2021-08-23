@@ -39,11 +39,7 @@ export function makeWorksheetWithPivotTable({
   };
 }
 
-function makeSheetDataRows(
-  employees: Employee[],
-  workingHoursPerMonth: number,
-  pivotTableOffset: number
-) {
+function makeSheetDataRows(employees: Employee[], workingHoursPerMonth: number, pivotTableOffset: number) {
   const rows: Row[] = [];
   rows.push({
     "@r": 3,

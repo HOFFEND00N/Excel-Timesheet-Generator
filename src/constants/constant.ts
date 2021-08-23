@@ -15,20 +15,7 @@ export const TABLE_HEADERS = [
 
 export const MONTHLY_TIMESHEET_HEADER = "Monthly Timesheet for";
 
-export const MONTHS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+export const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export const START_TABLE_POINT: Point = { column: 2, row: 8 };
 

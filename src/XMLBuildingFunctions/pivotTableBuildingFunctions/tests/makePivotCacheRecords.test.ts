@@ -6,15 +6,10 @@ test("pass table with 3 columns and 2 rows, expect to return pivot cache records
   const expectedPivotCacheRecords: PivotCacheRecords = {
     "@count": "1",
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-    "@xmlns:r":
-      "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "@xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     r: [
       {
-        "#": [
-          { n: { "@v": "1" } },
-          { x: { "@v": "0" } },
-          { s: { "@v": "test" } },
-        ],
+        "#": [{ n: { "@v": "1" } }, { x: { "@v": "0" } }, { s: { "@v": "test" } }],
       },
     ],
   };

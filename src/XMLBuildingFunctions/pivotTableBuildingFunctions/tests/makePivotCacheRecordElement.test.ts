@@ -11,9 +11,7 @@ test("pass string, expect to return string pivot cache record element", () => {
     employees: [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }],
   });
 
-  expect(actualPivotCacheRecordElement).toEqual(
-    expectedPivotCacheRecordElement
-  );
+  expect(actualPivotCacheRecordElement).toEqual(expectedPivotCacheRecordElement);
 });
 
 test("pass number, expect to return number pivot cache record element", () => {
@@ -26,9 +24,7 @@ test("pass number, expect to return number pivot cache record element", () => {
     employees: [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }],
   });
 
-  expect(actualPivotCacheRecordElement).toEqual(
-    expectedPivotCacheRecordElement
-  );
+  expect(actualPivotCacheRecordElement).toEqual(expectedPivotCacheRecordElement);
 });
 
 test("pass employee, expect to return shared item pivot cache record element", () => {
@@ -41,7 +37,5 @@ test("pass employee, expect to return shared item pivot cache record element", (
     employees: [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }],
   });
 
-  expect(actualPivotCacheRecordElement).toEqual(
-    expectedPivotCacheRecordElement
-  );
+  expect(actualPivotCacheRecordElement).toEqual(expectedPivotCacheRecordElement);
 });

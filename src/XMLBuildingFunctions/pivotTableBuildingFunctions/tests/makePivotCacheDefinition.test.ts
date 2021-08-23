@@ -4,8 +4,7 @@ import { makePivotCacheDefinition } from "../makePivotCacheDefinition";
 test("pass one employee, expect to return pivot cache definition with one employee", () => {
   const expectedPivotCacheDefinition: PivotCacheDefinition = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-    "@xmlns:r":
-      "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "@xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     "@r:id": "rId1",
     cacheSource: {
       "@type": "worksheet",
@@ -49,8 +48,7 @@ test("pass one employee, expect to return pivot cache definition with one employ
 test("pass several employee, expect to return pivot cache definition with several employees", () => {
   const expectedPivotCacheDefinition: PivotCacheDefinition = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-    "@xmlns:r":
-      "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "@xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     "@r:id": "rId1",
     cacheSource: {
       "@type": "worksheet",

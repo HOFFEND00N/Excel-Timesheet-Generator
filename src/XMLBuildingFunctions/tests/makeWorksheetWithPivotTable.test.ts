@@ -72,7 +72,5 @@ test("pass 2 employees, expect to return correct worksheet", () => {
     workingHoursPerMonth,
   });
 
-  expect(actualWorksheetWithPivotTable).toEqual(
-    expectedWorksheetWithPivotTable
-  );
+  expect(actualWorksheetWithPivotTable).toEqual(expectedWorksheetWithPivotTable);
 });

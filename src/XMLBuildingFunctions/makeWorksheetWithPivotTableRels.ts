@@ -6,8 +6,7 @@ export function makeWorksheetWithPivotTableRels(): Relationships {
     Relationship: [
       {
         "@Id": "rId1",
-        "@Type":
-          "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotTable",
+        "@Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotTable",
         "@Target": "../pivotTables/pivotTable1.xml",
       },
     ],

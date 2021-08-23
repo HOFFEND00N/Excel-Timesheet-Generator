@@ -18,8 +18,9 @@
 - generated excel file can be found in the root of the project
 
 ## Important information
-In case of wrong provided credentials, your account will be locked out, 
-because there is a strict policy for failed attempts via applications/api. 
+
+In case of wrong provided credentials, your account will be locked out,
+because there is a strict policy for failed attempts via applications/api.
 
 Visit this page, to understand how to unlock your account
 https://confluence.firmglobal.com/display/ISK/FAQ%3A+Using+self+service+PasswordReset+tool+to+unlock+account.

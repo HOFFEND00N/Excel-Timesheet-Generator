@@ -20,8 +20,7 @@ export function makePivotCacheDefinition({
 
   const pivotCacheDefinition: PivotCacheDefinition = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
-    "@xmlns:r":
-      "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "@xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     "@r:id": "rId1",
     cacheSource: {
       "@type": "worksheet",
@@ -37,15 +36,10 @@ export function makePivotCacheDefinition({
   return pivotCacheDefinition;
 }
 
-function makePivotCacheFields(
-  pivotCacheDefinition: PivotCacheDefinition,
-  employees: Employee[]
-) {
+function makePivotCacheFields(pivotCacheDefinition: PivotCacheDefinition, employees: Employee[]) {
   for (const tableHeader of TABLE_HEADERS) {
     if (tableHeader.label == "Employee")
-      pivotCacheDefinition.cacheFields.cacheField.push(
-        makePivotCacheFieldEmployees(employees, tableHeader.label)
-      );
+      pivotCacheDefinition.cacheFields.cacheField.push(makePivotCacheFieldEmployees(employees, tableHeader.label));
     else
       pivotCacheDefinition.cacheFields.cacheField.push({
         "@name": tableHeader.label,

@@ -12,23 +12,14 @@ export function makeNonWorkingHoursByEmployeesUsername({
   nonWorkingHoursRows: CommonValue[][];
   employees: Employee[];
 }) {
-  return nonWorkingHoursRows.reduce(
-    (
-      nonWorkingHoursByEmployeesUsername: HoursByEmployees,
-      nonWorkingHoursRow
-    ) => {
-      const employeeName = nonWorkingHoursRow[employeeColumn].toString();
-      const manHours = Number(nonWorkingHoursRow[manHoursColumn]);
-      const employee = employees.find(
-        (employee) => employee.name == employeeName
-      );
-      if (!employee) return nonWorkingHoursByEmployeesUsername;
+  return nonWorkingHoursRows.reduce((nonWorkingHoursByEmployeesUsername: HoursByEmployees, nonWorkingHoursRow) => {
+    const employeeName = nonWorkingHoursRow[employeeColumn].toString();
+    const manHours = Number(nonWorkingHoursRow[manHoursColumn]);
+    const employee = employees.find((employee) => employee.name == employeeName);
+    if (!employee) return nonWorkingHoursByEmployeesUsername;
 
-      nonWorkingHoursByEmployeesUsername[employee.jiraUsername] =
-        (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0) +
-        manHours;
-      return nonWorkingHoursByEmployeesUsername;
-    },
-    {}
-  );
+    nonWorkingHoursByEmployeesUsername[employee.jiraUsername] =
+      (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0) + manHours;
+    return nonWorkingHoursByEmployeesUsername;
+  }, {});
 }

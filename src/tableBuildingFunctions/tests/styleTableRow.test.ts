@@ -1,8 +1,5 @@
 import { styleTableRow } from "../index";
-import {
-  makeBoldCellTextStyle,
-  makeYellowBackgroundStyle,
-} from "../../constants/styleConstants";
+import { makeBoldCellTextStyle, makeYellowBackgroundStyle } from "../../constants/styleConstants";
 import { CommonCell } from "../types";
 
 let actualRow: CommonCell[];

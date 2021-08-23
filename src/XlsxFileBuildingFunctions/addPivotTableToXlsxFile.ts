@@ -106,14 +106,8 @@ export function addPivotTableToXlsxFile({
       }),
     }).end()
   );
-  fs.writeFileSync(
-    path.join(whereToExtract, "xl/workbook.xml"),
-    create({ workbook: makeWorkbook() }).end()
-  );
-  fs.writeFileSync(
-    path.join(whereToExtract, "[Content_Types].xml"),
-    create({ Types: makeContentTypes() }).end()
-  );
+  fs.writeFileSync(path.join(whereToExtract, "xl/workbook.xml"), create({ workbook: makeWorkbook() }).end());
+  fs.writeFileSync(path.join(whereToExtract, "[Content_Types].xml"), create({ Types: makeContentTypes() }).end());
 
   zip = new admZip();
   zip.addLocalFolder(whereToExtract);

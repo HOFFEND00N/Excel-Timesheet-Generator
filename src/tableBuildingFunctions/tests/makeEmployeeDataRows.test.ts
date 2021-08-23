@@ -1,33 +1,12 @@
 import { makeEmployeeDataRows } from "../index";
-import {
-  getFetchUserTasksForTests,
-  getTableDataForTests,
-} from "./mockedDataForTests";
+import { getFetchUserTasksForTests, getTableDataForTests } from "./mockedDataForTests";
 import { TABLE_HEADERS } from "../../constants/constant";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", async () => {
   const expectedTable = [
     [651, "NO", "Confirmit", "Studio", "Matrosova Marianna", "task 2", "", 120],
-    [
-      651,
-      "NO",
-      "Confirmit",
-      "Studio",
-      "Karaseva Svetlana",
-      "task 1 task 3",
-      "",
-      96,
-    ],
-    [
-      651,
-      "NO",
-      "Confirmit",
-      "Studio",
-      "Molotkova Maria",
-      "epic task 1",
-      "",
-      112,
-    ],
+    [651, "NO", "Confirmit", "Studio", "Karaseva Svetlana", "task 1 task 3", "", 96],
+    [651, "NO", "Confirmit", "Studio", "Molotkova Maria", "epic task 1", "", 112],
   ];
   const tableData = getTableDataForTests();
 
@@ -62,7 +41,5 @@ test("pass wrong credentials, expect to throw exception", async () => {
     });
   };
 
-  await expect(actualTable()).rejects.toThrow(
-    "Wrong credentials. Please try again"
-  );
+  await expect(actualTable()).rejects.toThrow("Wrong credentials. Please try again");
 });
