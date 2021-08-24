@@ -2,9 +2,7 @@ import inquirer from "inquirer";
 import xlsx from "xlsx";
 import { OUTPUT_FORMAT_ARRAY_OF_ARRAYS } from "../constants/constant";
 import inquirer_autocomplete_prompt from "inquirer-autocomplete-prompt";
-import { findSuitableFilesAndDirectories } from "./findSuitableFilesAndDirectories";
-import nodeDiskInfo from "node-disk-info";
-import path from "path";
+import { searchFilesAndDirectories } from "./searchFilesAndDirectories";
 
 export async function getNonWorkingHoursFile(): Promise<string[][]> {
   inquirer.registerPrompt("autocomplete", inquirer_autocomplete_prompt);
@@ -39,23 +37,4 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
 
 function removeEmptyCellAtTheBeginning(row: string[]) {
   return row.splice(row.findIndex((value) => value !== ""));
-}
-
-async function searchFilesAndDirectories(previousAnswers: unknown, input = "") {
-  let files: string[] = [];
-  try {
-    if (input == "") {
-      files = await listDrives();
-    } else {
-      files = await findSuitableFilesAndDirectories(input);
-    }
-  } catch (error) {
-    if (error.code == "ENOENT") files = [];
-  }
-  return files;
-}
-
-async function listDrives() {
-  const drives = await nodeDiskInfo.getDiskInfo();
-  return drives.map((drive) => `${drive.mounted}${path.sep}`);
 }
