@@ -35,11 +35,7 @@ export function makeWorksheetWithPivotTable({
       ],
     },
     sheetData: {
-      row: makeSheetDataRows(
-        employees,
-        workingHoursByEmployeesUsername,
-        pivotTableOffset
-      ),
+      row: makeSheetDataRows(employees, workingHoursByEmployeesUsername, pivotTableOffset),
     },
   };
 }
@@ -59,16 +55,17 @@ function makeSheetDataRows(
   });
 
   for (let i = 0; i < employees.length; i++) {
+    const rowIndex = i + pivotTableOffset;
     rows.push({
-      "@r": i + pivotTableOffset,
+      "@r": rowIndex,
       c: [
         {
-          "@r": `A${i + pivotTableOffset}`,
+          "@r": `A${rowIndex}`,
           "@t": "str",
           v: `${employees[i].name}`,
         },
         {
-          "@r": `B${i + pivotTableOffset}`,
+          "@r": `B${rowIndex}`,
           v: workingHoursByEmployeesUsername[employees[i].jiraUsername],
         },
       ],
@@ -85,23 +82,13 @@ function makeSheetDataRows(
       },
       {
         "@r": `B${getLastPivotTableColumn({ employees, pivotTableOffset })}`,
-        v: employees.reduce(
-          (sum, employee) =>
-            sum + workingHoursByEmployeesUsername[employee.jiraUsername],
-          0
-        ),
+        v: employees.reduce((sum, employee) => sum + workingHoursByEmployeesUsername[employee.jiraUsername], 0),
       },
     ],
   });
   return rows;
 }
 
-function getLastPivotTableColumn ({
-  employees,
-  pivotTableOffset,
-}: {
-  employees: Employee[];
-  pivotTableOffset: number;
-}) {
+function getLastPivotTableColumn({ employees, pivotTableOffset }: { employees: Employee[]; pivotTableOffset: number }) {
   return employees.length + pivotTableOffset;
 }
