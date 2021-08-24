@@ -26,28 +26,14 @@ test("pass the same working hours rate fro everybody, expect to return employees
     MatrosovaM: 140,
   };
 
-  let shouldUpdateEmployeeMonthRate = true;
   const actualWorkingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername({
     employees: [
       { jiraUsername: "KarasevaS", name: "Karaseva Svetlana" },
       { jiraUsername: "MatrosovaM", name: "Matrosova Marianna" },
     ],
     getChosenEmployeesNames: jest.fn().mockReturnValue([{ jiraUsername: "KarasevaS", name: "Karaseva Svetlana" }]),
-    getWorkingHoursPerMonth: jest.fn().mockImplementation(() => {
-      if (shouldUpdateEmployeeMonthRate) {
-        return 140;
-      } else {
-        return 120;
-      }
-    }),
-    shouldUpdateEmployeeMonthRate: jest.fn().mockImplementation(() => {
-      if (shouldUpdateEmployeeMonthRate) {
-        shouldUpdateEmployeeMonthRate = false;
-        return true;
-      } else {
-        return false;
-      }
-    }),
+    getWorkingHoursPerMonth: jest.fn().mockReturnValueOnce(140).mockReturnValueOnce(120),
+    shouldUpdateEmployeeMonthRate: jest.fn().mockReturnValueOnce(true).mockReturnValueOnce(false),
   });
 
   expect(actualWorkingHoursByEmployeesUsername).toEqual(expectedWorkingHoursByEmployeesUsername);
