@@ -22,7 +22,6 @@ const config = {
       "getWorkingHoursPerMonth",
       "types",
       "shouldUpdateEmployeeMonthRate",
-      "getWorkingHoursByEmployeesUsername",
       "areJiraCredentialsCorrect",
       "chooseEmployees",
     ].map((file) => `!./src/tableBuildingFunctions/${file}.ts`),

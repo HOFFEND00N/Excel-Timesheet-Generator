@@ -6,10 +6,9 @@ export async function chooseEmployees(employees: Employee[]) {
     {
       type: "checkbox",
       name: "chosenEmployees",
-      message:
-        "Please select employees with previously entered working hours per month rate",
+      message: "Please select employees with previously entered working hours per month rate",
       choices: [...employees.map((employee) => employee.name)],
     },
   ]);
-  return chosenEmployees;
+  return chosenEmployees.map((chosenEmployee) => employees.find((employee) => employee.name == chosenEmployee));
 }

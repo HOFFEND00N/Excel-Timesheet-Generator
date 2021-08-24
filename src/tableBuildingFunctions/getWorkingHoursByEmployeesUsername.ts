@@ -10,7 +10,7 @@ export async function getWorkingHoursByEmployeesUsername({
   employees: Employee[];
   getWorkingHoursPerMonth: () => Promise<number>;
   shouldUpdateEmployeeMonthRate: () => Promise<boolean>;
-  getChosenEmployeesNames: (employee: Employee[]) => Promise<string>;
+  getChosenEmployeesNames: (employee: Employee[]) => Promise<Employee[]>;
 }) {
   const workingHoursPerMonth = await getWorkingHoursPerMonth();
 
@@ -24,8 +24,7 @@ export async function getWorkingHoursByEmployeesUsername({
     const workingHoursPerMonth = await getWorkingHoursPerMonth();
 
     for (const chosenEmployee of chosenEmployees) {
-      const employee = employees.find((employee) => employee.name == chosenEmployee);
-      if (employee != undefined) workingHoursByEmployeesUsername[employee.jiraUsername] = workingHoursPerMonth;
+      workingHoursByEmployeesUsername[chosenEmployee.jiraUsername] = workingHoursPerMonth;
     }
 
     console.log(workingHoursByEmployeesUsername);
