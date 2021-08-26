@@ -1,7 +1,7 @@
-import { TableData } from "../classes/TableData";
-import { isNumeric } from "../utils/isNumeric";
-import { CommonValue } from "./types";
-import { errorHandler } from "./errorHandler";
+import { TableData } from "../../../classes/TableData";
+import { isNumeric } from "../../../utils/isNumeric";
+import { CommonValue } from "../../types";
+import { errorHandler } from "../../errorHandler";
 
 export async function getNonWorkingHoursRows(
   tableData: TableData,

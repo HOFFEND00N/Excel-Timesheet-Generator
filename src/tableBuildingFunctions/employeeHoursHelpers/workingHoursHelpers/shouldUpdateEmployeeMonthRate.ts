@@ -7,8 +7,7 @@ export async function shouldUpdateEmployeeMonthRate() {
       name: "shouldUpdateEmployeeMonthRate",
       message: "Does any employee has different monthly hours rate? (Y/N)",
       validate: (shouldUpdateEmployeeMonthRate) => {
-        if (!["y", "Y", "n", "N"].includes(shouldUpdateEmployeeMonthRate))
-          return "Please enter correct symbol, (Y/N)";
+        if (!["y", "Y", "n", "N"].includes(shouldUpdateEmployeeMonthRate)) return "Please enter correct symbol, (Y/N)";
         return true;
       },
     },

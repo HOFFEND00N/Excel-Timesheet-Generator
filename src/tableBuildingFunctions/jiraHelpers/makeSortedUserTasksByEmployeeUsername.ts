@@ -1,4 +1,4 @@
-import { UserTasks } from "./types";
+import { UserTasks } from "../types";
 
 export function makeSortedUserTasksByEmployeeUsername(usersTasks: UserTasks[]): Record<string, string[]> {
   const userTasksByEmployee: Record<string, string[]> = {};

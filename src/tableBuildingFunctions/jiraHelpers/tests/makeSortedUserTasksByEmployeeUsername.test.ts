@@ -1,4 +1,4 @@
-import { makeSortedUserTasksByEmployeeUsername } from "../index";
+import { makeSortedUserTasksByEmployeeUsername } from "../../index";
 
 test("pass zero user tasks, expect to return empty record", () => {
   const expectedUserTasksByEmployee: Record<string, string> = {};

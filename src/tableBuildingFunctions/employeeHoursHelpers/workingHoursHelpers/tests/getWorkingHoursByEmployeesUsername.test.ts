@@ -1,4 +1,4 @@
-import { HoursByEmployees } from "../types";
+import { HoursByEmployees } from "../../../types";
 import { getWorkingHoursByEmployeesUsername } from "../getWorkingHoursByEmployeesUsername";
 
 test("pass the same working hours rate fro everybody, expect to return employees with equal working hours rate", async () => {

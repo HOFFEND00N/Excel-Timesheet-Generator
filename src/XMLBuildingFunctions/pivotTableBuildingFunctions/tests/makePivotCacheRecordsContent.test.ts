@@ -1,4 +1,4 @@
-import { PivotCacheRecord } from "../../types/PivotCacheRecords";
+import { PivotCacheRecord } from "../../types";
 import { makePivotCacheRecordsContent } from "../makePivotCacheRecordsContent";
 import { CommonCell } from "../../../tableBuildingFunctions/types";
 

@@ -1,4 +1,4 @@
-import { UserTasks } from "./types";
+import { UserTasks } from "../types";
 
 export function makeTeamLeadJiraTasks(teamTasks: UserTasks[], jiraUserName: string): UserTasks {
   const teamLeadTasksWithDuplications = teamTasks.map((userTasks) =>

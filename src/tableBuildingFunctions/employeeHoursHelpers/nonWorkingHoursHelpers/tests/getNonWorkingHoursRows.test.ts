@@ -1,6 +1,6 @@
-import { CommonValue } from "../types";
-import { getNonWorkingHoursRows } from "../index";
-import { TableData } from "../../classes/TableData";
+import { CommonValue } from "../../../types";
+import { getNonWorkingHoursRows } from "../../../index";
+import { TableData } from "../../../../classes/TableData";
 
 test("pass empty array, expect to return zero rows", async () => {
   const expectedNonWorkingHoursRows: CommonValue[][] = [];

@@ -1,7 +1,7 @@
 import { TableData } from "../classes/TableData";
 import { CommonValue, FetchUserTasksArguments, HoursByEmployees, TableHeader, UserTasks } from "./types";
-import { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
-import { makeSortedUserTasksByEmployeeUsername } from "./makeSortedUserTasksByEmployeeUsername";
+import { makeTeamLeadJiraTasks, makeSortedUserTasksByEmployeeUsername } from "./jiraHelpers";
+
 import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 
 type MakeEmployeeDataRowsArguments = {
@@ -53,8 +53,7 @@ export async function makeEmployeeDataRows({
       makeEmployeeDataRow({
         headers,
         userTasksByEmployeeUsername,
-        workingHoursPerMonth:
-          workingHoursByEmployeesUsername[employee.jiraUsername],
+        workingHoursPerMonth: workingHoursByEmployeesUsername[employee.jiraUsername],
         nonWorkingHoursByEmployeesUsername,
         tableData,
         employee,
@@ -66,8 +65,7 @@ export async function makeEmployeeDataRows({
     makeEmployeeDataRow({
       headers,
       userTasksByEmployeeUsername,
-      workingHoursPerMonth:
-        workingHoursByEmployeesUsername[tableData.teamLead.jiraUsername],
+      workingHoursPerMonth: workingHoursByEmployeesUsername[tableData.teamLead.jiraUsername],
       nonWorkingHoursByEmployeesUsername,
       tableData,
       employee: tableData.teamLead,

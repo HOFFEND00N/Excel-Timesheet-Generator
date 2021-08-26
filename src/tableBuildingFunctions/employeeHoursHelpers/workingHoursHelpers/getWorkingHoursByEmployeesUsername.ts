@@ -1,5 +1,5 @@
-import { Employee } from "../classes/Employee";
-import { HoursByEmployees } from "./types";
+import { Employee } from "../../../classes/Employee";
+import { HoursByEmployees } from "../../types";
 
 export async function getWorkingHoursByEmployeesUsername({
   employees,

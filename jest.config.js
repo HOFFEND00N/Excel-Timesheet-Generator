@@ -16,6 +16,9 @@ const config = {
     "!./src/XMLBuildingFunctions/**",
     "!./src/classes/**",
     "!./src/tableBuildingFunctions/jiraHelpers/**",
+    "!./src/tableBuildingFunctions/employeeHoursHelpers/nonWorkingHoursHelpers/getNonWorkingHoursFile.ts",
+    "!./src/tableBuildingFunctions/employeeHoursHelpers/workingHoursHelpers/getWorkingHoursPerMonth.ts",
+    "!./src/tableBuildingFunctions/employeeHoursHelpers/workingHoursHelpers/shouldUpdateEmployeeMonthRate.ts",
     ...[
       "getNonWorkingHoursFile",
       "getWorkingHoursPerMonth",

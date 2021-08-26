@@ -12,14 +12,11 @@ import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
+import { CommonCell, FetchUserTasksArguments, HoursByEmployees, UserTasks } from "./types";
 import {
-  CommonCell,
-  FetchUserTasksArguments,
-  HoursByEmployees,
-  UserTasks,
-} from "./types";
-import { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
-import { makeNonWorkingHoursByEmployeesUsername } from "./makeNonWorkingHoursByEmployeesUsername";
+  getNonWorkingHoursRows,
+  makeNonWorkingHoursByEmployeesUsername,
+} from "./employeeHoursHelpers/nonWorkingHoursHelpers";
 import { errorHandler } from "./errorHandler";
 
 type MakeTableArguments = {

@@ -13,8 +13,10 @@ import {
 import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
-import { getWorkingHoursPerMonth } from "./tableBuildingFunctions/getWorkingHoursPerMonth";
-import { shouldUpdateEmployeeMonthRate } from "./tableBuildingFunctions/shouldUpdateEmployeeMonthRate";
+import {
+  getWorkingHoursPerMonth,
+  shouldUpdateEmployeeMonthRate,
+} from "./tableBuildingFunctions/employeeHoursHelpers/workingHoursHelpers";
 import { chooseEmployees } from "./tableBuildingFunctions/chooseEmployees";
 import { areJiraCredentialsCorrect, fetchJiraUserTasks, getCredentials } from "./tableBuildingFunctions/jiraHelpers";
 
