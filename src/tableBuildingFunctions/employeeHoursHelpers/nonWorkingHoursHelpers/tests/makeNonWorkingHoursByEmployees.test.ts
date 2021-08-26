@@ -1,6 +1,6 @@
 import { makeNonWorkingHoursByEmployeesUsername } from "../../../index";
 import { HoursByEmployees } from "../../../types";
-import { getTableDataForTests } from "../../../tests/mockedDataForTests";
+import { getTableDataForTests } from "../../../../../tests/mockedDataForTests";
 
 test("pass zero non working hours rows, expect to return empty map", () => {
   const expectedNonWorkingHoursByEmployees: HoursByEmployees = {};

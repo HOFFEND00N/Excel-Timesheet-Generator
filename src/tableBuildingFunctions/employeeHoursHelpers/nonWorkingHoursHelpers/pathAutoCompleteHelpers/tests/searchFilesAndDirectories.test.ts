@@ -27,18 +27,12 @@ test("input contains wrong path, expect to return nothing", async () => {
 });
 
 test("input contains path to a folder, expect to return 2 files", async () => {
-  const expectedFilesAndDirectories = [
-    `C:${path.sep}fileA`,
-    `C:${path.sep}fileB`,
-  ];
+  const expectedFilesAndDirectories = [`C:${path.sep}fileA`, `C:${path.sep}fileB`];
 
   fsPromisified.readdir = jest.fn().mockReturnValue([`fileA`, `fileB`]);
   fs.existsSync = jest.fn().mockReturnValue(true);
   fs.statSync = jest.fn().mockReturnValue({ isDirectory: () => false });
-  const actualFilesAndDirectories = await searchFilesAndDirectories(
-    {},
-    `C:${path.sep}f`
-  );
+  const actualFilesAndDirectories = await searchFilesAndDirectories({}, `C:${path.sep}f`);
 
   expect(actualFilesAndDirectories).toEqual(expectedFilesAndDirectories);
 });
@@ -49,9 +43,7 @@ test("input contains complex path , expect to return file and folder", async () 
     `C:${path.sep}folderA${path.sep}fileB`,
   ];
 
-  fsPromisified.readdir = jest
-    .fn()
-    .mockReturnValue([`folderB`, `fileB`, ".git"]);
+  fsPromisified.readdir = jest.fn().mockReturnValue([`folderB`, `fileB`, ".git"]);
   fs.existsSync = jest.fn().mockReturnValue(true);
   fs.statSync = jest.fn().mockImplementation((searchPath: string) => {
     return {
@@ -61,10 +53,7 @@ test("input contains complex path , expect to return file and folder", async () 
       }),
     };
   });
-  const actualFilesAndDirectories = await searchFilesAndDirectories(
-    {},
-    `C:${path.sep}folderA${path.sep}f`
-  );
+  const actualFilesAndDirectories = await searchFilesAndDirectories({}, `C:${path.sep}folderA${path.sep}f`);
 
   expect(actualFilesAndDirectories).toEqual(expectedFilesAndDirectories);
 });

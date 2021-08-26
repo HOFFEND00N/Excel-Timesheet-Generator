@@ -16,8 +16,8 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
 import {
   getWorkingHoursPerMonth,
   shouldUpdateEmployeeMonthRate,
+  chooseEmployees,
 } from "./tableBuildingFunctions/employeeHoursHelpers/workingHoursHelpers";
-import { chooseEmployees } from "./tableBuildingFunctions/chooseEmployees";
 import { areJiraCredentialsCorrect, fetchJiraUserTasks, getCredentials } from "./tableBuildingFunctions/jiraHelpers";
 
 (async () => {

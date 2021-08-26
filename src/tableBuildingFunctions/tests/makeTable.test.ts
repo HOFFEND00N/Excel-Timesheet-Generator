@@ -9,7 +9,11 @@ import {
 } from "../../constants/styleConstants";
 import { CommonCell, CommonValue, NumberValue, StringValue } from "../types";
 import { TableCell } from "../../classes/TableCell";
-import { getFetchUserTasksForTests, getMonthRowsForTests, getTableDataForTests } from "./mockedDataForTests";
+import {
+  getFetchUserTasksForTests,
+  getMonthRowsForTests,
+  getTableDataForTests,
+} from "../../../tests/mockedDataForTests";
 
 test("make full table", async () => {
   const expectedTable: CommonCell[] = [];

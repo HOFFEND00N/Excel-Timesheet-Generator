@@ -2,7 +2,7 @@ import inquirer from "inquirer";
 import xlsx from "xlsx";
 import { OUTPUT_FORMAT_ARRAY_OF_ARRAYS } from "../../../constants/constant";
 import inquirer_autocomplete_prompt from "inquirer-autocomplete-prompt";
-import { searchFilesAndDirectories } from "../../searchFilesAndDirectories";
+import { searchFilesAndDirectories } from "./pathAutoCompleteHelpers";
 
 export async function getNonWorkingHoursFile(): Promise<string[][]> {
   inquirer.registerPrompt("autocomplete", inquirer_autocomplete_prompt);

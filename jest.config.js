@@ -12,20 +12,16 @@ const config = {
   collectCoverageFrom: [
     "**/*.ts",
     "!**/node_modules/**",
+    "!**/index.ts",
     "!./src/app.ts",
     "!./src/XMLBuildingFunctions/**",
     "!./src/classes/**",
     "!./src/tableBuildingFunctions/jiraHelpers/**",
     "!./src/tableBuildingFunctions/employeeHoursHelpers/nonWorkingHoursHelpers/getNonWorkingHoursFile.ts",
-    "!./src/tableBuildingFunctions/employeeHoursHelpers/workingHoursHelpers/getWorkingHoursPerMonth.ts",
-    "!./src/tableBuildingFunctions/employeeHoursHelpers/workingHoursHelpers/shouldUpdateEmployeeMonthRate.ts",
-    ...[
-      "getNonWorkingHoursFile",
-      "getWorkingHoursPerMonth",
-      "types",
-      "shouldUpdateEmployeeMonthRate",
-      "chooseEmployees",
-    ].map((file) => `!./src/tableBuildingFunctions/${file}.ts`),
+    "!./src/tableBuildingFunctions/types.ts",
+    ...["getWorkingHoursPerMonth", "shouldUpdateEmployeeMonthRate", "chooseEmployees"].map(
+      (file) => `!./src/tableBuildingFunctions/employeeHoursHelpers/workingHoursHelpers/${file}.ts`
+    ),
     "!./src/XlsxFileBuildingFunctions/**",
     "!./src/tableBuildingFunctions/index.ts",
   ],

@@ -1,7 +1,7 @@
 import { CommonValue } from "../types";
 import { makeEmployeeDataRow } from "../index";
 import { TABLE_HEADERS } from "../../constants/constant";
-import { getTableDataForTests } from "./mockedDataForTests";
+import { getTableDataForTests } from "../../../tests/mockedDataForTests";
 
 test("pass data for one row", () => {
   const expectedTableRow: CommonValue[] = [

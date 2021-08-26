@@ -1,6 +1,6 @@
 import { makeEmployeeDataRows } from "../index";
 import { TABLE_HEADERS } from "../../constants/constant";
-import { getFetchUserTasksForTests, getTableDataForTests } from "./mockedDataForTests";
+import { getFetchUserTasksForTests, getTableDataForTests } from "../../../tests/mockedDataForTests";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", async () => {
   const expectedTable = [
