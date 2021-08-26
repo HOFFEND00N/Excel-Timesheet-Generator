@@ -1,6 +1,4 @@
-export { fetchJiraUserTasks } from "./fetchJiraUserTasks";
 export { isNumericCell, isStringCell } from "./types";
-export { getCredentials } from "./getCredentials";
 export { getNonWorkingHoursFile } from "./getNonWorkingHoursFile";
 export { getWorkingHoursByEmployeesUsername } from "./getWorkingHoursByEmployeesUsername";
 export { getNonWorkingHoursRows } from "./getNonWorkingHoursRows";
@@ -13,4 +11,3 @@ export { makeTableRow } from "./makeTableRow";
 export { makeTeamLeadJiraTasks } from "./makeTeamLeadJiraTasks";
 export { makeSortedUserTasksByEmployeeUsername } from "./makeSortedUserTasksByEmployeeUsername";
 export { styleTableRow } from "./styleTableRow";
-export { areJiraCredentialsCorrect } from "./areJiraCredentialsCorrect";

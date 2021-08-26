@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
-import { EPIC_KEY, TASKS_STATUSES } from "../constants/constant";
-import { FetchUserTasksArguments, JiraResponse, UserTasks } from "./types";
+import { EPIC_KEY, TASKS_STATUSES } from "../../constants/constant";
+import { FetchUserTasksArguments, JiraResponse, UserTasks } from "../types";
 
 export async function fetchJiraUserTasks({
   jiraUserName,

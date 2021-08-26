@@ -4,9 +4,6 @@ import { TableData } from "./classes/TableData";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
 import {
-  areJiraCredentialsCorrect,
-  fetchJiraUserTasks,
-  getCredentials,
   getNonWorkingHoursFile,
   getWorkingHoursByEmployeesUsername,
   isNumericCell,
@@ -19,6 +16,7 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
 import { getWorkingHoursPerMonth } from "./tableBuildingFunctions/getWorkingHoursPerMonth";
 import { shouldUpdateEmployeeMonthRate } from "./tableBuildingFunctions/shouldUpdateEmployeeMonthRate";
 import { chooseEmployees } from "./tableBuildingFunctions/chooseEmployees";
+import { areJiraCredentialsCorrect, fetchJiraUserTasks, getCredentials } from "./tableBuildingFunctions/jiraHelpers";
 
 (async () => {
   const workBook = new excel.Workbook({});
