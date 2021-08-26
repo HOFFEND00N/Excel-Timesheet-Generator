@@ -10,7 +10,7 @@ type MakeEmployeeDataRowsArguments = {
   fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;
   getCredentials: () => Promise<{ login: string; password: string }>;
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
-  isJiraCredentialsCorrect: ({ login, password }: { login: string; password: string }) => Promise<boolean>;
+  areJiraCredentialsCorrect: ({ login, password }: { login: string; password: string }) => Promise<boolean>;
   workingHoursByEmployeesUsername: HoursByEmployees;
 };
 
@@ -21,11 +21,11 @@ export async function makeEmployeeDataRows({
   getCredentials,
   nonWorkingHoursByEmployeesUsername,
   workingHoursByEmployeesUsername,
-  isJiraCredentialsCorrect,
+  areJiraCredentialsCorrect,
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const { login, password } = await getCredentials();
 
-  const cahAuthorize = await isJiraCredentialsCorrect({
+  const cahAuthorize = await areJiraCredentialsCorrect({
     login,
     password,
   });

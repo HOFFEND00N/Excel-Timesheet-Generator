@@ -45,7 +45,7 @@ import { areJiraCredentialsCorrect, fetchJiraUserTasks, getCredentials } from ".
     fetchUserTasks: fetchJiraUserTasks,
     getCredentials,
     getNonWorkingHoursFile,
-    isJiraCredentialsCorrect: areJiraCredentialsCorrect,
+    areJiraCredentialsCorrect: areJiraCredentialsCorrect,
     workingHoursByEmployeesUsername,
   });
 

@@ -19,7 +19,7 @@ test("make two dimensional array from parsed json, json file consist of predefin
       MolotkovaM: 8,
       KarasevaS: 24,
     },
-    isJiraCredentialsCorrect: () => Promise.resolve(true),
+    areJiraCredentialsCorrect: () => Promise.resolve(true),
     workingHoursByEmployeesUsername: {
       MolotkovaM: 120,
       KarasevaS: 140,
@@ -40,7 +40,7 @@ test("pass wrong credentials, expect to throw exception", async () => {
       getCredentials: () => Promise.resolve({ login: "", password: "" }),
       fetchUserTasks: getFetchUserTasksForTests(),
       nonWorkingHoursByEmployeesUsername: {},
-      isJiraCredentialsCorrect: () => Promise.resolve(false),
+      areJiraCredentialsCorrect: () => Promise.resolve(false),
       workingHoursByEmployeesUsername: {
         MolotkovaM: 120,
       },
