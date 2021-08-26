@@ -11,7 +11,7 @@ export function makeWorkbook(): Workbook {
       sheet: [
         { "@name": "Monthly Timesheet", "@sheetId": 2, "@r:id": "rId1" },
         {
-          "@name": "Sheet1",
+          "@name": "pivot",
           "@sheetId": 1,
           "@r:id": "rId2",
         },
