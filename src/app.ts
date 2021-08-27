@@ -3,22 +3,12 @@ import excel from "excel4node";
 import { TableData } from "./classes/TableData";
 import { WorksheetImage } from "./classes/WorksheetImage";
 import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
-import {
-  getNonWorkingHoursFile,
-  getWorkingHoursByEmployeesUsername,
-  isNumericCell,
-  isStringCell,
-  makeTable,
-} from "./tableBuildingFunctions";
+import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
 import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
-import {
-  getWorkingHoursPerMonth,
-  shouldUpdateEmployeeMonthRate,
-  chooseEmployees,
-} from "./tableBuildingFunctions/employeeHoursHelpers/workingHoursHelpers";
-import { areJiraCredentialsCorrect, fetchJiraUserTasks, getCredentials } from "./tableBuildingFunctions/jiraHelpers";
+import { getUserData } from "./userDataCollectionFunctions/getUserData";
+import { errorHandler } from "./tableBuildingFunctions/errorHandler";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -30,23 +20,13 @@ import { areJiraCredentialsCorrect, fetchJiraUserTasks, getCredentials } from ".
   };
 
   const tableData: TableData = JSON.parse(fs.readFileSync("tableData.json", "utf-8"));
-
-  const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername({
-    employees: [...tableData.employees, tableData.teamLead],
-    getWorkingHoursPerMonth,
-    shouldUpdateEmployeeMonthRate,
-    getChosenEmployeesNames: chooseEmployees,
-  });
+  const userData = await errorHandler(getUserData, tableData);
 
   const currentDate = new Date();
   const table = await makeTable({
     tableData,
     currentDate,
-    fetchUserTasks: fetchJiraUserTasks,
-    getCredentials,
-    getNonWorkingHoursFile,
-    areJiraCredentialsCorrect: areJiraCredentialsCorrect,
-    workingHoursByEmployeesUsername,
+    userData,
   });
 
   const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
@@ -83,7 +63,7 @@ import { areJiraCredentialsCorrect, fetchJiraUserTasks, getCredentials } from ".
   addPivotTableToXlsxFile({
     reportName,
     tableData,
-    workingHoursByEmployeesUsername,
+    workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
     table,
     employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
     manHoursColumnIndex: manHoursColumn,

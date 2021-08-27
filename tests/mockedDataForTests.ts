@@ -1,7 +1,7 @@
 import { TableData } from "../src/classes/TableData";
 import { Point } from "../src/classes/Point";
 import { MONTHLY_TIMESHEET_HEADER, START_MONTH_HEADER_POINT } from "../src/constants/constant";
-import { CommonCell, FetchUserTasksArguments, UserTasks } from "../src/tableBuildingFunctions/types";
+import { CommonCell } from "../src/tableBuildingFunctions/types";
 import {
   HorizontalAlignTextWays,
   makeBoldCellTextStyle,
@@ -30,29 +30,6 @@ export function getTableDataForTests(): TableData {
       name: "Molotkova Maria",
       jiraUsername: "MolotkovaM",
     },
-  };
-}
-
-export function getFetchUserTasksForTests(): ({
-  jiraUserName,
-  login,
-  password,
-}: FetchUserTasksArguments) => Promise<UserTasks> {
-  return (user) => {
-    const users = {
-      KarasevaS: {
-        tasks: [
-          { taskKey: "task 1", epicKey: undefined },
-          { taskKey: "task 3", epicKey: undefined },
-        ],
-        userName: "KarasevaS",
-      },
-      MatrosovaM: {
-        tasks: [{ taskKey: "task 2", epicKey: "epic task 1" }],
-        userName: "MatrosovaM",
-      },
-    };
-    return users[user.jiraUserName];
   };
 }
 

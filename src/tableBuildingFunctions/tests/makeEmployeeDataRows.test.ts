@@ -1,6 +1,6 @@
 import { makeEmployeeDataRows } from "../index";
 import { TABLE_HEADERS } from "../../constants/constant";
-import { getFetchUserTasksForTests, getTableDataForTests } from "../../../tests/mockedDataForTests";
+import { getTableDataForTests } from "../../../tests/mockedDataForTests";
 
 test("make two dimensional array from parsed json, json file consist of predefined table values, expect table values", async () => {
   const expectedTable = [
@@ -13,39 +13,21 @@ test("make two dimensional array from parsed json, json file consist of predefin
   const actualTable = await makeEmployeeDataRows({
     tableData,
     headers: TABLE_HEADERS,
-    getCredentials: () => Promise.resolve({ login: "", password: "" }),
-    fetchUserTasks: getFetchUserTasksForTests(),
     nonWorkingHoursByEmployeesUsername: {
       MolotkovaM: 8,
       KarasevaS: 24,
     },
-    areJiraCredentialsCorrect: () => Promise.resolve(true),
     workingHoursByEmployeesUsername: {
       MolotkovaM: 120,
       KarasevaS: 140,
       MatrosovaM: 160,
     },
+    userTasksByEmployeeUsername: {
+      MatrosovaM: ["task 2"],
+      KarasevaS: ["task 1", "task 3"],
+      MolotkovaM: ["epic task 1"],
+    },
   });
 
   expect(actualTable).toEqual(expectedTable);
-});
-
-test("pass wrong credentials, expect to throw exception", async () => {
-  const tableData = getTableDataForTests();
-
-  const actualTable = async () => {
-    await makeEmployeeDataRows({
-      tableData,
-      headers: TABLE_HEADERS,
-      getCredentials: () => Promise.resolve({ login: "", password: "" }),
-      fetchUserTasks: getFetchUserTasksForTests(),
-      nonWorkingHoursByEmployeesUsername: {},
-      areJiraCredentialsCorrect: () => Promise.resolve(false),
-      workingHoursByEmployeesUsername: {
-        MolotkovaM: 120,
-      },
-    });
-  };
-
-  await expect(actualTable()).rejects.toThrow("Wrong credentials. Please try again");
 });

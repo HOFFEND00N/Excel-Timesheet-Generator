@@ -1,11 +1,11 @@
 export { isNumericCell, isStringCell } from "./types";
-export { getNonWorkingHoursFile } from "./employeeHoursHelpers/nonWorkingHoursHelpers/getNonWorkingHoursFile";
-export { getWorkingHoursByEmployeesUsername } from "./employeeHoursHelpers/workingHoursHelpers/getWorkingHoursByEmployeesUsername";
-export { getNonWorkingHoursRows } from "./employeeHoursHelpers/nonWorkingHoursHelpers/getNonWorkingHoursRows";
+export { getNonWorkingHoursFile } from "../userDataCollectionFunctions/getNonWorkingHoursFile";
+export { getWorkingHoursByEmployeesUsername } from "../userDataCollectionFunctions/getWorkingHoursByEmployeesUsername";
+export { getNonWorkingHoursRows } from "./nonWorkingHoursHelpers/getNonWorkingHoursRows";
 export { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 export { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 export { makeMonthRows } from "./makeMonthRows";
-export { makeNonWorkingHoursByEmployeesUsername } from "./employeeHoursHelpers/nonWorkingHoursHelpers/makeNonWorkingHoursByEmployeesUsername";
+export { makeNonWorkingHoursByEmployeesUsername } from "./nonWorkingHoursHelpers/makeNonWorkingHoursByEmployeesUsername";
 export { makeTable } from "./makeTable";
 export { makeTableRow } from "./makeTableRow";
 export { makeTeamLeadJiraTasks } from "./jiraHelpers/makeTeamLeadJiraTasks";

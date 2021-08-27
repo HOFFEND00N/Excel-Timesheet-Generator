@@ -1,6 +1,6 @@
-import { CommonValue } from "../../../types";
-import { getNonWorkingHoursRows } from "../../../index";
-import { TableData } from "../../../../classes/TableData";
+import { CommonValue } from "../../types";
+import { getNonWorkingHoursRows } from "../../index";
+import { TableData } from "../../../classes/TableData";
 
 test("pass empty array, expect to return zero rows", async () => {
   const expectedNonWorkingHoursRows: CommonValue[][] = [];
@@ -13,7 +13,7 @@ test("pass empty array, expect to return zero rows", async () => {
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
   };
 
-  const actualNonWorkingHoursRows = await getNonWorkingHoursRows(tableData, () => Promise.resolve([]));
+  const actualNonWorkingHoursRows = await getNonWorkingHoursRows(tableData, []);
 
   expect(actualNonWorkingHoursRows).toEqual(expectedNonWorkingHoursRows);
 });
@@ -34,9 +34,9 @@ test("pass one non working hours row, expect to return zero non working rows, be
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
   };
 
-  const actualNonWorkingHoursRows = await getNonWorkingHoursRows(tableData, () =>
-    Promise.resolve([["100", "RU", "DaysOff", "Sick1DQ", "Matrosova Marianna", "25.01.2021", "", "8"]])
-  );
+  const actualNonWorkingHoursRows = await getNonWorkingHoursRows(tableData, [
+    ["100", "RU", "DaysOff", "Sick1DQ", "Matrosova Marianna", "25.01.2021", "", "8"],
+  ]);
 
   expect(actualNonWorkingHoursRows).toEqual(expectedNonWorkingHoursRows);
 });
@@ -59,9 +59,9 @@ test("pass one non working hours row, expect to return one non working rows, bec
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
   };
 
-  const actualNonWorkingHoursRows = await getNonWorkingHoursRows(tableData, () =>
-    Promise.resolve([["100", "RU", "DaysOff", "Sick1DQ", "Karaseva Svetlana", "25.01.2021", "", "8"]])
-  );
+  const actualNonWorkingHoursRows = await getNonWorkingHoursRows(tableData, [
+    ["100", "RU", "DaysOff", "Sick1DQ", "Karaseva Svetlana", "25.01.2021", "", "8"],
+  ]);
 
   expect(actualNonWorkingHoursRows).toEqual(expectedNonWorkingHoursRows);
 });
@@ -90,13 +90,11 @@ test("pass two non working hours row, expect to return one non working rows, bec
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
   };
 
-  const actualNonWorkingHoursRows = await getNonWorkingHoursRows(tableData, () =>
-    Promise.resolve([
-      ["100", "RU", "DaysOff", "Sick1DQ", "Molotkova Maria", "25.01.2021", "", "8"],
-      ["200", "EU", "DaysOff", "Sick1DQ", "Matrosova Marianna", "24.01.2021", "", "6"],
-      ["100", "EU", "DaysOff", "Sick1DQ", "Karaseva Svetlana", "14.01.2021", "", "12"],
-    ])
-  );
+  const actualNonWorkingHoursRows = await getNonWorkingHoursRows(tableData, [
+    ["100", "RU", "DaysOff", "Sick1DQ", "Molotkova Maria", "25.01.2021", "", "8"],
+    ["200", "EU", "DaysOff", "Sick1DQ", "Matrosova Marianna", "24.01.2021", "", "6"],
+    ["100", "EU", "DaysOff", "Sick1DQ", "Karaseva Svetlana", "14.01.2021", "", "12"],
+  ]);
 
   expect(actualNonWorkingHoursRows).toEqual(expectedNonWorkingHoursRows);
 });

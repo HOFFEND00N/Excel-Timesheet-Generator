@@ -12,32 +12,17 @@ import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
-import { CommonCell, FetchUserTasksArguments, HoursByEmployees, UserTasks } from "./types";
-import {
-  getNonWorkingHoursRows,
-  makeNonWorkingHoursByEmployeesUsername,
-} from "./employeeHoursHelpers/nonWorkingHoursHelpers";
+import { CommonCell, UserData } from "./types";
+import { getNonWorkingHoursRows, makeNonWorkingHoursByEmployeesUsername } from "./nonWorkingHoursHelpers";
 import { errorHandler } from "./errorHandler";
 
 type MakeTableArguments = {
   tableData: TableData;
   currentDate: Date;
-  fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;
-  getCredentials: () => Promise<{ login: string; password: string }>;
-  getNonWorkingHoursFile: () => Promise<string[][]>;
-  areJiraCredentialsCorrect: ({ login, password }: { login: string; password: string }) => Promise<boolean>;
-  workingHoursByEmployeesUsername: HoursByEmployees;
+  userData: UserData;
 };
 
-export async function makeTable({
-  tableData,
-  currentDate,
-  fetchUserTasks,
-  getCredentials,
-  getNonWorkingHoursFile,
-  areJiraCredentialsCorrect,
-  workingHoursByEmployeesUsername,
-}: MakeTableArguments): Promise<CommonCell[]> {
+export async function makeTable({ tableData, currentDate, userData }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = START_TABLE_POINT;
 
@@ -56,7 +41,7 @@ export async function makeTable({
   });
   table.push(...tableHeadersRow);
 
-  const nonWorkingHoursRows = await getNonWorkingHoursRows(tableData, getNonWorkingHoursFile);
+  const nonWorkingHoursRows = await getNonWorkingHoursRows(tableData, userData.nonWorkingHoursFile);
 
   const employeeColumn = tableHeaders.findIndex((item) => item.label === "Employee");
   const manHoursColumn = tableHeaders.findIndex((item) => item.label === "Man-Hours");
@@ -71,11 +56,9 @@ export async function makeTable({
   const tableRowsValues = await errorHandler(makeEmployeeDataRows, {
     tableData,
     headers: tableHeaders,
-    fetchUserTasks,
-    getCredentials,
     nonWorkingHoursByEmployeesUsername,
-    areJiraCredentialsCorrect,
-    workingHoursByEmployeesUsername,
+    workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
+    userTasksByEmployeeUsername: userData.userTasksByEmployeeUsername,
   });
 
   tableRowsValues.push(...nonWorkingHoursRows);
