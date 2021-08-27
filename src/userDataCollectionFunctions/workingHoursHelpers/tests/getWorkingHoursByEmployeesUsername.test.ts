@@ -1,4 +1,4 @@
-import { HoursByEmployees } from "../../tableBuildingFunctions/types";
+import { HoursByEmployees } from "../../../tableBuildingFunctions/types";
 import { getWorkingHoursByEmployeesUsername } from "../getWorkingHoursByEmployeesUsername";
 
 test("pass the same working hours rate fro everybody, expect to return employees with equal working hours rate", async () => {
@@ -12,7 +12,7 @@ test("pass the same working hours rate fro everybody, expect to return employees
       { jiraUsername: "KarasevaS", name: "Karaseva Svetlana" },
       { jiraUsername: "MatrosovaM", name: "Matrosova Marianna" },
     ],
-    getChosenEmployeesNames: jest.fn().mockReturnValue([]),
+    chooseEmployees: jest.fn().mockReturnValue([]),
     getWorkingHoursPerMonth: jest.fn().mockReturnValue(120),
     shouldUpdateEmployeeMonthRate: jest.fn().mockReturnValue(false),
   });
@@ -31,7 +31,7 @@ test("pass the same working hours rate fro everybody, expect to return employees
       { jiraUsername: "KarasevaS", name: "Karaseva Svetlana" },
       { jiraUsername: "MatrosovaM", name: "Matrosova Marianna" },
     ],
-    getChosenEmployeesNames: jest.fn().mockReturnValue([{ jiraUsername: "KarasevaS", name: "Karaseva Svetlana" }]),
+    chooseEmployees: jest.fn().mockReturnValue([{ jiraUsername: "KarasevaS", name: "Karaseva Svetlana" }]),
     getWorkingHoursPerMonth: jest.fn().mockReturnValueOnce(140).mockReturnValueOnce(120),
     shouldUpdateEmployeeMonthRate: jest.fn().mockReturnValueOnce(true).mockReturnValueOnce(false),
   });

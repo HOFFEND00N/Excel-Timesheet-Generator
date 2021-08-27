@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { isNumeric } from "../utils/isNumeric";
+import { isNumeric } from "../../utils/isNumeric";
 
 export async function getWorkingHoursPerMonth() {
   const { workingHoursPerMonth } = await inquirer.prompt([

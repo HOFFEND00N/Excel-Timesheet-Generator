@@ -1,4 +1,4 @@
-import { makeTeamLeadJiraTasks } from "../../index";
+import { makeTeamLeadJiraTasks } from "../makeTeamLeadJiraTasks";
 import { UserTasks } from "../../types";
 
 test("pass zero team tasks expect to return zero teamLead tasks", () => {

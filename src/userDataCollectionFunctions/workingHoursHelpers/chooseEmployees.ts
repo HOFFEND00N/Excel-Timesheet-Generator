@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { Employee } from "../classes/Employee";
+import { Employee } from "../../classes/Employee";
 
 export async function chooseEmployees(employees: Employee[]) {
   const { chosenEmployees } = await inquirer.prompt([

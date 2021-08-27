@@ -1,6 +1,6 @@
 export { isNumericCell, isStringCell } from "./types";
 export { getNonWorkingHoursFile } from "../userDataCollectionFunctions/getNonWorkingHoursFile";
-export { getWorkingHoursByEmployeesUsername } from "../userDataCollectionFunctions/getWorkingHoursByEmployeesUsername";
+export { getWorkingHoursByEmployeesUsername } from "../userDataCollectionFunctions/workingHoursHelpers/getWorkingHoursByEmployeesUsername";
 export { getNonWorkingHoursRows } from "./nonWorkingHoursHelpers/getNonWorkingHoursRows";
 export { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 export { makeEmployeeDataRows } from "./makeEmployeeDataRows";

@@ -1,21 +1,19 @@
-import { getCredentials } from "./getCredentials";
-import { areJiraCredentialsCorrect } from "./areJiraCredentialsCorrect";
-import { getWorkingHoursByEmployeesUsername } from "./getWorkingHoursByEmployeesUsername";
+import { getCredentials } from "./jiraHelpers/getCredentials";
+import { areJiraCredentialsCorrect } from "./jiraHelpers/areJiraCredentialsCorrect";
+import { getWorkingHoursByEmployeesUsername } from "./workingHoursHelpers/getWorkingHoursByEmployeesUsername";
 import { TableData } from "../classes/TableData";
-import { getWorkingHoursPerMonth } from "./getWorkingHoursPerMonth";
-import { shouldUpdateEmployeeMonthRate } from "./shouldUpdateEmployeeMonthRate";
-import { chooseEmployees } from "./chooseEmployees";
+import { getWorkingHoursPerMonth } from "./workingHoursHelpers/getWorkingHoursPerMonth";
+import { shouldUpdateEmployeeMonthRate } from "./workingHoursHelpers/shouldUpdateEmployeeMonthRate";
+import { chooseEmployees } from "./workingHoursHelpers/chooseEmployees";
 import { getNonWorkingHoursFile } from "./getNonWorkingHoursFile";
 import { UserData } from "../tableBuildingFunctions/types";
-import { getUserTasks } from "./getUserTasks";
-import { fetchJiraUserTasks } from "./fetchJiraUserTasks";
 
 export async function getUserData(tableData: TableData): Promise<UserData> {
   const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername({
     employees: [...tableData.employees, tableData.teamLead],
     getWorkingHoursPerMonth,
     shouldUpdateEmployeeMonthRate,
-    getChosenEmployeesNames: chooseEmployees,
+    chooseEmployees,
   });
 
   const nonWorkingHoursFile = await getNonWorkingHoursFile();
@@ -28,7 +26,6 @@ export async function getUserData(tableData: TableData): Promise<UserData> {
   if (!cahAuthorize) {
     throw new Error("Wrong credentials. Please try again");
   }
-  const tasks = await getUserTasks({ tableData, login, password, fetchUserTasks: fetchJiraUserTasks });
 
-  return { userTasksByEmployeeUsername: tasks, nonWorkingHoursFile, workingHoursByEmployeesUsername };
+  return { login, password, nonWorkingHoursFile, workingHoursByEmployeesUsername };
 }

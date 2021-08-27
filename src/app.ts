@@ -7,8 +7,10 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
 import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
-import { getUserData } from "./userDataCollectionFunctions/getUserData";
-import { errorHandler } from "./tableBuildingFunctions/errorHandler";
+import { getUserData } from "./userDataCollectionFunctions";
+import { errorHandler } from "./utils/errorHandler";
+import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
+import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
 
 (async () => {
   const workBook = new excel.Workbook({});
@@ -21,12 +23,19 @@ import { errorHandler } from "./tableBuildingFunctions/errorHandler";
 
   const tableData: TableData = JSON.parse(fs.readFileSync("tableData.json", "utf-8"));
   const userData = await errorHandler(getUserData, tableData);
+  const userTasksByEmployeeUsername = await getUserTasks({
+    tableData,
+    login: userData.login,
+    password: userData.password,
+    fetchUserTasks: fetchJiraUserTasks,
+  });
 
   const currentDate = new Date();
   const table = await makeTable({
     tableData,
     currentDate,
     userData,
+    userTasksByEmployeeUsername,
   });
 
   const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");

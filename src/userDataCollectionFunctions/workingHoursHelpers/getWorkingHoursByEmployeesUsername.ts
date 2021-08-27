@@ -1,16 +1,16 @@
-import { Employee } from "../classes/Employee";
-import { HoursByEmployees } from "../tableBuildingFunctions/types";
+import { Employee } from "../../classes/Employee";
+import { HoursByEmployees } from "../../tableBuildingFunctions/types";
 
 export async function getWorkingHoursByEmployeesUsername({
   employees,
   getWorkingHoursPerMonth,
   shouldUpdateEmployeeMonthRate,
-  getChosenEmployeesNames,
+  chooseEmployees,
 }: {
   employees: Employee[];
   getWorkingHoursPerMonth: () => Promise<number>;
   shouldUpdateEmployeeMonthRate: () => Promise<boolean>;
-  getChosenEmployeesNames: (employee: Employee[]) => Promise<Employee[]>;
+  chooseEmployees: (employee: Employee[]) => Promise<Employee[]>;
 }) {
   const workingHoursPerMonth = await getWorkingHoursPerMonth();
 
@@ -20,7 +20,7 @@ export async function getWorkingHoursByEmployeesUsername({
   }
 
   while (await shouldUpdateEmployeeMonthRate()) {
-    const chosenEmployees = await getChosenEmployeesNames(employees);
+    const chosenEmployees = await chooseEmployees(employees);
     const workingHoursPerMonth = await getWorkingHoursPerMonth();
 
     for (const chosenEmployee of chosenEmployees) {

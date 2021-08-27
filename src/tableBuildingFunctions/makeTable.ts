@@ -14,15 +14,21 @@ import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { CommonCell, UserData } from "./types";
 import { getNonWorkingHoursRows, makeNonWorkingHoursByEmployeesUsername } from "./nonWorkingHoursHelpers";
-import { errorHandler } from "./errorHandler";
+import { errorHandler } from "../utils/errorHandler";
 
 type MakeTableArguments = {
   tableData: TableData;
   currentDate: Date;
   userData: UserData;
+  userTasksByEmployeeUsername: Record<string, string[]>;
 };
 
-export async function makeTable({ tableData, currentDate, userData }: MakeTableArguments): Promise<CommonCell[]> {
+export async function makeTable({
+  tableData,
+  currentDate,
+  userData,
+  userTasksByEmployeeUsername,
+}: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: Point = START_TABLE_POINT;
 
@@ -58,7 +64,7 @@ export async function makeTable({ tableData, currentDate, userData }: MakeTableA
     headers: tableHeaders,
     nonWorkingHoursByEmployeesUsername,
     workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
-    userTasksByEmployeeUsername: userData.userTasksByEmployeeUsername,
+    userTasksByEmployeeUsername,
   });
 
   tableRowsValues.push(...nonWorkingHoursRows);

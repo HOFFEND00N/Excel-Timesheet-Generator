@@ -53,7 +53,8 @@ export type UserTasks = {
 export type HoursByEmployees = Record<string, number>;
 
 export type UserData = {
-  userTasksByEmployeeUsername: Record<string, string[]>;
+  login: string;
+  password: string;
   workingHoursByEmployeesUsername: HoursByEmployees;
   nonWorkingHoursFile: string[][];
 };

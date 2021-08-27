@@ -1,6 +1,6 @@
-import { makeTeamLeadJiraTasks, makeSortedUserTasksByEmployeeUsername } from "../tableBuildingFunctions";
-import { TableData } from "../classes/TableData";
-import { FetchUserTasksArguments, UserTasks } from "../tableBuildingFunctions/types";
+import { makeTeamLeadJiraTasks, makeSortedUserTasksByEmployeeUsername } from "../index";
+import { TableData } from "../../classes/TableData";
+import { FetchUserTasksArguments, UserTasks } from "../types";
 
 export async function getUserTasks({
   tableData,
