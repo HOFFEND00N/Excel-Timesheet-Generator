@@ -5,7 +5,7 @@ export const WORKSHEET_MONTHLY_TIMESHEET_NAME = "Monthly timesheet";
 export const TABLE_HEADERS = [
   { label: "Unit", dataKey: "unit" },
   { label: "Interco", dataKey: "companyCode" },
-  { label: "Product", dataKey: "companyName" },
+  { label: "Product", dataKey: "product" },
   { label: "Project", dataKey: "project" },
   { label: "Employee", dataKey: "employee" },
   { label: "Task", dataKey: "task" },

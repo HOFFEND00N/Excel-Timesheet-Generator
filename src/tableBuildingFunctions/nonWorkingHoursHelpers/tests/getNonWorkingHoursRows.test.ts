@@ -7,10 +7,11 @@ test("pass empty array, expect to return zero rows", async () => {
   const config: IConfig = {
     unit: 651,
     companyCode: "NO",
-    companyName: "Confirmit",
+    product: "Confirmit",
     project: "Studio",
     employees: [],
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
+    reportFileName: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, []);
@@ -23,7 +24,7 @@ test("pass one non working hours row, expect to return zero non working rows, be
   const config: IConfig = {
     unit: 651,
     companyCode: "NO",
-    companyName: "Confirmit",
+    product: "Confirmit",
     project: "Studio",
     employees: [
       {
@@ -32,6 +33,7 @@ test("pass one non working hours row, expect to return zero non working rows, be
       },
     ],
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
+    reportFileName: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [
@@ -48,7 +50,7 @@ test("pass one non working hours row, expect to return one non working rows, bec
   const config: IConfig = {
     unit: 651,
     companyCode: "NO",
-    companyName: "Confirmit",
+    product: "Confirmit",
     project: "Studio",
     employees: [
       {
@@ -57,6 +59,7 @@ test("pass one non working hours row, expect to return one non working rows, bec
       },
     ],
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
+    reportFileName: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [
@@ -75,7 +78,7 @@ test("pass two non working hours row, expect to return one non working rows, bec
   const config: IConfig = {
     unit: 651,
     companyCode: "NO",
-    companyName: "Confirmit",
+    product: "Confirmit",
     project: "Studio",
     employees: [
       {
@@ -88,6 +91,7 @@ test("pass two non working hours row, expect to return one non working rows, bec
       },
     ],
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
+    reportFileName: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [

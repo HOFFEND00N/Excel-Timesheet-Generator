@@ -1,7 +1,7 @@
 {
   "unit": 651,
   "companyCode": "NO",
-  "companyName": "Confirmit",
+  "product": "Confirmit",
   "project": "Studio",
   "employees": [
     {
@@ -36,5 +36,10 @@
   "teamLead": {
     "name": "Kachalov Alexey",
     "jiraUsername": "alexeyk"
-  }
+  },
+  "date": {
+    "year": 2021,
+    "month": 7
+  },
+  "reportFileName": "${year}-${month}-${companyUnit}_RPT-YAR.xlsx"
 }

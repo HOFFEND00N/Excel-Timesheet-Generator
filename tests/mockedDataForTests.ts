@@ -14,7 +14,7 @@ export function getConfigForTests(): IConfig {
   return {
     unit: 651,
     companyCode: "NO",
-    companyName: "Confirmit",
+    product: "Confirmit",
     project: "Studio",
     employees: [
       {
@@ -30,6 +30,7 @@ export function getConfigForTests(): IConfig {
       name: "Molotkova Maria",
       jiraUsername: "MolotkovaM",
     },
+    reportFileName: "",
   };
 }
 

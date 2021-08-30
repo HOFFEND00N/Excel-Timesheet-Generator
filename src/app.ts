@@ -10,13 +10,6 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
 import { getUserData } from "./userDataCollectionFunctions";
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
-//TODO
-//написать 3 реплейса на YEAR, MONTH, UNIT
-//добавить этот шаблон в конфиг файл. config.json
-///may be rename to config
-//change companyName to productName
-//add name to project or remove name in all 3
-//may be make config file not json, but rather js code, that return config object
 //TODO: use environmental variables for hiding password and login
 (async () => {
   const workBook = new excel.Workbook({});
@@ -36,7 +29,10 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
     fetchUserTasks: fetchJiraUserTasks,
   });
 
-  const currentDate = new Date();
+  let currentDate: Date;
+  if (!config.date) currentDate = new Date();
+  else currentDate = new Date(config.date.year, config.date.month);
+
   const table = await makeTable({
     config,
     currentDate,
@@ -70,7 +66,11 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
   }
   workSheet.addImage(new WorkSheetImageAdapter(image));
 
-  const reportName = makeReportFileName(currentDate, config.unit);
+  const reportName = makeReportFileName({
+    currentDate,
+    companyUnit: config.unit,
+    reportFileName: config.reportFileName,
+  });
   await makeXlsxFile(workBook, reportName);
 
   const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
