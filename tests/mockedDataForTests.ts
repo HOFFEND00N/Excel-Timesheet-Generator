@@ -1,4 +1,4 @@
-import { ITableData } from "../src/models/ITableData";
+import { IConfig } from "../src/models/IConfig";
 import { IPoint } from "../src/models/IPoint";
 import { MONTHLY_TIMESHEET_HEADER, START_MONTH_HEADER_POINT } from "../src/constants/constant";
 import { CommonCell } from "../src/tableBuildingFunctions/types";
@@ -10,7 +10,7 @@ import {
   makeYellowBackgroundStyle,
 } from "../src/constants/styleConstants";
 
-export function getTableDataForTests(): ITableData {
+export function getConfigForTests(): IConfig {
   return {
     unit: 651,
     companyCode: "NO",

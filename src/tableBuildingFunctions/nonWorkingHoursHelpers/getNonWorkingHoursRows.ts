@@ -1,13 +1,13 @@
-import { ITableData } from "../../models/ITableData";
+import { IConfig } from "../../models/IConfig";
 import { isNumeric } from "../../utils/isNumeric";
 import { CommonValue } from "../types";
 
 export async function getNonWorkingHoursRows(
-  tableData: ITableData,
+  config: IConfig,
   nonWorkingHoursFile: string[][]
 ): Promise<CommonValue[][]> {
-  const employees = tableData.employees.map((employee) => employee.name);
-  employees.push(tableData.teamLead.name);
+  const employees = config.employees.map((employee) => employee.name);
+  employees.push(config.teamLead.name);
 
   return nonWorkingHoursFile
     .filter((row) => row.some((cell) => employees.includes(cell)))

@@ -15,19 +15,19 @@ import {
   makeWorksheetWithPivotTableRels,
 } from "../XMLBuildingFunctions";
 import { CommonCell, HoursByEmployees } from "../tableBuildingFunctions/types";
-import { ITableData } from "../models/ITableData";
+import { IConfig } from "../models/IConfig";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
 
 export function addPivotTableToXlsxFile({
   reportName,
-  tableData,
+  config,
   workingHoursByEmployeesUsername,
   table,
   employeeColumnIndex,
   manHoursColumnIndex,
 }: {
   reportName: string;
-  tableData: ITableData;
+  config: IConfig;
   workingHoursByEmployeesUsername: HoursByEmployees;
   table: CommonCell[];
   employeeColumnIndex: number;
@@ -49,7 +49,7 @@ export function addPivotTableToXlsxFile({
   fs.mkdirSync(xl_pivotTables);
   fs.mkdirSync(xl_pivotTables_rels);
 
-  const employeesWithTeamLead = [...tableData.employees, tableData.teamLead];
+  const employeesWithTeamLead = [...config.employees, config.teamLead];
 
   fs.writeFileSync(
     path.join(whereToExtract, "xl/_rels/workbook.xml.rels"),

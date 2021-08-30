@@ -1,10 +1,10 @@
-import { ITableData } from "../models/ITableData";
+import { IConfig } from "../models/IConfig";
 import { CommonValue, HoursByEmployees, TableHeader } from "./types";
 
 import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 
 type MakeEmployeeDataRowsArguments = {
-  tableData: ITableData;
+  config: IConfig;
   headers: TableHeader[];
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursByEmployeesUsername: HoursByEmployees;
@@ -12,7 +12,7 @@ type MakeEmployeeDataRowsArguments = {
 };
 
 export async function makeEmployeeDataRows({
-  tableData,
+  config,
   headers,
   nonWorkingHoursByEmployeesUsername,
   workingHoursByEmployeesUsername,
@@ -20,14 +20,14 @@ export async function makeEmployeeDataRows({
 }: MakeEmployeeDataRowsArguments): Promise<CommonValue[][]> {
   const employeeDataRows: CommonValue[][] = [];
 
-  for (const employee of tableData.employees) {
+  for (const employee of config.employees) {
     employeeDataRows.push(
       makeEmployeeDataRow({
         headers,
         userTasksByEmployeeUsername,
         workingHoursPerMonth: workingHoursByEmployeesUsername[employee.jiraUsername],
         nonWorkingHoursByEmployeesUsername,
-        tableData,
+        config,
         employee,
       })
     );
@@ -37,10 +37,10 @@ export async function makeEmployeeDataRows({
     makeEmployeeDataRow({
       headers,
       userTasksByEmployeeUsername,
-      workingHoursPerMonth: workingHoursByEmployeesUsername[tableData.teamLead.jiraUsername],
+      workingHoursPerMonth: workingHoursByEmployeesUsername[config.teamLead.jiraUsername],
       nonWorkingHoursByEmployeesUsername,
-      tableData,
-      employee: tableData.teamLead,
+      config,
+      employee: config.teamLead,
     })
   );
 

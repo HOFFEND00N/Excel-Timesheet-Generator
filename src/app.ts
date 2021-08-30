@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import excel from "excel4node";
-import { ITableData } from "./models/ITableData";
+import { IConfig } from "./models/IConfig";
 import { IWorksheetImage } from "./models/IWorksheetImage";
 import { WorkSheetImageAdapter } from "./models/WorkSheetImageAdapter";
 import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
@@ -12,7 +12,7 @@ import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
 //TODO
 //написать 3 реплейса на YEAR, MONTH, UNIT
-//добавить этот шаблон в конфиг файл. tableData.json
+//добавить этот шаблон в конфиг файл. config.json
 ///may be rename to config
 //change companyName to productName
 //add name to project or remove name in all 3
@@ -27,10 +27,10 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
     row: 2,
   };
 
-  const tableData: ITableData = JSON.parse(fs.readFileSync("tableData.json", "utf-8"));
-  const userData = await getUserData(tableData);
+  const config: IConfig = JSON.parse(fs.readFileSync("config.json", "utf-8"));
+  const userData = await getUserData(config);
   const userTasksByEmployeeUsername = await getUserTasks({
-    tableData,
+    config,
     login: userData.login,
     password: userData.password,
     fetchUserTasks: fetchJiraUserTasks,
@@ -38,7 +38,7 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
 
   const currentDate = new Date();
   const table = await makeTable({
-    tableData,
+    config,
     currentDate,
     userData,
     userTasksByEmployeeUsername,
@@ -70,14 +70,14 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
   }
   workSheet.addImage(new WorkSheetImageAdapter(image));
 
-  const reportName = makeReportFileName(currentDate, tableData.unit);
+  const reportName = makeReportFileName(currentDate, config.unit);
   await makeXlsxFile(workBook, reportName);
 
   const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
 
   addPivotTableToXlsxFile({
     reportName,
-    tableData,
+    config: config,
     workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
     table,
     employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,

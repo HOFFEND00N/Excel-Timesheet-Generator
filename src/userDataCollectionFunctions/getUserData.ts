@@ -1,6 +1,6 @@
 import { getCredentials } from "./jiraHelpers/getCredentials";
 import { getWorkingHoursByEmployeesUsername } from "./workingHoursHelpers/getWorkingHoursByEmployeesUsername";
-import { ITableData } from "../models/ITableData";
+import { IConfig } from "../models/IConfig";
 import { getWorkingHoursPerMonth } from "./workingHoursHelpers/getWorkingHoursPerMonth";
 import { shouldUpdateEmployeeMonthRate } from "./workingHoursHelpers/shouldUpdateEmployeeMonthRate";
 import { chooseEmployees } from "./workingHoursHelpers/chooseEmployees";
@@ -8,9 +8,9 @@ import { getNonWorkingHoursFile } from "./getNonWorkingHoursFile";
 import { UserData } from "../tableBuildingFunctions/types";
 import { errorHandler } from "../utils/errorHandler";
 
-export async function getUserData(tableData: ITableData): Promise<UserData> {
+export async function getUserData(config: IConfig): Promise<UserData> {
   const workingHoursByEmployeesUsername = await errorHandler(getWorkingHoursByEmployeesUsername, {
-    employees: [...tableData.employees, tableData.teamLead],
+    employees: [...config.employees, config.teamLead],
     getWorkingHoursPerMonth,
     shouldUpdateEmployeeMonthRate,
     chooseEmployees,

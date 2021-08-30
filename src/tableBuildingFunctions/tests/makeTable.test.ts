@@ -9,7 +9,7 @@ import {
 } from "../../constants/styleConstants";
 import { CommonCell, CommonValue, NumberValue, StringValue } from "../types";
 import { ITableCell } from "../../models/ITableCell";
-import { getMonthRowsForTests, getTableDataForTests } from "../../../tests/mockedDataForTests";
+import { getMonthRowsForTests, getConfigForTests } from "../../../tests/mockedDataForTests";
 
 test("make full table", async () => {
   const expectedTable: CommonCell[] = [];
@@ -51,10 +51,10 @@ test("make full table", async () => {
     }
   }
 
-  const tableData = getTableDataForTests();
+  const config = getConfigForTests();
 
   const actualTable = await makeTable({
-    tableData,
+    config,
     currentDate,
     userData: {
       workingHoursByEmployeesUsername: {

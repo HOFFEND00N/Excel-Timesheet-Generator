@@ -1,6 +1,6 @@
 import { IEmployee } from "./IEmployee";
 
-export interface ITableData {
+export interface IConfig {
   unit: number;
   companyCode: string;
   companyName: string;

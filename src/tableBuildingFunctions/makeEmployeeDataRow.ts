@@ -1,9 +1,9 @@
-import { ITableData } from "../models/ITableData";
+import { IConfig } from "../models/IConfig";
 import { IEmployee } from "../models/IEmployee";
 import { CommonValue, HoursByEmployees, TableHeader } from "./types";
 
 type makeEmployeeDataRowArguments = {
-  tableData: ITableData;
+  config: IConfig;
   headers: TableHeader[];
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursPerMonth: number;
@@ -16,7 +16,7 @@ export function makeEmployeeDataRow({
   userTasksByEmployeeUsername,
   workingHoursPerMonth,
   nonWorkingHoursByEmployeesUsername,
-  tableData,
+  config,
   employee,
 }: makeEmployeeDataRowArguments) {
   return headers.map((header) => {
@@ -24,7 +24,7 @@ export function makeEmployeeDataRow({
     if (header.label === "Task") return userTasksByEmployeeUsername[employee.jiraUsername].join(" ");
     if (header.label === "Man-Hours")
       return workingHoursPerMonth - (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0);
-    const cell: CommonValue = tableData[header.dataKey];
+    const cell: CommonValue = config[header.dataKey];
     return cell ?? "";
   });
 }

@@ -1,19 +1,19 @@
 import { makeTeamLeadJiraTasks, makeSortedUserTasksByEmployeeUsername } from "../index";
-import { ITableData } from "../../models/ITableData";
+import { IConfig } from "../../models/IConfig";
 import { FetchUserTasksArguments, UserTasks } from "../types";
 
 export async function getUserTasks({
-  tableData,
+  config,
   login,
   password,
   fetchUserTasks,
 }: {
-  tableData: ITableData;
+  config: IConfig;
   login: string;
   password: string;
   fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;
 }): Promise<Record<string, string[]>> {
-  const tasks = tableData.employees.map((employee) =>
+  const tasks = config.employees.map((employee) =>
     fetchUserTasks({
       jiraUserName: employee.jiraUsername,
       login,
@@ -23,7 +23,7 @@ export async function getUserTasks({
 
   console.log(`Fetching tasks from Jira for employees. Please wait...`);
   const tasksRows = await Promise.all(tasks);
-  tasksRows.push(makeTeamLeadJiraTasks(tasksRows, tableData.teamLead.jiraUsername));
+  tasksRows.push(makeTeamLeadJiraTasks(tasksRows, config.teamLead.jiraUsername));
 
   return makeSortedUserTasksByEmployeeUsername(tasksRows);
 }

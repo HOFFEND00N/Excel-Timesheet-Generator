@@ -6,7 +6,7 @@ import {
   makeStyleHorizontalAlignText,
 } from "../constants/styleConstants";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
-import { ITableData } from "../models/ITableData";
+import { IConfig } from "../models/IConfig";
 import { IPoint } from "../models/IPoint";
 import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
@@ -16,14 +16,14 @@ import { CommonCell, UserData } from "./types";
 import { getNonWorkingHoursRows, makeNonWorkingHoursByEmployeesUsername } from "./nonWorkingHoursHelpers";
 
 type MakeTableArguments = {
-  tableData: ITableData;
+  config: IConfig;
   currentDate: Date;
   userData: UserData;
   userTasksByEmployeeUsername: Record<string, string[]>;
 };
 
 export async function makeTable({
-  tableData,
+  config,
   currentDate,
   userData,
   userTasksByEmployeeUsername,
@@ -46,7 +46,7 @@ export async function makeTable({
   });
   table.push(...tableHeadersRow);
 
-  const nonWorkingHoursRows = await getNonWorkingHoursRows(tableData, userData.nonWorkingHoursFile);
+  const nonWorkingHoursRows = await getNonWorkingHoursRows(config, userData.nonWorkingHoursFile);
 
   const employeeColumn = tableHeaders.findIndex((item) => item.label === "Employee");
   const manHoursColumn = tableHeaders.findIndex((item) => item.label === "Man-Hours");
@@ -55,11 +55,11 @@ export async function makeTable({
     employeeColumn,
     manHoursColumn,
     nonWorkingHoursRows,
-    employees: [...tableData.employees, tableData.teamLead],
+    employees: [...config.employees, config.teamLead],
   });
 
   const tableRowsValues = await makeEmployeeDataRows({
-    tableData,
+    config,
     headers: tableHeaders,
     nonWorkingHoursByEmployeesUsername,
     workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
