@@ -10,7 +10,6 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
 import { getUserData } from "./userDataCollectionFunctions";
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
-//TODO: use environmental variables for hiding password and login
 (async () => {
   const workBook = new excel.Workbook({});
   const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);

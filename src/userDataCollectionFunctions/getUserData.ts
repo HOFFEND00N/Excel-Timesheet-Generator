@@ -17,8 +17,12 @@ export async function getUserData(config: IConfig): Promise<UserData> {
   });
 
   const nonWorkingHoursFile = await errorHandler(getNonWorkingHoursFile);
-
-  const { login, password } = await errorHandler(getCredentials);
-
+  let login, password;
+  if (process.env.login === undefined || process.env.password === undefined) {
+    ({ login, password } = await errorHandler(getCredentials));
+  } else {
+    login = process.env.login;
+    password = process.env.password;
+  }
   return { login, password, nonWorkingHoursFile, workingHoursByEmployeesUsername };
 }
