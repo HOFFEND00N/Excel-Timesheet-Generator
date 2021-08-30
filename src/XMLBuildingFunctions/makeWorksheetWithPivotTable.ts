@@ -1,4 +1,4 @@
-import { Employee } from "../classes/Employee";
+import { IEmployee } from "../models/IEmployee";
 import { HoursByEmployees } from "../tableBuildingFunctions/types";
 import { Row } from "./types";
 
@@ -6,7 +6,7 @@ export function makeWorksheetWithPivotTable({
   employees,
   workingHoursByEmployeesUsername,
 }: {
-  employees: Employee[];
+  employees: IEmployee[];
   workingHoursByEmployeesUsername: HoursByEmployees;
 }) {
   const pivotTableOffset = 4;
@@ -41,7 +41,7 @@ export function makeWorksheetWithPivotTable({
 }
 
 function makeSheetDataRows(
-  employees: Employee[],
+  employees: IEmployee[],
   workingHoursByEmployeesUsername: HoursByEmployees,
   pivotTableOffset: number
 ) {
@@ -89,6 +89,12 @@ function makeSheetDataRows(
   return rows;
 }
 
-function getLastPivotTableColumn({ employees, pivotTableOffset }: { employees: Employee[]; pivotTableOffset: number }) {
+function getLastPivotTableColumn({
+  employees,
+  pivotTableOffset,
+}: {
+  employees: IEmployee[];
+  pivotTableOffset: number;
+}) {
   return employees.length + pivotTableOffset;
 }

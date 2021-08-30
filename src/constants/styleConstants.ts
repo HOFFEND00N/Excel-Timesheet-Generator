@@ -1,6 +1,6 @@
-import { Style } from "../classes/Style";
+import { IStyle } from "../models/IStyle";
 
-export function makeBoldCellTextStyle(): Style {
+export function makeBoldCellTextStyle(): IStyle {
   return {
     font: {
       bold: true,
@@ -8,7 +8,7 @@ export function makeBoldCellTextStyle(): Style {
   };
 }
 
-export function makeCellBorderStyle(): Style {
+export function makeCellBorderStyle(): IStyle {
   return {
     border: {
       left: {
@@ -27,7 +27,7 @@ export function makeCellBorderStyle(): Style {
   };
 }
 
-export function makeYellowBackgroundStyle(): Style {
+export function makeYellowBackgroundStyle(): IStyle {
   return {
     fill: {
       type: "pattern",
@@ -37,7 +37,7 @@ export function makeYellowBackgroundStyle(): Style {
   };
 }
 
-export function makeStyleHorizontalAlignText(way: HorizontalAlignTextWays): Style {
+export function makeStyleHorizontalAlignText(way: HorizontalAlignTextWays): IStyle {
   return {
     alignment: {
       horizontal: way,
@@ -56,7 +56,7 @@ export enum HorizontalAlignTextWays {
   right = "right",
 }
 
-export function makeDefaultTextStyle(): Style {
+export function makeDefaultTextStyle(): IStyle {
   return {
     font: {
       size: 10,

@@ -15,7 +15,7 @@ import {
   makeWorksheetWithPivotTableRels,
 } from "../XMLBuildingFunctions";
 import { CommonCell, HoursByEmployees } from "../tableBuildingFunctions/types";
-import { TableData } from "../classes/TableData";
+import { ITableData } from "../models/ITableData";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
 
 export function addPivotTableToXlsxFile({
@@ -27,7 +27,7 @@ export function addPivotTableToXlsxFile({
   manHoursColumnIndex,
 }: {
   reportName: string;
-  tableData: TableData;
+  tableData: ITableData;
   workingHoursByEmployeesUsername: HoursByEmployees;
   table: CommonCell[];
   employeeColumnIndex: number;

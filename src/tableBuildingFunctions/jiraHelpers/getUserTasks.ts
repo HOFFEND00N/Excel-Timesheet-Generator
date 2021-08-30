@@ -1,5 +1,5 @@
 import { makeTeamLeadJiraTasks, makeSortedUserTasksByEmployeeUsername } from "../index";
-import { TableData } from "../../classes/TableData";
+import { ITableData } from "../../models/ITableData";
 import { FetchUserTasksArguments, UserTasks } from "../types";
 
 export async function getUserTasks({
@@ -8,7 +8,7 @@ export async function getUserTasks({
   password,
   fetchUserTasks,
 }: {
-  tableData: TableData;
+  tableData: ITableData;
   login: string;
   password: string;
   fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;

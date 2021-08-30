@@ -6,18 +6,17 @@ import {
   makeStyleHorizontalAlignText,
 } from "../constants/styleConstants";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
-import { TableData } from "../classes/TableData";
-import { Point } from "../classes/Point";
+import { ITableData } from "../models/ITableData";
+import { IPoint } from "../models/IPoint";
 import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { CommonCell, UserData } from "./types";
 import { getNonWorkingHoursRows, makeNonWorkingHoursByEmployeesUsername } from "./nonWorkingHoursHelpers";
-import { errorHandler } from "../utils/errorHandler";
 
 type MakeTableArguments = {
-  tableData: TableData;
+  tableData: ITableData;
   currentDate: Date;
   userData: UserData;
   userTasksByEmployeeUsername: Record<string, string[]>;
@@ -30,11 +29,11 @@ export async function makeTable({
   userTasksByEmployeeUsername,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
-  const startTablePoint: Point = START_TABLE_POINT;
+  const startTablePoint: IPoint = START_TABLE_POINT;
 
   const tableHeaders = TABLE_HEADERS;
   const monthRow = makeMonthRows(currentDate);
-  const { row: pointRow, column: pointColumn }: Point = startTablePoint;
+  const { row: pointRow, column: pointColumn }: IPoint = startTablePoint;
   table.push(...monthRow);
 
   const tableHeadersRow = makeTableRow({
@@ -59,7 +58,7 @@ export async function makeTable({
     employees: [...tableData.employees, tableData.teamLead],
   });
 
-  const tableRowsValues = await errorHandler(makeEmployeeDataRows, {
+  const tableRowsValues = await makeEmployeeDataRows({
     tableData,
     headers: tableHeaders,
     nonWorkingHoursByEmployeesUsername,

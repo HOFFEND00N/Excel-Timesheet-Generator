@@ -6,12 +6,12 @@ import {
   makeStyleHorizontalAlignText,
   makeYellowBackgroundStyle,
 } from "../constants/styleConstants";
-import { Point } from "../classes/Point";
+import { IPoint } from "../models/IPoint";
 import { CommonCell } from "./types";
 
 export function makeMonthRows(currentDate: Date): CommonCell[] {
   const monthRows: CommonCell[] = [];
-  const { row, column }: Point = START_MONTH_HEADER_POINT;
+  const { row, column }: IPoint = START_MONTH_HEADER_POINT;
   monthRows.push({
     point: { row, column },
     value: MONTHLY_TIMESHEET_HEADER,

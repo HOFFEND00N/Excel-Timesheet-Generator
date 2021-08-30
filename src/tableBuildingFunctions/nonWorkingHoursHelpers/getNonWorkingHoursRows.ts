@@ -1,9 +1,9 @@
-import { TableData } from "../../classes/TableData";
+import { ITableData } from "../../models/ITableData";
 import { isNumeric } from "../../utils/isNumeric";
 import { CommonValue } from "../types";
 
 export async function getNonWorkingHoursRows(
-  tableData: TableData,
+  tableData: ITableData,
   nonWorkingHoursFile: string[][]
 ): Promise<CommonValue[][]> {
   const employees = tableData.employees.map((employee) => employee.name);

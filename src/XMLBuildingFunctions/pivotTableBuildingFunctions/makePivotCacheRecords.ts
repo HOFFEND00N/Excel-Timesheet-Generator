@@ -1,7 +1,7 @@
 import { CommonCell } from "../../tableBuildingFunctions/types";
-import { Employee } from "../../classes/Employee";
+import { IEmployee } from "../../models/IEmployee";
 import { PivotCacheRecords } from "../types";
-import { Point } from "../../classes/Point";
+import { IPoint } from "../../models/IPoint";
 import { makePivotCacheRecordsContent } from "./makePivotCacheRecordsContent";
 
 export function makePivotCacheRecords({
@@ -11,8 +11,8 @@ export function makePivotCacheRecords({
   recordElementsCount,
 }: {
   table: CommonCell[];
-  employees: Employee[];
-  startTablePoint: Point;
+  employees: IEmployee[];
+  startTablePoint: IPoint;
   recordElementsCount: number;
 }) {
   const tableRowsCount =

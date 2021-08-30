@@ -1,5 +1,5 @@
 import { CommonValue } from "../../tableBuildingFunctions/types";
-import { Employee } from "../../classes/Employee";
+import { IEmployee } from "../../models/IEmployee";
 import { PivotCacheRecordElement } from "../types";
 
 export function makePivotCacheRecordElement({
@@ -7,7 +7,7 @@ export function makePivotCacheRecordElement({
   employees,
 }: {
   value: CommonValue;
-  employees: Employee[];
+  employees: IEmployee[];
 }): PivotCacheRecordElement {
   const employeeIndex = employees.findIndex((employee) => employee.name === value);
   if (employeeIndex !== -1) return { x: { "@v": `${employeeIndex}` } };

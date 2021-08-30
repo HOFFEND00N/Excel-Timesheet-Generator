@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import { areJiraCredentialsCorrect } from "./areJiraCredentialsCorrect";
 
 export async function getCredentials(): Promise<{
   login: string;
@@ -8,6 +9,14 @@ export async function getCredentials(): Promise<{
   const { login } = await inquirer.prompt([{ type: "input", name: "login", message: "login: " }]);
 
   const { password } = await inquirer.prompt([{ type: "password", name: "password", message: "password: " }]);
+
+  const cahAuthorize = await areJiraCredentialsCorrect({
+    login,
+    password,
+  });
+  if (!cahAuthorize) {
+    throw new Error("Wrong credentials. Please try again");
+  }
 
   return { login, password };
 }

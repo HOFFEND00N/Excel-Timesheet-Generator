@@ -1,10 +1,10 @@
 import { PivotTableDefinition } from "../../types";
 import { TABLE_HEADERS } from "../../../constants/constant";
-import { Employee } from "../../../classes/Employee";
+import { IEmployee } from "../../../models/IEmployee";
 import { makePivotTable } from "../makePivotTable";
 
 test("pass one employee, expect to return pivot table definition", () => {
-  const employees: Employee[] = [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }];
+  const employees: IEmployee[] = [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }];
   const expectedPivotTableDefinition: PivotTableDefinition = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
     "@name": "PivotTable1",

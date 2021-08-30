@@ -8,7 +8,7 @@ import {
   makeStyleHorizontalAlignText,
 } from "../../constants/styleConstants";
 import { CommonCell, CommonValue, NumberValue, StringValue } from "../types";
-import { TableCell } from "../../classes/TableCell";
+import { ITableCell } from "../../models/ITableCell";
 import { getMonthRowsForTests, getTableDataForTests } from "../../../tests/mockedDataForTests";
 
 test("make full table", async () => {
@@ -41,7 +41,7 @@ test("make full table", async () => {
     const expectedTableRow = expectedTableRows[i];
     for (let j = 0; j < expectedTableRow.length; j++) {
       const value = expectedTableRow[j];
-      const tableCell: CommonCell = <TableCell<StringValue> | TableCell<NumberValue>>{
+      const tableCell: CommonCell = <ITableCell<StringValue> | ITableCell<NumberValue>>{
         point: { column: startPoint.column + j, row: startPoint.row + i + 1 },
         value: value,
         styles: [makeCellBorderStyle(), makeDefaultTextStyle()],

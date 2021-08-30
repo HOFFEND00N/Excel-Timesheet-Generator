@@ -1,28 +1,34 @@
 import * as fs from "fs";
 import excel from "excel4node";
-import { TableData } from "./classes/TableData";
-import { WorksheetImage } from "./classes/WorksheetImage";
-import { WorkSheetImageAdapter } from "./classes/WorkSheetImageAdapter";
+import { ITableData } from "./models/ITableData";
+import { IWorksheetImage } from "./models/IWorksheetImage";
+import { WorkSheetImageAdapter } from "./models/WorkSheetImageAdapter";
 import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
 import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
 import { getUserData } from "./userDataCollectionFunctions";
-import { errorHandler } from "./utils/errorHandler";
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
-
+//TODO
+//написать 3 реплейса на YEAR, MONTH, UNIT
+//добавить этот шаблон в конфиг файл. tableData.json
+///may be rename to config
+//change companyName to productName
+//add name to project or remove name in all 3
+//may be make config file not json, but rather js code, that return config object
+//TODO: use environmental variables for hiding password and login
 (async () => {
   const workBook = new excel.Workbook({});
   const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
-  const image: WorksheetImage = {
+  const image: IWorksheetImage = {
     path: "images/confirmit.jpg",
     column: 2,
     row: 2,
   };
 
-  const tableData: TableData = JSON.parse(fs.readFileSync("tableData.json", "utf-8"));
-  const userData = await errorHandler(getUserData, tableData);
+  const tableData: ITableData = JSON.parse(fs.readFileSync("tableData.json", "utf-8"));
+  const userData = await getUserData(tableData);
   const userTasksByEmployeeUsername = await getUserTasks({
     tableData,
     login: userData.login,

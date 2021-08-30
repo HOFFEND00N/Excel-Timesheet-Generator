@@ -1,7 +1,7 @@
-import { TableCell } from "../classes/TableCell";
+import { ITableCell } from "../models/ITableCell";
 
-export type StringCell = TableCell<StringValue>;
-export type NumericCell = TableCell<NumberValue>;
+export type StringCell = ITableCell<StringValue>;
+export type NumericCell = ITableCell<NumberValue>;
 export type CommonCell = StringCell | NumericCell;
 
 export function isNumericCell(tableCell: CommonCell): tableCell is NumericCell {

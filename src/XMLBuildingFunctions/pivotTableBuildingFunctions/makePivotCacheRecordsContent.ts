@@ -1,5 +1,5 @@
 import { CommonCell } from "../../tableBuildingFunctions/types";
-import { Employee } from "../../classes/Employee";
+import { IEmployee } from "../../models/IEmployee";
 import { PivotCacheRecord } from "../types";
 import { makePivotCacheRecordElement } from "./makePivotCacheRecordElement";
 
@@ -11,7 +11,7 @@ export function makePivotCacheRecordsContent({
 }: {
   startTableContentIndex: number;
   table: CommonCell[];
-  employees: Employee[];
+  employees: IEmployee[];
   recordElementsCount: number;
 }): PivotCacheRecord[] {
   let counter = recordElementsCount;

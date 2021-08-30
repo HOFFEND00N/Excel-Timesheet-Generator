@@ -13,6 +13,8 @@ export async function fetchJiraUserTasks({
   currentDate.setMonth(currentDate.getMonth() - 1);
   const taskUpdated = `${currentDate.getFullYear()}/${currentDate.getMonth() + 1}/1`;
 
+  //TODO: may be extract query to jira into config
+  //TODO: may be add specific query for employee, add optional property in config
   const tasksStatuses = TASKS_STATUSES.map((status) => '"' + status + '"').join(", ");
   const query = `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (${tasksStatuses}) AND assignee in (${jiraUserName}) and updated >= "${taskUpdated}" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY},`;
 

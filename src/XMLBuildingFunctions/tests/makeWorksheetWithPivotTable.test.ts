@@ -1,9 +1,9 @@
 import { Worksheet } from "../types";
-import { Employee } from "../../classes/Employee";
+import { IEmployee } from "../../models/IEmployee";
 import { makeWorksheetWithPivotTable } from "../makeWorksheetWithPivotTable";
 
 test("pass 2 employees, expect to return correct worksheet", () => {
-  const employees: Employee[] = [
+  const employees: IEmployee[] = [
     { name: "Karaseva Svetlana", jiraUsername: "KarasevaS" },
     { name: "Matrosova Marianna", jiraUsername: "MatrosovaM" },
   ];

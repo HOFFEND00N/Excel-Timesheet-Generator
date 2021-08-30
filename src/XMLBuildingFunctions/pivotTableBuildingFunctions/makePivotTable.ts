@@ -1,5 +1,5 @@
 import { TABLE_HEADERS } from "../../constants/constant";
-import { Employee } from "../../classes/Employee";
+import { IEmployee } from "../../models/IEmployee";
 import { Item, PivotTableDefinition, RowItem } from "../types";
 
 export function makePivotTable({
@@ -7,7 +7,7 @@ export function makePivotTable({
   employeeColumnIndex,
   manHoursColumnIndex,
 }: {
-  employees: Employee[];
+  employees: IEmployee[];
   employeeColumnIndex: number;
   manHoursColumnIndex: number;
 }) {

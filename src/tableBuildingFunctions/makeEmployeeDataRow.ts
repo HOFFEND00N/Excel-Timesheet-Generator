@@ -1,13 +1,13 @@
-import { TableData } from "../classes/TableData";
-import { Employee } from "../classes/Employee";
+import { ITableData } from "../models/ITableData";
+import { IEmployee } from "../models/IEmployee";
 import { CommonValue, HoursByEmployees, TableHeader } from "./types";
 
 type makeEmployeeDataRowArguments = {
-  tableData: TableData;
+  tableData: ITableData;
   headers: TableHeader[];
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursPerMonth: number;
-  employee: Employee;
+  employee: IEmployee;
   userTasksByEmployeeUsername: Record<string, string[]>;
 };
 

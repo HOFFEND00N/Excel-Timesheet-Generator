@@ -1,5 +1,5 @@
-import { TableData } from "../src/classes/TableData";
-import { Point } from "../src/classes/Point";
+import { ITableData } from "../src/models/ITableData";
+import { IPoint } from "../src/models/IPoint";
 import { MONTHLY_TIMESHEET_HEADER, START_MONTH_HEADER_POINT } from "../src/constants/constant";
 import { CommonCell } from "../src/tableBuildingFunctions/types";
 import {
@@ -10,7 +10,7 @@ import {
   makeYellowBackgroundStyle,
 } from "../src/constants/styleConstants";
 
-export function getTableDataForTests(): TableData {
+export function getTableDataForTests(): ITableData {
   return {
     unit: 651,
     companyCode: "NO",
@@ -34,7 +34,7 @@ export function getTableDataForTests(): TableData {
 }
 
 export function getMonthRowsForTests() {
-  const startMonthHeaderPoint: Point = START_MONTH_HEADER_POINT;
+  const startMonthHeaderPoint: IPoint = START_MONTH_HEADER_POINT;
   const monthRows: CommonCell[] = [];
   monthRows.push({
     point: startMonthHeaderPoint,

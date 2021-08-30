@@ -1,6 +1,6 @@
-import { Employee } from "../../classes/Employee";
+import { IEmployee } from "../../models/IEmployee";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../../constants/constant";
-import { Point } from "../../classes/Point";
+import { IPoint } from "../../models/IPoint";
 import { convertNumberToExcelColumn } from "../../utils/convertNumberToExcelColumn";
 import { CacheField, PivotCacheDefinition, SharedItem } from "../types";
 
@@ -8,8 +8,8 @@ export function makePivotCacheDefinition({
   employees,
   tableBottomRightPoint,
 }: {
-  employees: Employee[];
-  tableBottomRightPoint: Point;
+  employees: IEmployee[];
+  tableBottomRightPoint: IPoint;
 }) {
   const worksheetSourceRef =
     convertNumberToExcelColumn(START_TABLE_POINT.column) +
@@ -36,7 +36,7 @@ export function makePivotCacheDefinition({
   return pivotCacheDefinition;
 }
 
-function makePivotCacheFields(pivotCacheDefinition: PivotCacheDefinition, employees: Employee[]) {
+function makePivotCacheFields(pivotCacheDefinition: PivotCacheDefinition, employees: IEmployee[]) {
   for (const tableHeader of TABLE_HEADERS) {
     if (tableHeader.label === "Employee")
       pivotCacheDefinition.cacheFields.cacheField.push(makePivotCacheFieldEmployees(employees, tableHeader.label));
@@ -50,7 +50,7 @@ function makePivotCacheFields(pivotCacheDefinition: PivotCacheDefinition, employ
   return;
 }
 
-function makePivotCacheFieldEmployees(employees: Employee[], name: string) {
+function makePivotCacheFieldEmployees(employees: IEmployee[], name: string) {
   const cacheField: CacheField = {
     "@name": name,
     "@numFmtId": "0",
@@ -62,7 +62,7 @@ function makePivotCacheFieldEmployees(employees: Employee[], name: string) {
   return cacheField;
 }
 
-function makePivotCacheFieldSharedItems(employees: Employee[]) {
+function makePivotCacheFieldSharedItems(employees: IEmployee[]) {
   const sharedItems: SharedItem[] = [];
   for (const employee of employees) {
     sharedItems.push({ "@v": `${employee.name}` });

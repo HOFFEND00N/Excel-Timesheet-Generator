@@ -1,4 +1,4 @@
-import { Employee } from "../../classes/Employee";
+import { IEmployee } from "../../models/IEmployee";
 import { CommonValue, HoursByEmployees } from "../types";
 
 export function makeNonWorkingHoursByEmployeesUsername({
@@ -10,7 +10,7 @@ export function makeNonWorkingHoursByEmployeesUsername({
   employeeColumn: number;
   manHoursColumn: number;
   nonWorkingHoursRows: CommonValue[][];
-  employees: Employee[];
+  employees: IEmployee[];
 }) {
   return nonWorkingHoursRows.reduce((nonWorkingHoursByEmployeesUsername: HoursByEmployees, nonWorkingHoursRow) => {
     const employeeName = nonWorkingHoursRow[employeeColumn].toString();

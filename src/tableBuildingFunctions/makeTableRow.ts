@@ -1,11 +1,11 @@
-import { Point } from "../classes/Point";
-import { TableCell } from "../classes/TableCell";
+import { IPoint } from "../models/IPoint";
+import { ITableCell } from "../models/ITableCell";
 import { CommonCell, CommonValue, NumberValue, StringValue } from "./types";
 
-export function makeTableRow({ startPoint, values }: { startPoint: Point; values: CommonValue[] }): CommonCell[] {
+export function makeTableRow({ startPoint, values }: { startPoint: IPoint; values: CommonValue[] }): CommonCell[] {
   return values.map(
     (value, index) =>
-      <TableCell<StringValue> | TableCell<NumberValue>>{
+      <ITableCell<StringValue> | ITableCell<NumberValue>>{
         point: { column: startPoint.column + index, row: startPoint.row },
         value: value,
         styles: [],

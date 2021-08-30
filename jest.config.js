@@ -15,7 +15,7 @@ const config = {
     "!**/index.ts",
     "!./src/app.ts",
     "!./src/XMLBuildingFunctions/**",
-    "!./src/classes/**",
+    "!./src/models/**",
     "!./src/tableBuildingFunctions/jiraHelpers/**",
     "!./src/tableBuildingFunctions/employeeHoursHelpers/nonWorkingHoursHelpers/getNonWorkingHoursFile.ts",
     "!./src/tableBuildingFunctions/types.ts",

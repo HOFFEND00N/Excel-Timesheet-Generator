@@ -1,4 +1,4 @@
-export interface WorksheetImage {
+export interface IWorksheetImage {
   path: string;
   column: number;
   row: number;

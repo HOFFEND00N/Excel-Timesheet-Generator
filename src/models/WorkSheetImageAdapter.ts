@@ -1,11 +1,11 @@
-import { WorksheetImage } from "./WorksheetImage";
+import { IWorksheetImage } from "./IWorksheetImage";
 
 export class WorkSheetImageAdapter {
   type: string;
   path: string;
-  position: Position;
+  position: IPosition;
 
-  constructor(worksheetImage: WorksheetImage) {
+  constructor(worksheetImage: IWorksheetImage) {
     this.type = "picture";
     this.path = worksheetImage.path;
     this.position = {
@@ -18,12 +18,12 @@ export class WorkSheetImageAdapter {
   }
 }
 
-interface Position {
+interface IPosition {
   type: string;
-  from: From;
+  from: IFrom;
 }
 
-interface From {
+interface IFrom {
   col: number;
   row: number;
 }

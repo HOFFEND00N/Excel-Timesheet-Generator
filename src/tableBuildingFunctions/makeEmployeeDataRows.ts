@@ -1,10 +1,10 @@
-import { TableData } from "../classes/TableData";
+import { ITableData } from "../models/ITableData";
 import { CommonValue, HoursByEmployees, TableHeader } from "./types";
 
 import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
 
 type MakeEmployeeDataRowsArguments = {
-  tableData: TableData;
+  tableData: ITableData;
   headers: TableHeader[];
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursByEmployeesUsername: HoursByEmployees;
