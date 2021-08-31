@@ -18,6 +18,7 @@ export async function getUserTasks({
       jiraUserName: employee.jiraUsername,
       login,
       password,
+      query: config.employeeJiraTaskQuery,
     })
   );
 

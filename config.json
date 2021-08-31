@@ -41,5 +41,6 @@
     "year": 2021,
     "month": 7
   },
-  "reportFileName": "${year}-${month}-${companyUnit}_RPT-YAR.xlsx"
+  "reportFileName": "${year}-${month}-${companyUnit}_RPT-YAR.xlsx",
+  "employeeJiraTaskQuery": "https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (\"In Progress\", \"In Code Review\", \"IN QA\", \"QA Verified\", \"Investigation\", \"Code Completed\") AND assignee in (${jiraUserName}) and updated >= \"${taskUpdated}\" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY}"
 }

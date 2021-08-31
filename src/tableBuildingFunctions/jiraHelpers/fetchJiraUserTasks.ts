@@ -1,11 +1,12 @@
 import fetch from "node-fetch";
-import { EPIC_KEY, TASKS_STATUSES } from "../../constants/constant";
+import { EPIC_KEY } from "../../constants/constant";
 import { FetchUserTasksArguments, JiraResponse, UserTasks } from "../types";
 
 export async function fetchJiraUserTasks({
   jiraUserName,
   login,
   password,
+  query,
 }: FetchUserTasksArguments): Promise<UserTasks> {
   const authorizationKey = Buffer.from(`${login}:${password}`).toString("base64");
 
@@ -13,10 +14,10 @@ export async function fetchJiraUserTasks({
   currentDate.setMonth(currentDate.getMonth() - 1);
   const taskUpdated = `${currentDate.getFullYear()}/${currentDate.getMonth() + 1}/1`;
 
-  //TODO: may be extract query to jira into config
-  //TODO: may be add specific query for employee, add optional property in config
-  const tasksStatuses = TASKS_STATUSES.map((status) => '"' + status + '"').join(", ");
-  const query = `https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (${tasksStatuses}) AND assignee in (${jiraUserName}) and updated >= "${taskUpdated}" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY},`;
+  query = query
+    .replace(/\${jiraUserName}/g, jiraUserName)
+    .replace("${taskUpdated}", taskUpdated)
+    .replace("${EPIC_KEY}", EPIC_KEY);
 
   const fetchResult = await fetch(query, {
     method: "get",

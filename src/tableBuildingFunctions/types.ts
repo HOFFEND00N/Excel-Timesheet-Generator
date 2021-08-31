@@ -38,6 +38,7 @@ export type FetchUserTasksArguments = {
   jiraUserName: string;
   login: string;
   password: string;
+  query: string;
 };
 
 export type ParsedJiraResponse = {

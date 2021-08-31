@@ -9,4 +9,5 @@ export interface IConfig {
   teamLead: IEmployee;
   date?: { year: number; month: number };
   reportFileName: string;
+  employeeJiraTaskQuery: string;
 }
