@@ -32,6 +32,8 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
     dateNF: 'dd"."mm"."yyyy',
   });
 
+  if (!nonWorkingHoursRows.flat().includes("DaysOff"))
+    throw new Error("This is not the file with non working hours. Please try again.");
   return nonWorkingHoursRows.map(removeEmptyCellAtTheBeginning);
 }
 
