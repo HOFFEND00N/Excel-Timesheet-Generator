@@ -31,6 +31,7 @@ export function getConfigForTests(): IConfig {
       jiraUsername: "MolotkovaM",
     },
     reportFileName: "",
+    employeeJiraTaskQuery: "",
   };
 }
 
