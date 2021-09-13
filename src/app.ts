@@ -28,10 +28,7 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
     fetchUserTasks: fetchJiraUserTasks,
   });
 
-  let currentDate: Date;
-  if (!config.date) currentDate = new Date();
-  else currentDate = new Date(config.date.year, config.date.month);
-
+  const currentDate = config.date ? new Date(config.date.year, config.date.month) : new Date();
   const table = await makeTable({
     config,
     currentDate,
@@ -76,7 +73,7 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
 
   addPivotTableToXlsxFile({
     reportName,
-    config: config,
+    config,
     workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
     table,
     employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
