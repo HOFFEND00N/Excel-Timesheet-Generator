@@ -9,14 +9,6 @@ import { UserData } from "../tableBuildingFunctions/types";
 import { errorHandler } from "../utils/errorHandler";
 
 export async function getUserData(config: IConfig): Promise<UserData> {
-  const workingHoursByEmployeesUsername = await errorHandler(getWorkingHoursByEmployeesUsername, {
-    employees: [...config.employees, config.teamLead],
-    getWorkingHoursPerMonth,
-    shouldUpdateEmployeeMonthRate,
-    chooseEmployees,
-  });
-
-  const nonWorkingHoursFile = await errorHandler(getNonWorkingHoursFile);
   let login, password;
   if (process.env.login === undefined || process.env.password === undefined) {
     ({ login, password } = await errorHandler(getCredentials));
@@ -24,5 +16,15 @@ export async function getUserData(config: IConfig): Promise<UserData> {
     login = process.env.login;
     password = process.env.password;
   }
+
+  const nonWorkingHoursFile = await errorHandler(getNonWorkingHoursFile);
+
+  const workingHoursByEmployeesUsername = await errorHandler(getWorkingHoursByEmployeesUsername, {
+    employees: [...config.employees, config.teamLead],
+    getWorkingHoursPerMonth,
+    shouldUpdateEmployeeMonthRate,
+    chooseEmployees,
+  });
+
   return { login, password, nonWorkingHoursFile, workingHoursByEmployeesUsername };
 }
