@@ -10,11 +10,11 @@ export async function getCredentials(): Promise<{
 
   const { password } = await inquirer.prompt([{ type: "password", name: "password", message: "password: " }]);
 
-  const cahAuthorize = await areJiraCredentialsCorrect({
+  const canAuthorize = await areJiraCredentialsCorrect({
     login,
     password,
   });
-  if (!cahAuthorize) {
+  if (!canAuthorize) {
     throw new Error("Wrong credentials. Please try again");
   }
 
