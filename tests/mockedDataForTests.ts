@@ -30,7 +30,7 @@ export function getConfigForTests(): IConfig {
       name: "Molotkova Maria",
       jiraUsername: "MolotkovaM",
     },
-    reportFileName: "",
+    fileNameTemplate: "",
     employeeJiraTaskQuery: "",
   };
 }

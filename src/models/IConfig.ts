@@ -8,6 +8,6 @@ export interface IConfig {
   employees: IEmployee[];
   teamLead: IEmployee;
   date?: { year: number; month: number };
-  reportFileName: string;
+  fileNameTemplate: string;
   employeeJiraTaskQuery: string;
 }
