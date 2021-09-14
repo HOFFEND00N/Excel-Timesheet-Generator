@@ -1,10 +1,10 @@
 export function makeReportFileName({
-  companyUnit,
+  unit,
   fileNameTemplate,
   currentDate,
 }: {
   currentDate: Date;
-  companyUnit: number;
+  unit: number;
   fileNameTemplate: string;
 }) {
   const month = (currentDate.getMonth() + 1).toString();
@@ -12,5 +12,5 @@ export function makeReportFileName({
   return fileNameTemplate
     .replace("${year}", currentDate.getFullYear().toString())
     .replace("${month}", month.padStart(2, "0"))
-    .replace("${companyUnit}", companyUnit.toString());
+    .replace("${unit}", unit.toString());
 }

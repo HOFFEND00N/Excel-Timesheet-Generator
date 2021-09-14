@@ -5,7 +5,7 @@ test("pass may of 2021, expect to return fileName with month = 06", () => {
 
   const actualFileName = makeReportFileName({
     currentDate: new Date(2021, 5),
-    companyUnit: 7,
+    unit: 7,
     fileNameTemplate: "${year}-${month}-${companyUnit}.xlsx",
   });
 
@@ -17,7 +17,7 @@ test("pass january of 2021, expect to return fileName with month = 01", () => {
 
   const actualFileName = makeReportFileName({
     currentDate: new Date(2021, 0),
-    companyUnit: 7,
+    unit: 7,
     fileNameTemplate: "${year}-${month}-${companyUnit}.xlsx",
   });
 
@@ -29,7 +29,7 @@ test("pass december of 2020, expect to return fileName with month = 12", () => {
 
   const actualFileName = makeReportFileName({
     currentDate: new Date(2020, 11),
-    companyUnit: 7,
+    unit: 7,
     fileNameTemplate: "${year}-${month}-${companyUnit}.xlsx",
   });
 

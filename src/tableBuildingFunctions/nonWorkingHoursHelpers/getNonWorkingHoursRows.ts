@@ -2,6 +2,7 @@ import { IConfig } from "../../models/IConfig";
 import { isNumeric } from "../../utils/isNumeric";
 import { CommonValue } from "../types";
 
+//TODO: not SRP, not only get rows, but also transform strings to numbers
 export async function getNonWorkingHoursRows(
   config: IConfig,
   nonWorkingHoursFile: string[][]

@@ -64,7 +64,7 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
 
   const reportName = makeReportFileName({
     currentDate,
-    companyUnit: config.unit,
+    unit: config.unit,
     fileNameTemplate: config.fileNameTemplate,
   });
   await makeXlsxFile(workBook, reportName);
