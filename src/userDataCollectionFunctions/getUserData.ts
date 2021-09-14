@@ -4,7 +4,7 @@ import { IConfig } from "../models/IConfig";
 import { getWorkingHoursPerMonth } from "./workingHoursHelpers/getWorkingHoursPerMonth";
 import { shouldUpdateEmployeeMonthRate } from "./workingHoursHelpers/shouldUpdateEmployeeMonthRate";
 import { chooseEmployees } from "./workingHoursHelpers/chooseEmployees";
-import { getNonWorkingHoursFile } from "./getNonWorkingHoursFile";
+import { getNonWorkingHoursFile } from "./nonWorkingHoursHelpers/getNonWorkingHoursFile";
 import { UserData } from "../tableBuildingFunctions/types";
 import { errorHandler } from "../utils/errorHandler";
 

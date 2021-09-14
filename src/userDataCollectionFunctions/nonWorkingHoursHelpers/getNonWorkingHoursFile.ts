@@ -1,9 +1,9 @@
 import inquirer from "inquirer";
 import xlsx from "xlsx";
-import { OUTPUT_FORMAT_ARRAY_OF_ARRAYS, TABLE_HEADERS } from "../constants/constant";
+import { OUTPUT_FORMAT_ARRAY_OF_ARRAYS } from "../../constants/constant";
 import inquirer_autocomplete_prompt from "inquirer-autocomplete-prompt";
-import { searchFilesAndDirectories } from "./pathAutocompleteHelpers";
-import { areArraysEqual } from "../utils/areArraysEquals";
+import { searchFilesAndDirectories } from "../pathAutocompleteHelpers";
+import { isNonWorkingHoursFileValid } from "./isNonWorkingHoursFileValid";
 
 export async function getNonWorkingHoursFile(): Promise<string[][]> {
   inquirer.registerPrompt("autocomplete", inquirer_autocomplete_prompt);
@@ -35,14 +35,7 @@ export async function getNonWorkingHoursFile(): Promise<string[][]> {
     })
     .map(removeEmptyCellAtTheBeginning);
 
-  if (
-    !nonWorkingHoursRows.some((row) =>
-      areArraysEqual(
-        row,
-        TABLE_HEADERS.map((header) => header.label)
-      )
-    )
-  )
+  if (!isNonWorkingHoursFileValid(nonWorkingHoursRows))
     throw new Error("This is not the file with non working hours. Please try again.");
 
   return nonWorkingHoursRows;

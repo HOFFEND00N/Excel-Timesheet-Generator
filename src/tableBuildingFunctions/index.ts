@@ -1,5 +1,5 @@
 export { isNumericCell, isStringCell } from "./types";
-export { getNonWorkingHoursFile } from "../userDataCollectionFunctions/getNonWorkingHoursFile";
+export { getNonWorkingHoursFile } from "../userDataCollectionFunctions/nonWorkingHoursHelpers/getNonWorkingHoursFile";
 export { getWorkingHoursByEmployeesUsername } from "../userDataCollectionFunctions/workingHoursHelpers/getWorkingHoursByEmployeesUsername";
 export { getNonWorkingHoursRows } from "./nonWorkingHoursHelpers/getNonWorkingHoursRows";
 export { makeEmployeeDataRow } from "./makeEmployeeDataRow";

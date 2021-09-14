@@ -16,14 +16,6 @@ test("pass two empty arrays, expect to return true", () => {
   expect(actual).toEqual(expected);
 });
 
-test("pass array with numbers and array with strings, expect to return false", () => {
-  const expected = false;
-
-  const actual = areArraysEqual([1, 2], ["a", "v"]);
-
-  expect(actual).toEqual(expected);
-});
-
 test("pass two equal arrays with numbers, expect to return true", () => {
   const expected = true;
 

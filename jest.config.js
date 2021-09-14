@@ -21,7 +21,7 @@ const config = {
     "!./src/tableBuildingFunctions/index.ts",
     "!./src/tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks.ts",
     "!./src/tableBuildingFunctions/jiraHelpers/getUserTasks.ts",
-    "!./src/userDataCollectionFunctions/getNonWorkingHoursFile.ts",
+    "!./src/userDataCollectionFunctions/nonWorkingHoursHelpers/getNonWorkingHoursFile.ts",
     "!./src/userDataCollectionFunctions/getUserData.ts",
     "!./src/userDataCollectionFunctions/jiraHelpers/areJiraCredentialsCorrect.ts",
     "!./src/userDataCollectionFunctions/jiraHelpers/getCredentials.ts",
