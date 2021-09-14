@@ -1,4 +1,3 @@
-//TODO: make tests for areArraysEqual()
-export function areArraysEqual(a: unknown[], b: unknown[]) {
+export function areArraysEqual<T>(a: T[], b: T[]) {
   return a.length === b.length && a.every((value, index) => value === b[index]);
 }
