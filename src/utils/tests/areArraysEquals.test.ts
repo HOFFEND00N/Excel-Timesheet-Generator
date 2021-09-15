@@ -1,6 +1,6 @@
 import { areArraysEqual } from "../areArraysEquals";
 
-test("pass empty array and array with values, expect to return false", () => {
+test("pass empty array and array with number values, expect to return false", () => {
   const expected = false;
 
   const actual = areArraysEqual([], [1, 2]);
