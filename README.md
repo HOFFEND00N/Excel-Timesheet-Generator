@@ -17,6 +17,19 @@
 - follow program instructions
 - generated excel file can be found in the root of the project
 
+## Attention
+
+You can configure environmental variables to store there login and password,
+and don't enter them every time. Environmental variables names should be called
+"login", "password" respectively.
+
+In case of wrong provided credentials multiple times, your account will be
+locked out, because there is a strict policy for failed attempts via
+applications/api.
+
+Visit this page, to understand how to unlock your account
+https://confluence.firmglobal.com/display/ISK/FAQ%3A+Using+self+service+PasswordReset+tool+to+unlock+account.
+
 ## Config
 
 Actually, it is possible to change everything in config file.
@@ -56,12 +69,3 @@ specify "unit" you should change unit field in config, not in fileNameTemplate.
 
 In employeeJiraTaskQuery you can place your own query to jira, 
 but it must be a valid JQL syntax. For more info about JQL - https://www.atlassian.com/software/jira/guides/expand-jira/jql
-
-## Important information
-
-In case of wrong provided credentials multiple times, your account will be
-locked out, because there is a strict policy for failed attempts via 
-applications/api.
-
-Visit this page, to understand how to unlock your account
-https://confluence.firmglobal.com/display/ISK/FAQ%3A+Using+self+service+PasswordReset+tool+to+unlock+account.
