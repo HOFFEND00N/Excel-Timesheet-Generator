@@ -18,13 +18,24 @@ export async function getUserTasks({
       jiraUserName: employee.jiraUsername,
       login,
       password,
-      query: config.employeeJiraTaskQuery,
+      query: employee.employeeJiraTaskQuery ?? config.employeeJiraTaskQuery,
     })
   );
 
   console.log(`Fetching tasks from Jira for employees. Please wait...`);
   const tasksRows = await Promise.all(tasks);
-  tasksRows.push(makeTeamLeadJiraTasks(tasksRows, config.teamLead.jiraUsername));
+  if (config.teamLead.employeeJiraTaskQuery) {
+    tasksRows.push(
+      await fetchUserTasks({
+        jiraUserName: config.teamLead.jiraUsername,
+        login,
+        password,
+        query: config.teamLead.employeeJiraTaskQuery,
+      })
+    );
+  } else {
+    tasksRows.push(makeTeamLeadJiraTasks(tasksRows, config.teamLead.jiraUsername));
+  }
 
   return makeSortedUserTasksByEmployeeUsername(tasksRows);
 }
