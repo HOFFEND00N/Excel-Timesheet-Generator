@@ -1,9 +1,9 @@
-import { IConfig } from "../models/IConfig";
 import { IEmployee } from "../models/IEmployee";
 import { CommonValue, HoursByEmployees, TableHeader } from "./types";
+import { ITeamConfig } from "../models/ITeamConfig";
 
 type makeEmployeeDataRowArguments = {
-  config: IConfig;
+  config: ITeamConfig;
   headers: TableHeader[];
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursPerMonth: number;

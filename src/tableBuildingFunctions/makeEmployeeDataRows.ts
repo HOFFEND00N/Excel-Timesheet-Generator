@@ -1,10 +1,9 @@
-import { IConfig } from "../models/IConfig";
 import { CommonValue, HoursByEmployees, TableHeader } from "./types";
-
 import { makeEmployeeDataRow } from "./makeEmployeeDataRow";
+import { ITeamConfig } from "../models/ITeamConfig";
 
 type MakeEmployeeDataRowsArguments = {
-  config: IConfig;
+  config: ITeamConfig;
   headers: TableHeader[];
   nonWorkingHoursByEmployeesUsername: HoursByEmployees;
   workingHoursByEmployeesUsername: HoursByEmployees;

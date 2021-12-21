@@ -1,4 +1,3 @@
-import { IConfig } from "../src/models/IConfig";
 import { IPoint } from "../src/models/IPoint";
 import { MONTHLY_TIMESHEET_HEADER, START_MONTH_HEADER_POINT } from "../src/constants/constant";
 import { CommonCell } from "../src/tableBuildingFunctions/types";
@@ -9,8 +8,9 @@ import {
   makeStyleHorizontalAlignText,
   makeYellowBackgroundStyle,
 } from "../src/constants/styleConstants";
+import { ITeamConfig } from "../src/models/ITeamConfig";
 
-export function getConfigForTests(): IConfig {
+export function getConfigForTests(): ITeamConfig {
   return {
     unit: 651,
     companyCode: "NO",
@@ -31,7 +31,6 @@ export function getConfigForTests(): IConfig {
       jiraUsername: "MolotkovaM",
     },
     fileNameTemplate: "",
-    employeeJiraTaskQuery: "",
   };
 }
 

@@ -1,9 +1,9 @@
-import { IConfig } from "../../models/IConfig";
 import { isNumeric } from "../../utils/isNumeric";
 import { CommonValue } from "../types";
+import { ITeamConfig } from "../../models/ITeamConfig";
 
 export async function getNonWorkingHoursRows(
-  config: IConfig,
+  config: ITeamConfig,
   nonWorkingHoursFile: string[][]
 ): Promise<CommonValue[][]> {
   const employees = config.employees.map((employee) => employee.name);

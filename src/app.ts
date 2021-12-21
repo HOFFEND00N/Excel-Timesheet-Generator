@@ -12,78 +12,84 @@ import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
 
 (async () => {
-  const workBook = new excel.Workbook({});
-  const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
-  const image: IWorksheetImage = {
-    path: "images/confirmit.jpg",
-    column: 2,
-    row: 2,
-  };
-  // TODO: default folder for searching files with non working hours
-  // TODO: add optional field - default work hours for employee
-  // todays goal - generate several reports for all yar teams
-  // automate report generation for Galina - She combine all reports file into one?
-  //TODO: default employee jira query
-  // TODO: remove CLI interaction with user, only config
   const config: IConfig = JSON.parse(fs.readFileSync("config.json", "utf-8"));
-  const userData = await getUserData(config);
-  const userTasksByEmployeeUsername = await getUserTasks({
-    config,
-    login: userData.login,
-    password: userData.password,
-    fetchUserTasks: fetchJiraUserTasks,
-  });
+  for (const [index, team] of config.teams.entries()) {
+    const workBook = new excel.Workbook({});
+    const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
+    const image: IWorksheetImage = {
+      path: "images/confirmit.jpg",
+      column: 2,
+      row: 2,
+    };
+    // TODO: default folder for searching files with non working hours
+    // TODO: add optional field - default work hours for employee
+    // todays goal - generate several reports for all yar teams
+    // automate report generation for Galina - She combine all reports file into one?
+    //TODO: default employee jira query
+    // TODO: remove CLI interaction with user, only config
+    const userData = await getUserData({
+      config: config.teams[index],
+      workingHoursPerMonth: config.workingHoursPerMonth,
+    });
+    const userTasksByEmployeeUsername = await getUserTasks({
+      employeeJiraTaskQuery: config.employeeJiraTaskQuery,
+      login: userData.login,
+      password: userData.password,
+      fetchUserTasks: fetchJiraUserTasks,
+      team,
+    });
 
-  const currentDate = config.date ? new Date(config.date.year, config.date.month) : new Date();
-  const table = await makeTable({
-    config,
-    currentDate,
-    userData,
-    userTasksByEmployeeUsername,
-  });
+    const currentDate = config.date ? new Date(config.date.year, config.date.month) : new Date();
+    const table = await makeTable({
+      config: config.teams[index],
+      currentDate,
+      userData,
+      userTasksByEmployeeUsername,
+    });
 
-  const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
-  const taskColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Task");
+    const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
+    const taskColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Task");
 
-  workSheet.column(employeeColumn).setWidth(25);
-  workSheet.column(taskColumn).setWidth(50);
+    workSheet.column(employeeColumn).setWidth(25);
+    workSheet.column(taskColumn).setWidth(50);
 
-  for (const tableCell of table) {
-    const cell = workSheet.cell(tableCell.point.row, tableCell.point.column);
-    if (isNumericCell(tableCell)) cell.number(tableCell.value);
-    if (isStringCell(tableCell)) cell.string(tableCell.value);
+    for (const tableCell of table) {
+      const cell = workSheet.cell(tableCell.point.row, tableCell.point.column);
+      if (isNumericCell(tableCell)) cell.number(tableCell.value);
+      if (isStringCell(tableCell)) cell.string(tableCell.value);
 
-    if (tableCell.point.column === taskColumn)
-      cell.style(
-        workBook.createStyle({
-          alignment: {
-            wrapText: true,
-          },
-        })
-      );
+      if (tableCell.point.column === taskColumn)
+        cell.style(
+          workBook.createStyle({
+            alignment: {
+              wrapText: true,
+            },
+          })
+        );
 
-    for (const style of tableCell.styles) {
-      cell.style(workBook.createStyle(style));
+      for (const style of tableCell.styles) {
+        cell.style(workBook.createStyle(style));
+      }
     }
+    workSheet.addImage(new WorkSheetImageAdapter(image));
+
+    const reportName = makeReportFileName({
+      currentDate,
+      unit: config.teams[index].unit,
+      fileNameTemplate: config.teams[index].fileNameTemplate,
+    });
+    await makeXlsxFile(workBook, reportName);
+
+    const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
+
+    addPivotTableToXlsxFile({
+      reportName,
+      config: config.teams[index],
+      workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
+      table,
+      employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
+      manHoursColumnIndex: manHoursColumn,
+    });
+    console.log(`Successfully generated ${reportName}`);
   }
-  workSheet.addImage(new WorkSheetImageAdapter(image));
-
-  const reportName = makeReportFileName({
-    currentDate,
-    unit: config.unit,
-    fileNameTemplate: config.fileNameTemplate,
-  });
-  await makeXlsxFile(workBook, reportName);
-
-  const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
-
-  addPivotTableToXlsxFile({
-    reportName,
-    config,
-    workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
-    table,
-    employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
-    manHoursColumnIndex: manHoursColumn,
-  });
-  console.log(`Successfully generated ${reportName}`);
 })();

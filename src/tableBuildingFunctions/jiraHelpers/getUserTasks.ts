@@ -1,40 +1,42 @@
 import { makeTeamLeadJiraTasks, makeSortedUserTasksByEmployeeUsername } from "../index";
-import { IConfig } from "../../models/IConfig";
 import { FetchUserTasksArguments, UserTasks } from "../types";
+import { ITeamConfig } from "../../models/ITeamConfig";
 
 export async function getUserTasks({
-  config,
+  employeeJiraTaskQuery,
   login,
   password,
   fetchUserTasks,
+  team,
 }: {
-  config: IConfig;
+  employeeJiraTaskQuery: string;
   login: string;
   password: string;
   fetchUserTasks: ({ jiraUserName, login, password }: FetchUserTasksArguments) => Promise<UserTasks>;
+  team: ITeamConfig;
 }): Promise<Record<string, string[]>> {
-  const tasks = config.employees.map((employee) =>
+  const tasks = team.employees.map((employee) =>
     fetchUserTasks({
       jiraUserName: employee.jiraUsername,
       login,
       password,
-      query: employee.employeeJiraTaskQuery ?? config.employeeJiraTaskQuery,
+      query: employee.employeeJiraTaskQuery ?? employeeJiraTaskQuery,
     })
   );
 
   console.log(`Fetching tasks from Jira for employees. Please wait...`);
   const tasksRows = await Promise.all(tasks);
-  if (config.teamLead.employeeJiraTaskQuery) {
+  if (team.teamLead.employeeJiraTaskQuery) {
     tasksRows.push(
       await fetchUserTasks({
-        jiraUserName: config.teamLead.jiraUsername,
+        jiraUserName: team.teamLead.jiraUsername,
         login,
         password,
-        query: config.teamLead.employeeJiraTaskQuery,
+        query: team.teamLead.employeeJiraTaskQuery,
       })
     );
   } else {
-    tasksRows.push(makeTeamLeadJiraTasks(tasksRows, config.teamLead.jiraUsername));
+    tasksRows.push(makeTeamLeadJiraTasks(tasksRows, team.teamLead.jiraUsername));
   }
 
   return makeSortedUserTasksByEmployeeUsername(tasksRows);

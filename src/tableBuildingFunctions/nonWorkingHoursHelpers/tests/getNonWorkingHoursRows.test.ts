@@ -1,10 +1,10 @@
 import { CommonValue } from "../../types";
 import { getNonWorkingHoursRows } from "../../index";
-import { IConfig } from "../../../models/IConfig";
+import { ITeamConfig } from "../../../models/ITeamConfig";
 
 test("pass empty array, expect to return zero rows", async () => {
   const expectedNonWorkingHoursRows: CommonValue[][] = [];
-  const config: IConfig = {
+  const config: ITeamConfig = {
     unit: 651,
     companyCode: "NO",
     product: "Confirmit",
@@ -12,7 +12,6 @@ test("pass empty array, expect to return zero rows", async () => {
     employees: [],
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
     fileNameTemplate: "",
-    employeeJiraTaskQuery: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, []);
@@ -22,7 +21,7 @@ test("pass empty array, expect to return zero rows", async () => {
 
 test("pass one non working hours row, expect to return zero non working rows, because received row contains info about unsuitable employee", async () => {
   const expectedNonWorkingHoursRows: CommonValue[][] = [];
-  const config: IConfig = {
+  const config: ITeamConfig = {
     unit: 651,
     companyCode: "NO",
     product: "Confirmit",
@@ -35,7 +34,6 @@ test("pass one non working hours row, expect to return zero non working rows, be
     ],
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
     fileNameTemplate: "",
-    employeeJiraTaskQuery: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [
@@ -49,7 +47,7 @@ test("pass one non working hours row, expect to return one non working rows, bec
   const expectedNonWorkingHoursRows: CommonValue[][] = [
     [100, "RU", "DaysOff", "Sick1DQ", "Karaseva Svetlana", "25.01.2021", "", 8],
   ];
-  const config: IConfig = {
+  const config: ITeamConfig = {
     unit: 651,
     companyCode: "NO",
     product: "Confirmit",
@@ -62,7 +60,6 @@ test("pass one non working hours row, expect to return one non working rows, bec
     ],
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
     fileNameTemplate: "",
-    employeeJiraTaskQuery: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [
@@ -78,7 +75,7 @@ test("pass two non working hours row, expect to return one non working rows, bec
     [200, "EU", "DaysOff", "Sick1DQ", "Matrosova Marianna", "24.01.2021", "", 6],
     [100, "EU", "DaysOff", "Sick1DQ", "Karaseva Svetlana", "14.01.2021", "", 12],
   ];
-  const config: IConfig = {
+  const config: ITeamConfig = {
     unit: 651,
     companyCode: "NO",
     product: "Confirmit",
@@ -95,7 +92,6 @@ test("pass two non working hours row, expect to return one non working rows, bec
     ],
     teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
     fileNameTemplate: "",
-    employeeJiraTaskQuery: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [

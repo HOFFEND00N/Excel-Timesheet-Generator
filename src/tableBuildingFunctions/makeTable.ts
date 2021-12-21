@@ -6,7 +6,6 @@ import {
   makeStyleHorizontalAlignText,
 } from "../constants/styleConstants";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
-import { IConfig } from "../models/IConfig";
 import { IPoint } from "../models/IPoint";
 import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
@@ -14,9 +13,10 @@ import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
 import { CommonCell, UserData } from "./types";
 import { getNonWorkingHoursRows, makeNonWorkingHoursByEmployeesUsername } from "./nonWorkingHoursHelpers";
+import { ITeamConfig } from "../models/ITeamConfig";
 
 type MakeTableArguments = {
-  config: IConfig;
+  config: ITeamConfig;
   currentDate: Date;
   userData: UserData;
   userTasksByEmployeeUsername: Record<string, string[]>;
