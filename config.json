@@ -3,6 +3,16 @@
   "companyCode": "NO",
   "product": "Confirmit",
   "project": "Studio",
+  "date": {
+    "year": 2021,
+    "month": 7
+  },
+  "fileNameTemplate": "${year}-${month}-${unit}_RPT-YAR.xlsx",
+  "employeeJiraTaskQuery": "https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (\"In Progress\", \"In Code Review\", \"IN QA\", \"QA Verified\", \"Investigation\", \"Code Completed\") AND assignee in (${jiraUserName}) and updated >= \"${taskUpdated}\" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY}",
+  "teamLead": {
+    "name": "Kachalov Alexey",
+    "jiraUsername": "alexeyk"
+  },
   "employees": [
     {
       "name": "Kolokolenkina Natalia",
@@ -32,15 +42,5 @@
       "name": "Volyakova Kristina",
       "jiraUsername": "KristinaZ"
     }
-  ],
-  "teamLead": {
-    "name": "Kachalov Alexey",
-    "jiraUsername": "alexeyk"
-  },
-  "date": {
-    "year": 2021,
-    "month": 7
-  },
-  "fileNameTemplate": "${year}-${month}-${unit}_RPT-YAR.xlsx",
-  "employeeJiraTaskQuery": "https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (\"In Progress\", \"In Code Review\", \"IN QA\", \"QA Verified\", \"Investigation\", \"Code Completed\") AND assignee in (${jiraUserName}) and updated >= \"${taskUpdated}\" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY}"
+  ]
 }

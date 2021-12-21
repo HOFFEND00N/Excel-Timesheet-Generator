@@ -10,6 +10,7 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
 import { getUserData } from "./userDataCollectionFunctions";
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
+
 (async () => {
   const workBook = new excel.Workbook({});
   const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
@@ -18,7 +19,12 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
     column: 2,
     row: 2,
   };
-
+  // TODO: default folder for searching files with non working hours
+  // TODO: add optional field - default work hours for employee
+  // todays goal - generate several reports for all yar teams
+  // automate report generation for Galina - She combine all reports file into one?
+  //TODO: default employee jira query
+  // TODO: remove CLI interaction with user, only config
   const config: IConfig = JSON.parse(fs.readFileSync("config.json", "utf-8"));
   const userData = await getUserData(config);
   const userTasksByEmployeeUsername = await getUserTasks({
