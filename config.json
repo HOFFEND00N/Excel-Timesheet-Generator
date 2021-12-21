@@ -1,4 +1,5 @@
 {
+  "workingHoursPerMonth": 160,
   "unit": 651,
   "companyCode": "NO",
   "product": "Confirmit",
@@ -16,7 +17,8 @@
   "employees": [
     {
       "name": "Kolokolenkina Natalia",
-      "jiraUsername": "NataliaK"
+      "jiraUsername": "NataliaK",
+      "workingHoursPerMonth": 120
     },
     {
       "name": "Kozlova Anna",

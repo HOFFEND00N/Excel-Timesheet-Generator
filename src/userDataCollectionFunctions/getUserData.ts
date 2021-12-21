@@ -1,11 +1,7 @@
 import { getCredentials } from "./jiraHelpers/getCredentials";
-import { getWorkingHoursByEmployeesUsername } from "./workingHoursHelpers/getWorkingHoursByEmployeesUsername";
 import { IConfig } from "../models/IConfig";
-import { getWorkingHoursPerMonth } from "./workingHoursHelpers/getWorkingHoursPerMonth";
-import { shouldUpdateEmployeeMonthRate } from "./workingHoursHelpers/shouldUpdateEmployeeMonthRate";
-import { chooseEmployees } from "./workingHoursHelpers/chooseEmployees";
 import { getNonWorkingHoursFile } from "./nonWorkingHoursHelpers/getNonWorkingHoursFile";
-import { UserData } from "../tableBuildingFunctions/types";
+import { HoursByEmployees, UserData } from "../tableBuildingFunctions/types";
 import { errorHandler } from "../utils/errorHandler";
 
 export async function getUserData(config: IConfig): Promise<UserData> {
@@ -19,12 +15,11 @@ export async function getUserData(config: IConfig): Promise<UserData> {
 
   const nonWorkingHoursFile = await errorHandler(getNonWorkingHoursFile);
 
-  const workingHoursByEmployeesUsername = await errorHandler(getWorkingHoursByEmployeesUsername, {
-    employees: [...config.employees, config.teamLead],
-    getWorkingHoursPerMonth,
-    shouldUpdateEmployeeMonthRate,
-    chooseEmployees,
-  });
+  const workingHoursByEmployeesUsername: HoursByEmployees = {};
+  for (const employee of [...config.employees, config.teamLead]) {
+    workingHoursByEmployeesUsername[employee.jiraUsername] =
+      employee.workingHoursPerMonth ?? config.workingHoursPerMonth;
+  }
 
   return { login, password, nonWorkingHoursFile, workingHoursByEmployeesUsername };
 }

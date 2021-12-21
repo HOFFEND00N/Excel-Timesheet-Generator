@@ -10,4 +10,5 @@ export interface IConfig {
   date?: { year: number; month: number };
   fileNameTemplate: string;
   employeeJiraTaskQuery: string;
+  workingHoursPerMonth: number;
 }
