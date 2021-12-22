@@ -67,8 +67,6 @@ test("make full table", async () => {
         ["651", "RU", "Confirmit", "DaysOff", "Karaseva Svetlana", "20.01.2021", "", "8"],
         ["651", "RU", "Confirmit", "Holidays", "Molotkova Maria", "20.01.2021-23.01.2021", "", "24"],
       ],
-      password: "",
-      login: "",
     },
     userTasksByEmployeeUsername: {
       MatrosovaM: ["task 2"],

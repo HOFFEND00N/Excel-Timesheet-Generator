@@ -10,9 +10,11 @@ import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctio
 import { getUserData } from "./userDataCollectionFunctions";
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
+import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers/getCredentials";
 
 (async () => {
   const config: IConfig = JSON.parse(fs.readFileSync("config.json", "utf-8"));
+  const { login, password } = await getCredentials(config.credentials);
   for (const [index, team] of config.teams.entries()) {
     const workBook = new excel.Workbook({});
     const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
@@ -29,13 +31,12 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
     // TODO: remove CLI interaction with user, only config
     const userData = await getUserData({
       workingHoursPerMonth: config.workingHoursPerMonth,
-      credentials: config.credentials,
       team: [...config.teams[index].employees, config.teams[index].teamLead],
     });
     const userTasksByEmployeeUsername = await getUserTasks({
       employeeJiraTaskQuery: config.employeeJiraTaskQuery,
-      login: userData.login,
-      password: userData.password,
+      login: login,
+      password: password,
       fetchUserTasks: fetchJiraUserTasks,
       team,
     });
