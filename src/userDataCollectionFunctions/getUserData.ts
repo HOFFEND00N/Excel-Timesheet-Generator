@@ -1,28 +1,25 @@
-import { getCredentials } from "./jiraHelpers/getCredentials";
 import { getNonWorkingHoursFile } from "./nonWorkingHoursHelpers/getNonWorkingHoursFile";
 import { HoursByEmployees, UserData } from "../tableBuildingFunctions/types";
 import { errorHandler } from "../utils/errorHandler";
-import { ITeamConfig } from "../models/ITeamConfig";
+import { IEmployee } from "../models/IEmployee";
+import { ICredentials } from "../models/ICredentials";
+import { getCredentials } from "./credentialsHelpers/getCredentials";
 
 export async function getUserData({
-  config,
   workingHoursPerMonth,
+  team,
+  credentials,
 }: {
-  config: ITeamConfig;
   workingHoursPerMonth: number;
+  team: IEmployee[];
+  credentials: ICredentials;
 }): Promise<UserData> {
-  let login, password;
-  if (process.env.login === undefined || process.env.password === undefined) {
-    ({ login, password } = await errorHandler(getCredentials));
-  } else {
-    login = process.env.login;
-    password = process.env.password;
-  }
+  const { login, password } = await getCredentials(credentials);
 
   const nonWorkingHoursFile = await errorHandler(getNonWorkingHoursFile);
 
   const workingHoursByEmployeesUsername: HoursByEmployees = {};
-  for (const employee of [...config.employees, config.teamLead]) {
+  for (const employee of team) {
     workingHoursByEmployeesUsername[employee.jiraUsername] = employee.workingHoursPerMonth ?? workingHoursPerMonth;
   }
 

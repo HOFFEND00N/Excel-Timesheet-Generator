@@ -1,4 +1,12 @@
 {
+  "credentials": {
+    "login": "ivan.petrov",
+    "password": "bad password",
+    "env": {
+      "loginKey": "bad login",
+      "passwordKey": "password"
+    }
+  },
   "workingHoursPerMonth": 160,
   "date": {
     "year": 2021,

@@ -28,8 +28,9 @@ import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJi
     //TODO: default employee jira query
     // TODO: remove CLI interaction with user, only config
     const userData = await getUserData({
-      config: config.teams[index],
       workingHoursPerMonth: config.workingHoursPerMonth,
+      credentials: config.credentials,
+      team: [...config.teams[index].employees, config.teams[index].teamLead],
     });
     const userTasksByEmployeeUsername = await getUserTasks({
       employeeJiraTaskQuery: config.employeeJiraTaskQuery,
