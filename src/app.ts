@@ -23,12 +23,6 @@ import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers
       column: 2,
       row: 2,
     };
-    // TODO: default folder for searching files with non working hours
-    // TODO: add optional field - default work hours for employee
-    // todays goal - generate several reports for all yar teams
-    // automate report generation for Galina - She combine all reports file into one?
-    //TODO: default employee jira query
-    // TODO: remove CLI interaction with user, only config
     const userData = await getUserData({
       workingHoursPerMonth: config.workingHoursPerMonth,
       team: [...config.teams[index].employees, config.teams[index].teamLead],
