@@ -11,22 +11,24 @@ import { makeMonthRows } from "./makeMonthRows";
 import { makeTableRow } from "./makeTableRow";
 import { styleTableRow } from "./styleTableRow";
 import { makeEmployeeDataRows } from "./makeEmployeeDataRows";
-import { CommonCell, UserData } from "./types";
+import { CommonCell, HoursByEmployees } from "./types";
 import { getNonWorkingHoursRows, makeNonWorkingHoursByEmployeesUsername } from "./nonWorkingHoursHelpers";
 import { ITeamConfig } from "../models/ITeamConfig";
 
 type MakeTableArguments = {
   config: ITeamConfig;
   currentDate: Date;
-  userData: UserData;
   userTasksByEmployeeUsername: Record<string, string[]>;
+  nonWorkingHoursFile: string[][];
+  workingHoursByEmployeesUsername: HoursByEmployees;
 };
 
 export async function makeTable({
   config,
   currentDate,
-  userData,
   userTasksByEmployeeUsername,
+  nonWorkingHoursFile,
+  workingHoursByEmployeesUsername,
 }: MakeTableArguments): Promise<CommonCell[]> {
   const table: CommonCell[] = [];
   const startTablePoint: IPoint = START_TABLE_POINT;
@@ -46,7 +48,7 @@ export async function makeTable({
   });
   table.push(...tableHeadersRow);
 
-  const nonWorkingHoursRows = await getNonWorkingHoursRows(config, userData.nonWorkingHoursFile);
+  const nonWorkingHoursRows = await getNonWorkingHoursRows(config, nonWorkingHoursFile);
 
   const employeeColumn = tableHeaders.findIndex((item) => item.label === "Employee");
   const manHoursColumn = tableHeaders.findIndex((item) => item.label === "Man-Hours");
@@ -62,7 +64,7 @@ export async function makeTable({
     config,
     headers: tableHeaders,
     nonWorkingHoursByEmployeesUsername,
-    workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
+    workingHoursByEmployeesUsername,
     userTasksByEmployeeUsername,
   });
 

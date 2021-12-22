@@ -3,18 +3,20 @@ import excel from "excel4node";
 import { IConfig } from "./models/IConfig";
 import { IWorksheetImage } from "./models/IWorksheetImage";
 import { WorkSheetImageAdapter } from "./models/WorkSheetImageAdapter";
-import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
+import { getNonWorkingHoursFile, isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
 import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
-import { getUserData } from "./userDataCollectionFunctions";
+import { getWorkingHoursByEmployeesUsername } from "./userDataCollectionFunctions";
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
 import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers/getCredentials";
+import { errorHandler } from "./utils/errorHandler";
 
 (async () => {
   const config: IConfig = JSON.parse(fs.readFileSync("config.json", "utf-8"));
   const { login, password } = await getCredentials(config.credentials);
+  const nonWorkingHoursFile = await errorHandler(getNonWorkingHoursFile);
   for (const [index, team] of config.teams.entries()) {
     const workBook = new excel.Workbook({});
     const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
@@ -23,7 +25,7 @@ import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers
       column: 2,
       row: 2,
     };
-    const userData = await getUserData({
+    const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername({
       workingHoursPerMonth: config.workingHoursPerMonth,
       team: [...config.teams[index].employees, config.teams[index].teamLead],
     });
@@ -39,8 +41,9 @@ import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers
     const table = await makeTable({
       config: config.teams[index],
       currentDate,
-      userData,
       userTasksByEmployeeUsername,
+      workingHoursByEmployeesUsername,
+      nonWorkingHoursFile,
     });
 
     const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
@@ -81,7 +84,7 @@ import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers
     addPivotTableToXlsxFile({
       reportName,
       config: config.teams[index],
-      workingHoursByEmployeesUsername: userData.workingHoursByEmployeesUsername,
+      workingHoursByEmployeesUsername,
       table,
       employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
       manHoursColumnIndex: manHoursColumn,

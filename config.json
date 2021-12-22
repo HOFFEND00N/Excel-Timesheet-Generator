@@ -1,9 +1,7 @@
 {
   "credentials": {
-    "login": "ivan.petrov",
-    "password": "bad password",
     "env": {
-      "loginKey": "bad login",
+      "loginKey": "login",
       "passwordKey": "password"
     }
   },
