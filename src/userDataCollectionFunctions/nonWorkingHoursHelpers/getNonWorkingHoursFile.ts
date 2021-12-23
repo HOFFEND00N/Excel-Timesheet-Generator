@@ -1,46 +1,20 @@
-import inquirer from "inquirer";
-import xlsx from "xlsx";
-import { OUTPUT_FORMAT_ARRAY_OF_ARRAYS } from "../../constants/constant";
-import inquirer_autocomplete_prompt from "inquirer-autocomplete-prompt";
-import { searchFilesAndDirectories } from "../pathAutocompleteHelpers";
-import { isNonWorkingHoursFileValid } from "./isNonWorkingHoursFileValid";
+import { getPathToNonWorkingHoursFileFromCLI } from "./getPathToNonWorkingHoursFileFromCLI";
+import { readNonWorkingHoursFile } from "./readNonWorkingHoursFile";
+import { errorHandler } from "../../utils/errorHandler";
 
-export async function getNonWorkingHoursFile(): Promise<string[][]> {
-  inquirer.registerPrompt("autocomplete", inquirer_autocomplete_prompt);
-  console.log("Enter path to a excel file with non-working hours please ");
-  const { nonWorkingHoursFilePath } = await inquirer.prompt([
-    {
-      type: "autocomplete",
-      name: "nonWorkingHoursFilePath",
-      message: "path: ",
-      source: searchFilesAndDirectories,
-      suggestOnly: true,
-    },
-  ]);
-  const nonWorkingHoursFile = xlsx.readFile(nonWorkingHoursFilePath, {
-    cellText: false,
-    cellDates: true,
+export async function getNonWorkingHoursFile(path?: string): Promise<string[][]> {
+  if (path) {
+    try {
+      return readNonWorkingHoursFile(path);
+    } catch (e) {
+      console.log("Path from config is incorrect");
+    }
+  } else {
+    console.log("Did not find path to file with non-working hours in config");
+  }
+
+  return await errorHandler(async () => {
+    path = await getPathToNonWorkingHoursFileFromCLI();
+    return readNonWorkingHoursFile(path);
   });
-
-  const nonWorkingHoursFileSheetName = nonWorkingHoursFile.SheetNames[0];
-  const workSheet = nonWorkingHoursFile.Sheets[nonWorkingHoursFileSheetName];
-
-  const nonWorkingHoursRows: string[][] = xlsx.utils
-    .sheet_to_json(workSheet, {
-      defval: "",
-      header: OUTPUT_FORMAT_ARRAY_OF_ARRAYS,
-      raw: false,
-      blankrows: false,
-      dateNF: 'dd"."mm"."yyyy',
-    })
-    .map(removeEmptyCellAtTheBeginning);
-
-  if (!isNonWorkingHoursFileValid(nonWorkingHoursRows))
-    throw new Error("This is not the file with non working hours. Please try again.");
-
-  return nonWorkingHoursRows;
-}
-
-function removeEmptyCellAtTheBeginning(row: string[]) {
-  return row.splice(row.findIndex((value) => value !== ""));
 }

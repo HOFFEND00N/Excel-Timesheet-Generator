@@ -1,4 +1,5 @@
 {
+  "pathToNonWorkingHoursFile": "C:\\Copy of Days_Off_January_2021.xlsx",
   "credentials": {
     "env": {
       "loginKey": "login",

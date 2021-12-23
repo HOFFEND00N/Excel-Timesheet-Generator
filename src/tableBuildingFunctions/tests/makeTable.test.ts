@@ -56,18 +56,16 @@ test("make full table", async () => {
   const actualTable = await makeTable({
     config,
     currentDate,
-    userData: {
-      workingHoursByEmployeesUsername: {
-        KarasevaS: 160,
-        MolotkovaM: 140,
-        MatrosovaM: 120,
-      },
-      nonWorkingHoursFile: [
-        ["651", "RU", "Confirmit", "DaysOff", "Matrosova Marianna", "25.01.2021", "", "8"],
-        ["651", "RU", "Confirmit", "DaysOff", "Karaseva Svetlana", "20.01.2021", "", "8"],
-        ["651", "RU", "Confirmit", "Holidays", "Molotkova Maria", "20.01.2021-23.01.2021", "", "24"],
-      ],
+    workingHoursByEmployeesUsername: {
+      KarasevaS: 160,
+      MolotkovaM: 140,
+      MatrosovaM: 120,
     },
+    nonWorkingHoursFile: [
+      ["651", "RU", "Confirmit", "DaysOff", "Matrosova Marianna", "25.01.2021", "", "8"],
+      ["651", "RU", "Confirmit", "DaysOff", "Karaseva Svetlana", "20.01.2021", "", "8"],
+      ["651", "RU", "Confirmit", "Holidays", "Molotkova Maria", "20.01.2021-23.01.2021", "", "24"],
+    ],
     userTasksByEmployeeUsername: {
       MatrosovaM: ["task 2"],
       KarasevaS: ["task 1", "task 3"],

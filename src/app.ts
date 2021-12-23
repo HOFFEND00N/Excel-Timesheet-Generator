@@ -11,12 +11,11 @@ import { getWorkingHoursByEmployeesUsername } from "./userDataCollectionFunction
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
 import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers/getCredentials";
-import { errorHandler } from "./utils/errorHandler";
 
 (async () => {
   const config: IConfig = JSON.parse(fs.readFileSync("config.json", "utf-8"));
   const { login, password } = await getCredentials(config.credentials);
-  const nonWorkingHoursFile = await errorHandler(getNonWorkingHoursFile);
+  const nonWorkingHoursFile = await getNonWorkingHoursFile(config.pathToNonWorkingHoursFile);
   for (const [index, team] of config.teams.entries()) {
     const workBook = new excel.Workbook({});
     const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
