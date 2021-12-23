@@ -19,10 +19,12 @@ export async function getCredentials(credentials?: ICredentials) {
       return { login, password };
     }
   }
+
   console.log("environment credentials keys in config didn't found");
   if (credentials && credentials.login && credentials.password) {
     login = credentials.login;
-    password = credentials.password;
+    const encodedPassword = credentials.password;
+    password = Buffer.from(encodedPassword, "base64").toString("ascii");
     if (!(await areJiraCredentialsCorrect({ login, password }))) {
       console.log(`Config login = ${credentials.login} and password = ${credentials.password} are incorrect`);
     } else {

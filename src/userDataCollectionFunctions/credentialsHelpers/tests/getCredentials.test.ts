@@ -28,10 +28,11 @@ test("should return credentials from config, when credentials from environment a
   });
   const expectedLogin = "login",
     expectedPassword = "password";
+  const encodedPassword = "cGFzc3dvcmQ=";
 
   const { login: actualLogin, password: actualPassword } = await getCredentials({
     login: "login",
-    password: "password",
+    password: encodedPassword,
     env: { loginKey: "", passwordKey: "" },
   });
 
@@ -65,10 +66,11 @@ test("should return credentials from config, when credentials from environment a
   });
   const expectedLogin = "login",
     expectedPassword = "password";
+  const encodedPassword = "cGFzc3dvcmQ=";
 
   const { login: actualLogin, password: actualPassword } = await getCredentials({
     login: "login",
-    password: "password",
+    password: encodedPassword,
   });
 
   expect(actualLogin).toEqual(expectedLogin);

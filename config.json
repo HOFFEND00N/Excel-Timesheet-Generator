@@ -1,8 +1,10 @@
 {
   "pathToNonWorkingHoursFile": "C:\\Copy of Days_Off_January_2021.xlsx",
   "credentials": {
+    "login": "ivan.petrov",
+    "password": "",
     "env": {
-      "loginKey": "login",
+      "loginKey": "bad login",
       "passwordKey": "password"
     }
   },
