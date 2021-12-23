@@ -80,7 +80,7 @@ test("should return credentials from CLI, when credentials from environment and 
   const expectedLogin = "login",
     expectedPassword = "password";
 
-  const { login: actualLogin, password: actualPassword } = await getCredentials({});
+  const { login: actualLogin, password: actualPassword } = await getCredentials();
 
   expect(actualLogin).toEqual(expectedLogin);
   expect(actualPassword).toEqual(expectedPassword);

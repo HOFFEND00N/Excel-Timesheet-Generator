@@ -4,9 +4,9 @@ import { getCredentialsFromCLI } from "./getCredentialsFromCLI";
 import { getCredentialsFromEnvironment } from "./getCredentialsFromEnvironment";
 import { areJiraCredentialsCorrect } from "../areJiraCredentialsCorrect";
 
-export async function getCredentials(credentials: ICredentials) {
+export async function getCredentials(credentials?: ICredentials) {
   let login, password;
-  if (credentials.env) {
+  if (credentials && credentials.env) {
     ({ login, password } = getCredentialsFromEnvironment({
       loginKey: credentials.env.loginKey,
       passwordKey: credentials.env.passwordKey,
@@ -19,7 +19,8 @@ export async function getCredentials(credentials: ICredentials) {
       return { login, password };
     }
   }
-  if (credentials.login || credentials.password) {
+  console.log("environment credentials keys in config didn't found");
+  if (credentials && credentials.login && credentials.password) {
     login = credentials.login;
     password = credentials.password;
     if (!(await areJiraCredentialsCorrect({ login, password }))) {
@@ -29,6 +30,7 @@ export async function getCredentials(credentials: ICredentials) {
     }
   }
 
+  console.log("credentials in config didn't found");
   ({ login, password } = await errorHandler(getCredentialsFromCLI));
   return { login, password };
 }
