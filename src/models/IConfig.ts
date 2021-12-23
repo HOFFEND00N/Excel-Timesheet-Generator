@@ -5,7 +5,7 @@ export interface IConfig {
   pathToNonWorkingHoursFile?: string;
   credentials?: ICredentials;
   date?: { year: number; month: number };
-  employeeJiraTaskQuery: string;
+  jiraTaskQuery: string;
   workingHoursPerMonth: number;
   teams: ITeamConfig[];
 }

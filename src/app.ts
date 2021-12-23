@@ -29,7 +29,7 @@ import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers
       team: [...config.teams[index].employees, config.teams[index].teamLead],
     });
     const userTasksByEmployeeUsername = await getUserTasks({
-      employeeJiraTaskQuery: config.employeeJiraTaskQuery,
+      employeeJiraTaskQuery: config.jiraTaskQuery,
       login: login,
       password: password,
       fetchUserTasks: fetchJiraUserTasks,
