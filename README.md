@@ -12,7 +12,9 @@
 - run `npm install`
 
 ## Workflow
+Application can create multiple reports, if several teams specified inside teams array in config. 
 
+- setup config file with needed info
 - `npm run start`
 - follow program instructions
 - generated excel file can be found in the root of the project
@@ -20,8 +22,8 @@
 ## Attention
 
 You can configure environmental variables to store there login and password,
-and don't enter them every time. Environmental variables names should be called
-"login", "password" respectively.
+and don't enter them every time. Environmental variables key should be specified in config in credentials object.
+Password should be encoded in base64 format. 
 
 In case of wrong provided credentials multiple times, your account will be
 locked out, because there is a strict policy for failed attempts via
@@ -37,35 +39,64 @@ Here are the types of values in config file and some description:
 
 ```json
 {
-  "unit": number,
-  "companyCode": string,
-  "product": string,
-  "project": string,
-  "employees": [
-    {
-      "name": string,
-      "jiraUsername": string
-    },
-    ...
-  ],
-  "teamLead": {
-    "name": string,
-    "jiraUsername": string
+  "pathToNonWorkingHoursFile": string,
+  "credentials": {
+    "login": string,
+    "password": string
+    "env": {
+      "loginKey": string,
+      "passwordKey": string
+    }
   },
+  "workingHoursPerMonth": number,
   "date": {
     "year": number,
     "month": number (from 0 to 11)
   },
-  "fileNameTemplate": "${year}-${month}-${companyUnit}_RPT-YAR.xlsx",
-  "employeeJiraTaskQuery": "https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (\"In Progress\", \"In Code Review\", \"IN QA\", \"QA Verified\", \"Investigation\", \"Code Completed\") AND assignee in (${jiraUserName}) and updated >= \"${taskUpdated}\" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY}"
+  "jiraTaskQuery": "https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (\"In Progress\", \"In Code Review\", \"IN QA\", \"QA Verified\", \"Investigation\", \"Code Completed\") AND assignee in (${jiraUserName}) and updated >= \"${taskUpdated}\" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY}"
+  "teams": [
+    {
+      "fileNameTemplate": "${year}-${month}-${unit}_RPT-YAR.xlsx",
+      "unit": number,
+      "companyCode": string,
+      "product": string,
+      "project": string,
+      "teamLead": {
+        "name": string,
+        "jiraUsername": string,
+        "workingHoursPerMonth": number,
+        "jiraTaskQuery": string
+      },
+      "employees": [
+        {
+          "name": string,
+          "jiraUsername": string,
+          "workingHoursPerMonth": number,
+          "jiraTaskQuery": string
+        },
+        ...
+      ]
+    },
+    ...
+  ]
 }
 ```
-All fields are mandatory and configurable, except of date field, it is optional. 
-If specified, it will be used during report generation, instead of the current date, which is set by default.
 
-If you want to edit fileNameTemplate placeholders(e.g. ${year}), you should 
+Here are the list of optional fields, every other is mandatory.
+
+- date. If specified, it will be used during report generation, instead of the current date, which is set by default.
+- credentials (If not specified, app will ask you to enter them in CLI)
+- credentials.env (Important to consider: password stored in environmental variable should be encoded with base64 format)
+- pathToNonWorkingHoursFile (should be absolute. If not specified, app will ask you to enter it in CLI)
+- workingHoursPerMonth inside employee object
+- jiraTaskQuery inside employee object
+
+If you want to edit fileNameTemplate placeholders(e.g. ${year}), you should
 change other config parameters accordingly. For example if you want to explicitly
 specify "unit" you should change unit field in config, not in fileNameTemplate.
 
-In employeeJiraTaskQuery you can place your own query to jira, 
+In employeeJiraTaskQuery you can place your own query to jira,
 but it must be a valid JQL syntax. For more info about JQL - https://www.atlassian.com/software/jira/guides/expand-jira/jql
+
+Value specified deeper in config will override values specified on upper levels.
+For example: workingHoursPerMonth field value, specified inside employee object will be used instead of global one.
