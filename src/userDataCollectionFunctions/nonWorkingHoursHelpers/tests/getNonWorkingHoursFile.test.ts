@@ -30,12 +30,12 @@ test("should get file, when path in config incorrect, then get correct path from
   expect(actualFile).toEqual(expectedFile);
 });
 
-test("should get file, when path in config incorrect, then get correct path from CLI", async () => {
+test("should get file, when path in config not provided, then get correct path from CLI", async () => {
   (readNonWorkingHoursFile as jest.Mock).mockReturnValue([["test"]]);
   (getPathToNonWorkingHoursFileFromCLI as jest.Mock).mockReturnValue("");
   const expectedFile = [["test"]];
 
-  const actualFile = await getNonWorkingHoursFile("path");
+  const actualFile = await getNonWorkingHoursFile();
 
   expect(actualFile).toEqual(expectedFile);
 });
