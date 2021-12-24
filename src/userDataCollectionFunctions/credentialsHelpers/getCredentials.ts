@@ -18,9 +18,10 @@ export async function getCredentials(credentials?: ICredentials) {
     } else {
       return { login, password };
     }
+  } else {
+    console.log("environment credentials keys in config didn't found");
   }
 
-  console.log("environment credentials keys in config didn't found");
   if (credentials && credentials.login && credentials.password) {
     login = credentials.login;
     const encodedPassword = credentials.password;
@@ -30,9 +31,10 @@ export async function getCredentials(credentials?: ICredentials) {
     } else {
       return { login, password };
     }
+  } else {
+    console.log("credentials in config didn't found");
   }
 
-  console.log("credentials in config didn't found");
   ({ login, password } = await errorHandler(getCredentialsFromCLI));
   return { login, password };
 }
