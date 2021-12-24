@@ -1,0 +1,38 @@
+{
+  "pathToNonWorkingHoursFile": "C:\\Copy of Days_Off_January_2021.xlsx",
+  "credentials": {
+    "login": "",
+    "password": "",
+    "env": {
+      "loginKey": "bad login",
+      "passwordKey": "password"
+    }
+  },
+  "workingHoursPerMonth": 160,
+  "date": {
+    "year": 2021,
+    "month": 7
+  },
+  "jiraTaskQuery": "https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (\"In Progress\", \"In Code Review\", \"IN QA\", \"QA Verified\", \"Investigation\", \"Code Completed\") AND assignee in (${jiraUserName}) and updated >= \"${taskUpdated}\" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY}",
+  "teams": [
+    {
+      "fileNameTemplate": "${year}-${month}-${unit}_RPT-YAR.xlsx",
+      "unit": 651,
+      "companyCode": "NO",
+      "product": "Confirmit",
+      "project": "Studio",
+      "teamLead": {
+        "name": "",
+        "jiraUsername": ""
+      },
+      "employees": [
+        {
+          "name": "",
+          "jiraUsername": "",
+          "workingHoursPerMonth": 160,
+          "jiraTaskQuery": ""
+        }
+      ]
+    }
+  ]
+}

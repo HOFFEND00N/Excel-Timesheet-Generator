@@ -34,6 +34,9 @@ https://confluence.firmglobal.com/display/ISK/FAQ%3A+Using+self+service+Password
 
 ## Config
 
+When project has been cloned, you have to rename template-config.json file to config.json, 
+and provide necessary data. Or you can create config.json manually (should be in the root of project).
+
 Actually, it is possible to change everything in config file.
 Here are the types of values in config file and some description:
 
