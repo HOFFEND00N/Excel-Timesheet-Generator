@@ -20,6 +20,7 @@ export async function getUserData() {
   console.log(LINE_BREAK);
 
   const nonWorkingHoursFile = await getNonWorkingHoursFile(config.pathToNonWorkingHoursFile);
+  console.log("File with non-working hours have been read successfully");
   console.log(LINE_BREAK);
 
   return { config, login, password, nonWorkingHoursFile };

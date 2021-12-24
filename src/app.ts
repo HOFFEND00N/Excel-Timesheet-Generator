@@ -13,7 +13,7 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
 (async () => {
   const { config, login, password, nonWorkingHoursFile } = await getUserData();
 
-  for (const [index, team] of config.teams.entries()) {
+  for (const team of config.teams) {
     const workBook = new excel.Workbook({});
     const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
     const image: IWorksheetImage = {
@@ -23,7 +23,7 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
     };
     const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername({
       workingHoursPerMonth: config.workingHoursPerMonth,
-      team: [...config.teams[index].employees, config.teams[index].teamLead],
+      team: [...team.employees, team.teamLead],
     });
     const userTasksByEmployeeUsername = await getUserTasks({
       employeeJiraTaskQuery: config.jiraTaskQuery,
@@ -35,7 +35,7 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
 
     const currentDate = config.date ? new Date(config.date.year, config.date.month) : new Date();
     const table = await makeTable({
-      config: config.teams[index],
+      config: team,
       currentDate,
       userTasksByEmployeeUsername,
       workingHoursByEmployeesUsername,
@@ -70,8 +70,8 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
 
     const reportName = makeReportFileName({
       currentDate,
-      unit: config.teams[index].unit,
-      fileNameTemplate: config.teams[index].fileNameTemplate,
+      unit: team.unit,
+      fileNameTemplate: team.fileNameTemplate,
     });
     await makeXlsxFile(workBook, reportName);
 
@@ -79,7 +79,7 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
 
     addPivotTableToXlsxFile({
       reportName,
-      config: config.teams[index],
+      config: team,
       workingHoursByEmployeesUsername,
       table,
       employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
