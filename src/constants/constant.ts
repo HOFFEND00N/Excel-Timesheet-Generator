@@ -35,3 +35,5 @@ export const TASKS_STATUSES = [
   "Investigation",
   "Code Completed",
 ];
+
+export const LINE_BREAK = "------------------------------";

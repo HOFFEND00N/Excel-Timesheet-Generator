@@ -4,7 +4,7 @@
     "login": "ivan.petrov",
     "password": "",
     "env": {
-      "loginKey": "bad login",
+      "loginKey": "login",
       "passwordKey": "password"
     }
   },
