@@ -1,27 +1,17 @@
-import * as fs from "fs";
 import excel from "excel4node";
-import { IConfig } from "./models/IConfig";
 import { IWorksheetImage } from "./models/IWorksheetImage";
 import { WorkSheetImageAdapter } from "./models/WorkSheetImageAdapter";
-import { getNonWorkingHoursFile, isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
-import { LINE_BREAK, START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
+import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
 import { getWorkingHoursByEmployeesUsername } from "./userDataCollectionFunctions";
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
-import { getCredentials } from "./userDataCollectionFunctions/credentialsHelpers/getCredentials";
+import { getUserData } from "./userDataCollectionFunctions/getUserData";
+import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
 
 (async () => {
-  console.log(LINE_BREAK);
-  console.log("TIMESHEET GENERATOR");
-  console.log(LINE_BREAK);
-  const config: IConfig = JSON.parse(fs.readFileSync("config.json", "utf-8"));
-  const { login, password } = await getCredentials(config.credentials);
-  console.log("Credentials have been got successfully");
-  console.log(LINE_BREAK);
-  const nonWorkingHoursFile = await getNonWorkingHoursFile(config.pathToNonWorkingHoursFile);
-  console.log(LINE_BREAK);
+  const { config, login, password, nonWorkingHoursFile } = await getUserData();
 
   for (const [index, team] of config.teams.entries()) {
     const workBook = new excel.Workbook({});
