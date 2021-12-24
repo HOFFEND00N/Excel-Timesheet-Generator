@@ -4,6 +4,7 @@ import fs from "fs";
 import { getCredentials } from "./credentialsHelpers/getCredentials";
 import { getNonWorkingHoursFile } from "./nonWorkingHoursHelpers/getNonWorkingHoursFile";
 import { isConfigValid } from "./configValidation/isConfigValid";
+import { getWorkingHoursPerMonth } from "./workingHoursHelpers/getWorkingHoursPerMonth";
 
 export async function getUserData() {
   console.log(LINE_BREAK);
@@ -14,6 +15,12 @@ export async function getUserData() {
   if (!isConfigValid(config)) {
     process.exit(1);
   }
+
+  if (!config.workingHoursPerMonth) {
+    console.log("workingHoursPerMonth field missing in config");
+    config.workingHoursPerMonth = await getWorkingHoursPerMonth();
+  }
+  console.log(LINE_BREAK);
 
   const { login, password } = await getCredentials(config.credentials);
   console.log("Credentials have been got successfully");

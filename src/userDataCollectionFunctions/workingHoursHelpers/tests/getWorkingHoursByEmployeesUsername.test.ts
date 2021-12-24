@@ -1,4 +1,4 @@
-import { HoursByEmployees } from "../../tableBuildingFunctions/types";
+import { HoursByEmployees } from "../../../tableBuildingFunctions/types";
 import { getWorkingHoursByEmployeesUsername } from "../getWorkingHoursByEmployeesUsername";
 
 test("should return one employee with specific working hours and one with default", () => {

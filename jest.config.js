@@ -27,9 +27,7 @@ const config = {
     "!./src/userDataCollectionFunctions/areJiraCredentialsCorrect.ts",
     "!./src/userDataCollectionFunctions/credentialsHelpers/getCredentialsFromCLI.ts",
     "!./src/userDataCollectionFunctions/credentialsHelpers/getCredentialsFromEnvironment.ts",
-    "!./src/userDataCollectionFunctions/workingHoursHelpers/chooseEmployees.ts",
     "!./src/userDataCollectionFunctions/workingHoursHelpers/getWorkingHoursPerMonth.ts",
-    "!./src/userDataCollectionFunctions/workingHoursHelpers/shouldUpdateEmployeeMonthRate.ts",
   ],
 };
 export default config;

@@ -1,5 +1,5 @@
-import { HoursByEmployees } from "../tableBuildingFunctions/types";
-import { IEmployee } from "../models/IEmployee";
+import { HoursByEmployees } from "../../tableBuildingFunctions/types";
+import { IEmployee } from "../../models/IEmployee";
 
 export function getWorkingHoursByEmployeesUsername({
   workingHoursPerMonth,

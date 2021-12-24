@@ -1,1 +1,1 @@
-export { getWorkingHoursByEmployeesUsername } from "./getWorkingHoursByEmployeesUsername";
+export { getWorkingHoursByEmployeesUsername } from "./workingHoursHelpers/getWorkingHoursByEmployeesUsername";
