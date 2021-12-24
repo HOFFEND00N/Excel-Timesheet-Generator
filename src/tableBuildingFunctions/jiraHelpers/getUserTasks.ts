@@ -24,18 +24,20 @@ export async function getUserTasks({
     })
   );
 
-  console.log(`Fetching tasks from Jira for employees. Please wait...`);
-  const tasksRows = await Promise.all(tasks);
   if (team.teamLead.jiraTaskQuery) {
-    tasksRows.push(
-      await fetchUserTasks({
+    tasks.push(
+      fetchUserTasks({
         jiraUserName: team.teamLead.jiraUsername,
         login,
         password,
         query: team.teamLead.jiraTaskQuery,
       })
     );
-  } else {
+  }
+  console.log(`Fetching tasks from Jira for employees. Please wait...`);
+  const tasksRows = await Promise.all(tasks);
+
+  if (!team.teamLead.jiraTaskQuery) {
     tasksRows.push(makeTeamLeadJiraTasks(tasksRows, team.teamLead.jiraUsername));
   }
 
