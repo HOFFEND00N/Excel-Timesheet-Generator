@@ -24,7 +24,7 @@ const config = {
     "!./src/userDataCollectionFunctions/nonWorkingHoursHelpers/readNonWorkingHoursFile.ts",
     "!./src/userDataCollectionFunctions/nonWorkingHoursHelpers/getPathToNonWorkingHoursFileFromCLI.ts",
     "!./src/userDataCollectionFunctions/getUserData.ts",
-    "!./src/userDataCollectionFunctions/areJiraCredentialsCorrect.ts",
+    "!./src/userDataCollectionFunctions/credentialsHelpers/areJiraCredentialsCorrect.ts",
     "!./src/userDataCollectionFunctions/credentialsHelpers/getCredentialsFromCLI.ts",
     "!./src/userDataCollectionFunctions/credentialsHelpers/getCredentialsFromEnvironment.ts",
     "!./src/userDataCollectionFunctions/workingHoursHelpers/getWorkingHoursPerMonth.ts",

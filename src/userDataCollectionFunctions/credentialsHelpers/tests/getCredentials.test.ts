@@ -1,11 +1,11 @@
 import { getCredentialsFromEnvironment } from "../getCredentialsFromEnvironment";
 import { getCredentials } from "../getCredentials";
-import { areJiraCredentialsCorrect } from "../../areJiraCredentialsCorrect";
+import { areJiraCredentialsCorrect } from "../areJiraCredentialsCorrect";
 import { getCredentialsFromCLI } from "../getCredentialsFromCLI";
 
 jest.mock("../getCredentialsFromEnvironment");
 jest.mock("../getCredentialsFromCLI");
-jest.mock("../../areJiraCredentialsCorrect");
+jest.mock("../areJiraCredentialsCorrect");
 
 test("should return credentials from environment", async () => {
   (getCredentialsFromEnvironment as jest.Mock).mockReturnValue({ login: "login", password: "password" });

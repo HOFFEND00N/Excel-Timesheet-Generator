@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { areJiraCredentialsCorrect } from "../areJiraCredentialsCorrect";
+import { areJiraCredentialsCorrect } from "./areJiraCredentialsCorrect";
 
 export async function getCredentialsFromCLI(): Promise<{
   login: string;
