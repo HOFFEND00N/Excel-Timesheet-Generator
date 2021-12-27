@@ -21,8 +21,7 @@ export function readNonWorkingHoursFile(path: string) {
     })
     .map(removeEmptyCellAtTheBeginning);
 
-  if (!isNonWorkingHoursFileValid(nonWorkingHoursRows))
-    throw new Error("This is not the file with non working hours. Please try again.");
+  if (!isNonWorkingHoursFileValid(nonWorkingHoursRows)) throw new Error("This is not the file with non working hours.");
 
   return nonWorkingHoursRows;
 }
