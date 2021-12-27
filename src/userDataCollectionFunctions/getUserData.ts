@@ -20,6 +20,7 @@ export async function getUserData() {
     console.log("workingHoursPerMonth field missing in config");
     config.workingHoursPerMonth = await getWorkingHoursPerMonth();
   }
+  console.log("Config is correct");
   console.log(LINE_BREAK);
 
   const { login, password } = await getCredentials(config.credentials);

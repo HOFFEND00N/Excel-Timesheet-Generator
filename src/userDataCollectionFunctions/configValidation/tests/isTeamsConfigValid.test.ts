@@ -9,50 +9,34 @@ test("should return false, when teams count is 0", () => {
 });
 
 test("should return false, when teamlead is not provided", () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   expect(false).toBe(isTeamsConfigValid([{}]));
 });
 
 test("should return false, when employees field is missing", () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   expect(false).toBe(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" } }]));
 });
 
 test("should return false, when 0 employees inside team", () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   expect(false).toBe(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [] }]));
 });
 
 test("should return false, when employee with missing field inside team", () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   expect(false).toBe(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [{}] }]));
 });
 
 test("should return false, when employee with missing field inside team", () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   expect(false).toBe(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [{}] }]));
 });
 
 test("should return false, when companyCode field is missing", () => {
   expect(false).toBe(
-    isTeamsConfigValid([
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      { teamLead: { jiraUsername: "a", name: "a" }, employees: [{ name: "a", jiraUsername: "a" }] },
-    ])
+    isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [{ name: "a", jiraUsername: "a" }] }])
   );
 });
 
 test("should return false, when unit field is missing", () => {
   expect(false).toBe(
     isTeamsConfigValid([
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       { teamLead: { jiraUsername: "a", name: "a" }, employees: [{ name: "a", jiraUsername: "a" }], companyCode: "a" },
     ])
   );
@@ -61,8 +45,6 @@ test("should return false, when unit field is missing", () => {
 test("should return false, when product field is missing", () => {
   expect(false).toBe(
     isTeamsConfigValid([
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       {
         teamLead: { jiraUsername: "a", name: "a" },
         employees: [{ name: "a", jiraUsername: "a" }],
@@ -76,8 +58,6 @@ test("should return false, when product field is missing", () => {
 test("should return false, when project field is missing", () => {
   expect(false).toBe(
     isTeamsConfigValid([
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       {
         teamLead: { jiraUsername: "a", name: "a" },
         employees: [{ name: "a", jiraUsername: "a" }],
@@ -92,8 +72,6 @@ test("should return false, when project field is missing", () => {
 test("should return false, when fileNameTemplate field is missing", () => {
   expect(false).toBe(
     isTeamsConfigValid([
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       {
         teamLead: { jiraUsername: "a", name: "a" },
         employees: [{ name: "a", jiraUsername: "a" }],

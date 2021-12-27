@@ -1,15 +1,15 @@
 import { isConfigValid } from "../isConfigValid";
 
 test("should return false, when jiraTaskQueryField is missing", () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   expect(false).toBe(isConfigValid({}));
 });
 
 test("should return false, when teams field is missing", () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   expect(false).toBe(isConfigValid({ jiraTaskQuery: "a" }));
+});
+
+test("should return false, when working hours per month field is wrong type", () => {
+  expect(false).toBe(isConfigValid({ workingHoursPerMonth: "1" }));
 });
 
 test("should return true, when all fields passed", () => {

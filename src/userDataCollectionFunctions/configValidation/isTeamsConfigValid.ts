@@ -1,7 +1,7 @@
 import { ITeamConfig } from "../../models/ITeamConfig";
 import { isEmployeeDataValid } from "./isEmployeeDataValid";
-
-export function isTeamsConfigValid(teams?: ITeamConfig[]) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isTeamsConfigValid(teams?: any): teams is ITeamConfig[] {
   if (!teams) {
     console.log("teams field is missing in config");
     return false;
@@ -34,27 +34,27 @@ export function isTeamsConfigValid(teams?: ITeamConfig[]) {
     }
 
     if (!team.companyCode) {
-      console.log("company code field is missing/incorrect in config");
+      console.log("company code field is missing in config");
       return false;
     }
 
     if (!team.unit) {
-      console.log("unit field is missing/incorrect in config");
+      console.log("unit field is missing in config");
       return false;
     }
 
     if (!team.product) {
-      console.log("product field is missing/incorrect in config");
+      console.log("product field is missing in config");
       return false;
     }
 
     if (!team.project) {
-      console.log("project field is missing/incorrect in config");
+      console.log("project field is missing in config");
       return false;
     }
 
     if (!team.fileNameTemplate) {
-      console.log("fileNameTemplate field is missing/incorrect in config");
+      console.log("fileNameTemplate field is missing in config");
       return false;
     }
   }
