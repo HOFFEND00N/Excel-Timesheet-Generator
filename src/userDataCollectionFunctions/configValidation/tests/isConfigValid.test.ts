@@ -1,19 +1,19 @@
 import { isConfigValid } from "../isConfigValid";
 
 test("should return false, when jiraTaskQueryField is missing", () => {
-  expect(false).toBe(isConfigValid({}));
+  expect(isConfigValid({})).toBe(false);
 });
 
 test("should return false, when teams field is missing", () => {
-  expect(false).toBe(isConfigValid({ jiraTaskQuery: "a" }));
+  expect(isConfigValid({ jiraTaskQuery: "a" })).toBe(false);
 });
 
 test("should return false, when working hours per month field is wrong type", () => {
-  expect(false).toBe(isConfigValid({ workingHoursPerMonth: "1" }));
+  expect(isConfigValid({ workingHoursPerMonth: "1" })).toBe(false);
 });
 
 test("should return true, when all fields passed", () => {
-  expect(true).toBe(
+  expect(
     isConfigValid({
       workingHoursPerMonth: 1,
       jiraTaskQuery: "a",
@@ -29,5 +29,5 @@ test("should return true, when all fields passed", () => {
         },
       ],
     })
-  );
+  ).toBe(true);
 });
