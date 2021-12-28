@@ -1,49 +1,49 @@
 import { isTeamsConfigValid } from "../isTeamsConfigValid";
 
 test("should return false, when teams field is missing", () => {
-  expect(false).toBe(isTeamsConfigValid());
+  expect(isTeamsConfigValid()).toBe(false);
 });
 
 test("should return false, when teams count is 0", () => {
-  expect(false).toBe(isTeamsConfigValid([]));
+  expect(isTeamsConfigValid([])).toBe(false);
 });
 
 test("should return false, when teamlead is not provided", () => {
-  expect(false).toBe(isTeamsConfigValid([{}]));
+  expect(isTeamsConfigValid([{}])).toBe(false);
 });
 
 test("should return false, when employees field is missing", () => {
-  expect(false).toBe(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" } }]));
+  expect(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" } }])).toBe(false);
 });
 
 test("should return false, when 0 employees inside team", () => {
-  expect(false).toBe(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [] }]));
+  expect(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [] }])).toBe(false);
 });
 
 test("should return false, when employee with missing field inside team", () => {
-  expect(false).toBe(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [{}] }]));
+  expect(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [{}] }])).toBe(false);
 });
 
 test("should return false, when employee with missing field inside team", () => {
-  expect(false).toBe(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [{}] }]));
+  expect(isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [{}] }])).toBe(false);
 });
 
 test("should return false, when companyCode field is missing", () => {
-  expect(false).toBe(
+  expect(
     isTeamsConfigValid([{ teamLead: { jiraUsername: "a", name: "a" }, employees: [{ name: "a", jiraUsername: "a" }] }])
-  );
+  ).toBe(false);
 });
 
 test("should return false, when unit field is missing", () => {
-  expect(false).toBe(
+  expect(
     isTeamsConfigValid([
       { teamLead: { jiraUsername: "a", name: "a" }, employees: [{ name: "a", jiraUsername: "a" }], companyCode: "a" },
     ])
-  );
+  ).toBe(false);
 });
 
 test("should return false, when product field is missing", () => {
-  expect(false).toBe(
+  expect(
     isTeamsConfigValid([
       {
         teamLead: { jiraUsername: "a", name: "a" },
@@ -52,11 +52,11 @@ test("should return false, when product field is missing", () => {
         companyCode: "a",
       },
     ])
-  );
+  ).toBe(false);
 });
 
 test("should return false, when project field is missing", () => {
-  expect(false).toBe(
+  expect(
     isTeamsConfigValid([
       {
         teamLead: { jiraUsername: "a", name: "a" },
@@ -66,11 +66,11 @@ test("should return false, when project field is missing", () => {
         product: "a",
       },
     ])
-  );
+  ).toBe(false);
 });
 
 test("should return false, when fileNameTemplate field is missing", () => {
-  expect(false).toBe(
+  expect(
     isTeamsConfigValid([
       {
         teamLead: { jiraUsername: "a", name: "a" },
@@ -81,11 +81,11 @@ test("should return false, when fileNameTemplate field is missing", () => {
         product: "a",
       },
     ])
-  );
+  ).toBe(false);
 });
 
 test("should return true, when all fields are passed", () => {
-  expect(true).toBe(
+  expect(
     isTeamsConfigValid([
       {
         teamLead: { jiraUsername: "a", name: "a" },
@@ -97,5 +97,5 @@ test("should return true, when all fields are passed", () => {
         fileNameTemplate: "a",
       },
     ])
-  );
+  ).toBe(true);
 });
