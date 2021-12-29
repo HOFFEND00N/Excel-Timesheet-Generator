@@ -33,7 +33,7 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
       team,
     });
 
-    const currentDate = config.date ? new Date(config.date.year, config.date.month) : new Date();
+    const currentDate = config.date ? new Date(config.date.year, config.date.month - 1) : new Date();
     const table = await makeTable({
       config: team,
       currentDate,

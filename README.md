@@ -54,7 +54,7 @@ Here are the types of values in config file and some description:
   "workingHoursPerMonth": number,
   "date": {
     "year": number,
-    "month": number (from 0 to 11)
+    "month": number (from 1 to 12)
   },
   "jiraTaskQuery": "https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (\"In Progress\", \"In Code Review\", \"IN QA\", \"QA Verified\", \"Investigation\", \"Code Completed\") AND assignee in (${jiraUserName}) and updated >= \"${taskUpdated}\" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY}"
   "teams": [
