@@ -8,7 +8,7 @@ test("pass string, expect to return string pivot cache record element", () => {
 
   const actualPivotCacheRecordElement = makePivotCacheRecordElement({
     value: "test",
-    employees: [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }],
+    employees: [{ lastName: "Karaseva", firstName: "Svetlana", jiraUsername: "KarasevaS" }],
   });
 
   expect(actualPivotCacheRecordElement).toEqual(expectedPivotCacheRecordElement);
@@ -21,7 +21,7 @@ test("pass number, expect to return number pivot cache record element", () => {
 
   const actualPivotCacheRecordElement = makePivotCacheRecordElement({
     value: 1,
-    employees: [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }],
+    employees: [{ lastName: "Karaseva", firstName: "Svetlana", jiraUsername: "KarasevaS" }],
   });
 
   expect(actualPivotCacheRecordElement).toEqual(expectedPivotCacheRecordElement);
@@ -34,7 +34,7 @@ test("pass employee, expect to return shared item pivot cache record element", (
 
   const actualPivotCacheRecordElement = makePivotCacheRecordElement({
     value: "Karaseva Svetlana",
-    employees: [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }],
+    employees: [{ lastName: "Karaseva", firstName: "Svetlana", jiraUsername: "KarasevaS" }],
   });
 
   expect(actualPivotCacheRecordElement).toEqual(expectedPivotCacheRecordElement);

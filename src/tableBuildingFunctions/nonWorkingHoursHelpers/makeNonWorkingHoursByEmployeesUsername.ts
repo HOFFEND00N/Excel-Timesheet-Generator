@@ -15,7 +15,7 @@ export function makeNonWorkingHoursByEmployeesUsername({
   return nonWorkingHoursRows.reduce((nonWorkingHoursByEmployeesUsername: HoursByEmployees, nonWorkingHoursRow) => {
     const employeeName = nonWorkingHoursRow[employeeColumn].toString();
     const manHours = Number(nonWorkingHoursRow[manHoursColumn]);
-    const employee = employees.find((employee) => employee.name === employeeName);
+    const employee = employees.find((employee) => `${employee.lastName} ${employee.firstName}` === employeeName);
     if (!employee) return nonWorkingHoursByEmployeesUsername;
 
     nonWorkingHoursByEmployeesUsername[employee.jiraUsername] =

@@ -16,8 +16,13 @@ export function isEmployeeDataValid(employee?: any): employee is IEmployee {
     return false;
   }
 
-  if (!employee.name) {
-    console.log("employee name field is missing in config");
+  if (!employee.firstName) {
+    console.log("employee firstName field is missing in config");
+    return false;
+  }
+
+  if (!employee.lastName) {
+    console.log("employee lastName field is missing in config");
     return false;
   }
 

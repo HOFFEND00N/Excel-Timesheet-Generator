@@ -35,7 +35,8 @@ test("pass one employee, expect to return pivot cache definition with one employ
   const actualPivotCacheDefinition = makePivotCacheDefinition({
     employees: [
       {
-        name: "Karaseva Svetlana",
+        lastName: "Karaseva",
+        firstName: "Svetlana",
         jiraUsername: "KarasevaS",
       },
     ],
@@ -82,11 +83,13 @@ test("pass several employee, expect to return pivot cache definition with severa
   const actualPivotCacheDefinition = makePivotCacheDefinition({
     employees: [
       {
-        name: "Karaseva Svetlana",
+        lastName: "Karaseva",
+        firstName: "Svetlana",
         jiraUsername: "KarasevaS",
       },
       {
-        name: "Matrosova Marianna",
+        lastName: "Matrosova",
+        firstName: "Marianna",
         jiraUsername: "MatrosovaM",
       },
     ],

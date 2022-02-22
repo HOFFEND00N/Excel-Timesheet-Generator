@@ -10,7 +10,7 @@ test("pass empty array, expect to return zero rows", async () => {
     product: "Confirmit",
     project: "Studio",
     employees: [],
-    teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
+    teamLead: { lastName: "Molotkova", firstName: "Maria", jiraUsername: "MolotkovaM" },
     fileNameTemplate: "",
   };
 
@@ -28,11 +28,12 @@ test("pass one non working hours row, expect to return zero non working rows, be
     project: "Studio",
     employees: [
       {
-        name: "Karaseva Svetlana",
+        lastName: "Karaseva",
+        firstName: "Svetlana",
         jiraUsername: "KarasevaS",
       },
     ],
-    teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
+    teamLead: { lastName: "Molotkova", firstName: "Maria", jiraUsername: "MolotkovaM" },
     fileNameTemplate: "",
   };
 
@@ -54,11 +55,12 @@ test("pass one non working hours row, expect to return one non working rows, bec
     project: "Studio",
     employees: [
       {
-        name: "Karaseva Svetlana",
+        lastName: "Karaseva",
+        firstName: "Svetlana",
         jiraUsername: "KarasevaS",
       },
     ],
-    teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
+    teamLead: { lastName: "Molotkova", firstName: "Maria", jiraUsername: "MolotkovaM" },
     fileNameTemplate: "",
   };
 
@@ -82,15 +84,17 @@ test("pass two non working hours row, expect to return one non working rows, bec
     project: "Studio",
     employees: [
       {
-        name: "Matrosova Marianna",
+        lastName: "Matrosova",
+        firstName: "Marianna",
         jiraUsername: "MatrosovaM",
       },
       {
-        name: "Karaseva Svetlana",
+        lastName: "Karaseva",
+        firstName: "Svetlana",
         jiraUsername: "KarasevaS",
       },
     ],
-    teamLead: { name: "Molotkova Maria", jiraUsername: "MolotkovaM" },
+    teamLead: { lastName: "Molotkova", firstName: "Maria", jiraUsername: "MolotkovaM" },
     fileNameTemplate: "",
   };
 

@@ -62,7 +62,7 @@ function makeSheetDataRows(
         {
           "@r": `A${rowIndex}`,
           "@t": "str",
-          v: `${employees[i].name}`,
+          v: `${employees[i].lastName} ${employees[i].firstName}`,
         },
         {
           "@r": `B${rowIndex}`,

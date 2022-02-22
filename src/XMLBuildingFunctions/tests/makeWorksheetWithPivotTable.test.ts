@@ -4,8 +4,8 @@ import { makeWorksheetWithPivotTable } from "../makeWorksheetWithPivotTable";
 
 test("pass 2 employees, expect to return correct worksheet", () => {
   const employees: IEmployee[] = [
-    { name: "Karaseva Svetlana", jiraUsername: "KarasevaS" },
-    { name: "Matrosova Marianna", jiraUsername: "MatrosovaM" },
+    { lastName: "Karaseva", firstName: "Svetlana", jiraUsername: "KarasevaS" },
+    { lastName: "Matrosova", firstName: "Marianna", jiraUsername: "MatrosovaM" },
   ];
   const expectedWorksheetWithPivotTable: Worksheet = {
     "@xmlns": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",

@@ -20,7 +20,7 @@ export function makeEmployeeDataRow({
   employee,
 }: makeEmployeeDataRowArguments) {
   return headers.map((header) => {
-    if (header.label === "Employee") return employee.name;
+    if (header.label === "Employee") return `${employee.lastName} ${employee.firstName}`;
     if (header.label === "Task") return userTasksByEmployeeUsername[employee.jiraUsername].join(" ");
     if (header.label === "Man-Hours")
       return workingHoursPerMonth - (nonWorkingHoursByEmployeesUsername[employee.jiraUsername] ?? 0);

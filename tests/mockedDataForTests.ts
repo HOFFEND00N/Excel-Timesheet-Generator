@@ -18,16 +18,19 @@ export function getConfigForTests(): ITeamConfig {
     project: "Studio",
     employees: [
       {
-        name: "Matrosova Marianna",
+        lastName: "Matrosova",
+        firstName: "Marianna",
         jiraUsername: "MatrosovaM",
       },
       {
-        name: "Karaseva Svetlana",
+        lastName: "Karaseva",
+        firstName: "Svetlana",
         jiraUsername: "KarasevaS",
       },
     ],
     teamLead: {
-      name: "Molotkova Maria",
+      lastName: "Molotkova",
+      firstName: "Maria",
       jiraUsername: "MolotkovaM",
     },
     fileNameTemplate: "",

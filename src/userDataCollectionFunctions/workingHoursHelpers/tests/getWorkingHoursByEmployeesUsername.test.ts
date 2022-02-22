@@ -12,11 +12,13 @@ test("should return one employee with specific working hours and one with defaul
     team: [
       {
         jiraUsername: "employee 1",
-        name: "employee 1",
+        lastName: "employee",
+        firstName: "1",
       },
       {
         jiraUsername: "employee 2",
-        name: "employee 2",
+        lastName: "employee",
+        firstName: "2",
         workingHoursPerMonth: 120,
       },
     ],

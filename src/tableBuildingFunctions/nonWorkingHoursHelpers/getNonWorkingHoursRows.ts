@@ -6,8 +6,8 @@ export async function getNonWorkingHoursRows(
   config: ITeamConfig,
   nonWorkingHoursFile: string[][]
 ): Promise<CommonValue[][]> {
-  const employees = config.employees.map((employee) => employee.name);
-  employees.push(config.teamLead.name);
+  const employees = config.employees.map((employee) => `${employee.lastName} ${employee.firstName}`);
+  employees.push(`${config.teamLead.lastName} ${config.teamLead.firstName}`);
 
   return nonWorkingHoursFile
     .filter((row) => row.some((cell) => employees.includes(cell)))

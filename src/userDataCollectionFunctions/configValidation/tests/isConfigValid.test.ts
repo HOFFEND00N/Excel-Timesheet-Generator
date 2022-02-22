@@ -19,8 +19,8 @@ test("should return true, when all fields passed", () => {
       jiraTaskQuery: "a",
       teams: [
         {
-          teamLead: { jiraUsername: "a", name: "a" },
-          employees: [{ name: "a", jiraUsername: "a" }],
+          teamLead: { jiraUsername: "a", lastName: "a", firstName: "b" },
+          employees: [{ firstName: "a", lastName: "b", jiraUsername: "a" }],
           unit: 1,
           companyCode: "a",
           project: "a",

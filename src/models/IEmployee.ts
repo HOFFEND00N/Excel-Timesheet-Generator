@@ -1,5 +1,6 @@
 export interface IEmployee {
-  name: string;
+  firstName: string;
+  lastName: string;
   jiraUsername: string;
   workingHoursPerMonth?: number;
   jiraTaskQuery?: string;

@@ -26,7 +26,7 @@ test("pass table with 1 row expect to return one cache record", () => {
 
   const actualPivotCacheRecordsContent = makePivotCacheRecordsContent({
     startTableContentIndex: 3,
-    employees: [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }],
+    employees: [{ lastName: "Karaseva", firstName: "Svetlana", jiraUsername: "KarasevaS" }],
     table,
     recordElementsCount: 3,
   });

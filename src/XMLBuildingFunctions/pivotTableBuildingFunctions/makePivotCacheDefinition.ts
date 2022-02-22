@@ -65,7 +65,7 @@ function makePivotCacheFieldEmployees(employees: IEmployee[], name: string) {
 function makePivotCacheFieldSharedItems(employees: IEmployee[]) {
   const sharedItems: SharedItem[] = [];
   for (const employee of employees) {
-    sharedItems.push({ "@v": `${employee.name}` });
+    sharedItems.push({ "@v": `${employee.lastName} ${employee.firstName}` });
   }
   return sharedItems;
 }

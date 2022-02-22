@@ -33,7 +33,7 @@ test("pass table with 3 columns and 2 rows, expect to return pivot cache records
     table,
     recordElementsCount: 3,
     startTablePoint: { column: 1, row: 1 },
-    employees: [{ name: "Karaseva Svetlana", jiraUsername: "KarasevaS" }],
+    employees: [{ lastName: "Karaseva", firstName: "Svetlana", jiraUsername: "KarasevaS" }],
   });
 
   expect(actualPivotCacheRecords).toEqual(expectedPivotCacheRecords);
