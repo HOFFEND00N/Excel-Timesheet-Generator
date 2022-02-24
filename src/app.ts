@@ -8,44 +8,19 @@ import { getWorkingHoursByEmployeesUsername } from "./userDataCollectionFunction
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
 import { getUserData } from "./userDataCollectionFunctions/getUserData";
-import {
-  getNonWorkingHoursRows,
-  isNumericCell,
-  isStringCell,
-  makeMonthRows,
-  makeTable,
-  makeTableRow,
-  styleTableRow,
-} from "./tableBuildingFunctions";
-import { CommonCell, HoursByEmployees } from "./tableBuildingFunctions/types";
-import { IPoint } from "./models/IPoint";
-import { makeBoldCellTextStyle, makeCellBorderStyle, makeDefaultTextStyle } from "./constants/styleConstants";
+import { getNonWorkingHoursRows, isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
+import { HoursByEmployees } from "./tableBuildingFunctions/types";
+import { makeTableHeadersAndMonthRows } from "./tableBuildingFunctions/makeTableHeadersAndMonthRows";
 
 (async () => {
   const { config, login, password, nonWorkingHoursFile } = await getUserData();
   let reportName = "",
-    table: CommonCell[] = [],
     employeeColumn = 0,
     startRow = START_TABLE_POINT.row + 1;
-
   const overallWorkingHoursByEmployeesUsername: HoursByEmployees = {};
-  const startTablePoint: IPoint = START_TABLE_POINT;
-
-  const tableHeaders = TABLE_HEADERS;
   const currentDate = config.date ? new Date(config.date.year, config.date.month - 1) : new Date();
-  const monthRow = makeMonthRows(currentDate);
-  const { row: pointRow, column: pointColumn }: IPoint = startTablePoint;
-  table.push(...monthRow);
 
-  const tableHeadersRow = makeTableRow({
-    startPoint: { column: pointColumn, row: pointRow },
-    values: tableHeaders.map((item) => item.label),
-  });
-  styleTableRow({
-    row: tableHeadersRow,
-    cellStyles: [makeBoldCellTextStyle(), makeCellBorderStyle(), makeDefaultTextStyle()],
-  });
-  table.push(...tableHeadersRow);
+  let table = makeTableHeadersAndMonthRows(currentDate);
 
   for (const team of config.teams) {
     const workBook = new excel.Workbook({});
