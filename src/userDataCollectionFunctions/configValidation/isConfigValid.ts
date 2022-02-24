@@ -12,5 +12,10 @@ export function isConfigValid(config: any): config is IConfig {
     return false;
   }
 
+  if (!config.fileNameTemplate) {
+    console.log("fileNameTemplate field is missing in config");
+    return false;
+  }
+
   return isTeamsConfigValid(config.teams);
 }

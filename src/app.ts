@@ -8,10 +8,44 @@ import { getWorkingHoursByEmployeesUsername } from "./userDataCollectionFunction
 import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
 import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
 import { getUserData } from "./userDataCollectionFunctions/getUserData";
-import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
+import {
+  getNonWorkingHoursRows,
+  isNumericCell,
+  isStringCell,
+  makeMonthRows,
+  makeTable,
+  makeTableRow,
+  styleTableRow,
+} from "./tableBuildingFunctions";
+import { CommonCell, HoursByEmployees } from "./tableBuildingFunctions/types";
+import { IPoint } from "./models/IPoint";
+import { makeBoldCellTextStyle, makeCellBorderStyle, makeDefaultTextStyle } from "./constants/styleConstants";
 
 (async () => {
   const { config, login, password, nonWorkingHoursFile } = await getUserData();
+  let reportName = "",
+    table: CommonCell[] = [],
+    employeeColumn = 0,
+    startRow = START_TABLE_POINT.row + 1;
+
+  const overallWorkingHoursByEmployeesUsername: HoursByEmployees = {};
+  const startTablePoint: IPoint = START_TABLE_POINT;
+
+  const tableHeaders = TABLE_HEADERS;
+  const currentDate = config.date ? new Date(config.date.year, config.date.month - 1) : new Date();
+  const monthRow = makeMonthRows(currentDate);
+  const { row: pointRow, column: pointColumn }: IPoint = startTablePoint;
+  table.push(...monthRow);
+
+  const tableHeadersRow = makeTableRow({
+    startPoint: { column: pointColumn, row: pointRow },
+    values: tableHeaders.map((item) => item.label),
+  });
+  styleTableRow({
+    row: tableHeadersRow,
+    cellStyles: [makeBoldCellTextStyle(), makeCellBorderStyle(), makeDefaultTextStyle()],
+  });
+  table.push(...tableHeadersRow);
 
   for (const team of config.teams) {
     const workBook = new excel.Workbook({});
@@ -21,10 +55,11 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
       column: 2,
       row: 2,
     };
-    const workingHoursByEmployeesUsername = await getWorkingHoursByEmployeesUsername({
+    const workingHoursByEmployeesUsername = getWorkingHoursByEmployeesUsername({
       workingHoursPerMonth: config.workingHoursPerMonth,
       team: [...team.employees, team.teamLead],
     });
+    Object.assign(overallWorkingHoursByEmployeesUsername, workingHoursByEmployeesUsername);
     const userTasksByEmployeeUsername = await getUserTasks({
       employeeJiraTaskQuery: config.jiraTaskQuery,
       login: login,
@@ -33,16 +68,21 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
       team,
     });
 
-    const currentDate = config.date ? new Date(config.date.year, config.date.month - 1) : new Date();
-    const table = await makeTable({
-      config: team,
-      currentDate,
-      userTasksByEmployeeUsername,
-      workingHoursByEmployeesUsername,
-      nonWorkingHoursFile,
-    });
+    const nonWorkingHoursRows = await getNonWorkingHoursRows(team, nonWorkingHoursFile);
 
-    const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
+    table = table.concat(
+      table,
+      await makeTable({
+        config: team,
+        userTasksByEmployeeUsername,
+        workingHoursByEmployeesUsername,
+        nonWorkingHoursRows,
+        startRow,
+      })
+    );
+
+    startRow += nonWorkingHoursRows.length + team.employees.length + 2;
+    employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
     const taskColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Task");
 
     workSheet.column(employeeColumn).setWidth(25);
@@ -68,23 +108,28 @@ import { isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions
     }
     workSheet.addImage(new WorkSheetImageAdapter(image));
 
-    const reportName = makeReportFileName({
+    reportName = makeReportFileName({
       currentDate,
-      unit: team.unit,
-      fileNameTemplate: team.fileNameTemplate,
+      fileNameTemplate: config.fileNameTemplate,
     });
     await makeXlsxFile(workBook, reportName);
-
-    const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
-
-    addPivotTableToXlsxFile({
-      reportName,
-      config: team,
-      workingHoursByEmployeesUsername,
-      table,
-      employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
-      manHoursColumnIndex: manHoursColumn,
-    });
-    console.log(`Successfully generated ${reportName}`);
   }
+
+  const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
+
+  const allEmployees = config.teams
+    .map((team) => {
+      return [...team.employees, team.teamLead];
+    })
+    .flat();
+
+  addPivotTableToXlsxFile({
+    reportName,
+    employees: allEmployees,
+    workingHoursByEmployeesUsername: overallWorkingHoursByEmployeesUsername,
+    table,
+    employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
+    manHoursColumnIndex: manHoursColumn,
+  });
+  console.log(`Successfully generated ${reportName}`);
 })();

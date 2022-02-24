@@ -7,6 +7,5 @@ export interface ITeamConfig {
   project: string;
   employees: IEmployee[];
   teamLead: IEmployee;
-  fileNameTemplate: string;
   workingHoursPerMonth?: number;
 }

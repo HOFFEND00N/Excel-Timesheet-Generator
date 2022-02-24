@@ -12,11 +12,16 @@ test("should return false, when working hours per month field is wrong type", ()
   expect(isConfigValid({ workingHoursPerMonth: "1" })).toBe(false);
 });
 
+test("should return false, when fileNameTemplate field is missing", () => {
+  expect(isConfigValid({ workingHoursPerMonth: 1 })).toBe(false);
+});
+
 test("should return true, when all fields passed", () => {
   expect(
     isConfigValid({
       workingHoursPerMonth: 1,
       jiraTaskQuery: "a",
+      fileNameTemplate: "a",
       teams: [
         {
           teamLead: { jiraUsername: "a", lastName: "a", firstName: "b" },

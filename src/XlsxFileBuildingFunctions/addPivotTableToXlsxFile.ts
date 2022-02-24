@@ -16,18 +16,18 @@ import {
 } from "../XMLBuildingFunctions";
 import { CommonCell, HoursByEmployees } from "../tableBuildingFunctions/types";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
-import { ITeamConfig } from "../models/ITeamConfig";
+import { IEmployee } from "../models/IEmployee";
 
 export function addPivotTableToXlsxFile({
   reportName,
-  config,
+  employees,
   workingHoursByEmployeesUsername,
   table,
   employeeColumnIndex,
   manHoursColumnIndex,
 }: {
   reportName: string;
-  config: ITeamConfig;
+  employees: IEmployee[];
   workingHoursByEmployeesUsername: HoursByEmployees;
   table: CommonCell[];
   employeeColumnIndex: number;
@@ -49,8 +49,6 @@ export function addPivotTableToXlsxFile({
   fs.mkdirSync(xl_pivotTables);
   fs.mkdirSync(xl_pivotTables_rels);
 
-  const employeesWithTeamLead = [...config.employees, config.teamLead];
-
   fs.writeFileSync(
     path.join(whereToExtract, "xl/_rels/workbook.xml.rels"),
     create({ Relationships: makeWorkbookRels() }).end()
@@ -59,7 +57,7 @@ export function addPivotTableToXlsxFile({
     path.join(xl_pivotCache, "pivotCacheDefinition1.xml"),
     create({
       pivotCacheDefinition: makePivotCacheDefinition({
-        employees: employeesWithTeamLead,
+        employees: employees,
         tableBottomRightPoint: table[table.length - 1].point,
       }),
     }).end()
@@ -69,7 +67,7 @@ export function addPivotTableToXlsxFile({
     create({
       pivotCacheRecords: makePivotCacheRecords({
         table,
-        employees: employeesWithTeamLead,
+        employees: employees,
         recordElementsCount: TABLE_HEADERS.length,
         startTablePoint: START_TABLE_POINT,
       }),
@@ -87,7 +85,7 @@ export function addPivotTableToXlsxFile({
     path.join(xl_pivotTables, "pivotTable1.xml"),
     create({
       pivotTableDefinition: makePivotTable({
-        employees: employeesWithTeamLead,
+        employees: employees,
         employeeColumnIndex: employeeColumnIndex,
         manHoursColumnIndex: manHoursColumnIndex,
       }),
@@ -101,7 +99,7 @@ export function addPivotTableToXlsxFile({
     path.join(xl_worksheets, "sheet2.xml"),
     create({
       worksheet: makeWorksheetWithPivotTable({
-        employees: employeesWithTeamLead,
+        employees: employees,
         workingHoursByEmployeesUsername,
       }),
     }).end()

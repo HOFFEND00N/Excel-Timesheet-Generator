@@ -33,7 +33,6 @@ export function getConfigForTests(): ITeamConfig {
       firstName: "Maria",
       jiraUsername: "MolotkovaM",
     },
-    fileNameTemplate: "",
   };
 }
 

@@ -8,4 +8,5 @@ export interface IConfig {
   jiraTaskQuery: string;
   workingHoursPerMonth: number;
   teams: ITeamConfig[];
+  fileNameTemplate: string;
 }

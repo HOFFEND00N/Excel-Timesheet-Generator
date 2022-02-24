@@ -1,36 +1,33 @@
 import { makeReportFileName } from "../src/makeReportFileName";
 
 test("pass may of 2021, expect to return fileName with month = 06", () => {
-  const expectedFileName = "2021-06-7.xlsx";
+  const expectedFileName = "2021-06.xlsx";
 
   const actualFileName = makeReportFileName({
     currentDate: new Date(2021, 5),
-    unit: 7,
-    fileNameTemplate: "${year}-${month}-${unit}.xlsx",
+    fileNameTemplate: "${year}-${month}.xlsx",
   });
 
   expect(actualFileName).toEqual(expectedFileName);
 });
 
 test("pass january of 2021, expect to return fileName with month = 01", () => {
-  const expectedFileName = "2021-01-7.xlsx";
+  const expectedFileName = "2021-01.xlsx";
 
   const actualFileName = makeReportFileName({
     currentDate: new Date(2021, 0),
-    unit: 7,
-    fileNameTemplate: "${year}-${month}-${unit}.xlsx",
+    fileNameTemplate: "${year}-${month}.xlsx",
   });
 
   expect(actualFileName).toEqual(expectedFileName);
 });
 
 test("pass december of 2020, expect to return fileName with month = 12", () => {
-  const expectedFileName = "2020-12-7.xlsx";
+  const expectedFileName = "2020-12.xlsx";
 
   const actualFileName = makeReportFileName({
     currentDate: new Date(2020, 11),
-    unit: 7,
-    fileNameTemplate: "${year}-${month}-${unit}.xlsx",
+    fileNameTemplate: "${year}-${month}.xlsx",
   });
 
   expect(actualFileName).toEqual(expectedFileName);

@@ -11,7 +11,6 @@ test("pass empty array, expect to return zero rows", async () => {
     project: "Studio",
     employees: [],
     teamLead: { lastName: "Molotkova", firstName: "Maria", jiraUsername: "MolotkovaM" },
-    fileNameTemplate: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, []);
@@ -34,7 +33,6 @@ test("pass one non working hours row, expect to return zero non working rows, be
       },
     ],
     teamLead: { lastName: "Molotkova", firstName: "Maria", jiraUsername: "MolotkovaM" },
-    fileNameTemplate: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [
@@ -61,7 +59,6 @@ test("pass one non working hours row, expect to return one non working rows, bec
       },
     ],
     teamLead: { lastName: "Molotkova", firstName: "Maria", jiraUsername: "MolotkovaM" },
-    fileNameTemplate: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [
@@ -95,7 +92,6 @@ test("pass two non working hours row, expect to return one non working rows, bec
       },
     ],
     teamLead: { lastName: "Molotkova", firstName: "Maria", jiraUsername: "MolotkovaM" },
-    fileNameTemplate: "",
   };
 
   const actualNonWorkingHoursRows = await getNonWorkingHoursRows(config, [

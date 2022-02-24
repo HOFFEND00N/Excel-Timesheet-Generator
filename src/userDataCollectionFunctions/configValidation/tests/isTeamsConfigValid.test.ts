@@ -84,21 +84,6 @@ test("should return false, when project field is missing", () => {
   ).toBe(false);
 });
 
-test("should return false, when fileNameTemplate field is missing", () => {
-  expect(
-    isTeamsConfigValid([
-      {
-        teamLead: { jiraUsername: "a", lastName: "a", firstName: "b" },
-        employees: [{ lastName: "a", firstName: "b", jiraUsername: "a" }],
-        unit: 1,
-        companyCode: "a",
-        project: "a",
-        product: "a",
-      },
-    ])
-  ).toBe(false);
-});
-
 test("should return true, when all fields are passed", () => {
   expect(
     isTeamsConfigValid([

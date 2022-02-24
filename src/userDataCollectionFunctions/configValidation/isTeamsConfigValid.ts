@@ -52,11 +52,6 @@ export function isTeamsConfigValid(teams?: any): teams is ITeamConfig[] {
       console.log("project field is missing in config");
       return false;
     }
-
-    if (!team.fileNameTemplate) {
-      console.log("fileNameTemplate field is missing in config");
-      return false;
-    }
   }
 
   return true;
