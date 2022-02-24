@@ -12,7 +12,8 @@
 - run `npm install`
 
 ## Workflow
-Application can create multiple reports, if several teams specified inside teams array in config. 
+Application can create single report. If several teams specified inside teams array in config there will 
+be grouped by team employees in table separated by empty line and common pivot table for all employees in config. 
 
 - setup config file with needed info
 - `npm run start`
@@ -56,23 +57,25 @@ Here are the types of values in config file and some description:
     "year": number,
     "month": number (from 1 to 12)
   },
+  "fileNameTemplate": "${year}-${month}-YAR.xlsx",
   "jiraTaskQuery": "https://jiraosl.firmglobal.com/rest/api/2/search?jql=status in (\"In Progress\", \"In Code Review\", \"IN QA\", \"QA Verified\", \"Investigation\", \"Code Completed\") AND assignee in (${jiraUserName}) and updated >= \"${taskUpdated}\" or status CHANGED BY ${jiraUserName} after startOfMonth()&fields=key, ${EPIC_KEY}"
   "teams": [
     {
-      "fileNameTemplate": "${year}-${month}-${unit}_RPT-YAR.xlsx",
       "unit": number,
       "companyCode": string,
       "product": string,
       "project": string,
       "teamLead": {
-        "name": string,
+        "firstName": string,
+        "lastName": string,
         "jiraUsername": string,
         "workingHoursPerMonth": number,
         "jiraTaskQuery": string
       },
       "employees": [
         {
-          "name": string,
+          "firstName": string,
+          "lastName": string,
           "jiraUsername": string,
           "workingHoursPerMonth": number,
           "jiraTaskQuery": string
@@ -96,7 +99,7 @@ Here are the list of optional fields, every other is mandatory.
 
 If you want to edit fileNameTemplate placeholders(e.g. ${year}), you should
 change other config parameters accordingly. For example if you want to explicitly
-specify "unit" you should change unit field in config, not in fileNameTemplate.
+specify "month" you should change unit field in config, not in fileNameTemplate.
 
 In employeeJiraTaskQuery you can place your own query to jira,
 but it must be a valid JQL syntax. For more info about JQL - https://www.atlassian.com/software/jira/guides/expand-jira/jql
