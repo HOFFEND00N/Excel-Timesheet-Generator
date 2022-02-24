@@ -45,16 +45,16 @@ import { makeTableHeadersAndMonthRows } from "./tableBuildingFunctions/makeTable
 
     const nonWorkingHoursRows = await getNonWorkingHoursRows(team, nonWorkingHoursFile);
 
-    table = table.concat(
-      table,
-      await makeTable({
+    table = [
+      ...table,
+      ...(await makeTable({
         config: team,
         userTasksByEmployeeUsername,
         workingHoursByEmployeesUsername,
         nonWorkingHoursRows,
         startRow,
-      })
-    );
+      })),
+    ];
 
     startRow += nonWorkingHoursRows.length + team.employees.length + 2;
     employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
