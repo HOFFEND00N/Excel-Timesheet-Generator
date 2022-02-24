@@ -14,22 +14,22 @@ import { makeTableHeadersAndMonthRows } from "./tableBuildingFunctions/makeTable
 
 (async () => {
   const { config, login, password, nonWorkingHoursFile } = await getUserData();
-  let reportName = "",
-    employeeColumn = 0,
+  let employeeColumn = 0,
     startRow = START_TABLE_POINT.row + 1;
   const overallWorkingHoursByEmployeesUsername: HoursByEmployees = {};
   const currentDate = config.date ? new Date(config.date.year, config.date.month - 1) : new Date();
 
   let table = makeTableHeadersAndMonthRows(currentDate);
+  const workBook = new excel.Workbook({});
+  const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
+  const image: IWorksheetImage = {
+    path: "images/confirmit.jpg",
+    column: 2,
+    row: 2,
+  };
+  workSheet.addImage(new WorkSheetImageAdapter(image));
 
   for (const team of config.teams) {
-    const workBook = new excel.Workbook({});
-    const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
-    const image: IWorksheetImage = {
-      path: "images/confirmit.jpg",
-      column: 2,
-      row: 2,
-    };
     const workingHoursByEmployeesUsername = getWorkingHoursByEmployeesUsername({
       workingHoursPerMonth: config.workingHoursPerMonth,
       team: [...team.employees, team.teamLead],
@@ -81,14 +81,13 @@ import { makeTableHeadersAndMonthRows } from "./tableBuildingFunctions/makeTable
         cell.style(workBook.createStyle(style));
       }
     }
-    workSheet.addImage(new WorkSheetImageAdapter(image));
-
-    reportName = makeReportFileName({
-      currentDate,
-      fileNameTemplate: config.fileNameTemplate,
-    });
-    await makeXlsxFile(workBook, reportName);
   }
+
+  const reportName = makeReportFileName({
+    currentDate,
+    fileNameTemplate: config.fileNameTemplate,
+  });
+  await makeXlsxFile(workBook, reportName);
 
   const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
 
