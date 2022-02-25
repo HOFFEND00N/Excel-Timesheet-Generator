@@ -12,8 +12,9 @@
 - run `npm install`
 
 ## Workflow
-Application can create single report. If several teams specified inside teams array in config there will 
-be grouped by team employees in table separated by empty line and common pivot table for all employees in config. 
+Application can create single report. Report consist of table describing employees work and pivot table.
+If several teams specified inside teams array in config, then in generated excel file employees will be
+grouped by team and separated by empty line and common pivot table for all employees will be created. 
 
 - setup config file with needed info
 - `npm run start`
