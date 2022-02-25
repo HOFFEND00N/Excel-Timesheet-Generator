@@ -4,22 +4,18 @@ import { WorkSheetImageAdapter } from "./models/WorkSheetImageAdapter";
 import { START_TABLE_POINT, TABLE_HEADERS, WORKSHEET_MONTHLY_TIMESHEET_NAME } from "./constants/constant";
 import { makeReportFileName } from "./makeReportFileName";
 import { addPivotTableToXlsxFile, makeXlsxFile } from "./XlsxFileBuildingFunctions";
-import { getWorkingHoursByEmployeesUsername } from "./userDataCollectionFunctions";
-import { getUserTasks } from "./tableBuildingFunctions/jiraHelpers";
-import { fetchJiraUserTasks } from "./tableBuildingFunctions/jiraHelpers/fetchJiraUserTasks";
 import { getUserData } from "./userDataCollectionFunctions/getUserData";
-import { getNonWorkingHoursRows, isNumericCell, isStringCell, makeTable } from "./tableBuildingFunctions";
 import { HoursByEmployees } from "./tableBuildingFunctions/types";
 import { makeTableHeadersAndMonthRows } from "./tableBuildingFunctions/makeTableHeadersAndMonthRows";
+import { makeTeamTable } from "./tableBuildingFunctions/makeTeamTable";
+import { addTableCellsToWorkbook } from "./addTableCellsToWorkbook";
+import { makeWorkingHoursByEmployeesUsernameForEachTeam } from "./makeWorkingHoursByEmployeesUsernameForEachTeam";
 
 (async () => {
   const { config, login, password, nonWorkingHoursFile } = await getUserData();
-  let employeeColumn = 0,
-    startRow = START_TABLE_POINT.row + 1;
-  const overallWorkingHoursByEmployeesUsername: HoursByEmployees = {};
+
   const currentDate = config.date ? new Date(config.date.year, config.date.month - 1) : new Date();
 
-  let table = makeTableHeadersAndMonthRows(currentDate);
   const workBook = new excel.Workbook({});
   const workSheet = workBook.addWorksheet(WORKSHEET_MONTHLY_TIMESHEET_NAME);
   const image: IWorksheetImage = {
@@ -29,64 +25,34 @@ import { makeTableHeadersAndMonthRows } from "./tableBuildingFunctions/makeTable
   };
   workSheet.addImage(new WorkSheetImageAdapter(image));
 
-  for (const team of config.teams) {
-    const workingHoursByEmployeesUsername = getWorkingHoursByEmployeesUsername({
-      workingHoursPerMonth: config.workingHoursPerMonth,
-      team: [...team.employees, team.teamLead],
-    });
-    Object.assign(overallWorkingHoursByEmployeesUsername, workingHoursByEmployeesUsername);
-    const userTasksByEmployeeUsername = await getUserTasks({
-      employeeJiraTaskQuery: config.jiraTaskQuery,
-      login: login,
-      password: password,
-      fetchUserTasks: fetchJiraUserTasks,
-      team,
-    });
-
-    const nonWorkingHoursRows = await getNonWorkingHoursRows(team, nonWorkingHoursFile);
-
-    table = [
-      ...table,
-      ...(await makeTable({
-        config: team,
-        userTasksByEmployeeUsername,
-        workingHoursByEmployeesUsername,
-        nonWorkingHoursRows,
-        startRow,
-      })),
-    ];
-
-    startRow += nonWorkingHoursRows.length + team.employees.length + 2;
-    employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
-    const taskColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Task");
-
-    workSheet.column(employeeColumn).setWidth(25);
-    workSheet.column(taskColumn).setWidth(50);
-
-    for (const tableCell of table) {
-      const cell = workSheet.cell(tableCell.point.row, tableCell.point.column);
-      if (isNumericCell(tableCell)) cell.number(tableCell.value);
-      if (isStringCell(tableCell)) cell.string(tableCell.value);
-
-      if (tableCell.point.column === taskColumn)
-        cell.style(
-          workBook.createStyle({
-            alignment: {
-              wrapText: true,
-            },
-          })
-        );
-
-      for (const style of tableCell.styles) {
-        cell.style(workBook.createStyle(style));
-      }
-    }
-  }
-
   const reportName = makeReportFileName({
     currentDate,
     fileNameTemplate: config.fileNameTemplate,
   });
+  const employeeColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Employee");
+
+  const commonWorkingHoursByEmployeesUsername: HoursByEmployees = {};
+  const workingHoursByEmployeesUsernameForEachTeam = makeWorkingHoursByEmployeesUsernameForEachTeam(config);
+  Object.assign(commonWorkingHoursByEmployeesUsername, ...workingHoursByEmployeesUsernameForEachTeam);
+
+  let table = makeTableHeadersAndMonthRows(currentDate);
+  table = [
+    ...table,
+    ...(await makeTeamTable({
+      config,
+      login,
+      nonWorkingHoursFile,
+      password,
+      workingHoursByEmployeesUsernameForEachTeam,
+    })),
+  ];
+
+  const taskColumn = START_TABLE_POINT.column + TABLE_HEADERS.findIndex((header) => header.label === "Task");
+
+  workSheet.column(employeeColumn).setWidth(25);
+  workSheet.column(taskColumn).setWidth(50);
+
+  addTableCellsToWorkbook({ table, taskColumn, workSheet, workBook });
   await makeXlsxFile(workBook, reportName);
 
   const manHoursColumn = TABLE_HEADERS.findIndex((header) => header.label === "Man-Hours");
@@ -100,7 +66,7 @@ import { makeTableHeadersAndMonthRows } from "./tableBuildingFunctions/makeTable
   addPivotTableToXlsxFile({
     reportName,
     employees: allEmployees,
-    workingHoursByEmployeesUsername: overallWorkingHoursByEmployeesUsername,
+    workingHoursByEmployeesUsername: commonWorkingHoursByEmployeesUsername,
     table,
     employeeColumnIndex: employeeColumn - START_TABLE_POINT.column,
     manHoursColumnIndex: manHoursColumn,

@@ -14,6 +14,7 @@ const config = {
     "!**/node_modules/**",
     "!**/index.ts",
     "!./src/app.ts",
+    "!./src/addTableCellsToWorkbook.ts",
     "!./src/XMLBuildingFunctions/**",
     "!./src/models/**",
     "!./src/tableBuildingFunctions/types.ts",
