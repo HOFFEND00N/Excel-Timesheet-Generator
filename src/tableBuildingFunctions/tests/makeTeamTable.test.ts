@@ -5,7 +5,7 @@ import {
   HorizontalAlignTextWays,
   makeCellBorderStyle,
   makeDefaultTextStyle,
-  makeNumberFormat,
+  makeCellFormatNumber,
   makeStyleHorizontalAlignText,
 } from "../../constants/styleConstants";
 import { makeTeamTable } from "../makeTeamTable";
@@ -47,7 +47,7 @@ test("should make table for 2 teams", async () => {
         tableCell.styles.unshift(makeStyleHorizontalAlignText(HorizontalAlignTextWays.center));
       }
       if (j === expectedTableRow.length - 1) {
-        tableCell.styles.unshift(makeNumberFormat("0.00"));
+        tableCell.styles.unshift(makeCellFormatNumber());
       }
       expectedTable.push(tableCell);
     }

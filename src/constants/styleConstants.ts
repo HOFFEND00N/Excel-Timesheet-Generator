@@ -65,8 +65,8 @@ export function makeDefaultTextStyle(): IStyle {
   };
 }
 
-export function makeNumberFormat(value: string): IStyle {
+export function makeCellFormatNumber(): IStyle {
   return {
-    numberFormat: value,
+    numberFormat: "0.00",
   };
 }
