@@ -32,4 +32,5 @@ export interface IStyle {
   border?: IBorder;
   fill?: IBackground;
   alignment?: IAlignment;
+  numberFormat?: string;
 }

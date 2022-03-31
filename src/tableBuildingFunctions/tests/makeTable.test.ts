@@ -4,6 +4,7 @@ import {
   HorizontalAlignTextWays,
   makeCellBorderStyle,
   makeDefaultTextStyle,
+  makeNumberFormat,
   makeStyleHorizontalAlignText,
 } from "../../constants/styleConstants";
 import { CommonCell, CommonValue, NumberValue, StringValue } from "../types";
@@ -32,7 +33,12 @@ test("make full table", async () => {
         value: value,
         styles: [makeCellBorderStyle(), makeDefaultTextStyle()],
       };
-      if (j === 0 || j === 1) tableCell.styles.unshift(makeStyleHorizontalAlignText(HorizontalAlignTextWays.center));
+      if (j === 0 || j === 1) {
+        tableCell.styles.unshift(makeStyleHorizontalAlignText(HorizontalAlignTextWays.center));
+      }
+      if (j === expectedTableRow.length - 1) {
+        tableCell.styles.unshift(makeNumberFormat("0.00"));
+      }
       expectedTable.push(tableCell);
     }
   }

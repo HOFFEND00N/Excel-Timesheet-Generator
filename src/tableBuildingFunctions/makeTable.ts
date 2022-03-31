@@ -2,6 +2,7 @@ import {
   HorizontalAlignTextWays,
   makeCellBorderStyle,
   makeDefaultTextStyle,
+  makeNumberFormat,
   makeStyleHorizontalAlignText,
 } from "../constants/styleConstants";
 import { START_TABLE_POINT, TABLE_HEADERS } from "../constants/constant";
@@ -57,6 +58,7 @@ export async function makeTable({
       startPoint: { column: START_TABLE_POINT.column, row: startRow + i },
       values: tableRowValues,
     });
+    row[tableRowValues.length - 1].styles.push(makeNumberFormat("0.00"));
     styleTableRow({
       row: [row[0], row[1]],
       cellStyles: [makeStyleHorizontalAlignText(HorizontalAlignTextWays.center)],

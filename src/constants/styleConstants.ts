@@ -64,3 +64,9 @@ export function makeDefaultTextStyle(): IStyle {
     },
   };
 }
+
+export function makeNumberFormat(value: string): IStyle {
+  return {
+    numberFormat: value,
+  };
+}
