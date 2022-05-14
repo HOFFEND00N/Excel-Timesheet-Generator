@@ -8,7 +8,7 @@
 
 ## Setup
 
-- clone repository `git clone https://stashosl.firmglobal.com/scm/~ivan.petrov/excel-timesheet-generator.git`
+- clone repository `git clone https://github.com/HOFFEND00N/Excel-Timesheet-Generator.git`
 - run `npm install`
 
 ## Workflow
